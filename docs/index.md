@@ -1,11 +1,11 @@
 ---
 state:  draft
-layout: default
+layout: home
 date:   2021-01-10
 loc:    tallinn, estonia
 tags:   self
 ---
 
-## Hello World!
+# Hello World!
 
 Something will be here soon.

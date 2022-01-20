@@ -1,0 +1,57 @@
+---
+state:    draft
+---
+
+// @import "minima";
+
+main {
+    text-align: center;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    width: 100%;
+}
+
+h1 {
+    font-size: 3em;
+}
+
+nav {
+    display: none;
+}
+
+body, a {
+    font-family: 'Lucida Sans Unicode','Lucida Grande',Verdana,sans-serif;
+    color: black;
+}
+
+a {
+    font-weight: bold;
+}
+
+footer, header aside {
+    display: none;
+}
+
+html {
+    background-color: #141414;
+    height: 100%;
+}
+
+body {
+    color: #c8c8f0;
+    max-width: 50em;
+    margin-left: auto;
+    margin-right: auto;
+    height: 90%;
+    background: url(/assets/index.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+}
+
+a {
+    color: #f0f0f8;
+}
