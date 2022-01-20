@@ -1,0 +1,15 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Jekyll: Run Server",
+            "type": "shell",
+            "command": "python -mwebbrowser http://127.0.0.1:4000 & bundle exec jekyll serve",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
