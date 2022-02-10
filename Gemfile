@@ -11,6 +11,7 @@ gem 'minima', '~> 2.5.1'
 # If you have any plugins, put them here!
 group :jekyll_plugins do
   gem 'jekyll-feed', versions['jekyll-feed']
+  gem 'jekyll-remote-theme', versions['jekyll-remote-theme']
 end
 
 install_if -> { RUBY_PLATFORM =~ %r!mingw|mswin|java! } do
