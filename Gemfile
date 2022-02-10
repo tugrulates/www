@@ -1,16 +1,23 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-gem "jekyll"
-# gem "github-pages"
+require 'json'
+require 'open-uri'
+versions = JSON.parse(open('https://pages.github.com/versions.json').read)
 
-gem "minima"
-# gem "jekyll-theme-midnight"
+gem 'github-pages', versions['github-pages'], group: :jekyll_plugins
 
+gem 'minima', '~> 2.5.1'
+
+# If you have any plugins, put them here!
 group :jekyll_plugins do
-    # gem "jekyll-remote-theme"
-    # gem "jekyll-feed"
-    # gem "jekyll-seo-tag"
+  gem 'jekyll-feed', versions['jekyll-feed']
 end
 
-gem "webrick"
-gem "wdm", :install_if => Gem.win_platform?
+install_if -> { RUBY_PLATFORM =~ %r!mingw|mswin|java! } do
+  gem 'tzinfo', '~> 1.2'
+  gem 'tzinfo-data'
+end
+
+gem 'wdm', '~> 0.1.0', :install_if => Gem.win_platform?
+gem 'kramdown-parser-gfm', versions['kramdown-parser-gfm']
+
