@@ -4,7 +4,7 @@
         {
             "label": "Jekyll: Run Server",
             "type": "shell",
-            "command": "python -mwebbrowser http://127.0.0.1:4000 && bundle exec jekyll serve --config _config.yml -s docs --livereload",
+            "command": "python -mwebbrowser http://127.0.0.1:4000 && bundle exec jekyll serve --config _config.yml --livereload",
             "problemMatcher": [],
             "group": {
                 "kind": "build",
