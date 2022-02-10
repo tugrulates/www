@@ -25,13 +25,10 @@ author: tugrulates
 
 # Build settings
 markdown: kramdown
-remote_theme: jekyll/minima
+theme: minima
 ignore_theme_config: true
-minima:
-  skin: dark
 plugins:
   - jekyll-feed
-  - jekyll-remote-theme
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list

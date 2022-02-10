@@ -6,12 +6,11 @@ versions = JSON.parse(open('https://pages.github.com/versions.json').read)
 
 gem 'github-pages', versions['github-pages'], group: :jekyll_plugins
 
-gem 'minima', git: 'https://github.com/jekyll/minima'
+gem 'minima', versions['minima']
 
 # If you have any plugins, put them here!
 group :jekyll_plugins do
   gem 'jekyll-feed', versions['jekyll-feed']
-  gem 'jekyll-remote-theme', versions['jekyll-remote-theme']
 end
 
 install_if -> { RUBY_PLATFORM =~ %r!mingw|mswin|java! } do
