@@ -26,7 +26,6 @@ author: tugrulates
 # Build settings
 markdown: kramdown
 theme: minima
-ignore_theme_config: true
 plugins:
   - jekyll-feed
 
