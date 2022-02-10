@@ -6,7 +6,7 @@ versions = JSON.parse(open('https://pages.github.com/versions.json').read)
 
 gem 'github-pages', versions['github-pages'], group: :jekyll_plugins
 
-gem 'minima', '~> 2.5.1'
+gem 'minima', git: 'https://github.com/jekyll/minima'
 
 # If you have any plugins, put them here!
 group :jekyll_plugins do
