@@ -29,7 +29,11 @@
                 {%- endif -%}
                 {%- endfor -%}
             </div> -->
-            <button id="theme-toggle">Theme</button>
+            <button id="theme-toggle"><svg id="dark-theme-icon" class="svg-icon" alt="Toggle theme">
+                    <use xlink:href="{{ '/assets/icons.svg#dark' | relative_url }}"></use>
+                </svg><svg id="light-theme-icon" class="svg-icon hidden" alt="Toggle theme">
+                    <use xlink:href="{{ '/assets/icons.svg#light' | relative_url }}"></use>
+                </svg></button>
         </nav>
         {%- endif -%}
     </div>

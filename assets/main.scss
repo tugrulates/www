@@ -43,10 +43,16 @@ a, a:visited {
     color: var(--link-color);
 }
 
-a:hover {
+a:hover, button:hover {
     text-decoration: underline;
     color: var(--link-color);
     filter: brightness(80%);
+    cursor: pointer;
+}
+
+button {
+    background: none;
+    border: none;
 }
 
 time {
@@ -96,6 +102,10 @@ a.site-title {
     letter-spacing: -1px;
 }
 
+html[data-theme="dark"] #dark-theme-icon, html[data-theme="light"] #light-theme-icon {
+    display: none;
+}
+
 .footer-col-wrapper {
     margin: auto;
 }
@@ -116,6 +126,6 @@ a.site-title {
     margin: 6px;
 }
 
-.social-media-list .svg-icon {
+.social-media-list .svg-icon, button .svg-icon {
     fill: var(--text-color-secondary);
 }
