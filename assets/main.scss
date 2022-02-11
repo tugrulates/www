@@ -17,7 +17,7 @@ html[data-theme="dark"] {
     --background-color: hsl(0, 0%, 0%);
     --background-color-secondary: hsl(0, 0%, 10%);
     --text-color: hsl(240, 50%, 75%);
-    --text-color-secondary: hsl(240, 0%, 50%);
+    --text-color-secondary: hsl(240, 10%, 75%);
     --link-color: hsl(240, 59%, 90%);
     --grey-light: hsl(240, 0%, 6%);
     --grey-dark: hsl(240, 0%, 4%);
@@ -27,7 +27,7 @@ html[data-theme="light"] {
     --background-color: hsl(240, 50%, 90%);
     --background-color-secondary: hsl(240, 50%, 100%);
     --text-color: hsl(240, 50%, 0%);
-    --text-color-secondary: hsl(240, 50%, 25%);
+    --text-color-secondary: hsl(240, 10%, 25%);
     --link-color: hsl(240, 50%, 50%);
     --grey-light: hsl(240, 50%, 94%);
     --grey-dark: hsl(240, 50%, 96%);
@@ -78,20 +78,44 @@ pre {
     min-height: auto;
 }
 
-.site-title, .site-nav {
-    line-height: 32px;
-    // letter-spacing: 0px;
-}
-
-a.site-title {
-    text-decoration: none !important;
-    color: var(--link-color) !important;
-}
-
 img.avatar {
     border-radius: 50%;
 }
 
 .site-title .avatar {
     margin-right: 12px;
+}
+
+a.site-title {
+    text-decoration: none !important;
+    color: var(--text-color-secondary) !important;
+}
+
+.site-title, .site-nav, .footer {
+    line-height: 32px;
+    letter-spacing: -1px;
+}
+
+.footer-col-wrapper {
+    margin: auto;
+}
+
+.footer-col {
+    margin: auto;
+    float: none;
+    width: fit-content;
+    padding: 0px;
+}
+
+.social-media-list {
+    margin: 0px;
+}
+
+.social-media-list li {
+    display: inline;
+    margin: 6px;
+}
+
+.social-media-list .svg-icon {
+    fill: var(--text-color-secondary);
 }
