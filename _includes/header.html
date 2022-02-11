@@ -5,7 +5,8 @@
         {%- assign page_paths = site.header_pages | default: default_paths -%}
         {%- assign titles_size = site.pages | map: 'title' | join: '' | size -%} -->
         <a class="site-title" rel="author" href="/">
-            <img class="avatar" src="/images/tugrulates-40.png" alt="profile picture">I am {{ site.title | escape }}.
+            <img class="avatar" src="{{ '/images/tugrulates-40.png' | relative_url }}" alt="profile picture">I am {{
+            site.title | escape }}.
         </a>
 
         <!-- {%- if titles_size > 0 -%} -->
