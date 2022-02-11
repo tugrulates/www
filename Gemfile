@@ -11,6 +11,7 @@ gem "minima", versions['minima']
 # If you have any plugins, put them here!
 group :jekyll_plugins do
   gem 'jekyll-feed', versions['jekyll-feed']
+  gem 'jekyll-titles-from-headings', versions['jekyll-titles-from-headings']
 end
 
 install_if -> { RUBY_PLATFORM =~ %r!mingw|mswin|java! } do

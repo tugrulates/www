@@ -4,12 +4,14 @@
 $background-color: hsl(0, 0%, 0%) !default;
 $text-color:       hsl(240, 50%, 75%) !default;
 $brand-color:      hsl(240, 50%, 50%) !default;
-$grey-color:       hsl(240, 0%, 50%) !default;
-$grey-color-light: hsl(240, 0%, 75%) !default;
-$grey-color-dark:  hsl(240, 0%, 25%) !default;
+$grey-color:       hsl(240, 0%, 10%) !default;
+$grey-color-light: hsl(240, 0%, 16%) !default;
+$grey-color-dark:  hsl(240, 0%, 14%) !default;
 
-@import "/assets/code.css";
 @import "minima";
+
+@import "/assets/table.css";
+@import "/assets/code.css";
 
 html[data-theme="dark"] {
     --background-color: hsl(0, 0%, 0%);
@@ -17,6 +19,8 @@ html[data-theme="dark"] {
     --text-color: hsl(240, 50%, 75%);
     --text-color-secondary: hsl(240, 0%, 50%);
     --link-color: hsl(240, 59%, 90%);
+    --grey-light: hsl(240, 0%, 6%);
+    --grey-dark: hsl(240, 0%, 4%);
 }
 
 html[data-theme="light"] {
@@ -25,6 +29,8 @@ html[data-theme="light"] {
     --text-color: hsl(240, 50%, 0%);
     --text-color-secondary: hsl(240, 50%, 25%);
     --link-color: hsl(240, 50%, 50%);
+    --grey-light: hsl(240, 50%, 94%);
+    --grey-dark: hsl(240, 50%, 96%);
 }
 
 body, .highlight {
