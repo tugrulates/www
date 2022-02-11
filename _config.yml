@@ -26,11 +26,11 @@ author: tugrulates
 # Build settings
 markdown: kramdown
 theme: minima
-minima:
-  social_links:
-    github: tugrulates
-    twitter: turugula
-    linkedin: tugrulates
+twitter_username: turugula
+github_username:  tugrulates
+instagram_username: turuling
+linkedin_username: tugrulates
+youtube_username: tugrulates
 plugins:
   - jekyll-feed
   - jekyll-remote-theme
