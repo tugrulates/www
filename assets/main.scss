@@ -1,26 +1,38 @@
 ---
 ---
 
+$background-color: hsl(0, 0%, 0%) !default;
+$text-color:       hsl(240, 50%, 75%) !default;
+$brand-color:      hsl(240, 50%, 50%) !default;
+$grey-color:       hsl(240, 0%, 50%) !default;
+$grey-color-light: hsl(240, 0%, 75%) !default;
+$grey-color-dark:  hsl(240, 0%, 25%) !default;
+
+@import "/assets/code.css";
 @import "minima";
 
-html {
-    --background-color: #000000;
-    --text-color: #c8c8f0;
-    --link-color: #f0f0f8;
+html[data-theme="dark"] {
+    --background-color: hsl(0, 0%, 0%);
+    --background-color-secondary: hsl(0, 0%, 10%);
+    --text-color: hsl(240, 50%, 75%);
+    --text-color-secondary: hsl(240, 0%, 50%);
+    --link-color: hsl(240, 59%, 90%);
 }
 
-html[data-theme='light'] {
-    --background-color: #f0f0f8;
-    --text-color: #121416;
-    --link-color: #543fd7;
+html[data-theme="light"] {
+    --background-color: hsl(240, 50%, 90%);
+    --background-color-secondary: hsl(240, 50%, 100%);
+    --text-color: hsl(240, 50%, 0%);
+    --text-color-secondary: hsl(240, 50%, 25%);
+    --link-color: hsl(240, 50%, 50%);
 }
 
-body {
+body, .highlight {
     background: var(--background-color);
     color: var(--text-color);
 }
 
-a {
+a, a:visited {
     color: var(--link-color);
 }
 
@@ -30,21 +42,38 @@ a:hover {
     filter: brightness(80%);
 }
 
+time {
+    color: var(--text-color-secondary);
+}
 
-// @media screen {
-//     html {
-//         background-color: #141414;
-//     }
+code, pre {
+    background: var(--background-color-secondary);
+    border: none;
+    border-radius: 6px;
+}
 
-//     body {
-//         background-color: #141414;
-//         color: #c8c8f0;
-//         max-width: 50em;
-//         margin-left: auto;
-//         margin-right: auto;
-//     }
+.site-header, .site-footer {
+    background: var(--background-color-secondary);
+    padding-bottom: 6px;
+    padding-top: 6px;
+    border: none;
+    min-height: auto;
+}
 
-//     a {
-//         color: #f0f0f8 !important;
-//     }
-// }
+.site-title, .site-nav {
+    line-height: 32px;
+    letter-spacing: 0px;
+}
+
+a.site-title {
+    text-decoration: none !important;
+    color: var(--link-color) !important;
+}
+
+img.avatar {
+    border-radius: 50%;
+}
+
+.site-title .avatar {
+    margin-right: 12px;
+}
