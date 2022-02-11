@@ -39,6 +39,7 @@ body, .highlight {
 }
 
 a, a:visited {
+    text-decoration: underline;
     color: var(--link-color);
 }
 
@@ -52,10 +53,21 @@ time {
     color: var(--text-color-secondary);
 }
 
+blockquote {
+    color: var(--link-color);
+    background: var(--background-color-secondary);
+    padding: 6px 18px;
+    border-radius: 6px;
+}
+
 code, pre {
     background: var(--background-color-secondary);
     border: none;
     border-radius: 6px;
+}
+
+pre {
+    padding: 6px 18px;
 }
 
 .site-header, .site-footer {
