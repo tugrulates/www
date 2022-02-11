@@ -34,7 +34,7 @@ html[data-theme="light"] {
 }
 
 body, .highlight {
-    background: var(--background-color);
+    background: var(--background-color) !important;
     color: var(--text-color);
 }
 
@@ -50,9 +50,9 @@ a:hover, button:hover {
     cursor: pointer;
 }
 
-button {
-    background: none;
-    border: none;
+button, nav {
+    background: none !important;
+    border: none !important;
 }
 
 time {
