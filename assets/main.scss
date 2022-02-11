@@ -55,6 +55,12 @@ button, nav {
     border: none !important;
 }
 
+.svg-icon {
+    width: 24px !important;
+    height: 24px !important;
+    fill: var(--text-color-secondary);
+}
+
 time {
     color: var(--text-color-secondary);
 }
@@ -102,7 +108,7 @@ a.site-title {
 }
 
 .site-title, .site-nav, .footer {
-    line-height: 32px;
+    line-height: 22px;
     letter-spacing: -1px;
 }
 
@@ -118,18 +124,15 @@ html[data-theme="dark"] #dark-theme-icon, html[data-theme="light"] #light-theme-
     margin: auto;
     float: none;
     width: fit-content;
-    padding: 0px;
+    padding: 6px;
 }
 
 .social-media-list {
     margin: 0px;
+    text-align: center;
 }
 
 .social-media-list li {
     display: inline;
-    margin: 6px;
-}
-
-.social-media-list .svg-icon, button .svg-icon {
-    fill: var(--text-color-secondary);
+    padding: 6px;
 }
