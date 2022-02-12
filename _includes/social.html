@@ -11,8 +11,8 @@
                 <use xlink:href="{{ '/assets/icons.svg#github' | relative_url }}"></use>
             </svg></a></li>{%- endif -%}
     {%- if site.author.stackoverflow -%}<li><a
-            href="https://stackoverflow.com/users/{{ site.author.stackoverflow| cgi_escape | escape }}"><svg
-                class="svg-icon" alt="Stack Overflow: {{ site.author.stackoverflow | escape }}">
+            href="https://stackoverflow.com/users/{{ site.author.stackoverflow | escape }}"><svg class="svg-icon"
+                alt="Stack Overflow: {{ site.author.stackoverflow | escape }}">
                 <title>Stack Overflow: {{ site.author.stackoverflow | escape }}</title>
                 <use xlink:href="{{ '/assets/icons.svg#stackoverflow' | relative_url }}"></use>
             </svg></a></li>{%- endif -%}
@@ -33,7 +33,7 @@
                 <title>Instagram: {{ site.author.instagram | escape }}</title>
                 <use xlink:href="{{ '/assets/icons.svg#instagram' | relative_url }}"></use>
             </svg></a></li>{%- endif -%}
-    {%- if site.email -%}<li><a href="mailto:{{ site.email| cgi_escape | escape }}"><svg class="svg-icon"
+    {%- if site.email -%}<li><a href="mailto:{{ site.email | escape }}"><svg class="svg-icon"
                 alt="E-Mail: {{ site.email | escape }}">
                 <title>E-Mail: {{ site.email | escape }}</title>
                 <use xlink:href="{{ '/assets/icons.svg#email' | relative_url }}"></use>
