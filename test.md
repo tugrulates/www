@@ -55,6 +55,7 @@ for i in range(10):
 | :----------: | :----------- |
 | first key    | first value  |
 | second key   | second value |
+| third key    | third value  |
 
 ### Tags
 
