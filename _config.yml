@@ -68,6 +68,9 @@ defaults:
       path: "_docs"
     values:
       published: false
+      state: 'draft'
+      layout: post
+      language: 'English'
 
 # Plugins
 plugins:

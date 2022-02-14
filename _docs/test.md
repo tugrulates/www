@@ -1,6 +1,5 @@
 ---
 state: public
-layout: post
 date: 2022-02-11
 location: San Francisco, CA
 tags: meta
