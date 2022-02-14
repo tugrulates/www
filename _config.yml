@@ -32,7 +32,8 @@ author:
 # Theme
 markdown: kramdown
 kramdown:
-   math_engine: mathjax
+  footnote_backlink: "↵"
+  math_engine: mathjax
 theme: minima
 twitter_username: turugula
 github_username:  tugrulates
