@@ -6,6 +6,7 @@ location: San Francisco, CA
 tags: meta
 use_math: true
 use_chart: true
+published: true
 ---
 
 # Test post

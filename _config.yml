@@ -61,6 +61,14 @@ titles_from_headings:
   strip_title: true
   collections: true
 
+# Meta
+defaults:
+  -
+    scope:
+      path: "_docs"
+    values:
+      published: false
+
 # Plugins
 plugins:
   - jekyll-feed

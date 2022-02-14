@@ -84,7 +84,17 @@ code, pre, pre.highlight {
 }
 
 pre {
+    font-family: inherit;
     padding: 6px 18px;
+}
+
+.alert {
+    color: var(--background-color);
+    background-color: var(--text-color) !important;
+}
+
+.warning:before {
+    content: '⚠️ ';
 }
 
 .site-header, .site-footer {
