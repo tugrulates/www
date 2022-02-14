@@ -9,9 +9,8 @@
 
     <main class="page-content" aria-label="Content">
         <div class="wrapper">
-            {% unless page.published %}
-            {% include draft_alert.html %}
-            {% endunless %}
+            {% if page.collection == 'docs' %}{% unless page.published %}
+            {% include draft_alert.html %}{% endunless %}{% endif %}
             {{ content }}
         </div>
     </main>
