@@ -1,11 +1,13 @@
-<script type="text/x-mathjax-config">
-    var config = {
-        startOnLoad: true,
-        themeVariables: {
-            lineColor: 'var(--text-color-secondary)',
-        }
+<script>
+    window.onload = function () {
+        var config = {
+            startOnLoad: true,
+            themeVariables: {
+                lineColor: 'var(--text-color-secondary)',
+            }
+        };
+        mermaid.initialize(config);
+        mermaid.init(undefined, '.language-mermaid');
     };
-    mermaid.initialize(config);
-    mermaid.init(undefined, '.language-mermaid');
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
