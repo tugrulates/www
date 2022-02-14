@@ -1,0 +1,13 @@
+<script>
+    function update_links() {
+        for (var c = document.getElementsByTagName("a"), a = 0; a < c.length; a++) {
+            var b = c[a];
+            if (b.getAttribute("href") && b.hostname !== location.hostname) {
+                b.target = "_blank";
+                b.rel = "noopener";
+                b.classList.add('external-link');
+            }
+        }
+    }
+    update_links();
+</script>
