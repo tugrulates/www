@@ -33,7 +33,7 @@ html[data-theme="light"] {
     --grey-dark: hsl(240, 50%, 96%);
 }
 
-body, .highlight {
+body {
     background: var(--background-color) !important;
     color: var(--text-color);
 }
@@ -72,8 +72,12 @@ blockquote {
     border-radius: 6px;
 }
 
-code, pre {
-    background: var(--background-color-secondary);
+.highlight {
+    background: none !important;
+}
+
+code, pre, pre.highlight {
+    background: var(--background-color-secondary) !important;
     border: none;
     border-radius: 6px;
 }
