@@ -44,13 +44,6 @@ for i in range(10):
     print(i)
 ```
 
-### Jekyll code
-
-{% highlight python %}
-for i in range(10):
-    print(i)
-{% endhighlight %}
-
 ### Table
 
 | Center       | Left         |
@@ -65,7 +58,9 @@ These are tags: #coding #blog
 
 ### Math
 
-$x_{1,2} = \frac{-b \pm \sqrt{b^2-4ac}}{2b}$
+The value of $\pi$ is close to 4.
+
+$$x_{1,2} = \frac{-b \pm \sqrt{b^2-4ac}}{2b}$$
 
 ### Graph
 
