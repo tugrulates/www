@@ -4,6 +4,7 @@ layout: post
 date: 2022-02-11
 location: San Francisco, CA
 tags: meta
+use_math: true
 ---
 
 # Test post
@@ -63,7 +64,7 @@ These are tags: #coding #blog
 
 ### Math
 
-$$x_{1,2} = \frac{-b \pm \sqrt{b^2-4ac}}{2b}$$
+$x_{1,2} = \frac{-b \pm \sqrt{b^2-4ac}}{2b}$
 
 ### Graph
 
