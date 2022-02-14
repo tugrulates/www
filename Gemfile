@@ -11,6 +11,7 @@ gem "minima", versions['minima']
 # If you have any plugins, put them here!
 group :jekyll_plugins do
   gem 'jekyll-feed', versions['jekyll-feed']
+  gem 'jekyll-relative-links', versions['jekyll-relative-links']
   gem 'jekyll-titles-from-headings', versions['jekyll-titles-from-headings']
 end
 

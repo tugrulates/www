@@ -1,5 +1,5 @@
 ---
-state: draft
+state: public
 layout: post
 date: 2022-02-11
 location: San Francisco, CA
@@ -20,7 +20,7 @@ This is a text with *italic*, **bold** and `code` words.
 
 ### Links
 
-This is a link to another post on the site: [About](/about)
+This is a link to another post on the site: [About](./about.md) or [Test](./test.md)
 
 This is a link to another site: [GitHub](https://www.github.com)
 
