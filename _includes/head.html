@@ -20,4 +20,8 @@
     {% if page.use_math %}
     {% include mathjax.html %}
     {% endif %}
+
+    {% if page.use_chart %}
+    {% include mermaid.html %}
+    {% endif %}
 </head>

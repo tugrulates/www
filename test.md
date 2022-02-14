@@ -5,6 +5,7 @@ date: 2022-02-11
 location: San Francisco, CA
 tags: meta
 use_math: true
+use_chart: true
 ---
 
 # Test post
@@ -69,8 +70,11 @@ $x_{1,2} = \frac{-b \pm \sqrt{b^2-4ac}}{2b}$
 ### Graph
 
 ```mermaid
-flowchart LR;
-	A --> B
+flowchart LR
+    First --> Second & Third --> Fourth
+    Third --> Fifth --> Seventh
+    Second --> Sixth --> Eighth
+    Fourth & Eighth --> Ninth
 ```
 
 ### Lists
