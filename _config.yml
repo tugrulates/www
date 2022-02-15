@@ -73,7 +73,7 @@ defaults:
     values:
       state: draft
       layout: post
-      language: English
+      lang: en
 
 # Plugins
 plugins:
