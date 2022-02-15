@@ -142,7 +142,7 @@ img.avatar {
 }
 
 a:hover img.avatar {
-    border: 2px solid var(--text-color);
+    border: 2px solid var(--text-color) !important;
     border-style: inset;
 }
 
