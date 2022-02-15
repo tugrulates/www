@@ -31,7 +31,7 @@ html[data-theme="light"] {
     --text-color: hsl(0, 0%, 0%);
     --text-color-secondary: hsl(240, 10%, 25%);
     --text-color-dark: var(--text-color);
-    --link-color: hsl(240, 50%, 50%);
+    --link-color: hsl(240, 50%, 45%);
     --grey-light: hsl(240, 50%, 94%);
     --grey-dark: hsl(240, 50%, 96%);
 }
@@ -53,8 +53,7 @@ main a.external-link {
     background-size: 12px;
 }
 
-html[data-theme="dark"] main a.external-link { background-image: url('/assets/external-link-dark.svg'); }
-html[data-theme="light"] main a.external-link { background-image: url('/assets/external-link-light.svg'); }
+main a.external-link { background-image: url('/assets/link-external.svg'); }
 
 a:hover, button:hover {
     text-decoration: underline;
