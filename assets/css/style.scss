@@ -121,8 +121,8 @@ code, pre, pre.highlight {
 
 .site-header, .site-footer {
     background: var(--background-color-secondary);
-    padding-bottom: 6px;
-    padding-top: 6px;
+    padding-bottom: 2px;
+    padding-top: 2px;
     border: none;
     min-height: auto;
 }
@@ -155,9 +155,16 @@ a.site-title:hover {
     color: var(--text-color) !important;
 }
 
-.site-title, .site-nav, .footer {
+.site-title, .footer {
     line-height: 22px;
     letter-spacing: -1px;
+}
+
+.site-nav {
+    line-height: 36px;
+    position: relative;
+    left: 0px;
+    top: 0px;
 }
 
 html[data-theme="dark"] #dark-theme-icon, html[data-theme="light"] #light-theme-icon {
