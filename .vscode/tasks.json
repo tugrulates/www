@@ -4,7 +4,7 @@
         {
             "label": "Jekyll: Run Server",
             "type": "shell",
-            "command": "rm _docs -R && ln -s ~/notes/blog _docs && bundle exec jekyll serve --unpublished --future --config _config.yml --livereload --force-polling",
+            "command": "rm _docs -R && ln -s ~/notes/blog _docs && bundle exec jekyll serve --unpublished --future --config _config.yml --livereload --force_polling",
             "problemMatcher": [],
             "group": {
                 "kind": "build",

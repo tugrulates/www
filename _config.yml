@@ -70,7 +70,6 @@ defaults:
       path: ""
       type: "docs"
     values:
-      published: false
       state: 'draft'
       layout: post
       language: 'English'
