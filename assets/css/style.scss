@@ -167,7 +167,7 @@ a.site-title:hover {
     top: 0px;
 }
 
-html[data-theme="dark"] #dark-theme-icon, html[data-theme="light"] #light-theme-icon {
+html[data-theme="dark"] #light-theme-icon, html[data-theme="light"] #dark-theme-icon {
     display: none;
 }
 
