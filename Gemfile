@@ -6,7 +6,8 @@ gem 'minima'
 
 # If you have any plugins, put them here!
 group :jekyll_plugins do
-  gem 'jekyll-feed'
+  # for the feed template, remove when released
+  gem 'jekyll-feed', git: 'https://github.com/tugrulates/jekyll-feed', branch: 'dev'
   gem 'jekyll-relative-links'
   gem 'jekyll-titles-from-headings'
 end

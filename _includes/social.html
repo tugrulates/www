@@ -38,8 +38,7 @@
                 <title>E-Mail: {{ site.author.email | escape }}</title>
                 <use xlink:href="{{ '/assets/icons.svg#email' | relative_url }}"></use>
             </svg></a></li>{%- endif -%}
-    {%- if site.rss -%}<li><a href="{{ 'feed.xml' | relative_url }}"><svg class="svg-icon"
-                alt="RSS: {{ site.rss | escape }}">
+    {%- if site.rss -%}<li><a href="{{ site.feed.path | relative_url }}"><svg class="svg-icon" alt="RSS feed">
                 <title>RSS: {{ site.rss | escape }}</title>
                 <use xlink:href="{{ '/assets/icons.svg#rss' | relative_url }}"></use>
             </svg></a></li>{%- endif -%}

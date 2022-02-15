@@ -25,6 +25,7 @@ rss: rss
 # Author
 author:
   name: Tugrul Ates
+  uri: https://www.tugrulates.com
   picture: /images/tugrulates.png
   email: me@tugrulates.com
   linkedin: tugrulates
@@ -44,11 +45,11 @@ collections:
   docs:
     output: true
     permalink: /:title
+
+# Feed
 feed:
-  path: _posts.atom
-  collections:
-    docs:
-      path: "/feed.xml"
+  template: _layouts/feed.atom
+  path: /feed.atom
 
 # Theme
 markdown: kramdown
@@ -70,9 +71,9 @@ defaults:
       path: ""
       type: "docs"
     values:
-      state: 'draft'
+      state: draft
       layout: post
-      language: 'English'
+      language: English
 
 # Plugins
 plugins:
