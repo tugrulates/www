@@ -18,22 +18,26 @@ html[data-theme="dark"] {
     --background-color: hsl(0, 0%, 0%);
     --background-color-secondary: hsl(0, 0%, 10%);
     --text-color: hsl(240, 50%, 90%);
-    --text-color-secondary: hsl(240, 10%, 75%);
+    --text-color-secondary: hsl(240, 10%, 50%);
     --text-color-dark: hsl(240, 10%, 15%);
+    --icon-color: hsl(240, 10%, 25%);
     --link-color: hsl(240, 40%, 50%);
     --grey-light: hsl(240, 0%, 6%);
     --grey-dark: hsl(240, 0%, 4%);
+    --hover-brightness: 400%;
 }
 
 html[data-theme="light"] {
     --background-color: hsl(240, 50%, 90%);
     --background-color-secondary: hsl(240, 50%, 100%);
     --text-color: hsl(0, 0%, 0%);
-    --text-color-secondary: hsl(240, 10%, 25%);
+    --text-color-secondary: hsl(240, 10%, 50%);
     --text-color-dark: var(--text-color);
+    --icon-color: hsl(240, 10%, 75%);
     --link-color: #4040bf;
     --grey-light: hsl(240, 40%, 94%);
     --grey-dark: hsl(240, 50%, 96%);
+    --hover-brightness: 25%;
 }
 
 body {
@@ -42,8 +46,14 @@ body {
 }
 
 a, a:visited {
+    text-decoration: none;
+    color: var(--link-color);
+}
+
+a:hover {
     text-decoration: underline;
     color: var(--link-color);
+    filter: brightness(var(--hover-brightness));
 }
 
 main a.external-link {
@@ -53,31 +63,27 @@ main a.external-link {
     background-size: 12px;
 }
 
-main a.external-link { background-image: url('/assets/link-external.svg'); }
+main a.external-link {
+    background-image: url('/assets/link-external.svg');
+}
 
-a:hover, button:hover {
-    text-decoration: underline;
-    color: var(--link-color);
+button:hover {
     cursor: pointer;
-}
-
-html[data-theme="dark"] a:hover, button:hover {
-    filter: brightness(66%);
-}
-
-html[data-theme="light"] a:hover, button:hover {
-    filter: brightness(150%);
-}
-
-button, nav {
-    background: none !important;
-    border: none !important;
 }
 
 .svg-icon {
     width: 24px !important;
     height: 24px !important;
-    fill: var(--text-color-secondary);
+    fill: var(--icon-color);
+}
+
+a .svg-icon:hover, button .svg-icon:hover {
+    filter: brightness(var(--hover-brightness));
+}
+
+button, nav {
+    background: none !important;
+    border: none !important;
 }
 
 time {
