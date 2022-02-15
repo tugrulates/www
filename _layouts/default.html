@@ -9,8 +9,10 @@
 
     <main class="page-content" aria-label="Content">
         <div class="wrapper">
-            {% if page.collection == 'docs' %}{% unless page.published %}
-            {% include draft_alert.html %}{% endunless %}{% endif %}
+            {% if page.collection == 'docs' %}{% unless page.state == 'public' %}
+            <div class='alert warning'>This post is not published, it is in <strong>{{ page.state }}</strong>
+                state.</div>
+            {% endunless %}{% endif %}
             {{ content }}
         </div>
     </main>
