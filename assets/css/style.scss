@@ -18,7 +18,7 @@ html[data-theme="dark"] {
     --background-color: hsl(0, 0%, 0%);
     --background-color-secondary: hsl(0, 0%, 10%);
     --text-color: hsl(240, 50%, 90%);
-    --text-color-secondary: hsl(240, 10%, 50%);
+    --text-color-secondary: hsl(240, 10%, 66%);
     --text-color-dark: hsl(240, 10%, 15%);
     --icon-color: hsl(240, 10%, 25%);
     --link-color: hsl(240, 40%, 50%);
@@ -31,7 +31,7 @@ html[data-theme="light"] {
     --background-color: hsl(240, 50%, 90%);
     --background-color-secondary: hsl(240, 50%, 100%);
     --text-color: hsl(0, 0%, 0%);
-    --text-color-secondary: hsl(240, 10%, 50%);
+    --text-color-secondary: hsl(240, 10%, 33%);
     --text-color-dark: var(--text-color);
     --icon-color: hsl(240, 10%, 75%);
     --link-color: #4040bf;
