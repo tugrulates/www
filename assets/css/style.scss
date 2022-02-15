@@ -24,7 +24,7 @@ html[data-theme="dark"] {
     --link-color: hsl(240, 40%, 50%);
     --grey-light: hsl(240, 0%, 6%);
     --grey-dark: hsl(240, 0%, 4%);
-    --hover-brightness: 400%;
+    --hover-brightness: 110%;
 }
 
 html[data-theme="light"] {
@@ -37,7 +37,7 @@ html[data-theme="light"] {
     --link-color: #4040bf;
     --grey-light: hsl(240, 40%, 94%);
     --grey-dark: hsl(240, 50%, 96%);
-    --hover-brightness: 25%;
+    --hover-brightness: 90%;
 }
 
 body {
@@ -52,8 +52,7 @@ a, a:visited {
 
 a:hover {
     text-decoration: underline;
-    color: var(--link-color);
-    filter: brightness(var(--hover-brightness));
+    color: var(--text-color) !important;
 }
 
 main a.external-link {
@@ -78,7 +77,7 @@ button:hover {
 }
 
 a .svg-icon:hover, button .svg-icon:hover {
-    filter: brightness(var(--hover-brightness));
+    fill: var(--text-color);
 }
 
 button, nav {
@@ -128,10 +127,6 @@ code, pre, pre.highlight {
     min-height: auto;
 }
 
-img.avatar {
-    border-radius: 50%;
-}
-
 .site-title {
     font-size: 24px;
 }
@@ -140,9 +135,24 @@ img.avatar {
     margin-right: 12px;
 }
 
+img.avatar {
+    border-radius: 50%;
+    border: 2px solid transparent;
+    padding: 2px;
+}
+
+a:hover img.avatar {
+    border: 2px solid var(--text-color);
+    border-style: inset;
+}
+
 a.site-title {
     text-decoration: none !important;
     color: var(--text-color-secondary) !important;
+}
+
+a.site-title:hover {
+    color: var(--text-color) !important;
 }
 
 .site-title, .site-nav, .footer {
