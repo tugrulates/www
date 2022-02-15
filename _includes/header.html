@@ -10,8 +10,7 @@
             {{ '/assets/avatar-3x.png' | relative_url }} 3x,
             {{ '/assets/avatar-4x.png' | relative_url }} 4x
            " alt="profile picture">Hello, I am
-            {{
-            site.title | escape }}!
+            {{ site.author.name | escape }}!
         </a>
 
         <!-- {%- if titles_size > 0 -%} -->

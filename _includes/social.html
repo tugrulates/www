@@ -33,9 +33,9 @@
                 <title>Instagram: {{ site.author.instagram | escape }}</title>
                 <use xlink:href="{{ '/assets/icons.svg#instagram' | relative_url }}"></use>
             </svg></a></li>{%- endif -%}
-    {%- if site.email -%}<li><a href="mailto:{{ site.email | escape }}"><svg class="svg-icon"
+    {%- if site.author.email -%}<li><a href="mailto:{{ site.email | escape }}"><svg class="svg-icon"
                 alt="E-Mail: {{ site.email | escape }}">
-                <title>E-Mail: {{ site.email | escape }}</title>
+                <title>E-Mail: {{ site.author.email | escape }}</title>
                 <use xlink:href="{{ '/assets/icons.svg#email' | relative_url }}"></use>
             </svg></a></li>{%- endif -%}
     {%- if site.rss -%}<li><a href="{{ 'feed.xml' | relative_url }}"><svg class="svg-icon"
