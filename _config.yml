@@ -67,7 +67,8 @@ titles_from_headings:
 defaults:
   -
     scope:
-      path: "_docs"
+      path: ""
+      type: "docs"
     values:
       published: false
       state: 'draft'
