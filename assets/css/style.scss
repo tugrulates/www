@@ -2,23 +2,25 @@
 ---
 
 $background-color: hsl(0, 0%, 0%) !default;
-$text-color:       hsl(240, 50%, 75%) !default;
-$brand-color:      hsl(240, 50%, 50%) !default;
+$text-color:       hsl(240, 50%, 90%) !default;
+$brand-color:      hsl(240, 50%, 60%) !default;
 $grey-color:       hsl(240, 0%, 10%) !default;
 $grey-color-light: hsl(240, 0%, 16%) !default;
 $grey-color-dark:  hsl(240, 0%, 14%) !default;
 
 @import "minima";
 
-@import "/assets/table.css";
-@import "/assets/code.css";
+@import "table.css";
+@import "code.css";
+@import "chart.css";
 
 html[data-theme="dark"] {
     --background-color: hsl(0, 0%, 0%);
     --background-color-secondary: hsl(0, 0%, 10%);
-    --text-color: hsl(240, 50%, 75%);
+    --text-color: hsl(240, 50%, 90%);
     --text-color-secondary: hsl(240, 10%, 75%);
-    --link-color: hsl(240, 61%, 90%);
+    --text-color-dark: hsl(240, 10%, 15%);
+    --link-color: hsl(240, 50%, 60%);
     --grey-light: hsl(240, 0%, 6%);
     --grey-dark: hsl(240, 0%, 4%);
 }
@@ -26,8 +28,9 @@ html[data-theme="dark"] {
 html[data-theme="light"] {
     --background-color: hsl(240, 50%, 90%);
     --background-color-secondary: hsl(240, 50%, 100%);
-    --text-color: hsl(240, 50%, 0%);
+    --text-color: hsl(0, 0%, 0%);
     --text-color-secondary: hsl(240, 10%, 25%);
+    --text-color-dark: var(--text-color);
     --link-color: hsl(240, 50%, 50%);
     --grey-light: hsl(240, 50%, 94%);
     --grey-dark: hsl(240, 50%, 96%);
@@ -76,7 +79,7 @@ time {
 }
 
 blockquote {
-    color: var(--link-color);
+    color: var(--text-color-secondary);
     background: var(--background-color-secondary);
     padding: 6px 18px;
     border-radius: 6px;

@@ -1,13 +1,27 @@
 <script>
-    window.onload = function () {
+    function initializeMermaid() {
         var config = {
             startOnLoad: true,
+            theme: 'base',
             themeVariables: {
-                lineColor: 'var(--text-color-secondary)',
-            }
+                primaryColor: '#9f9fdf',
+                secondaryColor: '#df9f9f',
+                tertiaryColor: '#dfdf9f',
+                lineColor: '#6666cc',
+                textColor: 'var(--text-color)',
+                titleColor: 'var(--text-color)',
+                nodeTextColor: 'var(--background-color)',
+                mainBkg: 'var(--text-color)',
+                nodeBorder: 'var(--text-color-dark)',
+                clusterBkg: 'var(--grey-dark)',
+                clusterBorder: 'var(--grey-light)',
+            },
         };
         mermaid.initialize(config);
         mermaid.init(undefined, '.language-mermaid');
+    }
+    window.onload = function () {
+        initializeMermaid();
     };
 </script>
 <script src="{{ '/assets/js/mermaid.min.js' | relative_url }}"></script>

@@ -34,7 +34,8 @@
                 {%- endif -%}
                 {%- endfor -%}
             </div> -->
-            <button id="theme-toggle"><svg id="dark-theme-icon" class="svg-icon" alt="Toggle theme">
+            <button id="theme-toggle" onclick="window.changeTheme()"><svg id="dark-theme-icon" class="svg-icon"
+                    alt="Toggle theme">
                     <use xlink:href="{{ '/assets/icons.svg#dark' | relative_url }}"></use>
                 </svg><svg id="light-theme-icon" class="svg-icon hidden" alt="Toggle theme">
                     <use xlink:href="{{ '/assets/icons.svg#light' | relative_url }}"></use>
@@ -43,30 +44,3 @@
         {%- endif -%}
     </div>
 </header>
-
-<head>
-    <script>
-        var toggle = document.getElementById("theme-toggle");
-
-        var theme = localStorage.getItem("theme");
-        if (!theme) {
-            if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-                theme = "dark";
-            } else if (window.matchMedia("(prefers-color-scheme: light)").matches) {
-                theme = "light";
-            }
-        }
-        if (!theme) {
-            // I care for your eyes.
-            theme = "dark";
-        }
-        document.documentElement.setAttribute("data-theme", theme)
-
-        toggle.onclick = function () {
-            var theme = document.documentElement.getAttribute("data-theme");
-            theme = (theme === "dark") ? "light" : "dark";
-            document.documentElement.setAttribute("data-theme", theme)
-            localStorage.setItem("theme", theme);
-        };
-    </script>
-</head>

@@ -1,0 +1,20 @@
+.language-mermaid svg {
+    max-width: 100% !important;
+}
+
+.language-mermaid .label-container, .language-mermaid .edgeLabel {
+    border-radius: 6px;
+    padding: 2px 6px;
+}
+
+.language-mermaid .edgeLabel:empty {
+    display: none;
+}
+
+.language-mermaid .edgeLabel {
+    color: var(--text-color-dark) !important;
+}
+
+.language-mermaid text.slice {
+    fill: var(--text-color-dark) !important;
+}

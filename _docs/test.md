@@ -65,11 +65,36 @@ $$x_{1,2} = \frac{-b \pm \sqrt{b^2-4ac}}{2b}$$
 ### Graph
 
 ```mermaid
+pie
+    title Pie chart
+    "Calcium" :   50
+    "Potassium" : 20
+    "Magnesium" : 10
+    "Iron" :      15
+    "Popcorn" :   5
+```
+
+```mermaid
 flowchart LR
     First --> Second & Third --> Fourth
     Third --> Fifth --> Seventh
     Second --> Sixth --> Eighth
     Fourth & Eighth --> Ninth
+```
+
+```mermaid
+flowchart LR
+    c1 -->|text| a2
+    b2 -->|text| a1
+    subgraph one
+    a1-->a2
+    end
+    subgraph two
+    b1-->b2
+    end
+    subgraph three
+    c1-->c2
+    end
 ```
 
 ### Lists
