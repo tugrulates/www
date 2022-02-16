@@ -58,7 +58,7 @@ a:hover, button:hover {
     filter: brightness(var(--hover-brightness));
 }
 
-main a.external-link {
+main a.external-link, main a[href$=".pdf"] {
     background-repeat: no-repeat;
     background-position: right top;
     padding-right: 12px;
@@ -67,6 +67,10 @@ main a.external-link {
 
 main a.external-link {
     background-image: url('/assets/link-external.svg');
+}
+
+main a[href$=".pdf"] {
+    background-image: url('/assets/link-pdf.svg');
 }
 
 button:hover {
