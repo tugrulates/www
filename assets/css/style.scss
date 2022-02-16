@@ -21,10 +21,10 @@ html[data-theme="dark"] {
     --text-color-secondary: hsl(240, 10%, 66%);
     --text-color-dark: hsl(240, 10%, 15%);
     --icon-color: hsl(240, 10%, 25%);
-    --link-color: hsl(240, 40%, 50%);
+    --link-color: hsl(240, 60%, 60%);
     --grey-light: hsl(240, 0%, 6%);
     --grey-dark: hsl(240, 0%, 4%);
-    --hover-brightness: 110%;
+    --hover-brightness: 200%;
 }
 
 html[data-theme="light"] {
@@ -34,10 +34,10 @@ html[data-theme="light"] {
     --text-color-secondary: hsl(240, 10%, 33%);
     --text-color-dark: var(--text-color);
     --icon-color: hsl(240, 10%, 75%);
-    --link-color: #4040bf;
+    --link-color: hsl(240, 60%, 40%);
     --grey-light: hsl(240, 40%, 94%);
     --grey-dark: hsl(240, 50%, 96%);
-    --hover-brightness: 90%;
+    --hover-brightness: 50%;
 }
 
 body {
@@ -52,7 +52,10 @@ a, a:visited {
 
 a:hover {
     text-decoration: underline;
-    color: var(--text-color) !important;
+}
+
+a:hover, button:hover {
+    filter: brightness(var(--hover-brightness));
 }
 
 main a.external-link {
@@ -76,13 +79,15 @@ button:hover {
     fill: var(--icon-color);
 }
 
-a .svg-icon:hover, button .svg-icon:hover {
-    fill: var(--text-color);
-}
-
 button, nav {
     background: none !important;
     border: none !important;
+    padding: 0px;
+    margin: 0px;
+}
+
+button .svg-icon {
+    padding: 0px;
 }
 
 time {
@@ -133,6 +138,7 @@ code, pre, pre.highlight {
 
 .site-title .avatar {
     margin-right: 12px;
+    margin-left: -4px;
 }
 
 img.avatar {
@@ -190,4 +196,8 @@ html[data-theme="dark"] #light-theme-icon, html[data-theme="light"] #dark-theme-
 .social-media-list li {
     display: inline;
     padding: 6px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 30px;
 }
