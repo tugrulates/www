@@ -112,6 +112,16 @@ code, pre, pre.highlight {
     border-radius: 6px;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 30px;
+}
+
+.footnotes {
+    border-top: 1px solid var(--text-color);
+    margin-top: 45px;
+    padding-top: 15px;
+}
+
 .alert {
     color: var(--background-color);
     background-color: var(--text-color) !important;
@@ -198,6 +208,3 @@ html[data-theme="dark"] #light-theme-icon, html[data-theme="light"] #dark-theme-
     padding: 6px;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    margin-top: 30px;
-}
