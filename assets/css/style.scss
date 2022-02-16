@@ -54,7 +54,7 @@ a:hover {
     text-decoration: underline;
 }
 
-a:hover, button:hover {
+a:not(.site-title):hover, .site-title:hover span, button:hover {
     filter: brightness(var(--hover-brightness));
 }
 
