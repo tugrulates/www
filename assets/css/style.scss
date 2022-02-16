@@ -58,7 +58,7 @@ a:not(.site-title):hover, .site-title:hover span, button:hover {
     filter: brightness(var(--hover-brightness));
 }
 
-main a[href*="//"], main a[href$=".pdf"] {
+main a[href*="//"], main a[href$=".pdf"],, main a[href$=".zip"] {
     background-repeat: no-repeat;
     background-position: right top;
     padding-right: 12px;
@@ -71,6 +71,10 @@ main a[href*="//"] {
 
 main a[href$=".pdf"] {
     background-image: url('/assets/link-pdf.svg');
+}
+
+main a[href$=".zip"] {
+    background-image: url('/assets/link-zip.svg');
 }
 
 button:hover {
