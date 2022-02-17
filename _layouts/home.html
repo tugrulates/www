@@ -21,30 +21,29 @@ layout: default
     {%- if page.list_title -%}
     <h2 class="post-list-heading">{{ page.list_title }}</h2>
     {%- endif -%}
-    <ul class="post-list">
+    <div class="post-list">
         {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
         {%- for doc in docs -%}
         {%- if doc.state == "public" -%}
-        <li class="post-summary-container">
-            <a href="{{ doc.url | relative_url }}">
-                <div class="post-summary">
-                    <h2>
-                        {{ doc.title | escape }}
-                    </h2>
-                    <span class="post-meta"><time>{{ doc.date | date: date_format }}</time></span>
-                    {%- if site.show_excerpts -%}
-                    {%- if doc.description -%}
-                    <p>{{ doc.description }}</p>
-                    {%- else -%}
-                    {{ doc.content | strip | newline_to_br | split:'<br />' | first }}
-                    {%- endif -%}
-                    {%- endif -%}
-                </div>
-            </a>
-        </li>
+        <a class="post-card" href="{{ doc.url | relative_url }}">
+            <img class="post-banner" src="{{ doc.image | relative_url }}">
+            <div class="post-summary">
+                <h2>
+                    {{ doc.title | escape }}
+                </h2>
+                <span class="post-meta"><time>{{ doc.date | date: date_format }}</time></span>
+                {%- if site.show_excerpts -%}
+                {%- if doc.description -%}
+                <p>{{ doc.description }}</p>
+                {%- else -%}
+                {{ doc.content | strip | newline_to_br | split:'<br />' | first }}
+                {%- endif -%}
+                {%- endif -%}
+            </div>
+        </a>
         {%- endif -%}
         {%- endfor -%}
-    </ul>
+    </div>
 
     {% if site.paginate %}
     <div class="pager">

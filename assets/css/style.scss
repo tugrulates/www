@@ -114,12 +114,15 @@ button .svg-icon {
     font-size: 5vw;
 }
 
+.post-title-container .post-banner {
+    border-radius: 6px;
+}
+
 .post-banner {
     height: 100%;
     min-height: inherit;
     width: auto;
     object-fit: cover;
-    border-radius: 6px;
 }
 
 html[data-theme="dark"] .post-banner { filter: opacity(33%); }
@@ -145,23 +148,54 @@ blockquote {
     background: none !important;
 }
 
-code, pre, pre.highlight, .post-summary {
+code, pre, pre.highlight, .post-card {
     background: var(--background-color-secondary) !important;
     border: none;
     border-radius: 6px;
+}
+
+.post-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.post-card {
+    color: currentColor !important;
+    display: flexbox;
+    flex-direction: row;
+    height: auto;
+    flex-grow: 1;
+    flex-basis: 40%;
+    min-width: 200px;
+}
+
+.post-card:hover {
+    text-decoration: none !important;
+}
+
+.post-card:hover h2 {
+    text-decoration: underline;
+}
+
+.post-card .post-banner {
+    border-radius: 6px 6px 0px 0px;
+    width: 100%;
+    height: auto;
 }
 
 .post-summary {
     padding: 6px 18px;
 }
 
-.post-summary h2, .post-summary p {
+.post-summary h2 {
     margin-top: 0px;
     margin-bottom: 6px;
 }
 
-.post-summary-container a {
-    color: currentColor;
+.post-summary p {
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 h1, h2, h3, h4, h5, h6 {
