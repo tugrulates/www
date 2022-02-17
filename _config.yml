@@ -57,6 +57,8 @@ kramdown:
   footnote_backlink: "↵"
   math_engine: mathjax
 theme: minima
+minima:
+  date_format: "%B %-d, %Y"
 
 # Titles
 titles_from_headings:
