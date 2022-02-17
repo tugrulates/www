@@ -57,7 +57,7 @@ relative_links:
 collections:
   docs:
     output: true
-    permalink: /:title
+    permalink: /:path
 
 # Feed
 feed:

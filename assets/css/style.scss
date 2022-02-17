@@ -98,6 +98,37 @@ button .svg-icon {
     padding: 0px;
 }
 
+.post-title-container {
+    position: relative;
+    margin-bottom: 6px;
+}
+
+.post-banner + .post-title {
+    position: absolute;
+    bottom: 0px;
+    margin: 20px;
+    margin: 2%;
+}
+
+.post-title h1 {
+    font-size: 5vw;
+}
+
+.post-banner {
+    height: 100%;
+    min-height: inherit;
+    width: auto;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+html[data-theme="dark"] .post-banner { filter: opacity(33%); }
+html[data-theme="light"] .post-banner { filter: opacity(66%); }
+
+.post-meta {
+    margin: 0px;
+}
+
 time {
     color: var(--text-color-secondary);
 }
