@@ -94,8 +94,6 @@ responsive_image:
   strip: true
   output_path_format: 'images/%{filename}-%{width}.%{extension}'
   save_to_source: false
-  extra_images:
-    - _docs/images/*
 
 # Meta
 defaults:

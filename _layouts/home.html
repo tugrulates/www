@@ -25,22 +25,7 @@ layout: default
         {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
         {%- for doc in docs -%}
         {%- if doc.state == "public" -%}
-        <a class="post-card" href="{{ doc.url | relative_url }}">
-            <img class="post-cover" src="{{ doc.cover | width: 400}}">
-            <div class="post-summary">
-                <h2>
-                    {{ doc.title | escape }}
-                </h2>
-                <span class="post-meta"><time>{{ doc.date | date: date_format }}</time></span>
-                {%- if site.show_excerpts -%}
-                {%- if doc.description -%}
-                <p>{{ doc.description }}</p>
-                {%- else -%}
-                {{ doc.content | strip | newline_to_br | split:'<br />' | first }}
-                {%- endif -%}
-                {%- endif -%}
-            </div>
-        </a>
+        {%- include card.html doc=doc -%}
         {%- endif -%}
         {%- endfor -%}
     </div>

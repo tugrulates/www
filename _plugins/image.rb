@@ -4,13 +4,27 @@ module Jekyll
 
       include Jekyll::Filters::URLFilters
 
-      def width(image, width)
+      def _path(image)
         raise "`image` must be a string - got: #{image.class}" unless image.is_a? String
         raise "`image` may not be empty" unless image.length > 0
+
+        path = image
+        @context.registers[:site].collections.each do |name, meta|
+          for doc in meta.files
+            if doc.url == relative_url(image)
+              path = doc.path
+            end
+          end
+        end
+
+        path
+      end
+
+      def width(image, width)
         raise "`width` must be an int - got: #{width.class}" unless width.is_a? Integer
         raise "`width` must be positive" unless width > 0
 
-        image = relative_url(image)
+        image = _path(image)
         name = File.basename(image, ".*").concat("-", width.to_s, File.extname(image))
         File.join('/images', name)
       end
@@ -21,11 +35,11 @@ module Jekyll
 
       def image(image, cls, width, height)
         @attributes = {
-          'path' => image,
+          'path' => _path(image),
           'class' => cls,
           'width' => width,
           'height' => height,
-          'src' => width(image, width),
+          'src' => image,
           'srcset' => srcset(image, width)
         }
         Renderer.new(@context.registers[:site], @attributes).render_responsive_image

@@ -1,0 +1,16 @@
+<a class="post-card" href="{{ doc.url | relative_url }}">
+    {{ doc.cover | image: 'post-cover', 320, 160 }}
+    <div class="post-summary">
+        <h2>
+            {{ doc.title | escape }}
+        </h2>
+        <span class="post-meta"><time>{{ doc.date | date: date_format }}</time></span>
+        {%- if site.show_excerpts -%}
+        {%- if doc.description -%}
+        <p>{{ doc.description }}</p>
+        {%- else -%}
+        {{ doc.content | strip | newline_to_br | split:'<br />' | first }}
+        {%- endif -%}
+        {%- endif -%}
+    </div>
+</a>
