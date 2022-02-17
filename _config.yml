@@ -89,6 +89,7 @@ defaults:
       state: draft
       layout: post
       lang: en
+      cover: "./images/roundest-object-on-earth.jpg"
 
 # Plugins
 plugins:
