@@ -114,10 +114,23 @@ blockquote {
     background: none !important;
 }
 
-code, pre, pre.highlight {
+code, pre, pre.highlight, .post-summary {
     background: var(--background-color-secondary) !important;
     border: none;
     border-radius: 6px;
+}
+
+.post-summary {
+    padding: 6px 18px;
+}
+
+.post-summary h2, .post-summary p {
+    margin-top: 0px;
+    margin-bottom: 6px;
+}
+
+.post-summary-container a {
+    color: currentColor;
 }
 
 h1, h2, h3, h4, h5, h6 {
