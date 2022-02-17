@@ -4,7 +4,6 @@
         <h2>
             {{ doc.title | escape }}
         </h2>
-        <span class="post-meta"><time>{{ doc.date | date: date_format }}</time></span>
         {%- if site.show_excerpts -%}
         {%- if doc.description -%}
         <p>{{ doc.description }}</p>
