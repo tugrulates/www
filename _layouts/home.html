@@ -26,7 +26,7 @@ layout: default
         {%- for doc in docs -%}
         {%- if doc.state == "public" -%}
         <a class="post-card" href="{{ doc.url | relative_url }}">
-            <img class="post-banner" src="{{ doc.cover | relative_url }}">
+            <img class="post-cover" src="{{ doc.cover | relative_url }}">
             <div class="post-summary">
                 <h2>
                     {{ doc.title | escape }}

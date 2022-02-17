@@ -101,9 +101,10 @@ button .svg-icon {
 .post-title-container {
     position: relative;
     margin-bottom: 6px;
+    max-height: 360px;
 }
 
-.post-banner + .post-title {
+.post-cover + .post-title {
     position: absolute;
     bottom: 0px;
     margin: 20px;
@@ -114,19 +115,19 @@ button .svg-icon {
     font-size: 5vw;
 }
 
-.post-title-container .post-banner {
+.post-title-container .post-cover {
     border-radius: 6px;
 }
 
-.post-banner {
+.post-cover {
     height: 100%;
     min-height: inherit;
     width: auto;
     object-fit: cover;
 }
 
-html[data-theme="dark"] .post-banner { filter: opacity(33%); }
-html[data-theme="light"] .post-banner { filter: opacity(66%); }
+html[data-theme="dark"] .post-cover { filter: opacity(33%); }
+html[data-theme="light"] .post-cover { filter: opacity(66%); }
 
 .post-meta {
     margin: 0px;
@@ -178,7 +179,7 @@ code, pre, pre.highlight, .post-card {
     text-decoration: underline;
 }
 
-.post-card .post-banner {
+.post-card .post-cover {
     border-radius: 6px 6px 0px 0px;
     width: 100%;
     height: auto;

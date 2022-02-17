@@ -6,7 +6,7 @@ layout: default
     <header class="post-header">
         <div class="post-title-container">
             {%- if page.cover -%}
-            <img class="post-banner" src="{{ page.cover | relative_url }}">
+            <img class="post-cover" src="{{ page.cover | relative_url }}">
             {% endif -%}
             <h1 class="post-title p-name" itemprop="name headline">
                 {{ page.title | escape }}
