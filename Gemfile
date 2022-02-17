@@ -9,7 +9,7 @@ group :jekyll_plugins do
   # for the feed template, remove when released
   gem 'jekyll-feed', git: 'https://github.com/tugrulates/jekyll-feed', branch: 'dev'
   gem 'jekyll-relative-links'
-  gem 'jekyll-responsive-image'
+  gem 'jekyll-responsive-image', git: 'https://github.com/tugrulates/jekyll-responsive-image', branch: 'master'
   gem 'jekyll-seo-tag'
   gem 'jekyll-titles-from-headings'
 end
