@@ -79,6 +79,18 @@ titles_from_headings:
   strip_title: true
   collections: true
 
+# Images
+responsive_image:
+  template: _includes/srcset.html
+  sizes:
+    - width: 400
+    - width: 800
+  strip: true
+  output_path_format: images/%{filename}-%{width}.%{extension}
+  save_to_source: false
+  extra_images:
+    - _docs/images/*
+
 # Meta
 defaults:
   -
@@ -95,6 +107,7 @@ defaults:
 plugins:
   - jekyll-feed
   - jekyll-relative-links
+  - jekyll-responsive-image
   - jekyll-seo-tag
   - jekyll-titles-from-headings
 
