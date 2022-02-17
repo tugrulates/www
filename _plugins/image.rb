@@ -20,25 +20,36 @@ module Jekyll
         path
       end
 
-      def width(image, width)
+      WIDTHS = [ 40, 80, 120, 160, 320, 640, 960, 1280 ].freeze
+
+      def _best_width(width)
         raise "`width` must be an int - got: #{width.class}" unless width.is_a? Integer
         raise "`width` must be positive" unless width > 0
 
+        WIDTHS.select {|value| value > width }.first
+      end
+
+      def width(image, width)
         image = _path(image)
-        name = File.basename(image, ".*").concat("-", width.to_s, File.extname(image))
+        width = _best_width(width)
+        if width
+          name = File.basename(image, ".*").concat("-", width.to_s, File.extname(image))
+        else
+          name = File.basename(image)
+        end
         File.join('/images', name)
       end
 
       def srcset(image, width)
-        [1, 2, 3, 4].collect {|dp| "%s %dx" % [ width(image, width * dp), dp ]}.join(", ")
+        [1, 2, 3, 4]
+          .collect {|dp| "%s %dx" % [ width(image, width * dp), dp ]}
+          .join(", ")
       end
 
-      def image(image, cls, width, height)
+      def image(image, cls, width)
         @attributes = {
           'path' => _path(image),
           'class' => cls,
-          'width' => width,
-          'height' => height,
           'src' => image,
           'srcset' => srcset(image, width)
         }
