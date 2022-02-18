@@ -114,6 +114,7 @@ plugins:
   - jekyll-relative-links
   - jekyll-responsive-image
   - jekyll-seo-tag
+  - jekyll-tagories
   - jekyll-titles-from-headings
 
 # Exclude from processing.

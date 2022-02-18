@@ -15,6 +15,14 @@ GIT
       jekyll (>= 2.0, < 5.0)
       rmagick (>= 2.0, < 5.0)
 
+GIT
+  remote: https://github.com/tugrulates/jekyll-tagories
+  revision: 776e8cc8de3f17828bed566b6dab4c4c17e4d51e
+  branch: master
+  specs:
+    jekyll-tagories (0.1.0)
+      jekyll (>= 3.7, < 5.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -100,6 +108,7 @@ DEPENDENCIES
   jekyll-relative-links
   jekyll-responsive-image!
   jekyll-seo-tag
+  jekyll-tagories!
   jekyll-titles-from-headings
   kramdown-parser-gfm
   minima

@@ -11,6 +11,7 @@ group :jekyll_plugins do
   gem 'jekyll-relative-links'
   gem 'jekyll-responsive-image', git: 'https://github.com/tugrulates/jekyll-responsive-image', branch: 'master'
   gem 'jekyll-seo-tag'
+  gem 'jekyll-tagories', git: 'https://github.com/tugrulates/jekyll-tagories', branch: 'master'
   gem 'jekyll-titles-from-headings'
 end
 
