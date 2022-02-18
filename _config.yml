@@ -23,6 +23,7 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://tugrul.blog"
 logo: "/assets/favicon.png"
 rss: rss
+states: public
 show_excerpts: true
 
 # Author

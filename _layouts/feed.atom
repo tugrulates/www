@@ -48,7 +48,7 @@
     {% assign posts = posts | where: "categories", page.category %}
   {% endif %}
   {% unless site.show_drafts %}
-    {% assign posts = posts | where_exp: "post", "post.state == 'public'" %}
+    {% assign posts = posts | where_exp: "post", "site.states contains post.state" %}
   {% endunless %}
   {% assign posts = posts | sort: "date" | reverse %}
   {% assign posts_limit = site.feed.posts_limit | default: 10 %}
