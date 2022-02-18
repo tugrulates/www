@@ -1,0 +1,102 @@
+/* Asana */
+/*:root {
+    --gray: #c7c4c4;
+    --red: #f06a6a;
+    --orange: #ec8d71;
+    --yellow-orange: #f1bd6c;
+    --yellow: #f8df72;
+    --yellow-green: #aecf55;
+    --green: #5da283;
+    --blue-green: #4ecbc4;
+    --aqua: #9ee7e3;
+    --blue: #4573d2;
+    --indigo: #8d84e8;
+    --purple: #b36bd4;
+    --magenta: #f9aaef;
+    --pink: #f26fb2;
+    --hot-pink: #fc979a;
+    --cool-gray: #6d6e6f;
+}*/
+
+/* Asana*0.66 */
+:root {
+    --gray: #838181;
+    --red: #9e4545;
+    --orange: #9b5d4a;
+    --yellow-orange: #9f7c47;
+    --yellow: #a3934b;
+    --yellow-green: #728838;
+    --green: #3d6a56;
+    --blue-green: #338581;
+    --aqua: #689895;
+    --blue: #2d4b8a;
+    --indigo: #5d5799;
+    --purple: #76468b;
+    --magenta: #a4709d;
+    --pink: #9f4975;
+    --hot-pink: #a66365;
+    --cool-gray: #474849;
+}
+
+.tag[href="#meta"] { background-color: var(--cool-gray); }
+.tag[href="#self"] { background-color: var(--cool-gray); }
+.tag[href="#study"] { background-color: var(--cool-gray); }
+.tag[href="#productivity"] { background-color: var(--cool-gray); }
+.tag[href="#accounts"] { background-color: var(--cool-gray); }
+.tag[href="#social"] { background-color: var(--pink); }
+.tag[href="#events"] { background-color: var(--pink); }
+.tag[href="#qna"] { background-color: var(--pink); }
+.tag[href="#craft"] { background-color: var(--purple); }
+.tag[href="#coding"] { background-color: var(--purple); }
+.tag[href="#math"] { background-color: var(--purple); }
+.tag[href="#graphics"] { background-color: var(--purple); }
+.tag[href="#ai"] { background-color: var(--purple); }
+.tag[href="#research"] { background-color: var(--purple); }
+.tag[href="#business"] { background-color: var(--blue); }
+.tag[href="#career"] { background-color: var(--blue); }
+.tag[href="#leadership"] { background-color: var(--blue); }
+.tag[href="#management"] { background-color: var(--blue); }
+.tag[href="#mentorship"] { background-color: var(--blue); }
+.tag[href="#work"] { background-color: var(--blue); }
+.tag[href="#marketing"] { background-color: var(--blue); }
+.tag[href="#travel"] { background-color: var(--aqua); }
+.tag[href="#money"] { background-color: var(--green); }
+.tag[href="#budgeting"] { background-color: var(--green); }
+.tag[href="#investing"] { background-color: var(--green); }
+.tag[href="#tax"] { background-color: var(--green); }
+.tag[href="#home"] { background-color: var(--yellow-green); }
+.tag[href="#shopping"] { background-color: var(--yellow-green); }
+.tag[href="#language"] { background-color: var(--yellow); }
+.tag[href="#writing"] { background-color: var(--yellow); }
+.tag[href="#blog"] { background-color: var(--yellow); }
+.tag[href="#design"] { background-color: var(--yellow-orange); }
+.tag[href="#arts"] { background-color: var(--yellow-orange); }
+.tag[href="#music"] { background-color: var(--yellow-orange); }
+.tag[href="#culture"] { background-color: var(--orange); }
+.tag[href="#history"] { background-color: var(--orange); }
+.tag[href="#literature"] { background-color: var(--orange); }
+.tag[href="#philosophy"] { background-color: var(--orange); }
+.tag[href="#health"] { background-color: var(--red); }
+.tag[href="#mind"] { background-color: var(--red); }
+.tag[href="#body"] { background-color: var(--red); }
+.tag[href="#food"] { background-color: var(--red); }
+
+.tag, .frontmatter .tag {
+    align-self: flex-start;
+    background-color: var(--gray);
+    border-radius: 6px !important;
+    border: none !important;
+    color: white !important;
+    cursor: pointer !important;
+    display: inline-block !important;
+    font-size: small !important;
+    padding: 2px 6px !important;
+    text-align: center !important;
+    text-decoration: none !important;
+}
+
+/* Change color of tag count pill when hovering */
+.tag:hover, .frontmatter .tag:hover {
+    background-color: var(--gray) !important;
+    color: white !important;
+}

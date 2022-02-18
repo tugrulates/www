@@ -13,6 +13,7 @@ $grey-color-dark:  hsl(240, 0%, 14%) !default;
 @import "table.css";
 @import "code.css";
 @import "chart.css";
+@import "tag.css";
 
 html[data-theme="dark"] {
     --background-color-secondary: hsl(0, 0%, 10%);
@@ -180,8 +181,10 @@ button .svg-icon {
 }
 
 .post-title-container {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-areas: "tags time" "title title";
+    grid-template-columns: auto max-content;
+    grid-template-rows: auto max-content;
     height: calc(100% - 24px);
     padding: 12px 18px;
     position: absolute;
@@ -189,21 +192,30 @@ button .svg-icon {
     width: calc(100% - 36px);
 }
 
-.post-title {
-    font-size: calc(min(8vw, 48px));
-    margin: 0px;
+.post-tags {
+    align-items: flex-start;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    grid-area: tags;
 }
 
-.post-meta {
-    flex-grow: 1;
+.post-time {
     font-size: calc(min(4vw, 24px));
+    grid-area: time;
     margin: 0px;
-    text-align: right;
 }
 
 time {
     color: var(--text-color-secondary);
     margin: 0px;
+}
+
+.post-title {
+    font-size: calc(min(8vw, 48px));
+    grid-area: title;
+    margin: 0px;
+    text-align: bottom;
 }
 
 blockquote {
