@@ -1,9 +1,9 @@
 table {
-    color: var(--text-color) !important;
     background-color: transparent !important;
-    border: none !important;
-    border-spacing: 0px 6px !important;
     border-collapse: separate !important;
+    border-spacing: 0px 6px !important;
+    border: none !important;
+    color: var(--text-color) !important;
 }
 
 table, table tr {
