@@ -194,7 +194,7 @@ button .svg-icon {
     padding:
         calc(min(12px, 2vw))
         calc(min(18px, 2.5vw))
-        calc(min(6px, 2.5vw))
+        calc(min(6px, 1vw))
         calc(min(18px, 2.5vw)) ;
     position: absolute;
     top: 0px;
@@ -202,8 +202,8 @@ button .svg-icon {
 }
 
 .card .cover {
-    height: calc(100% - 12px);
-    padding: calc(min(6px, 2vw)) calc(min(12px, 2.5vw));
+    height: calc(100% - 24px);
+    padding: calc(min(12px, 2vw)) calc(min(12px, 2.5vw));
     width: calc(100% - 24px);
 }
 
@@ -249,12 +249,16 @@ time {
     line-height: 1.5em;
 }
 
+.card-list {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 20px;
+}
+
 .card {
     border-radius: 6px;
     color: currentColor !important;
-    flex-basis: 40%;
-    flex-direction: row;
-    flex-grow: 1;
+    flex: 1 0 40%;
     height: auto;
     min-width: 350px;
 }
@@ -289,12 +293,6 @@ code, pre, pre.highlight, .card {
     background: var(--background-color-secondary) !important;
     border-radius: 6px;
     border: none;
-}
-
-.post-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
 }
 
 h1, h2, h3, h4, h5, h6 {

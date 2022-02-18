@@ -19,7 +19,7 @@ layout: default
 
     {%- if docs.size > 0 -%}
     {%- if page.list_title -%}
-    <h2 class="post-list-heading">{{ page.list_title }}</h2>
+    <h2 class="card-list-heading">{{ page.list_title }}</h2>
     {%- endif -%}
 
     {%- comment - %}
@@ -29,7 +29,7 @@ layout: default
     {%- endfor -%}
     {%- endcomment - %}
 
-    <div class="post-list">
+    <div class="card-list">
         {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
         {%- for doc in docs -%}
         {%- if site.states contains doc.state -%}
