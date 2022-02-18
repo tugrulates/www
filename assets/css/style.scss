@@ -110,7 +110,6 @@ h5.anchor { margin-left: -28px; }
 h6.anchor { margin-left: -24px; }
 
 .anchor .anchor-left {
-    visibility: hidden;
     background-position: left center;
 }
 
@@ -118,25 +117,22 @@ h6.anchor { margin-left: -24px; }
     background-position: right center;
 }
 
-
-@media screen and (hover: hover) and (min-width: 1280px){
-    .anchor:hover .anchor-left {
-        visibility: visible;
-    }
-
-    .anchor .anchor-right {
-        visibility: hidden;
-    }
+@media screen and (min-width: 1280px) {
+    .anchor .anchor-right { visibility: hidden; }
 }
 
-@media screen and (hover: hover) and (max-width: 1279px){
-    .anchor .anchor-right {
-        visibility: hidden;
-    }
+@media screen and (max-width: 1280px) {
+    .anchor .anchor-left { visibility: hidden; }
+}
 
-    .anchor:hover .anchor-right {
-        visibility: visible;
-    }
+@media screen and (hover: hover) and (min-width: 1280px) {
+    .anchor .anchor-left { visibility: hidden; }
+    .anchor:hover .anchor-left { visibility: visible; }
+}
+
+@media screen and (hover: hover) and (max-width: 1279px) {
+    .anchor .anchor-right { visibility: hidden; }
+    .anchor:hover .anchor-right { visibility: visible; }
 }
 
 button:hover {
