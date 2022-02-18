@@ -15,8 +15,8 @@ jobs:
       - uses: actions/checkout@v2
         with: 
           submodules: true
-      - name: Downgrade imagemagick
-        run: sudo apt-get remove imagemagick && sudo apt-get install -y imagemagick=7
+      - name: imagemagick
+        run: sudo apt-get install -y libmagickcore-6.q16-dev
       - uses: actions/cache@v2
         with:
           path: vendor/bundle
