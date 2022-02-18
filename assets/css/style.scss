@@ -106,8 +106,12 @@ button .svg-icon {
     border-radius: 6px;
 }
 
-.post-cover {
-    filter: opacity(33%);
+.post-card .post-cover {
+    filter: opacity(80%);
+}
+
+.post-header .post-cover {
+    filter: opacity(40%);
 }
 
 .post-title-container {
@@ -124,12 +128,12 @@ button .svg-icon {
 }
 
 .post-title {
-    font-size: calc(min(8vw, 36px));
+    font-size: calc(min(8vw, 48px));
     margin: 0px;
 }
 
 .post-meta {
-    font-size: calc(min(4vw, 16px));
+    font-size: calc(min(4vw, 24px));
     margin: 0px;
     flex-grow: 1;
     text-align: right;
