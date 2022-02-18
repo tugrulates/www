@@ -117,20 +117,20 @@ h6.anchor { margin-left: -24px; }
     background-position: right center;
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: 960px) {
     .anchor .anchor-right { visibility: hidden; }
 }
 
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 959px) {
     .anchor .anchor-left { visibility: hidden; }
 }
 
-@media screen and (hover: hover) and (min-width: 1280px) {
+@media screen and (hover: hover) and (min-width: 960px) {
     .anchor .anchor-left { visibility: hidden; }
     .anchor:hover .anchor-left { visibility: visible; }
 }
 
-@media screen and (hover: hover) and (max-width: 1279px) {
+@media screen and (hover: hover) and (max-width: 959px) {
     .anchor .anchor-right { visibility: hidden; }
     .anchor:hover .anchor-right { visibility: visible; }
 }
