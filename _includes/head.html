@@ -18,7 +18,7 @@
     <meta name="msapplication-TileColor" content="#c1af83">
     <meta name="theme-color" content="#ffffff">
 
-    {% include theme.html %}
+    <script src="{{ '/assets/js/jquery-3.6.0.min.js' | relative_url }}"></script>
 
     {% if page.use_math %}
     {% include mathjax.html %}
@@ -27,4 +27,7 @@
     {% if page.use_chart %}
     {% include mermaid.html %}
     {% endif %}
+
+    {% include theme.html %}
+
 </head>
