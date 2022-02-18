@@ -5,7 +5,7 @@
         {%- endfor -%}
     </div>
     <div class="cover-time">
-        {%- assign date_format = date_format | default: "%b %-d, %Y" -%}
+        {%- assign date_format = "%B %-d, %Y" -%}
         <time class="dt-published" datetime="{{ doc.date | date_to_xmlschema }}" itemprop="datePublished">
             {{ doc.date | date: date_format }}
         </time>

@@ -2,7 +2,7 @@
     <div class="card-header">
         {{ doc.cover | image: 'cover-image', 320 }}
         {%- assign doc=page -%}
-        {%- include cover.html date_format="%b %-d, %Y" -%}
+        {%- include cover.html -%}
     </div>
     {%- if site.show_excerpts -%}
     {% if doc.description %}
