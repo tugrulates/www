@@ -1,15 +1,20 @@
-<a class="post-card" href="{{ doc.url | relative_url }}">
-    {{ doc.cover | image: 'post-cover', 320 }}
-    <div class="post-summary">
-        <h2>
-            {{ doc.title | escape }}
-        </h2>
-        {%- if site.show_excerpts -%}
-        {%- if doc.description -%}
-        <p>{{ doc.description }}</p>
-        {%- else -%}
-        {{ doc.content | strip | newline_to_br | split:'<br />' | first }}
-        {%- endif -%}
-        {%- endif -%}
+<a class="card" href="{{ doc.url | relative_url }}">
+    <header class="card-header">
+        {{ doc.cover | image: 'cover-image', 320 }}
+        {%- assign doc=page -%}
+        {%- include cover.html date_format="%b %-d, %Y" -%}
+    </header>
+    {%- if site.show_excerpts -%}
+    {% if doc.description %}
+    {% assign desc = doc.description %}
+    {% else %}
+    {% assign desc = doc.content%}
+    {% endif %}
+    {% assign desc = desc | newline_to_br | split:'<br />' | first | strip_html | strip %}
+    {%- if desc != '' -%}
+    <div class="card-description">
+        {{ desc }}
     </div>
+    {%- endif -%}
+    {%- endif -%}
 </a>

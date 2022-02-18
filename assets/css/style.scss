@@ -60,7 +60,7 @@ a:not(.site-title):hover, .site-title:hover span, button:hover {
 }
 
 @media (hover: none) {
-    a:not(a.post-card) {
+    a:not(a.card) {
         text-decoration: underline;
     }
 
@@ -157,43 +157,47 @@ button .svg-icon {
     padding: 0px;
 }
 
-.post-header {
+.post-header, .card-header {
     aspect-ratio: 2;
     position: relative;
 }
 
-.post-header .post-cover {
+.cover-image {
     border-radius: 6px;
-}
-
-.post-cover {
+    filter: opacity(40%);
     height: 100%;
     object-fit: cover;
     width: 100%;
 }
 
-.post-card .post-cover {
+.card .cover-image {
     filter: opacity(60%);
 }
 
-.post-header .post-cover {
-    filter: opacity(40%);
-}
-
-.post-title-container {
+.cover {
     display: grid;
-    gap: 24px;
+    gap: calc(min(6px, 4vw));
     grid-template-areas: "tags time" "title title";
     grid-template-columns: auto max-content;
     grid-template-rows: auto max-content;
-    height: calc(100% - 24px);
-    padding: 12px 18px;
+    height: calc(100% - 18px);
+    padding:
+        calc(min(12px, 2vw))
+        calc(min(18px, 2.5vw))
+        calc(min(6px, 2.5vw))
+        calc(min(18px, 2.5vw)) ;
     position: absolute;
     top: 0px;
     width: calc(100% - 36px);
 }
 
-#post-tags {
+.card .cover {
+    height: calc(100% - 12px);
+    padding: calc(min(6px, 2vw)) calc(min(12px, 2.5vw));
+    width: calc(100% - 24px);
+}
+
+.cover-tags {
     align-content: flex-start;
     grid-area: tags;
 }
@@ -204,10 +208,17 @@ button .svg-icon {
     gap: 6px;
 }
 
-.post-time {
-    font-size: calc(min(4vw, 24px));
+.cover-time {
     grid-area: time;
     margin: 0px;
+}
+
+.cover-time time {
+    display: block;
+    font-size: calc(max(6px, min(12px, 3vw)));
+    font-style: oblique;
+    line-height: 1.5em;
+    text-align: right;
 }
 
 time {
@@ -215,11 +226,49 @@ time {
     margin: 0px;
 }
 
-.post-title {
-    font-size: calc(min(8vw, 48px));
+.cover-title {
+    font-size: calc(max(6px, min(48px, 6vw)));
+    line-height: 1.5em;
     grid-area: title;
     margin: 0px;
     text-align: bottom;
+}
+
+.card .cover-title {
+    font-size: calc(max(6px, min(24px, 6vw)));
+    line-height: 1.5em;
+}
+
+.card {
+    border-radius: 6px;
+    color: currentColor !important;
+    flex-basis: 40%;
+    flex-direction: row;
+    flex-grow: 1;
+    height: auto;
+    min-width: 320px;
+}
+
+.card:hover {
+    text-decoration: none !important;
+}
+
+.card:hover h1 {
+    text-decoration: underline;
+}
+
+.card .cover-image {
+    border-radius: 6px;
+    height: auto;
+    width: 100%;
+}
+
+.card-description {
+    color: var(--text-color-secondary);
+    padding: calc(min(12px, 2.5vw));
+    line-height: 1.5em;
+    max-height: calc(1.5em * 5);
+    overflow: hidden;
 }
 
 blockquote {
@@ -234,7 +283,7 @@ blockquote {
     background: none !important;
 }
 
-code, pre, pre.highlight, .post-card {
+code, pre, pre.highlight, .card {
     background: var(--background-color-secondary) !important;
     border-radius: 6px;
     border: none;
@@ -244,43 +293,6 @@ code, pre, pre.highlight, .post-card {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-}
-
-.post-card {
-    color: currentColor !important;
-    flex-basis: 40%;
-    flex-direction: row;
-    flex-grow: 1;
-    height: auto;
-    min-width: 200px;
-}
-
-.post-card:hover {
-    text-decoration: none !important;
-}
-
-.post-card:hover h2 {
-    text-decoration: underline;
-}
-
-.post-card .post-cover {
-    border-radius: 6px 6px 0px 0px;
-    height: auto;
-    width: 100%;
-}
-
-.post-summary {
-    padding: 12px 18px;
-}
-
-.post-summary h2 {
-    margin-bottom: 6px;
-    margin-top: 0px;
-}
-
-.post-summary p {
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 h1, h2, h3, h4, h5, h6 {

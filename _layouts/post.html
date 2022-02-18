@@ -4,33 +4,9 @@ layout: default
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
     <header class="post-header">
-        {{ page.cover | image: 'post-cover', 800 }}
-        <div class="post-title-container">
-            <div id="post-tags" class="tag-list">
-                {%- for tag in page.tags -%}
-                {%- include tag.html -%}
-                {%- endfor -%}
-            </div>
-            <div class="post-time">
-                {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
-                <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-                    {{ page.date | date: date_format }}
-                </time>
-                {%- if page.update -%}
-                <em><time class="dt-modified" datetime="{{ page.last_modified_at | date_to_xmlschema }}"
-                        itemprop="dateModified">
-                        (updated on {{ page.update | date: date_format }})
-                    </time></em>
-                {%- endif -%}
-                {%- if page.author -%}
-                • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card"
-                        itemprop="name">{{ page.author }}</span></span>
-                {%- endif -%}
-            </div>
-            <h1 class="post-title p-name" itemprop="name headline">
-                {{ page.title | escape }}
-            </h1>
-        </div>
+        {{ page.cover | image: 'cover-image', 800 }}
+        {%- assign doc=page -%}
+        {%- include cover.html -%}
     </header>
 
     <div class="post-content e-content" itemprop="articleBody">
