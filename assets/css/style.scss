@@ -251,12 +251,18 @@ h1, h2, h3, h4, h5, h6 {
     min-height: auto;
 }
 
+.site-header .wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
 .site-title {
+    flex-grow: 1;
     font-size: 24px;
 }
 
 .site-title .avatar {
-    margin-right: 12px;
+    margin-right: 6px;
     margin-left: -4px;
 }
 
@@ -283,14 +289,12 @@ a.site-title:hover {
 }
 
 .site-title, .footer {
-    line-height: 22px;
+    line-height: 30px;
     letter-spacing: -1px;
 }
 
 .site-nav {
     line-height: 36px;
-    position: relative;
-    left: 0px;
     top: 0px;
 }
 
