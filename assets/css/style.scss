@@ -58,6 +58,16 @@ a:not(.site-title):hover, .site-title:hover span, button:hover {
     filter: brightness(var(--hover-brightness));
 }
 
+@media (hover: none) {
+    a:not(a.post-card) {
+        text-decoration: underline;
+    }
+
+    a.social-media-item, button {
+        filter: brightness(var(--hover-brightness));
+    }
+}
+
 main a[rel="external"], main a[href$=".pdf"], main a[href$=".zip"] {
     background-position: right top;
     background-repeat: no-repeat;
