@@ -87,8 +87,8 @@ main a[href$=".zip"] {
 main a.anchor-left, main a.anchor-right {
     background-image: url('/assets/link-anchor.svg');
     background-repeat: no-repeat;
-    background-size: 24px;
     padding-right: 36px;
+    background-size: 24px;
 }
 
 .anchor .anchor-left {
@@ -344,7 +344,7 @@ a.site-title:hover {
 }
 
 .site-nav {
-    line-height: 36px;
+    line-height: 38px;
     top: 0px;
 }
 
