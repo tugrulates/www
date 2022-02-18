@@ -103,7 +103,6 @@ DEPENDENCIES
   jekyll-titles-from-headings
   kramdown-parser-gfm
   minima
-  rmagick (~> 4.0)
   tzinfo (~> 1.2)
   tzinfo-data
   wdm (~> 0.1.0)

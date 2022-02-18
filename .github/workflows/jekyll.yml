@@ -13,17 +13,16 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-        with: 
+        with:
           submodules: true
-      - name: imagemagick
-        run: sudo apt-get install -y libmagickcore-6.q16-dev
       - uses: actions/cache@v2
         with:
           path: vendor/bundle
           key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile') }}
           restore-keys: |
             ${{ runner.os }}-gems-
-      - uses: helaili/jekyll-action@v2
+      - uses: tugrulates/jekyll-action@master
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          pre_build_commands: apk --update add imagemagick imagemagick-c++ imagemagick-dev imagemagick-libs
           target_branch: 'gh-pages'
