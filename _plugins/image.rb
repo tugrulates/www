@@ -51,7 +51,8 @@ module Jekyll
           'path' => _path(image),
           'class' => cls,
           'src' => image,
-          'srcset' => srcset(image, width)
+          'srcset' => srcset(image, width),
+          'alt' => File.basename(image, ".*").gsub(/-/, " ")
         }
         Renderer.new(@context.registers[:site], @attributes).render_responsive_image
       end
