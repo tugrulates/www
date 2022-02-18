@@ -6,7 +6,7 @@ layout: default
     <header class="post-header">
         {{ page.cover | image: 'post-cover', 800 }}
         <div class="post-title-container">
-            <div class="post-tags">
+            <div id="post-tags" class="tag-list">
                 {%- for tag in page.tags -%}
                 {%- include tag.html -%}
                 {%- endfor -%}
