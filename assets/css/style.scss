@@ -58,7 +58,7 @@ a:not(.site-title):hover, .site-title:hover span, button:hover {
     filter: brightness(var(--hover-brightness));
 }
 
-main a[href*="//"], main a[href$=".pdf"], main a[href$=".zip"] {
+main a[rel="external"], main a[href$=".pdf"], main a[href$=".zip"] {
     background-position: right top;
     background-repeat: no-repeat;
     background-size: 12px;
@@ -75,6 +75,50 @@ main a[href$=".pdf"] {
 
 main a[href$=".zip"] {
     background-image: url('/assets/link-zip.svg');
+}
+
+.anchor {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    margin-left: -36px
+}
+
+main a.anchor-left, main a.anchor-right {
+    background-image: url('/assets/link-anchor.svg');
+    background-repeat: no-repeat;
+    padding-right: 36px;
+    background-size: 24px;
+}
+
+.anchor .anchor-left {
+    visibility: hidden;
+    background-position: left center;
+}
+
+.anchor .anchor-right {
+    background-position: right center;
+}
+
+
+@media screen and (hover: hover) and (min-width: 1280px){
+    .anchor:hover .anchor-left {
+        visibility: visible;
+    }
+
+    .anchor .anchor-right {
+        visibility: hidden;
+    }
+}
+
+@media screen and (hover: hover) and (max-width: 1279px){
+    .anchor .anchor-right {
+        visibility: hidden;
+    }
+
+    .anchor:hover .anchor-right {
+        visibility: visible;
+    }
 }
 
 button:hover {

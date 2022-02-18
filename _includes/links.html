@@ -1,7 +1,17 @@
 <script>
     $(document).ready(function () {
-        var external_links = $("a[href^='http'], a[href^='//'], a[rel='external']");
-        external_links.attr("target", "_blank");
-        external_links.attr("rel", "external");
+        $("a[href^='http'], a[href^='//'], a[rel='external']")
+            .attr("target", "_blank")
+            .attr("rel", "external");
+
+        var subtitles = $("article").find("h2, h3, h4, h5, h6");
+        subtitles
+            .prepend(function (index, html) {
+                return "<a class='anchor-left' href='{{ page.url | relative_url }}#" + subtitles[index].id + "'></a>";
+            })
+            .append(function (index, html) {
+                return "<a class='anchor-right' href='{{ page.url | relative_url }}#" + subtitles[index].id + "'></a>";
+            })
+            .wrap("<span class='anchor'></span>");
     });
 </script>
