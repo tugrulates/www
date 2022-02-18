@@ -51,24 +51,22 @@ a, a:visited {
     text-decoration: none;
 }
 
-@media (hover: hover) {
-    a:hover {
-        text-decoration: underline;
-    }
+a:hover {
+    text-decoration: underline;
+}
 
-    a:not(.site-title, .card):hover,
-    .site-title:hover span,
-    .card:hover .cover-title,
-    .card:hover .cover-time,
-    .card:hover .card-description,
-    button:hover {
-        filter: brightness(var(--hover-brightness));
-    }
+a:not(.site-title, .card):hover,
+.site-title:hover span,
+.card:hover .cover-title,
+.card:hover .cover-time,
+.card:hover .card-description,
+button:hover {
+    filter: brightness(var(--hover-brightness));
+}
 
-    .card:hover {
-        background-color: var(--icon-color) !important;
-        text-decoration: none !important;
-    }
+.card:hover {
+    background-color: var(--icon-color) !important;
+    text-decoration: none !important;
 }
 
 @media (hover: none) {
