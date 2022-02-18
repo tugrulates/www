@@ -87,7 +87,7 @@
     border-radius: 12px !important;
     border: none !important;
     color: white !important;
-    cursor: pointer !important;
+    /* cursor: pointer !important; */
     display: inline-block !important;
     font-size: max(3px, min(12px, 3vw)) !important;
     line-height: 1.5em !important;
@@ -97,7 +97,7 @@
 }
 
 /* Change color of tag count pill when hovering */
-.tag:hover, .frontmatter .tag:hover {
+/* .tag:hover, .frontmatter .tag:hover {
     background-color: var(--gray) !important;
     color: white !important;
-}
+} */

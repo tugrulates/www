@@ -1,9 +1,9 @@
 <a class="card" href="{{ doc.url | relative_url }}">
-    <header class="card-header">
+    <div class="card-header">
         {{ doc.cover | image: 'cover-image', 320 }}
         {%- assign doc=page -%}
         {%- include cover.html date_format="%b %-d, %Y" -%}
-    </header>
+    </div>
     {%- if site.show_excerpts -%}
     {% if doc.description %}
     {% assign desc = doc.description %}
@@ -12,9 +12,7 @@
     {% endif %}
     {% assign desc = desc | newline_to_br | split:'<br />' | first | strip_html | strip %}
     {%- if desc != '' -%}
-    <div class="card-description">
-        {{ desc }}
-    </div>
+    <div class="card-description">{{ desc }}</div>
     {%- endif -%}
     {%- endif -%}
 </a>
