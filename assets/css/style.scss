@@ -245,10 +245,12 @@ h1, h2, h3, h4, h5, h6 {
 
 .site-header, .site-footer {
     background: var(--background-color-secondary);
-    padding-bottom: 2px;
-    padding-top: 2px;
     border: none;
     min-height: auto;
+}
+
+.site-header {
+    padding: 2px 0px;
 }
 
 .site-header .wrapper {
@@ -288,7 +290,7 @@ a.site-title:hover {
     color: var(--text-color) !important;
 }
 
-.site-title, .footer {
+.site-title {
     line-height: 30px;
     letter-spacing: -1px;
 }
@@ -302,24 +304,14 @@ html[data-theme="dark"] #light-theme-icon, html[data-theme="light"] #dark-theme-
     display: none;
 }
 
-.footer-col-wrapper {
-    margin: auto;
-}
-
-.footer-col {
-    margin: auto;
-    float: none;
-    width: fit-content;
-    padding: 6px;
+.site-footer {
+    padding: 12px 0px;
 }
 
 .social-media-list {
-    margin: 0px;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: calc(min(18px, max(6px, (100% - 240px) / 7)));
 }
-
-.social-media-list li {
-    display: inline;
-    padding: 6px;
-}
-
