@@ -100,8 +100,6 @@ button .svg-icon {
 
 .post-header {
     position: relative;
-    margin-bottom: 30px;
-    max-height: 360px;
 }
 
 .post-header .post-cover {
@@ -109,7 +107,6 @@ button .svg-icon {
 }
 
 .post-cover {
-    height: 100%;
     min-height: inherit;
     width: auto;
     object-fit: cover;
@@ -119,14 +116,14 @@ button .svg-icon {
 .post-title-container {
     position: absolute;
     top: 0px;
-    margin: 6px 18px;
+    padding: 12px 18px;
 }
 
 .post-title-container {
     display: flex;
     flex-direction: column;
     width: calc(100% - 36px);
-    height: calc(100% - 12px);
+    height: calc(100% - 24px);
 }
 
 .post-title {
