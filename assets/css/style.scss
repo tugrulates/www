@@ -99,11 +99,18 @@ button .svg-icon {
 }
 
 .post-header {
+    aspect-ratio: 2;
     position: relative;
 }
 
 .post-header .post-cover {
     border-radius: 6px;
+}
+
+.post-cover {
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
 }
 
 .post-card .post-cover {
@@ -115,15 +122,12 @@ button .svg-icon {
 }
 
 .post-title-container {
-    padding: 12px 18px;
-    position: absolute;
-    top: 0px;
-}
-
-.post-title-container {
     display: flex;
     flex-direction: column;
     height: calc(100% - 24px);
+    padding: 12px 18px;
+    position: absolute;
+    top: 0px;
     width: calc(100% - 36px);
 }
 
