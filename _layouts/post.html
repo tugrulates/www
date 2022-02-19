@@ -6,6 +6,7 @@ layout: default
     <header class="post-header">
         {{ page.cover | image: 'cover-image', 800 }}
         {%- assign doc=page -%}
+        {%- assign covertags=true -%}
         {%- include cover.html -%}
     </header>
 

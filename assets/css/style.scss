@@ -64,8 +64,11 @@ button:hover {
     filter: brightness(var(--hover-brightness));
 }
 
-.card:hover {
+.card-container:hover {
     background-color: var(--icon-color) !important;
+}
+
+.card:hover {
     text-decoration: none !important;
 }
 
@@ -251,12 +254,15 @@ time {
     gap: 20px;
 }
 
+.card-container {
+    flex: 1 0 40%;
+    min-width: 350px;
+}
+
 .card {
     border-radius: 6px;
     color: currentColor !important;
-    flex: 1 0 40%;
     height: auto;
-    min-width: 350px;
 }
 
 .card .cover-image {
@@ -274,6 +280,10 @@ time {
     overflow: hidden;
 }
 
+.card-tags {
+    padding: calc(min(12px, 2vw));
+}
+
 blockquote {
     background: var(--background-color-secondary);
     border-left: 4px solid var(--text-color-secondary);
@@ -286,7 +296,7 @@ blockquote {
     background: none !important;
 }
 
-code, pre, pre.highlight, .card {
+code, pre, pre.highlight, .card-container {
     background: var(--background-color-secondary) !important;
     border-radius: 6px;
     border: none;

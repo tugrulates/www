@@ -1,9 +1,11 @@
 <div class="cover">
+    {%- if covertags -%}
     <div class="cover-tags tag-list">
         {%- for tag in doc.tags -%}
         {%- include tag.html -%}
         {%- endfor -%}
     </div>
+    {%- endif -%}
     <div class="cover-time">
         {%- assign date_format = "%B %-d, %Y" -%}
         <time class="dt-published" datetime="{{ doc.date | date_to_xmlschema }}" itemprop="datePublished">

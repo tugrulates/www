@@ -1,18 +1,28 @@
-<a class="card" href="{{ doc.url | relative_url }}">
-    <div class="card-header">
-        {{ doc.cover | image: 'cover-image', 320 }}
-        {%- assign doc=page -%}
-        {%- include cover.html -%}
+<div class="card-container">
+
+    <a class="card" href="{{ doc.url | relative_url }}">
+        <div class="card-header">
+            {{ doc.cover | image: 'cover-image', 320 }}
+            {%- assign doc=page -%}
+            {%- include cover.html -%}
+        </div>
+        {%- if site.show_excerpts -%}
+        {% if doc.description %}
+        {% assign desc = doc.description %}
+        {% else %}
+        {% assign desc = doc.content%}
+        {% endif %}
+        {% assign desc = desc | newline_to_br | split:'<br />' | first | strip_html | strip %}
+        {%- if desc != '' -%}
+        <div class="card-description">{{ desc }}</div>
+        {%- endif -%}
+        {%- endif -%}
+    </a>
+
+    <div class="card-tags tag-list">
+        {%- for tag in doc.tags -%}
+        {%- include tag.html -%}
+        {%- endfor -%}
     </div>
-    {%- if site.show_excerpts -%}
-    {% if doc.description %}
-    {% assign desc = doc.description %}
-    {% else %}
-    {% assign desc = doc.content%}
-    {% endif %}
-    {% assign desc = desc | newline_to_br | split:'<br />' | first | strip_html | strip %}
-    {%- if desc != '' -%}
-    <div class="card-description">{{ desc }}</div>
-    {%- endif -%}
-    {%- endif -%}
-</a>
+
+</div>
