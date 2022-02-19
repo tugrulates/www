@@ -55,7 +55,7 @@ a:hover {
     text-decoration: underline;
 }
 
-a:not(a.home-link, .card-link):hover,
+a:not(a.tag, a.home-link, .card-link):hover,
 a.home-link:hover span,
 .card-link:hover .cover-title,
 .card-link:hover .cover-time,

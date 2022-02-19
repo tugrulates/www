@@ -1,97 +1,102 @@
-html[data-theme="dark"] {
-    --red: hsl(0, 50%, 20%);
-    --orange: hsl(14, 50%, 20%);
-    --yellow-orange: hsl(37, 50%, 20%);
-    --yellow: hsl(49, 50%, 20%);
-    --yellow-green: hsl(76, 50%, 15%);
-    --green: hsl(100, 50%, 15%);
-    --aqua: hsl(177, 50%, 30%);
-    --blue: hsl(220, 50%, 25%);
-    --indigo: hsl(245, 50%, 20%);
-    --purple: hsl(281, 50%, 20%);
-    --pink: hsl(329, 50%, 20%);
-    --cool-gray: hsl(240, 0%, 20%);
+/* Shared with Obsidian */
+
+:root {
+    --tag-text-color: hsl(240, 0%, 80%);
+    --tag-red: hsl(0, 50%, 20%);
+    --tag-orange: hsl(14, 50%, 20%);
+    --tag-yellow-orange: hsl(37, 50%, 20%);
+    --tag-yellow: hsl(49, 50%, 20%);
+    --tag-yellow-green: hsl(76, 50%, 15%);
+    --tag-green: hsl(100, 50%, 15%);
+    --tag-aqua: hsl(177, 50%, 30%);
+    --tag-blue: hsl(220, 50%, 25%);
+    --tag-indigo: hsl(245, 50%, 20%);
+    --tag-purple: hsl(281, 50%, 20%);
+    --tag-pink: hsl(329, 50%, 20%);
+    --tag-cool-gray: hsl(240, 0%, 20%);
+    --tag-hover-color: hsl(0, 0%, 70%);
+    --tag-inverse-color: black;
 }
 
 html[data-theme="light"] {
-    --red: hsl(0, 85%, 60%);
-    --orange: hsl(14, 85%, 60%);
-    --yellow-orange: hsl(37, 85%, 60%);
-    --yellow: hsl(49, 85%, 60%);
-    --yellow-green: hsl(76, 85%, 45%);
-    --green: hsl(100, 85%, 45%);
-    --aqua: hsl(177, 85%, 90%);
-    --blue: hsl(220, 85%, 75%);
-    --indigo: hsl(245, 85%, 60%);
-    --purple: hsl(281, 85%, 60%);
-    --pink: hsl(329, 85%, 60%);
-    --cool-gray: hsl(240, 0%, 60%);
+    --tag-text-color: hsl(240, 0%, 20%);
+    --tag-red: hsl(0, 85%, 60%);
+    --tag-orange: hsl(14, 85%, 60%);
+    --tag-yellow-orange: hsl(37, 85%, 60%);
+    --tag-yellow: hsl(49, 85%, 60%);
+    --tag-yellow-green: hsl(76, 85%, 45%);
+    --tag-green: hsl(100, 85%, 45%);
+    --tag-aqua: hsl(177, 85%, 90%);
+    --tag-blue: hsl(220, 85%, 75%);
+    --tag-indigo: hsl(245, 85%, 60%);
+    --tag-purple: hsl(281, 85%, 60%);
+    --tag-pink: hsl(329, 85%, 60%);
+    --tag-cool-gray: hsl(240, 0%, 60%);
+    --tag-hover-color: hsl(0, 0%, 30%);
+    --tag-inverse-color: white;
 }
 
-.tag[href="/meta"] { background-color: var(--cool-gray); }
-.tag[href="/self"] { background-color: var(--cool-gray); }
-.tag[href="/study"] { background-color: var(--cool-gray); }
-.tag[href="/productivity"] { background-color: var(--cool-gray); }
-.tag[href="/accounts"] { background-color: var(--cool-gray); }
-.tag[href="/social"] { background-color: var(--pink); }
-.tag[href="/events"] { background-color: var(--pink); }
-.tag[href="/qna"] { background-color: var(--pink); }
-.tag[href="/craft"] { background-color: var(--purple); }
-.tag[href="/coding"] { background-color: var(--purple); }
-.tag[href="/math"] { background-color: var(--purple); }
-.tag[href="/graphics"] { background-color: var(--purple); }
-.tag[href="/ai"] { background-color: var(--purple); }
-.tag[href="/research"] { background-color: var(--purple); }
-.tag[href="/business"] { background-color: var(--blue); }
-.tag[href="/career"] { background-color: var(--blue); }
-.tag[href="/leadership"] { background-color: var(--blue); }
-.tag[href="/management"] { background-color: var(--blue); }
-.tag[href="/mentorship"] { background-color: var(--blue); }
-.tag[href="/work"] { background-color: var(--blue); }
-.tag[href="/marketing"] { background-color: var(--blue); }
-.tag[href="/travel"] { background-color: var(--aqua); }
-.tag[href="/money"] { background-color: var(--green); }
-.tag[href="/budgeting"] { background-color: var(--green); }
-.tag[href="/investing"] { background-color: var(--green); }
-.tag[href="/tax"] { background-color: var(--green); }
-.tag[href="/home"] { background-color: var(--yellow-green); }
-.tag[href="/shopping"] { background-color: var(--yellow-green); }
-.tag[href="/language"] { background-color: var(--yellow); }
-.tag[href="/writing"] { background-color: var(--yellow); }
-.tag[href="/blog"] { background-color: var(--yellow); }
-.tag[href="/design"] { background-color: var(--yellow-orange); }
-.tag[href="/arts"] { background-color: var(--yellow-orange); }
-.tag[href="/music"] { background-color: var(--yellow-orange); }
-.tag[href="/culture"] { background-color: var(--orange); }
-.tag[href="/history"] { background-color: var(--orange); }
-.tag[href="/literature"] { background-color: var(--orange); }
-.tag[href="/philosophy"] { background-color: var(--orange); }
-.tag[href="/health"] { background-color: var(--red); }
-.tag[href="/mind"] { background-color: var(--red); }
-.tag[href="/body"] { background-color: var(--red); }
-.tag[href="/food"] { background-color: var(--red); }
+.tag[href = "/meta"], .tag[href = "#meta"] { background-color: var(--tag-cool-gray) !important; }
+.tag[href = "/self"], .tag[href = "#self"] { background-color: var(--tag-cool-gray) !important; }
+.tag[href = "/study"], .tag[href = "#study"] { background-color: var(--tag-cool-gray) !important; }
+.tag[href = "/productivity"], .tag[href = "#productivity"] { background-color: var(--tag-cool-gray) !important; }
+.tag[href = "/accounts"], .tag[href = "#accounts"] { background-color: var(--tag-cool-gray) !important; }
+.tag[href = "/social"], .tag[href = "#social"] { background-color: var(--tag-pink) !important; }
+.tag[href = "/events"], .tag[href = "#events"] { background-color: var(--tag-pink) !important; }
+.tag[href = "/qna"], .tag[href = "#qna"] { background-color: var(--tag-pink) !important; }
+.tag[href = "/craft"], .tag[href = "#craft"] { background-color: var(--tag-purple) !important; }
+.tag[href = "/coding"], .tag[href = "#coding"] { background-color: var(--tag-purple) !important; }
+.tag[href = "/math"], .tag[href = "#math"] { background-color: var(--tag-purple) !important; }
+.tag[href = "/graphics"], .tag[href = "#graphics"] { background-color: var(--tag-purple) !important; }
+.tag[href = "/demoscene"], .tag[href = "#demoscene"] { background-color: var(--tag-purple) !important; }
+.tag[href = "/ai"], .tag[href = "#ai"] { background-color: var(--tag-purple) !important; }
+.tag[href = "/research"], .tag[href = "#research"] { background-color: var(--tag-purple) !important; }
+.tag[href = "/business"], .tag[href = "#business"] { background-color: var(--tag-blue) !important; }
+.tag[href = "/career"], .tag[href = "#career"] { background-color: var(--tag-blue) !important; }
+.tag[href = "/leadership"], .tag[href = "#leadership"] { background-color: var(--tag-blue) !important; }
+.tag[href = "/management"], .tag[href = "#management"] { background-color: var(--tag-blue) !important; }
+.tag[href = "/mentorship"], .tag[href = "#mentorship"] { background-color: var(--tag-blue) !important; }
+.tag[href = "/work"], .tag[href = "#work"] { background-color: var(--tag-blue) !important; }
+.tag[href = "/marketing"], .tag[href = "#marketing"] { background-color: var(--tag-blue) !important; }
+.tag[href = "/travel"], .tag[href = "#travel"] { background-color: var(--tag-aqua) !important; }
+.tag[href = "/money"], .tag[href = "#money"] { background-color: var(--tag-green) !important; }
+.tag[href = "/budgeting"], .tag[href = "#budgeting"] { background-color: var(--tag-green) !important; }
+.tag[href = "/investing"], .tag[href = "#investing"] { background-color: var(--tag-green) !important; }
+.tag[href = "/tax"], .tag[href = "#tax"] { background-color: var(--tag-green) !important; }
+.tag[href = "/home"], .tag[href = "#home"] { background-color: var(--tag-yellow-green) !important; }
+.tag[href = "/shopping"], .tag[href = "#shopping"] { background-color: var(--tag-yellow-green) !important; }
+.tag[href = "/language"], .tag[href = "#language"] { background-color: var(--tag-yellow) !important; }
+.tag[href = "/writing"], .tag[href = "#writing"] { background-color: var(--tag-yellow) !important; }
+.tag[href = "/blog"], .tag[href = "#blog"] { background-color: var(--tag-yellow) !important; }
+.tag[href = "/design"], .tag[href = "#design"] { background-color: var(--tag-yellow-orange) !important; }
+.tag[href = "/arts"], .tag[href = "#arts"] { background-color: var(--tag-yellow-orange) !important; }
+.tag[href = "/music"], .tag[href = "#music"] { background-color: var(--tag-yellow-orange) !important; }
+.tag[href = "/culture"], .tag[href = "#culture"] { background-color: var(--tag-orange) !important; }
+.tag[href = "/history"], .tag[href = "#history"] { background-color: var(--tag-orange) !important; }
+.tag[href = "/literature"], .tag[href = "#literature"] { background-color: var(--tag-orange) !important; }
+.tag[href = "/philosophy"], .tag[href = "#philosophy"] { background-color: var(--tag-orange) !important; }
+.tag[href = "/health"], .tag[href = "#health"] { background-color: var(--tag-red) !important; }
+.tag[href = "/mind"], .tag[href = "#mind"] { background-color: var(--tag-red) !important; }
+.tag[href = "/body"], .tag[href = "#body"] { background-color: var(--tag-red) !important; }
+.tag[href = "/food"], .tag[href = "#food"] { background-color: var(--tag-red) !important; }
 
 .tag, .frontmatter .tag, .tag:visited {
     align-self: flex-start;
-    /* background-color: var(--gray); */
+    background-color: var(--tag-unknown-color);
     border-radius: 20px !important;
-    color: var(--secondary-text-color);
-    /* cursor: pointer !important; */
+    color: var(--tag-text-color) !important;
     display: inline-block !important;
-    font-size: max(8px, min(14px, 3vw)) !important;
-    font-weight: 600;
-    line-height: 1em !important;
-    padding:
-        min(3px, 0.6vw)
-        min(8px, 1.6vw)
-        min(6px, 1.2vw)
-        min(8px, 1.6vw) !important;
+    font-size: max(8px, min(14px, 3.5vw)) !important;
+    font-weight: 600 !important;
+    height: max(12px, min(24px, 8vw)) !important;
+    padding-left: min(8px, 1.6vw) !important;
+    padding-right: min(8px, 1.6vw) !important;
     text-align: center !important;
     text-decoration: none !important;
 }
 
 /* Change color of tag count pill when hovering */
-/* .tag:hover, .frontmatter .tag:hover {
-    background-color: var(--gray) !important;
-    color: white !important;
-} */
+.tag:hover, .frontmatter .tag:hover {
+    background-color: var(--tag-hover-color) !important;
+    color: var(--tag-inverse-color) !important;
+}
