@@ -46,12 +46,13 @@ layout: default
     {%- endfor -%}
     {%- endcomment - %}
 
+    {% unless site.show_drafts %}
+    {% assign docs = docs | where_exp: "doc", "site.states contains doc.state" %}
+    {% endunless %}
     <div class="card-list">
         {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
         {%- for doc in docs -%}
-        {%- if site.states contains doc.state -%}
         {%- include card.html doc=doc -%}
-        {%- endif -%}
         {%- endfor -%}
     </div>
 
