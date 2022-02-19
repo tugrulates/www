@@ -346,15 +346,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 a.home-link {
+    align-items: center;
     color: var(--text-color-secondary);
+    display: flex;
+    flex-flow: row nowrap;
     font-size: 28px;
     font-weight: 300;
     letter-spacing: -1px;
     line-height: 1em;
     text-decoration: none;
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
 }
 
 a.home-link span {
@@ -383,23 +383,20 @@ a:hover img.avatar {
     flex-grow: 1;
 }
 
-.header-nav {
-    // line-height: 38px;
-    // top: 0px;
-}
-
 html[data-theme="dark"] #light-theme-icon, html[data-theme="light"] #dark-theme-icon {
     display: none;
 }
 
 .site-footer {
-    padding: 12px 0px;
+    padding: 0px;
 }
 
 .social-media-list {
+    align-items: center;
     display: flex;
-    flex-direction: row;
+    flex-flow: row wrap;
     flex-wrap: wrap;
     gap: calc(min(18px, max(6px, (100% - 240px) / 7)));
+    height: 48px;
     justify-content: center;
 }
