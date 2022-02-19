@@ -109,7 +109,7 @@ defaults:
       type: tags
     values:
       layout: home
-      permalink: tags/:tag
+      permalink: /:tag
 
 # Plugins
 plugins:
