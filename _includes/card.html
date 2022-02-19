@@ -1,6 +1,6 @@
-<div class="card-container">
+<div class="card">
 
-    <a class="card" href="{{ doc.url | relative_url }}">
+    <a class="card-link" href="{{ doc.url | relative_url }}">
         <div class="card-header">
             {{ doc.cover | image: 'cover-image', 320 }}
             {%- assign doc=page -%}

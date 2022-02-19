@@ -55,25 +55,25 @@ a:hover {
     text-decoration: underline;
 }
 
-a:not(a.home-link, .card):hover,
+a:not(a.home-link, .card-link):hover,
 a.home-link:hover span,
-.card:hover .cover-title,
-.card:hover .cover-time,
-.card:hover .card-description,
+.card-link:hover .cover-title,
+.card-link:hover .cover-time,
+.card-link:hover .card-description,
 button:hover {
     filter: brightness(var(--hover-brightness));
 }
 
-.card-container:hover {
+.card:hover {
     background-color: var(--icon-color) !important;
 }
 
-.card:hover {
+.card-link:hover {
     text-decoration: none !important;
 }
 
 @media (hover: none) {
-    a:not(a.home-link, a.card) {
+    a:not(a.home-link, a.card-link) {
         text-decoration: underline;
     }
 
@@ -198,7 +198,7 @@ button .svg-icon {
     width: calc(100% - 2 * calc(min(18px, 3vw)));
 }
 
-.card .cover {
+.card-link .cover {
     height: calc(100% - 2 * calc(min(6px, 1vw)));
     padding: calc(min(6px, 1vw)) calc(min(12px, 2vw));
     width: calc(100% - 2 * calc(min(12px, 2vw)));
@@ -246,24 +246,25 @@ time {
     font-size: calc(max(24px, min(36px, 6vw)));
 }
 
+
 .card-list {
     display: flex;
     flex-flow: row wrap;
     gap: 20px;
 }
 
-.card-container {
+.card {
     flex: 1 0 40%;
     min-width: 350px;
 }
 
-.card {
+.card-link {
     border-radius: 6px;
-    color: currentColor !important;
+    color: var(--text-color) !important;
     height: auto;
 }
 
-.card .cover-image {
+.card-link .cover-image {
     border-radius: 6px;
     height: auto;
     width: 100%;
@@ -293,7 +294,7 @@ blockquote {
     background: none !important;
 }
 
-code, pre, pre.highlight, .card-container {
+code, pre, pre.highlight, .card {
     background: var(--background-color-secondary) !important;
     border-radius: 6px;
     border: none;
