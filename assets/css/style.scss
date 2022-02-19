@@ -254,8 +254,12 @@ time {
 }
 
 .card {
-    flex: 1 0 40%;
+    flex: 1 0 calc(50% - 10px);
     min-width: 350px;
+}
+
+.card-list:not(.card-list-even) .card:first-child {
+    flex-basis: 100%;
 }
 
 .card-link {
