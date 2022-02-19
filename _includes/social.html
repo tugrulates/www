@@ -40,9 +40,8 @@
             <title>my e-mail address</title>
             <use xlink:href="{{ '/assets/icons.svg#email' | relative_url }}"></use>
         </svg></a>{%- endif -%}
-    {%- if site.rss -%}<a class="social-media-item" href="{{ site.feed.path | relative_url }}"><svg class="svg-icon"
-            alt="RSS feed">
-            <title>Atom feed for all posts</title>
+    <a class="social-media-item" href="{{ site.feed.path | relative_url }}"><svg class="svg-icon" alt="Atom feed">
+            <title>atom feed for all posts</title>
             <use xlink:href="{{ '/assets/icons.svg#rss' | relative_url }}"></use>
-        </svg></a>{%- endif -%}
+        </svg></a>
 </div>

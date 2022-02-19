@@ -157,6 +157,7 @@ button:hover {
     fill: var(--icon-color);
     height: 24px !important;
     width: 24px !important;
+    vertical-align: middle;
 }
 
 button, nav {
@@ -296,6 +297,18 @@ code, pre, pre.highlight, .card-container {
     background: var(--background-color-secondary) !important;
     border-radius: 6px;
     border: none;
+}
+
+.home h1 {
+    align-items: flex-end;
+    display: flex;
+    flex-flow: row wrap;
+    gap: 6px;
+}
+
+.home .feed-link .svg-icon {
+    margin-top: 2px;
+    vertical-align: top;
 }
 
 h1, h2, h3, h4, h5, h6 {

@@ -26,7 +26,8 @@ module SamplePlugin
         @data = {
           'title' => "~/#{tag}",
           'tag'   => tag,
-          'docs'  => docs
+          'docs'  => docs,
+          'feed'  => "#{site.config["feed"]["tags"]["path"]}#{tag}.atom"
         }
 
         # Look up front matter defaults scoped to type `tags`, if given key
