@@ -28,9 +28,8 @@ show_excerpts: true
 # Author
 author:
   name: Tugrul Ates
-  uri: https://www.tugrulates.com
+  uri: https://tugrul.blog
   picture: /images/tugrulates.png
-  email: me@tugrulates.com
   linkedin: tugrulates
   github: tugrulates
   stackoverflow: 634336/tugrul-ates
