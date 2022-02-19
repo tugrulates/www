@@ -80,10 +80,6 @@ button:hover {
     a.social-media-item, button {
         filter: brightness(var(--hover-brightness));
     }
-
-    .card h1 {
-        text-decoration: underline;
-    }
 }
 
 main a[rel="external"], main a[href$=".pdf"], main a[href$=".zip"] {
@@ -191,9 +187,9 @@ button .svg-icon {
 .cover {
     display: grid;
     gap: calc(min(6px, 4vw));
-    grid-template-areas: "tags time" "tags ." "title title";
+    grid-template-areas: "tags time" "title title";
     grid-template-columns: auto auto;
-    grid-template-rows: auto auto min-content;
+    grid-template-rows: auto min-content;
     height: calc(100% - 2 * calc(min(12px, 2vw)));
     padding: calc(min(12px, 2vw)) calc(min(18px, 3vw));
     position: absolute;
@@ -208,11 +204,11 @@ button .svg-icon {
 }
 
 .cover-tags {
-    align-content: flex-start;
     grid-area: tags;
 }
 
 .tag-list {
+    align-content: flex-start;
     display: flex;
     flex-flow: row wrap;
     gap: 6px;
@@ -225,7 +221,8 @@ button .svg-icon {
 
 .cover-time time {
     display: block;
-    font-size: calc(max(8px, min(12px, 2vw)));
+
+    font-size: calc(max(10px, min(12px, 2vw)));
     font-style: oblique;
     line-height: 1.5em;
     text-align: right;
@@ -237,7 +234,7 @@ time {
 }
 
 .cover-title {
-    font-size: calc(max(16px, min(48px, 8vw)));
+    font-size: calc(max(24px, min(48px, 8vw)));
     line-height: 1em;
     grid-area: title;
     margin: 0px;
@@ -245,7 +242,7 @@ time {
 }
 
 .card .cover-title {
-    font-size: calc(max(16px, min(24px, 4vw)));
+    font-size: calc(max(24px, min(36px, 6vw)));
 }
 
 .card-list {
@@ -273,7 +270,6 @@ time {
 
 .card-description {
     color: var(--text-color-secondary);
-    font-size: calc(max(10px, min(16px, 2.75vw)));
     line-height: 1.5em;
     max-height: calc(1.5em * 5);
     padding: calc(min(12px, 2vw));
