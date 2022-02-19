@@ -191,20 +191,16 @@ button .svg-icon {
     grid-template-areas: "tags time" "title title";
     grid-template-columns: auto max-content;
     grid-template-rows: auto max-content;
-    height: calc(100% - 18px);
-    padding:
-        calc(min(12px, 2vw))
-        calc(min(18px, 2.5vw))
-        calc(min(6px, 1vw))
-        calc(min(18px, 2.5vw)) ;
+    height: calc(100% - 24px);
+    padding: calc(min(12px, 2vw)) calc(min(18px, 2.5vw));
     position: absolute;
     top: 0px;
     width: calc(100% - 36px);
 }
 
 .card .cover {
-    height: calc(100% - 24px);
-    padding: calc(min(12px, 2vw)) calc(min(12px, 2.5vw));
+    height: calc(100% - 12px);
+    padding: calc(min(6px, 2vw)) calc(min(12px, 2.5vw));
     width: calc(100% - 24px);
 }
 
@@ -239,7 +235,7 @@ time {
 
 .cover-title {
     font-size: calc(max(6px, min(48px, 6vw)));
-    line-height: 1.5em;
+    line-height: 1em;
     grid-area: title;
     margin: 0px;
     text-align: bottom;
@@ -247,7 +243,6 @@ time {
 
 .card .cover-title {
     font-size: calc(max(6px, min(24px, 6vw)));
-    line-height: 1.5em;
 }
 
 .card-list {
