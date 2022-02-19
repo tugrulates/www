@@ -98,8 +98,7 @@ responsive_image:
 
 # Meta
 defaults:
-  -
-    scope:
+  - scope:
       path: ""
       type: "docs"
     values:
@@ -107,6 +106,11 @@ defaults:
       layout: post
       lang: en
       cover: "./images/roundest-object-on-earth.jpg"
+  - scope:
+      type: tags
+    values:
+      layout: home
+      permalink: tags/:tag
 
 # Plugins
 plugins:

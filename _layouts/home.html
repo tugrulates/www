@@ -1,5 +1,4 @@
 ---
-state: draft
 layout: default
 ---
 
@@ -12,6 +11,8 @@ layout: default
 
     {% if site.paginate %}
     {% assign docs = paginator.docs %}
+    {% elsif page.tag %}
+    {% assign docs = page.docs | reverse %}
     {% else %}
     {% assign docs = site.docs | reverse %}
     {% endif %}
