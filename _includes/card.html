@@ -7,15 +7,13 @@
             {%- include cover.html -%}
         </div>
         {%- if site.show_excerpts -%}
-        {% if doc.description %}
-        {% assign desc = doc.description %}
-        {% else %}
-        {% assign desc = doc.content%}
-        {% endif %}
-        {% assign desc = desc | newline_to_br | split:'<br />' | first | strip_html | strip %}
-        {%- if desc != '' -%}
-        <div class="card-description">{{ desc }}</div>
+        {%- if doc.description -%}
+        {%- assign desc = doc.description -%}
+        {%- else -%}
+        {%- assign desc = doc.content -%}
         {%- endif -%}
+        {% assign desc = desc | newline_to_br | split:'<br />' | first | strip_html | strip -%}
+        <div class="card-description">{{ desc }}</div>
         {%- endif -%}
     </a>
 
