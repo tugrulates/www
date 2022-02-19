@@ -77,7 +77,7 @@ button:hover {
         text-decoration: underline;
     }
 
-    a.social-media-item, button {
+    a.social-media-item, a.feed-link, button {
         filter: brightness(var(--hover-brightness));
     }
 }
