@@ -55,8 +55,8 @@ a:hover {
     text-decoration: underline;
 }
 
-a:not(.site-title, .card):hover,
-.site-title:hover span,
+a:not(a.home-link, .card):hover,
+a.home-link:hover span,
 .card:hover .cover-title,
 .card:hover .cover-time,
 .card:hover .card-description,
@@ -70,7 +70,7 @@ button:hover {
 }
 
 @media (hover: none) {
-    a:not(a.card) {
+    a:not(a.home-link, a.card) {
         text-decoration: underline;
     }
 
@@ -165,6 +165,7 @@ button, nav {
     border: none !important;
     margin: 0px;
     padding: 0px;
+    line-height: normal;
 }
 
 button .svg-icon {
@@ -346,14 +347,26 @@ h1, h2, h3, h4, h5, h6 {
 .site-header .wrapper {
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 
-.site-title {
-    flex-grow: 1;
-    font-size: 24px;
+a.home-link {
+    color: var(--text-color-secondary);
+    font-size: 28px;
+    font-weight: 300;
+    letter-spacing: -1px;
+    line-height: 1em;
+    text-decoration: none;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
 }
 
-.site-title .avatar {
+a.home-link span {
+    padding-bottom: 4px;
+}
+
+a.home-link .avatar {
     margin-left: -4px;
     margin-right: 6px;
 }
@@ -371,23 +384,13 @@ a:hover img.avatar {
     border: 2px solid var(--text-color) !important;
 }
 
-a.site-title {
-    color: var(--text-color-secondary) !important;
-    text-decoration: none !important;
+.header-gap {
+    flex-grow: 1;
 }
 
-a.site-title:hover {
-    color: var(--text-color) !important;
-}
-
-.site-title {
-    letter-spacing: -1px;
-    line-height: 30px;
-}
-
-.site-nav {
-    line-height: 38px;
-    top: 0px;
+.header-nav {
+    // line-height: 38px;
+    // top: 0px;
 }
 
 html[data-theme="dark"] #light-theme-icon, html[data-theme="light"] #dark-theme-icon {

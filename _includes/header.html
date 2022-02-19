@@ -1,17 +1,15 @@
 <header class="site-header">
 
-    <div class="wrapper">
-        <a class="site-title" rel="author" href="/">
+    <nav class="wrapper">
+        <a class="home-link" rel="author" href="/">
             {{ 'assets/me.png' | image: 'avatar', 40 }}<span>Hello, I’m Tugrul!</span>
         </a>
-
-        <nav class="site-nav">
-            <button id="theme-toggle" onclick="window.changeTheme()"><svg id="dark-theme-icon" class="svg-icon"
-                    alt="Toggle theme">
-                    <use xlink:href="{{ '/assets/icons.svg#dark' | relative_url }}"></use>
-                </svg><svg id="light-theme-icon" class="svg-icon hidden" alt="Toggle theme">
-                    <use xlink:href="{{ '/assets/icons.svg#light' | relative_url }}"></use>
-                </svg></button>
-        </nav>
-    </div>
+        <div class="header-gap"></div>
+        <button id="theme-toggle" onclick="window.changeTheme()"><svg id="dark-theme-icon" class="svg-icon"
+                alt="Toggle theme">
+                <use xlink:href="{{ '/assets/icons.svg#dark' | relative_url }}"></use>
+            </svg><svg id="light-theme-icon" class="svg-icon hidden" alt="Toggle theme">
+                <use xlink:href="{{ '/assets/icons.svg#light' | relative_url }}"></use>
+            </svg></button>
+        </div>
 </header>
