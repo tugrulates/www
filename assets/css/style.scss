@@ -254,6 +254,8 @@ time {
 }
 
 .card {
+    display: flex;
+    flex-flow: column nowrap;
     flex: 1 0 calc(50% - 10px);
     min-width: 350px;
 }
@@ -265,6 +267,7 @@ time {
 .card-link {
     border-radius: 6px;
     color: var(--text-color) !important;
+    flex-grow: 1;
     height: auto;
 }
 
@@ -277,7 +280,7 @@ time {
 .card-description {
     color: var(--text-color-secondary);
     line-height: 1.5em;
-    max-height: calc(1.5em * 5);
+    // max-height: calc(1.5em * 5);
     padding: calc(min(12px, 2vw));
     overflow: hidden;
 }
