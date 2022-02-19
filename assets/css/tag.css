@@ -36,49 +36,15 @@ html[data-theme="light"] {
     --tag-inverse-color: white;
 }
 
-.tag[href = "/meta"], .tag[href = "#meta"] { background-color: var(--tag-cool-gray) !important; }
-.tag[href = "/self"], .tag[href = "#self"] { background-color: var(--tag-cool-gray) !important; }
-.tag[href = "/study"], .tag[href = "#study"] { background-color: var(--tag-cool-gray) !important; }
-.tag[href = "/productivity"], .tag[href = "#productivity"] { background-color: var(--tag-cool-gray) !important; }
-.tag[href = "/accounts"], .tag[href = "#accounts"] { background-color: var(--tag-cool-gray) !important; }
-.tag[href = "/social"], .tag[href = "#social"] { background-color: var(--tag-pink) !important; }
-.tag[href = "/events"], .tag[href = "#events"] { background-color: var(--tag-pink) !important; }
-.tag[href = "/qna"], .tag[href = "#qna"] { background-color: var(--tag-pink) !important; }
-.tag[href = "/craft"], .tag[href = "#craft"] { background-color: var(--tag-purple) !important; }
-.tag[href = "/coding"], .tag[href = "#coding"] { background-color: var(--tag-purple) !important; }
-.tag[href = "/math"], .tag[href = "#math"] { background-color: var(--tag-purple) !important; }
-.tag[href = "/graphics"], .tag[href = "#graphics"] { background-color: var(--tag-purple) !important; }
-.tag[href = "/demoscene"], .tag[href = "#demoscene"] { background-color: var(--tag-purple) !important; }
-.tag[href = "/ai"], .tag[href = "#ai"] { background-color: var(--tag-purple) !important; }
-.tag[href = "/research"], .tag[href = "#research"] { background-color: var(--tag-purple) !important; }
-.tag[href = "/business"], .tag[href = "#business"] { background-color: var(--tag-blue) !important; }
-.tag[href = "/career"], .tag[href = "#career"] { background-color: var(--tag-blue) !important; }
-.tag[href = "/leadership"], .tag[href = "#leadership"] { background-color: var(--tag-blue) !important; }
-.tag[href = "/management"], .tag[href = "#management"] { background-color: var(--tag-blue) !important; }
-.tag[href = "/mentorship"], .tag[href = "#mentorship"] { background-color: var(--tag-blue) !important; }
-.tag[href = "/work"], .tag[href = "#work"] { background-color: var(--tag-blue) !important; }
-.tag[href = "/marketing"], .tag[href = "#marketing"] { background-color: var(--tag-blue) !important; }
-.tag[href = "/travel"], .tag[href = "#travel"] { background-color: var(--tag-aqua) !important; }
-.tag[href = "/money"], .tag[href = "#money"] { background-color: var(--tag-green) !important; }
-.tag[href = "/budgeting"], .tag[href = "#budgeting"] { background-color: var(--tag-green) !important; }
-.tag[href = "/investing"], .tag[href = "#investing"] { background-color: var(--tag-green) !important; }
-.tag[href = "/tax"], .tag[href = "#tax"] { background-color: var(--tag-green) !important; }
-.tag[href = "/home"], .tag[href = "#home"] { background-color: var(--tag-yellow-green) !important; }
-.tag[href = "/shopping"], .tag[href = "#shopping"] { background-color: var(--tag-yellow-green) !important; }
-.tag[href = "/language"], .tag[href = "#language"] { background-color: var(--tag-yellow) !important; }
 .tag[href = "/writing"], .tag[href = "#writing"] { background-color: var(--tag-yellow) !important; }
 .tag[href = "/blog"], .tag[href = "#blog"] { background-color: var(--tag-yellow) !important; }
-.tag[href = "/design"], .tag[href = "#design"] { background-color: var(--tag-yellow-orange) !important; }
-.tag[href = "/arts"], .tag[href = "#arts"] { background-color: var(--tag-yellow-orange) !important; }
-.tag[href = "/music"], .tag[href = "#music"] { background-color: var(--tag-yellow-orange) !important; }
-.tag[href = "/culture"], .tag[href = "#culture"] { background-color: var(--tag-orange) !important; }
-.tag[href = "/history"], .tag[href = "#history"] { background-color: var(--tag-orange) !important; }
-.tag[href = "/literature"], .tag[href = "#literature"] { background-color: var(--tag-orange) !important; }
-.tag[href = "/philosophy"], .tag[href = "#philosophy"] { background-color: var(--tag-orange) !important; }
-.tag[href = "/health"], .tag[href = "#health"] { background-color: var(--tag-red) !important; }
-.tag[href = "/mind"], .tag[href = "#mind"] { background-color: var(--tag-red) !important; }
-.tag[href = "/body"], .tag[href = "#body"] { background-color: var(--tag-red) !important; }
-.tag[href = "/food"], .tag[href = "#food"] { background-color: var(--tag-red) !important; }
+.tag[href = "/self"], .tag[href = "#self"] { background-color: var(--tag-cool-gray) !important; }
+.tag[href = "/meta"], .tag[href = "#meta"] { background-color: var(--tag-cool-gray) !important; }
+.tag[href = "/graphics"], .tag[href = "#graphics"] { background-color: var(--tag-purple) !important; }
+.tag[href = "/research"], .tag[href = "#research"] { background-color: var(--tag-purple) !important; }
+.tag[href = "/ai"], .tag[href = "#ai"] { background-color: var(--tag-purple) !important; }
+.tag[href = "/coding"], .tag[href = "#coding"] { background-color: var(--tag-purple) !important; }
+.tag[href = "/demoscene"], .tag[href = "#demoscene"] { background-color: var(--tag-purple) !important; }
 
 .tag, .frontmatter .tag, .tag:visited {
     align-self: flex-start;
