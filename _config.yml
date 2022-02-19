@@ -64,6 +64,8 @@ collections:
 feed:
   template: _layouts/feed.atom
   path: /feed.atom
+  tags:
+    path: "/"
 
 # Theme
 markdown: kramdown

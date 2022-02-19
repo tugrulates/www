@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/tugrulates/jekyll-feed
-  revision: 4aef061b158a9d744170429b41e5077e92d92618
+  revision: e6feb93db968d76c6a73cbf0fbbdb775dabe8b17
   branch: dev
   specs:
     jekyll-feed (0.16.0)
