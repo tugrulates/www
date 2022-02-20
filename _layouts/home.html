@@ -1,7 +1,6 @@
 ---
 layout: default
 ---
-
 <div class="home">
     <header>
         <h1>
@@ -26,6 +25,7 @@ layout: default
     {{ content }}
 
     {% if site.paginate %}
+    <!-- TODO: #4 Add pagination -->
     {% assign docs = paginator.docs %}
     {% elsif page.tag %}
     {% assign docs = page.docs | reverse %}

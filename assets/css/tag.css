@@ -36,15 +36,15 @@ html[data-theme="light"] {
     --tag-inverse-color: white;
 }
 
-.tag[href = "/writing"], .tag[href = "#writing"] { background-color: var(--tag-yellow) !important; }
-.tag[href = "/blog"], .tag[href = "#blog"] { background-color: var(--tag-yellow) !important; }
-.tag[href = "/self"], .tag[href = "#self"] { background-color: var(--tag-cool-gray) !important; }
-.tag[href = "/meta"], .tag[href = "#meta"] { background-color: var(--tag-cool-gray) !important; }
-.tag[href = "/graphics"], .tag[href = "#graphics"] { background-color: var(--tag-purple) !important; }
-.tag[href = "/research"], .tag[href = "#research"] { background-color: var(--tag-purple) !important; }
 .tag[href = "/ai"], .tag[href = "#ai"] { background-color: var(--tag-purple) !important; }
-.tag[href = "/coding"], .tag[href = "#coding"] { background-color: var(--tag-purple) !important; }
 .tag[href = "/demoscene"], .tag[href = "#demoscene"] { background-color: var(--tag-purple) !important; }
+.tag[href = "/writing"], .tag[href = "#writing"] { background-color: var(--tag-yellow) !important; }
+.tag[href = "/self"], .tag[href = "#self"] { background-color: var(--tag-cool-gray) !important; }
+.tag[href = "/research"], .tag[href = "#research"] { background-color: var(--tag-purple) !important; }
+.tag[href = "/graphics"], .tag[href = "#graphics"] { background-color: var(--tag-purple) !important; }
+.tag[href = "/meta"], .tag[href = "#meta"] { background-color: var(--tag-cool-gray) !important; }
+.tag[href = "/blog"], .tag[href = "#blog"] { background-color: var(--tag-yellow) !important; }
+.tag[href = "/coding"], .tag[href = "#coding"] { background-color: var(--tag-purple) !important; }
 
 .tag, .frontmatter .tag, .tag:visited {
     align-self: flex-start;
