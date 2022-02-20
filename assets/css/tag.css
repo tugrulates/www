@@ -52,11 +52,11 @@ html[data-theme="light"] {
     border-radius: 20px !important;
     color: var(--tag-text-color) !important;
     display: inline-block !important;
-    font-size: max(8px, min(14px, 3.5vw)) !important;
+    font-size: 14px !important;
     font-weight: 600 !important;
-    height: max(12px, min(24px, 8vw)) !important;
-    padding-left: min(8px, 1.6vw) !important;
-    padding-right: min(8px, 1.6vw) !important;
+    height: 24px !important;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
     text-align: center !important;
     text-decoration: none !important;
 }
