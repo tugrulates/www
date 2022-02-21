@@ -1,26 +1,31 @@
 <div class="card">
 
-    <a class="card-link" href="{{ doc.url | relative_url }}">
-        <div class="card-header">
+
+    <div class="card-header">
+        <a class="card-link" href=" {{ doc.url | relative_url }}">
             {{ doc.cover | image: 'cover-image', 320 }}
             {%- assign doc=page -%}
             {%- include cover.html -%}
-        </div>
-        {%- if site.show_excerpts -%}
-        {%- if doc.description -%}
-        {%- assign desc = doc.description -%}
-        {%- else -%}
-        {%- assign desc = doc.content -%}
-        {%- endif -%}
-        {% assign desc = desc | newline_to_br | split:'<br />' | first | strip_html | strip -%}
-        <div class="card-description">{{ desc }}</div>
-        {%- endif -%}
-    </a>
-
-    <div class="card-tags tag-list">
-        {%- for tag in doc.tags -%}
-        {%- include tag.html -%}
-        {%- endfor -%}
+        </a>
     </div>
 
+    <div class="card-footer">
+        <a class="card-description card-link" href="{{ doc.url | relative_url }}">
+            {%- if site.show_excerpts -%}
+            {%- if doc.description -%}
+            {%- assign desc = doc.description -%}
+            {%- else -%}
+            {%- assign desc = doc.content -%}
+            {%- endif -%}
+            {% assign desc = desc | newline_to_br | split:'<br />' | first | strip_html | strip -%}
+            {{ desc }}
+            {%- endif -%}
+        </a>
+
+        <div class="card-tags tag-list">
+            {%- for tag in doc.tags -%}
+            {%- include tag.html -%}
+            {%- endfor -%}
+        </div>
+    </div>
 </div>

@@ -6,22 +6,20 @@
         {%- endfor -%}
     </div>
     {%- endif -%}
-    <div class="cover-time">
-        {%- assign date_format = "%B %-d, %Y" -%}
-        <time class="dt-published" datetime="{{ doc.date | date_to_xmlschema }}" itemprop="datePublished">
-            {{ doc.date | date: date_format }}
-        </time>
-        {%- if doc.update -%}
-        <time class="dt-modified" datetime="{{ doc.last_modified_at | date_to_xmlschema }}" itemprop="dateModified">
-            (updated on {{ doc.update | date: date_format }})
-        </time>
-        {%- endif -%}
-        {%- if doc.author -%}
-        • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card"
-                itemprop="name">{{ doc.author }}</span></span>
-        {%- endif -%}
+    <div class="cover-title">
+        <h1 class="p-name" itemprop="name headline">
+            {{ doc.title | escape }}
+        </h1>
+        <div class="cover-time">
+            {%- assign date_format = "%B %-d, %Y" -%}
+            <time class="dt-published" datetime="{{ doc.date | date_to_xmlschema }}" itemprop="datePublished">
+                {{ doc.date | date: date_format }}
+            </time>
+            {%- if doc.update -%}
+            <time class="dt-modified" datetime="{{ doc.last_modified_at | date_to_xmlschema }}" itemprop="dateModified">
+                (updated {{ doc.update | date: date_format }})
+            </time>
+            {%- endif -%}
+        </div>
     </div>
-    <h1 class="cover-title p-name" itemprop="name headline">
-        {{ doc.title | escape }}
-    </h1>
 </div>
