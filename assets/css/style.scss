@@ -15,6 +15,10 @@ $grey-color-dark:  hsl(240, 0%, 14%) !default;
 @import "chart.css";
 @import "tag.css";
 
+:root {
+    --border-radius: 18px;
+}
+
 html[data-theme="dark"] {
     --background-color-secondary: hsl(0, 0%, 10%);
     --background-color: hsl(0, 0%, 0%);
@@ -178,7 +182,7 @@ button .svg-icon {
 }
 
 .cover-image {
-    border-radius: 6px;
+    border-radius: var(--border-radius);
     filter: opacity(60%);
     height: 100%;
     object-fit: cover;
@@ -196,12 +200,6 @@ button .svg-icon {
     position: absolute;
     top: 0px;
     width: calc(100% - 2 * calc(min(18px, 3vw)));
-}
-
-.card-link .cover {
-    height: calc(100% - 2 * calc(min(6px, 1vw)));
-    padding: calc(min(6px, 1vw)) calc(min(12px, 2vw));
-    width: calc(100% - 2 * calc(min(12px, 2vw)));
 }
 
 .cover-tags {
@@ -265,14 +263,14 @@ time {
 }
 
 .card-link {
-    border-radius: 6px;
+    border-radius: var(--border-radius);
     color: var(--text-color) !important;
     flex-grow: 1;
     height: auto;
 }
 
 .card-link .cover-image {
-    border-radius: 6px;
+    border-radius: var(--border-radius);
     height: auto;
     width: 100%;
 }
@@ -280,19 +278,18 @@ time {
 .card-description {
     color: var(--text-color-secondary);
     line-height: 1.5em;
-    // max-height: calc(1.5em * 5);
-    padding: calc(min(12px, 2vw));
+    padding: calc(min(12px, 2vw)) calc(min(18px, 3vw));
     overflow: hidden;
 }
 
 .card-tags {
-    padding: calc(min(12px, 2vw));
+    padding: calc(min(12px, 2vw)) calc(min(18px, 3vw));
 }
 
 blockquote {
     background: var(--background-color-secondary);
     border-left: 4px solid var(--text-color-secondary);
-    border-radius: 6px;
+    border-radius: var(--border-radius);
     color: var(--text-color-secondary);
     padding: 6px 18px;
 }
@@ -303,7 +300,7 @@ blockquote {
 
 code, pre, pre.highlight, .card {
     background: var(--background-color-secondary) !important;
-    border-radius: 6px;
+    border-radius: var(--border-radius);
     border: none;
 }
 
@@ -342,7 +339,7 @@ article h1, article h2, article h3, article h4, article h5, article h6 {
 
 .alert {
     background-color: var(--text-color) !important;
-    border-radius: 6px;
+    border-radius: var(--border-radius);
     color: var(--background-color);
     margin-bottom: 20px;
     padding: 6px 12px;
