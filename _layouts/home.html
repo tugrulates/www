@@ -3,22 +3,27 @@ layout: default
 ---
 <div class="home">
     <header>
-        <h1>
-            <span>{%- if page.title -%}{{ page.title }}/</span>
+        <div class="home-title-container">
 
-            {% if page.tag %}
-            {% assign feed = page.feed %}
-            {% else %}
-            {% assign feed = site.feed.path %}
-            {% endif %}
+            <h1>
+                <span>{%- if page.title -%}{{ page.title }}/</span>
+
+                {% if page.tag %}
+                {% assign feed = page.feed %}
+                {% else %}
+                {% assign feed = site.feed.path %}
+                {% endif %}
+            </h1>
+
             <a class="feed-link" href="{{ feed | relative_url }}">
                 <svg class="svg-icon" alt="Atom feed">
                     <title>{% if page.tag %}atom feed for the {{
                         page.tag }} tag{% else %}atom feed for all posts{% endif %}</title>
-                    <use xlink:href="{{ '/assets/icons.svg#rss' | relative_url }}"></use>
+                    <use xlink:href="{{ '/assets/icons.svg#feed' | relative_url }}"></use>
                 </svg>
             </a>
-        </h1>
+
+        </div>
         {%- endif -%}
     </header>
 

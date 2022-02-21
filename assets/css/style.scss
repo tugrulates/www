@@ -98,7 +98,7 @@ main a[href$=".pdf"] {
 }
 
 main a[href$=".zip"] {
-    background-image: url('/assets/link-zip.svg');
+    background-image: url('/assets/link-download.svg');
 }
 
 .anchor {
@@ -157,7 +157,7 @@ button:hover {
     fill: var(--icon-color);
     height: 24px !important;
     width: 24px !important;
-    vertical-align: middle;
+    padding: 0px !important;
 }
 
 button, nav {
@@ -307,19 +307,14 @@ code, pre, pre.highlight, .card {
     border: none;
 }
 
-.home h1 {
-    align-items: flex-end;
+.home-title-container {
+    align-items: flex-start;
     display: flex;
     flex-flow: row wrap;
     gap: 6px;
 }
 
-.home .feed-link .svg-icon {
-    margin-top: 2px;
-    vertical-align: top;
-}
-
-h1, h2, h3, h4, h5, h6 {
+article h1, article h2, article h3, article h4, article h5, article h6 {
     margin-top: 30px;
 }
 
