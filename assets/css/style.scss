@@ -23,12 +23,12 @@ $grey-color-dark:  hsl(240, 0%, 14%) !default;
 }
 
 html[data-theme="dark"] {
-    --background-color-content: hsla(240, 10%, 25%, 66%);
-    --background-color-secondary: hsl(240, 10%, 12%);
+    --background-color-content: hsla(240, 10%, 20%, 66%);
+    --background-color-secondary: hsl(240, 10%, 10%);
     --background-color: hsl(0, 0%, 0%);
     --cover-filter: hue-rotate(40deg);
-    --grey-dark: hsl(240, 10%, 22%);
-    --grey-light: hsl(240, 10%, 28%);
+    --grey-dark: hsl(240, 10%, 17%);
+    --grey-light: hsl(240, 10%, 23%);
     --hover-brightness: 200%;
     --icon-color: hsl(240, 10%, 33%);
     --link-color: hsl(240, 60%, 60%);
@@ -38,14 +38,14 @@ html[data-theme="dark"] {
 }
 
 html[data-theme="light"] {
-    --background-color-content: rgba(26, 26, 26, 0.7);
-    --background-color-secondary: hsl(240, 50%, 100%);
-    --background-color: hsl(240, 50%, 90%);
-    --cover-filter: opacity(75%);
-    --grey-dark: hsl(240, 50%, 96%);
-    --grey-light: hsl(240, 40%, 94%);
+    --background-color-content: hsla(240, 40%, 85%, 66%);
+    --background-color-secondary: hsl(240, 40%, 80%);
+    --background-color: hsl(240, 90%, 100%);
+    --cover-filter: opacity(90%);
+    --grey-dark: hsl(240, 10%, 90%);
+    --grey-light: hsl(240, 10%, 96%);
     --hover-brightness: 50%;
-    --icon-color: hsl(240, 10%, 75%);
+    --icon-color: hsl(240, 10%, 55%);
     --link-color: hsl(240, 60%, 40%);
     --text-color-dark: var(--text-color);
     --text-color-secondary: hsl(240, 10%, 33%);
