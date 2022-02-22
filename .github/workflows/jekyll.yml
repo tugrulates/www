@@ -12,6 +12,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Debug github context
+        run: |
+          echo ${{ github.ref_name }}
+          echo ${{ github.head_ref }}
+          echo ${{ github.ref }}
       - uses: actions/checkout@v2
         with:
           submodules: true
