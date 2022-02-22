@@ -14,7 +14,7 @@ jobs:
     steps:
       - id: path
         name: Determine output path
-        run: bash -c '[[ "${{ github.ref_name }}" = "main" ]] && echo "::set-output name=path::/" || [[ -z ${{ github.head_ref }} ]] && echo "::set-output name=path::/branch/${{ github.ref_name }}" || echo "::set-output name=path::/branch/${{ github.head_ref }}"'
+        run: bash -c '[[ "${{ github.ref_name }}" = "main" ]] && echo "::set-output name=path::/" || [[ -z ${{ "github.head_ref" }} ]] && echo "::set-output name=path::/branch/${{ github.ref_name }}" || echo "::set-output name=path::/branch/${{ github.head_ref }}"'
       - uses: actions/checkout@v2
         with:
           submodules: true
