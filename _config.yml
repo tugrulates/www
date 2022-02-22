@@ -95,7 +95,7 @@ plugins:
   - jekyll-tagories
   - jekyll-titles-from-headings
 
-# Exclude
+# Files
 exclude:
   - _docs/.*
   - scripts/

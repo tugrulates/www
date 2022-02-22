@@ -10,10 +10,10 @@ $grey-color-dark:  hsl(240, 0%, 14%) !default;
 
 @import "minima";
 
-@import "table.css";
-@import "code.css";
-@import "chart.css";
-@import "tag.css";
+@import url("table.css");
+@import url("code.css");
+@import url("chart.css");
+@import url("tag.css");
 
 :root {
     --border-radius-large: 18px;

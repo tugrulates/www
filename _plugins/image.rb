@@ -11,7 +11,7 @@ module Jekyll
         path = image
         @context.registers[:site].collections.each do |name, meta|
           for doc in meta.files
-            if doc.url == relative_url(image)
+            if relative_url(doc.url) == relative_url(image)
               path = doc.path
             end
           end
@@ -37,7 +37,7 @@ module Jekyll
         else
           name = File.basename(image)
         end
-        File.join('/images', name)
+        relative_url(File.join('/images', name))
       end
 
       def srcset(image, width)
@@ -50,7 +50,7 @@ module Jekyll
         @attributes = {
           'path' => _path(image),
           'class' => cls,
-          'src' => image,
+          'src' => relative_url(image),
           'srcset' => srcset(image, width),
           'alt' => File.basename(image, ".*").gsub(/-/, " ")
         }
