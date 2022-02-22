@@ -23,7 +23,7 @@ $grey-color-dark:  hsl(240, 0%, 14%) !default;
 }
 
 html[data-theme="dark"] {
-    --background-color-content: hsla(240, 10%, 20%, 66%);
+    --background-color-content: hsla(240, 10%, 10%, 80%);
     --background-color-secondary: hsl(240, 10%, 10%);
     --background-color: hsl(0, 0%, 0%);
     --cover-filter: hue-rotate(40deg);
@@ -38,7 +38,7 @@ html[data-theme="dark"] {
 }
 
 html[data-theme="light"] {
-    --background-color-content: hsla(240, 40%, 85%, 66%);
+    --background-color-content: hsla(240, 40%, 90%, 80%);
     --background-color-secondary: hsl(240, 40%, 80%);
     --background-color: hsl(240, 90%, 100%);
     --cover-filter: opacity(90%);
