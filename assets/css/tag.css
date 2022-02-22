@@ -1,54 +1,60 @@
 /* Shared with Obsidian */
 
 :root {
+    --tag-group: -1;
+    --tag-group-meta: 240;
+    --tag-group-social: 329;
+    --tag-group-craft: 281;
+    --tag-group-business: 220;
+    --tag-group-travel: 177;
+    --tag-group-money: 100;
+    --tag-group-home: 72;
+    --tag-group-language: 49;
+    --tag-group-design: 37;
+    --tag-group-culture: 14;
+    --tag-group-health: 0;
+}
+
+:root {
+    --tag-light-hover: 40%;
+    --tag-light: 20%;
+    --tag-saturation: 40%;
     --tag-text-color: hsl(240, 0%, 80%);
-    --tag-red: hsl(0, 50%, 20%);
-    --tag-orange: hsl(14, 50%, 20%);
-    --tag-yellow-orange: hsl(37, 50%, 20%);
-    --tag-yellow: hsl(49, 50%, 20%);
-    --tag-yellow-green: hsl(76, 50%, 15%);
-    --tag-green: hsl(100, 50%, 15%);
-    --tag-aqua: hsl(177, 50%, 30%);
-    --tag-blue: hsl(220, 50%, 25%);
-    --tag-indigo: hsl(245, 50%, 20%);
-    --tag-purple: hsl(281, 50%, 20%);
-    --tag-pink: hsl(329, 50%, 20%);
-    --tag-cool-gray: hsl(240, 0%, 20%);
-    --tag-hover-color: hsl(0, 0%, 70%);
-    --tag-inverse-color: black;
 }
 
 html[data-theme="light"] {
+    --tag-light-hover: 40%;
+    --tag-light: 20%;
+    --tag-saturation: 40%;
     --tag-text-color: hsl(240, 0%, 20%);
-    --tag-red: hsl(0, 85%, 60%);
-    --tag-orange: hsl(14, 85%, 60%);
-    --tag-yellow-orange: hsl(37, 85%, 60%);
-    --tag-yellow: hsl(49, 85%, 60%);
-    --tag-yellow-green: hsl(76, 85%, 45%);
-    --tag-green: hsl(100, 85%, 45%);
-    --tag-aqua: hsl(177, 85%, 90%);
-    --tag-blue: hsl(220, 85%, 75%);
-    --tag-indigo: hsl(245, 85%, 60%);
-    --tag-purple: hsl(281, 85%, 60%);
-    --tag-pink: hsl(329, 85%, 60%);
-    --tag-cool-gray: hsl(240, 0%, 60%);
-    --tag-hover-color: hsl(0, 0%, 30%);
-    --tag-inverse-color: white;
 }
 
-.tag[href = "/ai"], .tag[href = "#ai"] { background-color: var(--tag-purple) !important; }
-.tag[href = "/demoscene"], .tag[href = "#demoscene"] { background-color: var(--tag-purple) !important; }
-.tag[href = "/writing"], .tag[href = "#writing"] { background-color: var(--tag-yellow) !important; }
-.tag[href = "/self"], .tag[href = "#self"] { background-color: var(--tag-cool-gray) !important; }
-.tag[href = "/research"], .tag[href = "#research"] { background-color: var(--tag-purple) !important; }
-.tag[href = "/graphics"], .tag[href = "#graphics"] { background-color: var(--tag-purple) !important; }
-.tag[href = "/meta"], .tag[href = "#meta"] { background-color: var(--tag-cool-gray) !important; }
-.tag[href = "/blog"], .tag[href = "#blog"] { background-color: var(--tag-yellow) !important; }
-.tag[href = "/coding"], .tag[href = "#coding"] { background-color: var(--tag-purple) !important; }
+.tag[href = "/health"], .tag[href = "#health"] { --tag-group: var(--tag-group-health); }
+.tag[href = "/meta"], .tag[href = "#meta"] { --tag-group: var(--tag-group-meta); }
+.tag[href = "/travel"], .tag[href = "#travel"] { --tag-group: var(--tag-group-travel); }
+.tag[href = "/money"], .tag[href = "#money"] { --tag-group: var(--tag-group-money); }
+.tag[href = "/self"], .tag[href = "#self"] { --tag-group: var(--tag-group-meta); }
+.tag[href = "/social"], .tag[href = "#social"] { --tag-group: var(--tag-group-social); }
+.tag[href = "/home"], .tag[href = "#home"] { --tag-group: var(--tag-group-home); }
+.tag[href = "/language"], .tag[href = "#language"] { --tag-group: var(--tag-group-language); }
+.tag[href = "/demoscene"], .tag[href = "#demoscene"] { --tag-group: var(--tag-group-craft); }
+.tag[href = "/writing"], .tag[href = "#writing"] { --tag-group: var(--tag-group-language); }
+.tag[href = "/craft"], .tag[href = "#craft"] { --tag-group: var(--tag-group-craft); }
+.tag[href = "/graphics"], .tag[href = "#graphics"] { --tag-group: var(--tag-group-craft); }
+.tag[href = "/blog"], .tag[href = "#blog"] { --tag-group: var(--tag-group-language); }
+.tag[href = "/design"], .tag[href = "#design"] { --tag-group: var(--tag-group-design); }
+.tag[href = "/coding"], .tag[href = "#coding"] { --tag-group: var(--tag-group-craft); }
+.tag[href = "/ai"], .tag[href = "#ai"] { --tag-group: var(--tag-group-craft); }
+.tag[href = "/culture"], .tag[href = "#culture"] { --tag-group: var(--tag-group-culture); }
+.tag[href = "/research"], .tag[href = "#research"] { --tag-group: var(--tag-group-craft); }
+.tag[href = "/business"], .tag[href = "#business"] { --tag-group: var(--tag-group-business); }
 
 .tag, .frontmatter .tag, .tag:visited {
     align-self: flex-start;
-    background-color: var(--tag-unknown-color);
+    background-color: hsl(
+        var(--tag-group),
+        calc(40% + 40% * min(0, var(--tag-group))),
+        var(--tag-light)) !important;
     border-radius: 18px !important;
     color: var(--tag-text-color) !important;
     display: inline-block !important;
@@ -61,8 +67,9 @@ html[data-theme="light"] {
     text-decoration: none !important;
 }
 
-/* Change color of tag count pill when hovering */
 .tag:hover, .frontmatter .tag:hover {
-    background-color: var(--tag-hover-color) !important;
-    color: var(--tag-inverse-color) !important;
+    background-color: hsl(
+        var(--tag-group),
+        calc(40% + 40% * min(0, var(--tag-group))),
+        var(--tag-light-hover)) !important;
 }

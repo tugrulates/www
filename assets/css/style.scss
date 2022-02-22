@@ -23,7 +23,7 @@ $grey-color-dark:  hsl(240, 0%, 14%) !default;
 }
 
 html[data-theme="dark"] {
-    --background-color-content: rgba(57, 57, 70, 80%);
+    --background-color-content: hsla(240, 10%, 25%, 80%);
     --background-color-secondary: hsl(0, 0%, 10%);
     --background-color: hsl(0, 0%, 0%);
     --cover-filter: hue-rotate(40deg);
@@ -121,8 +121,8 @@ main a[href$=".zip"] {
 .anchor {
     display: flex;
     flex-direction: row;
-    gap: 12px;
-    margin-left: -36px;
+    gap: calc(2 * var(--horizontal-space));
+    margin-left: calc(-24px - 2 * var(--horizontal-space));
 }
 
 .anchor-left, .anchor-right {
@@ -132,13 +132,9 @@ main a[href$=".zip"] {
     background-size: 24px;
 }
 
-h4 .anchor-left, h4 .anchor-right { background-size: 20px; width: 20px; }
-h5 .anchor-left, h5 .anchor-right { background-size: 16px; width: 16px; }
-h6 .anchor-left, h6 .anchor-right { background-size: 12px; width: 12px; }
-
-h4.anchor { margin-left: -32px; }
-h5.anchor { margin-left: -28px; }
-h6.anchor { margin-left: -24px; }
+h4 .anchor-right { background-size: 20px; width: 20px; }
+h5 .anchor-right { background-size: 16px; width: 16px; }
+h6 .anchor-right { background-size: 12px; width: 12px; }
 
 .anchor .anchor-left {
     background-position: left center;
@@ -268,8 +264,8 @@ time {
     color: var(--text-color);
     font-size: calc(max(24px, min(48px, 8vw)));
     font-weight: 600;
-    line-height: 1.2em;
-    padding: 0px;
+    line-height: 1em;
+    padding-bottom: var(--vertical-space);
     margin: 0px;
 }
 
