@@ -14,10 +14,12 @@
             {%- assign date_format = "%B %-d, %Y" -%}
             <time class="dt-published" datetime="{{ doc.date | date_to_xmlschema }}" itemprop="datePublished">
                 {{ doc.date | date: date_format }}
-            </time>
-            {%- if doc.update -%}
-            <time class="dt-modified" datetime="{{ doc.last_modified_at | date_to_xmlschema }}" itemprop="dateModified">
+                {%- if doc.update -%}
+            </time> <time class="dt-modified" datetime="{{ doc.last_modified_at | date_to_xmlschema }}"
+                itemprop="dateModified">
                 (updated {{ doc.update | date: date_format }})
+            </time>
+            {%- else -%}
             </time>
             {%- endif -%}
         </div>

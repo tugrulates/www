@@ -23,14 +23,14 @@ $grey-color-dark:  hsl(240, 0%, 14%) !default;
 }
 
 html[data-theme="dark"] {
-    --background-color-content: hsla(240, 10%, 25%, 80%);
-    --background-color-secondary: hsl(0, 0%, 10%);
+    --background-color-content: hsla(240, 10%, 25%, 66%);
+    --background-color-secondary: hsl(240, 10%, 12%);
     --background-color: hsl(0, 0%, 0%);
     --cover-filter: hue-rotate(40deg);
-    --grey-dark: hsl(240, 0%, 4%);
-    --grey-light: hsl(0, 0%, 6%);
+    --grey-dark: hsl(240, 10%, 22%);
+    --grey-light: hsl(240, 10%, 28%);
     --hover-brightness: 200%;
-    --icon-color: hsl(240, 10%, 25%);
+    --icon-color: hsl(240, 10%, 33%);
     --link-color: hsl(240, 60%, 60%);
     --text-color-dark: hsl(240, 10%, 15%);
     --text-color-secondary: hsl(240, 10%, 66%);
@@ -94,7 +94,7 @@ button:hover {
         text-decoration: underline;
     }
 
-    a.social-media-item, a.feed-link, button {
+    a.home-link span, a.social-media-item, a.feed-link, button {
         filter: brightness(var(--hover-brightness));
     }
 }
@@ -121,14 +121,21 @@ main a[href$=".zip"] {
 .anchor {
     display: flex;
     flex-direction: row;
-    gap: calc(2 * var(--horizontal-space));
+    gap: var(--horizontal-space);
     margin-left: calc(-24px - 2 * var(--horizontal-space));
+}
+
+.anchor-left {
+    width: calc(24px + var(--horizontal-space));
+}
+
+.anchor-right {
+    width: 24px;
 }
 
 .anchor-left, .anchor-right {
     background-image: url('/assets/link-anchor.svg');
     background-repeat: no-repeat;
-    width: 24px;
     background-size: 24px;
 }
 
@@ -196,12 +203,7 @@ button .svg-icon {
     border-bottom-left-radius: var(--border-radius-large);
     border-bottom-right-radius: var(--border-radius-large);
     margin-left: var(--horizontal-space);
-    padding:
-        calc(3 * var(--vertical-space))
-        var(--horizontal-space)
-        var(--vertical-space)
-        var(--horizontal-space);
-
+    padding: var(--vertical-space) var(--horizontal-space);
 }
 
 .cover-image {
@@ -241,7 +243,7 @@ button .svg-icon {
 }
 
 .cover-time time {
-    display: block;
+    font-size: calc(max(9px, min(18px, 3vw)));
     font-style: oblique;
 }
 
@@ -249,6 +251,7 @@ time {
     color: var(--text-color-secondary);
     font-weight: 600;
     margin: 0px;
+    white-space: nowrap;
 }
 
 .cover-title {
@@ -306,14 +309,22 @@ time {
 
 .card-description {
     color: var(--text-color) !important;
-    padding: 0px var(--horizontal-space);
+    padding:
+        var(--vertical-space)
+        var(--horizontal-space)
+        calc(var(--vertical-space) / 2)
+        var(--horizontal-space);
     flex-grow: 1;
     line-height: 1.5em;
     overflow: hidden;
 }
 
 .card-tags {
-    padding: var(--vertical-space) var(--horizontal-space);
+    padding:
+    calc(var(--vertical-space) / 2)
+    var(--horizontal-space)
+    var(--vertical-space)
+    var(--horizontal-space);
 }
 
 blockquote {
@@ -380,7 +391,7 @@ article h1, article h2, article h3, article h4, article h5, article h6 {
 }
 
 .site-header, .site-footer {
-    background: var(--background-color-secondary);
+    background: var(--background-color-content);
     border: none;
     min-height: auto;
 }
@@ -397,7 +408,7 @@ article h1, article h2, article h3, article h4, article h5, article h6 {
 
 a.home-link {
     align-items: center;
-    color: var(--text-color-secondary);
+    color: var(--icon-color);
     display: flex;
     flex-flow: row nowrap;
     font-size: 28px;
