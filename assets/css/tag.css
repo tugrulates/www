@@ -57,15 +57,17 @@ html[data-theme="light"] {
         var(--tag-light)) !important;
     border-radius: 18px !important;
     color: var(--tag-text-color) !important;
-    display: inline-block !important;
+    display: table-cell !important;
     font-size: 14px !important;
     font-weight: 600 !important;
     height: 24px !important;
-    line-height: 24px !important;
+    padding-bottom: 0px !important;
     padding-left: 8px !important;
     padding-right: 8px !important;
+    padding-top: 0px !important;
     text-align: center !important;
     text-decoration: none !important;
+    vertical-align: middle !important;
 }
 
 .tag:hover, .frontmatter .tag:hover {
