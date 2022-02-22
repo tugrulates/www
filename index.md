@@ -6,5 +6,3 @@ tags: self
 ---
 
 # \~
-
-test
