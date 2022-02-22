@@ -29,25 +29,25 @@ html[data-theme="light"] {
     --tag-text-color: hsl(240, 0%, 10%);
 }
 
-.tag[href = "/health"], .tag[href = "#health"] { --tag-group: var(--tag-group-health); }
-.tag[href = "/meta"], .tag[href = "#meta"] { --tag-group: var(--tag-group-meta); }
-.tag[href = "/travel"], .tag[href = "#travel"] { --tag-group: var(--tag-group-travel); }
-.tag[href = "/money"], .tag[href = "#money"] { --tag-group: var(--tag-group-money); }
-.tag[href = "/self"], .tag[href = "#self"] { --tag-group: var(--tag-group-meta); }
-.tag[href = "/social"], .tag[href = "#social"] { --tag-group: var(--tag-group-social); }
-.tag[href = "/home"], .tag[href = "#home"] { --tag-group: var(--tag-group-home); }
-.tag[href = "/language"], .tag[href = "#language"] { --tag-group: var(--tag-group-language); }
-.tag[href = "/demoscene"], .tag[href = "#demoscene"] { --tag-group: var(--tag-group-craft); }
-.tag[href = "/writing"], .tag[href = "#writing"] { --tag-group: var(--tag-group-language); }
-.tag[href = "/craft"], .tag[href = "#craft"] { --tag-group: var(--tag-group-craft); }
-.tag[href = "/graphics"], .tag[href = "#graphics"] { --tag-group: var(--tag-group-craft); }
-.tag[href = "/blog"], .tag[href = "#blog"] { --tag-group: var(--tag-group-language); }
-.tag[href = "/design"], .tag[href = "#design"] { --tag-group: var(--tag-group-design); }
-.tag[href = "/coding"], .tag[href = "#coding"] { --tag-group: var(--tag-group-craft); }
-.tag[href = "/ai"], .tag[href = "#ai"] { --tag-group: var(--tag-group-craft); }
-.tag[href = "/culture"], .tag[href = "#culture"] { --tag-group: var(--tag-group-culture); }
-.tag[href = "/research"], .tag[href = "#research"] { --tag-group: var(--tag-group-craft); }
-.tag[href = "/business"], .tag[href = "#business"] { --tag-group: var(--tag-group-business); }
+.tag[href$="/health"], .tag[href="#health"] { --tag-group: var(--tag-group-health); }
+.tag[href$="/meta"], .tag[href="#meta"] { --tag-group: var(--tag-group-meta); }
+.tag[href$="/travel"], .tag[href="#travel"] { --tag-group: var(--tag-group-travel); }
+.tag[href$="/money"], .tag[href="#money"] { --tag-group: var(--tag-group-money); }
+.tag[href$="/self"], .tag[href="#self"] { --tag-group: var(--tag-group-meta); }
+.tag[href$="/social"], .tag[href="#social"] { --tag-group: var(--tag-group-social); }
+.tag[href$="/home"], .tag[href="#home"] { --tag-group: var(--tag-group-home); }
+.tag[href$="/language"], .tag[href="#language"] { --tag-group: var(--tag-group-language); }
+.tag[href$="/demoscene"], .tag[href="#demoscene"] { --tag-group: var(--tag-group-craft); }
+.tag[href$="/writing"], .tag[href="#writing"] { --tag-group: var(--tag-group-language); }
+.tag[href$="/craft"], .tag[href="#craft"] { --tag-group: var(--tag-group-craft); }
+.tag[href$="/graphics"], .tag[href="#graphics"] { --tag-group: var(--tag-group-craft); }
+.tag[href$="/blog"], .tag[href="#blog"] { --tag-group: var(--tag-group-language); }
+.tag[href$="/design"], .tag[href="#design"] { --tag-group: var(--tag-group-design); }
+.tag[href$="/coding"], .tag[href="#coding"] { --tag-group: var(--tag-group-craft); }
+.tag[href$="/ai"], .tag[href="#ai"] { --tag-group: var(--tag-group-craft); }
+.tag[href$="/culture"], .tag[href="#culture"] { --tag-group: var(--tag-group-culture); }
+.tag[href$="/research"], .tag[href="#research"] { --tag-group: var(--tag-group-craft); }
+.tag[href$="/business"], .tag[href="#business"] { --tag-group: var(--tag-group-business); }
 
 .tag, .frontmatter .tag, .tag:visited {
     align-self: flex-start;
