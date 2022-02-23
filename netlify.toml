@@ -1,0 +1,6 @@
+[[redirects]]
+    from = "https://tugrul.netlify.app/*"
+    to = "https://tugrul.blog/:splat"
+    status = 301
+    force = true
+
