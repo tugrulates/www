@@ -10,8 +10,9 @@ group :jekyll_plugins do
   gem 'jekyll-feed', git: 'https://github.com/tugrulates/jekyll-feed', branch: 'dev'
   gem 'jekyll-relative-links'
   gem 'jekyll-responsive-image', git: 'https://github.com/tugrulates/jekyll-responsive-image', branch: 'master'
-  gem 'jekyll-seo-tag'
+  gem 'jekyll-seo-tag', git: 'https://github.com/tugrulates/jekyll-seo-tag', branch: 'dev'
   gem 'jekyll-tagories', git: 'https://github.com/tugrulates/jekyll-tagories', branch: 'master'
+  gem 'jekyll-tidy', git: 'https://github.com/tugrulates/jekyll-tidy', branch: 'master'
   gem 'jekyll-titles-from-headings'
 end
 

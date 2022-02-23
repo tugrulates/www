@@ -4,11 +4,11 @@
             {{ 'assets/me.png' | image: 'avatar', 40 }}<span>Hello, I’m Tugrul!</span>
         </a>
         <div class="header-gap"></div>
-        <button id="theme-toggle" onclick="window.changeTheme()"><svg id="dark-theme-icon" class="svg-icon"
-                alt="Toggle theme">
+        <button type="button" id="theme-toggle" onclick="window.changeTheme()" aria-label="toggle theme"><svg
+                id="dark-theme-icon" class="svg-icon" focusable="false">
                 <use xlink:href="{{ '/assets/icons.svg#dark' | relative_url }}"></use>
-            </svg><svg id="light-theme-icon" class="svg-icon hidden" alt="Toggle theme">
+            </svg><svg id="light-theme-icon" class="svg-icon hidden" focusable="false">
                 <use xlink:href="{{ '/assets/icons.svg#light' | relative_url }}"></use>
             </svg></button>
-        </div>
+    </nav>
 </header>

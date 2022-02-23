@@ -14,11 +14,14 @@ layout: default
                 {% assign feed = site.feed.path %}
                 {% endif %}
             </h1>
-
-            <a class="feed-link" href="{{ feed | relative_url }}">
-                <svg class="svg-icon" alt="Atom feed">
-                    <title>{% if page.tag %}atom feed for the {{
-                        page.tag }} tag{% else %}atom feed for all posts{% endif %}</title>
+            {% if page.tag %}
+            {% assign feeddesc = 'atom feed for the ' | append: page.tag | append: ' tag' %}
+            {% else %}
+            {% assign feeddesc = 'atom feed for all posts' %}
+            {% endif %}
+            <a class="feed-link" href="{{ feed | relative_url }}" aria-label="{{ feeddesc }}">
+                <svg class="svg-icon" alt="Atom feed" focusable="false">
+                    <title>{{ feeddesc }}</title>
                     <use xlink:href="{{ '/assets/icons.svg#feed' | relative_url }}"></use>
                 </svg>
             </a>

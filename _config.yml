@@ -93,6 +93,7 @@ plugins:
   - jekyll-responsive-image
   - jekyll-seo-tag
   - jekyll-tagories
+  - jekyll-tidy
   - jekyll-titles-from-headings
 
 # Files
