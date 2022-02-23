@@ -1,0 +1,14 @@
+<script src="{{ '/assets/js/jquery-3.6.0.min.js' | relative_url }}"></script>
+
+<script src="{{ '/assets/js/theme.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/link.js' | relative_url }}"></script>
+
+{% if page.use_math %}
+<script src="{{ '/assets/js/math.js' | relative_url }}"></script>
+<script async src="{{ '/assets/js/tex-svg.js' | relative_url }}"></script>
+{% endif %}
+
+{% if page.use_chart %}
+<script src="{{ '/assets/js/mermaid.min.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/graph.js' | relative_url }}"></script>
+{% endif %}

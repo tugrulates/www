@@ -1,8 +1,7 @@
 <div class="card">
 
-
     <div class="card-header">
-        <a class="card-link" href=" {{ doc.url | relative_url }}">
+        <a class="card-link" href="{{ doc.url | relative_url }}" aria-label="{{ doc.title }}">
             {{ doc.cover | image: 'cover-image', 320 }}
             {%- assign doc=page -%}
             {%- include cover.html -%}
@@ -10,7 +9,7 @@
     </div>
 
     <div class="card-footer">
-        <a class="card-description card-link" href="{{ doc.url | relative_url }}">
+        <a class="card-description card-link" href="{{ doc.url | relative_url }}" aria-label="{{ doc.title }}">
             {%- if site.show_excerpts -%}
             {%- if doc.description -%}
             {%- assign desc = doc.description -%}

@@ -10,7 +10,7 @@
     <main class="page-content" aria-label="Content">
         <div class="wrapper">
             {% if page.collection == 'docs' %}{% unless page.state == 'public' %}
-            <div class='alert warning'>This post is not published. It is in <strong>{{ page.state }}</strong>
+            <div class="alert warning">This post is not published. It is in <strong>{{ page.state }}</strong>
                 state.</div>
             {% endunless %}{% endif %}
             {{ content }}
@@ -20,7 +20,5 @@
     {%- include footer.html -%}
 
 </body>
-
-{%- include links.html -%}
 
 </html>
