@@ -1,0 +1,35 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "server",
+            "type": "shell",
+            "command": "npx gulp dev --drafts",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "isBackground": true,
+            "presentation": {
+                "clear": true,
+                "reveal": "silent",
+            },
+            "problemMatcher": {
+                "background": {
+                    "beginsPattern": "^Building site...$",
+                    "endsPattern": "^Web server is available.*$"
+                },
+                "pattern": [
+                    {
+                        "code": 4,
+                        "column": 3,
+                        "file": 1,
+                        "line": 2,
+                        "message": 5,
+                        "regexp": "^(.+):(\\d+):(\\d+): (\\w\\d+) (.+)$",
+                    }
+                ],
+            }
+        }
+    ]
+}

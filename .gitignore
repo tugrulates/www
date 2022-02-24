@@ -1,0 +1,7 @@
+content/[!_]*.md
+content/photos/*.jpg
+node_modules/
+public/
+static/*.*
+static/processed_images
+templates/favicon.html

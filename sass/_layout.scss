@@ -1,0 +1,89 @@
+@mixin layout {
+  @include column($gap: 0, $grow: main);
+  @include float(".mermaidTooltip", $bottom: 0);
+
+  margin: 0;
+  min-height: 100vh;
+
+  & > a.link-main {
+    @include hidden;
+  }
+
+  & > * {
+    @include centered-horizontally;
+  }
+
+  & > header {
+    @include row(
+      $align: flex-start,
+      $justify: space-between,
+      $grow: ".control-box"
+    );
+    @include needs-vertical-space-on-desktop;
+    @include slim-on-mobile;
+    .home-link {
+      @include navigation;
+      @include thin-padded;
+      @include row($align: center);
+
+      .avatar {
+        border-radius: 50%;
+        width: 2rem;
+        height: 2rem;
+      }
+
+      font: {
+        size: 1.25rem;
+        weight: 300;
+      }
+      letter-spacing: -1px;
+      text-decoration: none;
+    }
+
+    .control-box {
+      @include float(".controls", $top: 0, $right: 0, $z-index: 1);
+      overflow: visible;
+
+      .controls {
+        @include theme-controls;
+      }
+    }
+  }
+
+  & > main {
+    & > p {
+      @include paragraph;
+    }
+  }
+
+  & > main.home {
+    header {
+      @include needs-huge-vertical-space;
+      @include row($align: center);
+      @include padded;
+      h1 {
+        margin: 0;
+      }
+    }
+    a.feed-link {
+      @include navigation;
+      @include square-padded;
+    }
+  }
+
+  & > main.error {
+    @include huge-icons;
+    @include column($align: center, $justify: center);
+    text-align: center;
+  }
+
+  & > footer {
+    @include row($align: center, $justify: center, $gap: 0);
+    @include needs-vertical-space-on-desktop;
+    @include slim-on-mobile;
+    & > * {
+      @include navigation;
+      @include square-padded;
+    }
+  }
+}

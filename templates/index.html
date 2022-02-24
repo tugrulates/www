@@ -1,0 +1,7 @@
+{%- extends "base.html" -%}
+
+{%- block class -%}home{%- endblock class -%}
+{%- block title -%}{{ section.title }}{%- endblock title -%}
+{%- block content -%}
+{{- macros::home(title="~", name=section.title, pages=section.pages) -}}
+{%- endblock content -%}
