@@ -1,0 +1,49 @@
+@import "../text";
+@import "../size";
+@import "../color";
+@import "../flex";
+@import "../box";
+@import "../image";
+@import "../tag";
+@import "../layout";
+@import "../tile";
+@import "../article";
+@import "../interaction";
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+html {
+  @include fonts;
+  @include transition(background-color);
+  @include background-color;
+  @include text-color;
+  word-break: keep-all;
+}
+
+body {
+  @include layout;
+  @include has-cover;
+  @include has-cards;
+  @include has-icons;
+  @include has-tags;
+  @include has-selection;
+
+  article {
+    @include has-link;
+    @include has-paragraph;
+    @include has-title;
+    @include has-list;
+    @include has-blockquote;
+    @include has-table;
+    @include has-image;
+    @include has-video;
+    @include has-code;
+    @include has-graph;
+    @include has-footnote;
+    @include has-alert;
+  }
+}
