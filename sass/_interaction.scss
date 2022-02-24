@@ -1,0 +1,157 @@
+$transition-duration: 0.2s;
+$delay-duration: 1s;
+
+@mixin hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+@mixin transition($props...) {
+  $transition: ();
+  @each $prop in $props {
+    $transition: append($transition, $prop $transition-duration ease, comma);
+  }
+  transition: $transition;
+}
+
+@mixin delayed-transition($props...) {
+  $transition: ();
+  @each $prop in $props {
+    $transition: append(
+      $transition,
+      $prop $transition-duration ease $delay-duration,
+      comma
+    );
+  }
+  transition: $transition;
+}
+
+@mixin hover(
+  $children: null,
+  $after: null,
+  $before: null,
+  $mobile: false,
+  $delay: false
+) {
+  @each $child in $children {
+    // @if $mobile {
+    @media (hover: hover) {
+      & #{$child} {
+        @each $prop, $value in $before {
+          #{$prop}: $value;
+        }
+        @include transition(map-keys($after)...);
+      }
+    }
+    &:hover #{$child} {
+      @each $prop, $value in $after {
+        #{$prop}: $value;
+      }
+      @if $delay {
+        @include delayed-transition(map-keys($after)...);
+      } @else {
+        @include transition(map-keys($after)...);
+      }
+    }
+    &:focus-within #{$child} {
+      @each $prop, $value in $after {
+        #{$prop}: $value;
+      }
+      @include transition(map-keys($after)...);
+    }
+    // } @else {
+    //   @media (hover: hover) {
+    //     & #{$child} {
+    //       @each $prop, $value in $before {
+    //         #{$prop}: $value;
+    //       }
+    //       @include transition(map-keys($after)...);
+    //     }
+    //     &:hover #{$child} {
+    //       @each $prop, $value in $after {
+    //         #{$prop}: $value;
+    //       }
+    //     }
+    //   }
+    // }
+  }
+}
+
+@mixin navigation {
+  @include no-text;
+  @include normal-text;
+  @include rounded;
+  @include hover(
+    $before: (
+      border-radius: $border-radius,
+    ),
+    $after: (
+      background-color: $background-primary-color,
+      box-shadow: $shadow,
+    ),
+    $mobile: true
+  );
+}
+
+@mixin theme-controls {
+  @include navigation;
+  @include column($align: flex-end, $gap: 0);
+  .control {
+    @include row($align: center, $gap: 0);
+    label {
+      @include hidden;
+    }
+    button {
+      @include square-padded;
+      @include no-text;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 1;
+    }
+    .tune {
+      opacity: 0%;
+      height: $icon-size;
+      width: 0;
+      margin: {
+        left: 0;
+        right: 0;
+      }
+    }
+  }
+  @include hover(
+    ".tune",
+    $delay: true,
+    $after: (
+      opacity: 100%,
+      width: #{$icon-size * 3},
+      margin-left: $large-gap,
+      margin-right: $normal-gap
+    )
+  );
+  .hue.control {
+    opacity: 0%;
+    height: 0;
+  }
+  @include hover(
+    ".hue.control",
+    $delay: true,
+    $after: (opacity: 100%, height: #{$icon-size + 2 * $normal-gap})
+  );
+}
+
+@mixin highlight($children: null) {
+  @include responsive-rounded;
+  @include hover(
+    $children: $children,
+    $after: (
+      background-color: $background-highlight-color,
+    )
+  );
+}

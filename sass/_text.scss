@@ -1,0 +1,33 @@
+$font-size: 20px;
+$line-height: 1.6em;
+
+@mixin fonts {
+  $responsive-font-size: calc(
+    min(#{$font-size}, max(#{100 * $font-size / $width}vw, 6vw))
+  );
+  font: 400 unquote("#{$responsive-font-size}/#{$line-height/1em}") -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font: {
+    feature-settings: "kern" 1;
+    kerning: normal;
+  }
+}
+
+@mixin max-lines($lines) {
+  max-height: $lines * $line-height;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  // line-clamp: $lines;
+  -webkit-line-clamp: $lines;
+}
+
+@mixin normal-text {
+  @include text-color;
+  text-decoration: none;
+}
+
+@mixin no-text {
+  line-height: 0em;
+}

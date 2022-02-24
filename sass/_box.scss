@@ -1,0 +1,65 @@
+$border-radius: 0.5rem;
+$shadow: 0 0 $small-gap 0 hsla(0, 0%, calc(10% * var(--light)), 0.7);
+
+$responsive-border-radius: calc(
+  min(#{$border-radius}, (100vw - #{$width}) / 2)
+);
+
+@mixin rounded() {
+  border-radius: $border-radius;
+}
+
+@mixin responsive-rounded() {
+  border-radius: $responsive-border-radius;
+}
+
+@mixin box {
+  @include background-primary-color;
+  box-shadow: $shadow;
+}
+
+@mixin rounded-box {
+  @include box;
+  @include rounded;
+}
+
+@mixin responsive-rounded-box {
+  @include box;
+  @include responsive-rounded;
+}
+
+@mixin border-overlap-fix {
+  @media (min-width: #{$width}) {
+    overflow: visible;
+    .drawer {
+      $shift: calc(max(-1px, #{$width} - 100vw));
+      margin: 0 $shift $shift $shift;
+    }
+  }
+}
+
+@mixin slim-on-mobile {
+  @media (max-width: #{$width - 1}) {
+    @include box;
+    @include padded;
+  }
+}
+
+@mixin float(
+  $child,
+  $top: null,
+  $right: null,
+  $bottom: null,
+  $left: null,
+  $z-index: null
+) {
+  position: relative;
+  #{$child} {
+    position: absolute;
+    top: $top;
+    right: $right;
+    bottom: $bottom;
+    left: $left;
+    z-index: $z-index;
+  }
+}

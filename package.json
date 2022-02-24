@@ -1,0 +1,37 @@
+{
+  "name": "blog-code",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tugrulates/blog-code.git"
+  },
+  "author": "Tugrul Ates",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tugrulates/blog-code/issues"
+  },
+  "homepage": "https://github.com/tugrulates/blog-code#readme",
+  "dependencies": {
+    "delete": "^1.1.0",
+    "gulp": "^4.0.2",
+    "gulp-add-front-matter": "^0.1.1",
+    "gulp-favicons": "^3.0.0",
+    "gulp-gm": "^0.0.9",
+    "gulp-gray-matter": "^3.0.1",
+    "gulp-imagemin": "^8.0.0",
+    "gulp-newer": "^1.4.0",
+    "imagemin-jpegtran": "^7.0.0",
+    "imagemin-mozjpeg": "^10.0.0",
+    "minimist": "^1.2.5",
+    "path": "^0.12.7",
+    "through2": "^4.0.2"
+  }
+}
