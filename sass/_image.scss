@@ -1,0 +1,34 @@
+@mixin responsive-image {
+  height: 100%;
+  object: {
+    fit: cover;
+    position: 50% 50%;
+  }
+  width: auto;
+}
+
+@mixin icon-mask($icon, $size: $icon-size) {
+  -webkit-mask-image: url($icon);
+  mask: {
+    image: url($icon);
+    size: $size;
+  }
+  display: inline-block;
+  width: $size;
+  height: $size;
+}
+
+@mixin huge-icons {
+  .icon {
+    width: $icon-size * 4;
+    height: $icon-size * 4;
+  }
+}
+
+@mixin has-icons {
+  .icon {
+    fill: $text-color;
+    width: $icon-size;
+    height: $icon-size;
+  }
+}

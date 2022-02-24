@@ -1,0 +1,289 @@
+@mixin paragraph {
+  @include padded;
+  @include rounded;
+}
+
+@mixin block {
+  @include responsive-rounded-box;
+  @include padded;
+  display: inline-block;
+  width: 100%;
+}
+
+@mixin link-hint($icon) {
+  &::after {
+    @include icon-mask($icon, $small-icon-size);
+    background-color: $link-color;
+    content: "";
+    margin-left: $small-gap;
+  }
+}
+
+@mixin has-link {
+  a {
+    @include link-color;
+    @include hover(
+      $before: (
+        text-decoration: none,
+      ),
+      $after: (
+        text-decoration: underline,
+        filter: $hover-filter,
+      )
+    );
+    &[rel="noopener"] {
+      @include link-hint("/svg/link-external.svg");
+    }
+    &[href$=".pdf"] {
+      @include link-hint("/svg/link-pdf.svg");
+    }
+    &[href$=".zip"] {
+      @include link-hint("/svg/link-download.svg");
+    }
+  }
+}
+
+@mixin has-paragraph {
+  & > p {
+    @include paragraph;
+    @include highlight;
+    :empty {
+      line-height: 0;
+    }
+  }
+}
+
+@mixin has-title {
+  & > h1 {
+    font-size: 250%;
+    @include paragraph;
+    time {
+      display: block;
+      font: {
+        size: 1rem;
+        style: oblique;
+        weight: 600;
+      }
+      text-align: end;
+    }
+  }
+  & > h1,
+  & > h2,
+  & > h3,
+  & > h4,
+  & > h5,
+  & > h6 {
+    @include paragraph;
+    a.anchor {
+      @include icon-mask("/svg/link-anchor.svg");
+      margin: {
+        left: $normal-gap;
+        right: $normal-gap;
+      }
+      @include hover(
+        $after: (
+          filter: $hover-filter,
+        )
+      );
+    }
+    @include hover(
+      ".anchor",
+      $before: (background-color: transparent),
+      $after: (background-color: $primary-color)
+    );
+  }
+  & > h4,
+  & > h5,
+  & > h6 {
+    a.anchor {
+      background-size: $small-icon-size;
+    }
+  }
+}
+
+@mixin has-blockquote {
+  blockquote {
+    @include highlight;
+    @include paragraph;
+    @include padded;
+    @include rounded;
+    border-left: ($tiny-gap solid $text-color);
+    font: {
+      style: oblique;
+      size: 1.2rem;
+    }
+    margin: {
+      left: 0;
+      right: 0;
+    }
+    & > p {
+      @include padded;
+      margin: 0;
+    }
+    width: 100%;
+  }
+}
+
+@mixin has-list {
+  & > ul,
+  & > ol {
+    @include rounded;
+    padding: $small-gap (3 * $large-gap);
+  }
+}
+
+@mixin has-table {
+  & > table {
+    @include padded;
+    border: {
+      spacing: 0;
+      collapse: separate;
+    }
+    text-align: center;
+    margin: auto;
+    th,
+    td {
+      @include padded;
+    }
+    thead {
+      th {
+        border-bottom: $tiny-gap solid $text-color;
+      }
+    }
+    tbody {
+      tr {
+        @include highlight(td);
+        td {
+          &:first-child {
+            border: {
+              start-start-radius: $border-radius;
+              end-start-radius: $border-radius;
+            }
+          }
+          &:last-child {
+            border: {
+              start-end-radius: $border-radius;
+              end-end-radius: $border-radius;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@mixin has-image {
+  & > p:empty {
+    @include block;
+  }
+  & > p > img {
+    max-width: 100%;
+  }
+}
+
+@mixin has-video {
+  & > div > iframe {
+    @include block;
+    height: calc(min(100vw, #{$width}) * 0.5625);
+    border: 0;
+    padding: 0;
+  }
+}
+
+@mixin has-code {
+  & > p > code {
+    @include rounded-box;
+    @include thin-padded;
+    font-weight: 600;
+  }
+  & > pre.z-code:not([data-lang="mermaid"]) {
+    @include block;
+    font-weight: 600;
+    white-space: pre-wrap;
+    .z-generic-name,
+    .z-variable {
+      @include code-color(-90);
+    }
+    .z-string,
+    .z-numeric {
+      @include code-color(90);
+    }
+    .z-keyword:not(.z-operator),
+    .z-language,
+    .z-type {
+      @include code-color(180);
+    }
+    .z-builtin {
+      color: $text-color;
+    }
+    .z-comment {
+      @include code-color(0);
+    }
+    table {
+      border: {
+        spacing: 0;
+        collapse: separate;
+      }
+      tr {
+        td:first-child {
+          @include code-color(0);
+          vertical-align: top;
+        }
+        @include hover(
+          td,
+          $after: (background-color: $background-highlight-color)
+        );
+      }
+    }
+  }
+}
+
+@mixin has-graph {
+  & > pre[data-lang="mermaid"] {
+    @include padded;
+    & > code > span {
+      &[data-processed="true"] {
+        text-align: center;
+        display: block;
+        .edgeLabel {
+          @include rounded;
+          @include thin-padded;
+          margin: 0;
+        }
+        .edgeLabel:empty {
+          display: none;
+        }
+      }
+      &:not([data-processed="true"]) {
+        &::before {
+          display: block;
+          content: "======= this is a graph ======";
+        }
+
+        &::after {
+          display: block;
+          content: "=== that needs javascript ===";
+        }
+      }
+    }
+  }
+}
+
+@mixin has-footnote {
+  & > .footnote-definition {
+    @include block;
+  }
+
+  & > .footnote-definition > p:first-of-type {
+    display: inline;
+  }
+}
+
+@mixin has-alert {
+  & alert {
+    @include block;
+    &::before {
+      content: "⚠️ ";
+    }
+  }
+}

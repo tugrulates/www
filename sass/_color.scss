@@ -1,0 +1,84 @@
+$contrast: 0.875;
+
+$primary-color: hsl(var(--hue), 80%, calc(66% - 33% * var(--light)));
+$background-color: hsl(var(--hue), 0%, calc(100% * var(--light)));
+$background-primary-color: hsl(var(--hue), 40%, calc(20% + 60% * var(--light)));
+$background-highlight-color: hsla(var(--hue), 40%, 50%, 0.15);
+$selection-color: hsl(var(--hue), 80%, calc(33% + 33% * var(--light)));
+
+$text-color: hsl(0, 0%, var(--negative));
+$link-color: $primary-color;
+$negative-color: hsl(
+  0,
+  0%,
+  calc(100% * max(0.2, min(0.8, (100 * (var(--light) - 0.5)))))
+);
+
+$hover-filter: brightness(200%) saturate(70%);
+
+// $indigo: 240;
+// $pink: 329;
+// $purple: 281;
+// $blue: 220;
+// $aque: 177;
+// $green: 100;
+// $yellow-green: 72;
+// $yellow: 49;
+// $yellow-orange: 37;
+// $orange: 14;
+// $red: 0;
+
+html {
+  --light: #{1 - $contrast};
+  --positive: calc(100% * min(0.2, var(--light)));
+  --negative: calc(100% * max(0.8, 1 - var(--light)));
+  &[data-theme="light"] {
+    --light: #{$contrast};
+    --positive: calc(100% * max(0.8, var(--light)));
+    --negative: calc(100% * min(0.2, 1 - var(--light)));
+  }
+  @media (prefers-color-scheme: light) {
+    &:not([data-theme]) {
+      --light: #{1 - $contrast};
+    }
+  }
+  --hue: 240;
+}
+
+@mixin text-color {
+  color: #{$text-color};
+}
+
+@mixin link-color {
+  @include primary-color;
+}
+
+@mixin primary-color {
+  color: $primary-color;
+}
+
+@mixin code-color($hue-shift) {
+  color: hsl(
+    calc(var(--hue) + #{$hue-shift}),
+    50%,
+    calc(max(30%, min(80%, var(--negative))))
+  );
+}
+
+@mixin background-color {
+  background-color: $background-color;
+}
+
+@mixin background-primary-color {
+  background-color: $background-primary-color;
+}
+
+@mixin background-highlight-color {
+  background-color: $background-highlight-color;
+}
+
+@mixin has-selection {
+  ::selection {
+    background-color: $selection-color;
+  }
+}

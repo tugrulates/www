@@ -1,0 +1,61 @@
+$width: 780px;
+
+$tiny-gap: 0.1rem;
+$small-gap: 0.2rem;
+$normal-gap: 0.4rem;
+$large-gap: 0.8rem;
+$huge-gap: 2.4rem;
+
+$icon-size: 1.5rem;
+$small-icon-size: 0.75rem;
+
+@mixin padded {
+  padding: $normal-gap $large-gap;
+}
+
+@mixin thin-padded {
+  padding: $small-gap $normal-gap;
+}
+
+@mixin square-padded {
+  padding: $normal-gap $normal-gap;
+}
+
+@mixin large-square-padded {
+  padding: $large-gap $large-gap;
+}
+
+@mixin centered-horizontally {
+  margin: {
+    left: auto;
+    right: auto;
+  }
+  width: 100%;
+  max-width: $width;
+}
+
+@mixin needs-vertical-space {
+  margin: {
+    top: $normal-gap;
+    bottom: $normal-gap;
+  }
+}
+
+@mixin needs-huge-vertical-space {
+  margin: {
+    top: $huge-gap;
+    bottom: $huge-gap;
+  }
+}
+
+@mixin needs-vertical-space-on-desktop {
+  @media (min-width: $width) {
+    @include needs-vertical-space;
+  }
+}
+
+@mixin needs-huge-vertical-space-on-desktop {
+  @media (min-width: $width) {
+    @include needs-huge-vertical-space;
+  }
+}

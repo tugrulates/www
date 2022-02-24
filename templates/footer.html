@@ -1,0 +1,76 @@
+<a class="social" aria-label="back to the homepage" href="/">
+  <svg class="icon" focusable="false">
+    <title>back to the homepage</title>
+    <use xlink:href="{{ '/svg/icons.svg#home' | safe }}"></use>
+  </svg>
+</a>
+
+{%- if config.extra.author.linkedin -%}
+<a class="social" aria-label="my LinkedIn profile" rel="noopener" target="_blank"
+  href="https://www.linkedin.com/in/{{ config.extra.author.linkedin | safe }}/">
+  <svg class="icon" focusable="false">
+    <title>my LinkedIn profile</title>
+    <use xlink:href="{{ '/svg/icons.svg#linkedin' | safe }}"></use>
+  </svg>
+</a>
+{%- endif -%}
+
+{%- if config.extra.author.github -%}
+<a class="social" aria-label="my GitHub profile" rel="noopener" target="_blank"
+  href="https://github.com/{{ config.extra.author.github | safe }}">
+  <svg class="icon" focusable="false">
+    <title>my GitHub profile</title>
+    <use xlink:href="{{ '/svg/icons.svg#github' | safe }}"></use>
+  </svg>
+</a>
+{%- endif -%}
+
+{%- if config.extra.author.stackoverflow -%}
+<a class="social" aria-label="my Stack Overflow profile" rel="noopener" target="_blank"
+  href="https://stackoverflow.com/users/{{ config.extra.author.stackoverflow | safe }}">
+  <svg class="icon" focusable="false">
+    <title>my Stack Overflow profile</title>
+    <use xlink:href="{{ '/svg/icons.svg#stackoverflow' | safe }}"></use>
+  </svg>
+</a>
+{%- endif -%}
+
+{%- if config.extra.author.twitter -%}
+<a class="social" aria-label="my Twitter profile" rel="noopener" target="_blank"
+  href="https://twitter.com/{{ config.extra.author.twitter | safe }}">
+  <svg class="icon" focusable="false">
+    <title>my Twitter profile</title>
+    <use xlink:href="{{ '/svg/icons.svg#twitter' | safe }}"></use>
+  </svg>
+</a>
+{%- endif -%}
+
+{%- if config.extra.author.youtube -%}
+<a class="social" aria-label="my YouTube channel" rel="noopener" target="_blank"
+  href="https://www.youtube.com/{{ config.extra.author.youtube | safe }}">
+  <svg class="icon" focusable="false">
+    <title>my YouTube profile</title>
+    <use xlink:href="{{ '/svg/icons.svg#youtube' | safe }}"></use>
+  </svg>
+</a>
+{%- endif -%}
+
+{%- if config.extra.author.instagram -%}
+<a class="social" aria-label="my Instagram profile" rel="noopener" target="_blank"
+  href="https://www.instagram.com/{{ config.extra.author.instagram | safe }}/">
+  <svg class="icon" focusable="false">
+    <title>my Instagram profile</title>
+    <use xlink:href="{{ '/svg/icons.svg#instagram' | safe }}"></use>
+  </svg>
+</a>
+{%- endif -%}
+
+{%- if config.extra.author.email -%}
+<a class="social" aria-label="my e-mail address" rel="noopener" target="_blank"
+  href="mailto:{{ config.extra.author.email }}">
+  <svg class="icon" focusable="false">
+    <title>my e-mail address</title>
+    <use xlink:href="{{ '/svg/icons.svg#email' | safe }}"></use>
+  </svg>
+</a>
+{%- endif -%}

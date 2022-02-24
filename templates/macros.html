@@ -1,0 +1,126 @@
+{%- macro no_trailing_slash(link) -%}
+{{ link | trim_end_matches(pat='/') | safe }}
+{%- endmacro stem -%}
+
+{%- macro titlefrompath(path) -%}
+{{ path | split(pat="/") | last | split(pat=".") | first | replace(from="-", to=" ") }}
+{%- endmacro image -%}
+
+{%- macro image(path, width) -%}
+{%- set meta = get_image_metadata(path=path) -%}
+{%- set height = meta.height * width / meta.width | round | int -%}
+{%- set image1x = resize_image(path=path, width=1*width, height=1*height, op="fit", quality=85) -%}
+{%- set image2x = resize_image(path=path, width=2*width, height=2*height, op="fit", quality=85) -%}
+{%- set image3x = resize_image(path=path, width=3*width, height=3*height, op="fit", quality=85) -%}
+{%- set image4x = resize_image(path=path, width=4*width, height=4*height, op="fit", quality=85) -%}
+<img src="{{ path | safe }}" alt="{{ macros::titlefrompath(path=path) }}"
+  srcset="{{ image1x.url | safe }} 1x, {{ image2x.url | safe }} 2x, {{ image3x.url | safe }} 3x, {{ image4x.url | safe }} 4x">
+{%- endmacro image -%}
+
+{%- macro time(page, update=false, dateformat="%B %d, %Y") -%}
+<time>
+  {%- if page.updated -%}
+  {{ page.updated | date(format=dateformat) }}
+  {%- if update -%}
+  <br>- originally published {{ page.updated | date(format=dateformat) }}
+  {%- endif -%}
+  {%- else -%}
+  {{ page.date | date(format=dateformat) }}
+  {%- endif -%}
+</time>
+{%- endmacro card -%}
+
+{%- macro tag(tag) -%}
+<a class="tag" href="/tags/{{ tag | safe }}">{{ tag }}</a>
+{%- endmacro tag -%}
+
+{%- macro tags(tags) -%}
+{%- if config.taxonomies -%}
+<ul class="tags" aria-label="tags">
+  {% for tag in tags %}
+  <li>{{ macros::tag(tag=tag) }}</li>
+  {% endfor %}
+</ul>
+{%- endif -%}
+{%- endmacro tags -%}
+
+{%- macro cover(page) -%}
+<header class="cover">
+  {{- macros::image(path=page.extra.cover, width=800) -}}
+  {{- macros::tags(tags=page.taxonomies.tags) -}}
+</header>
+{%- endmacro cover -%}
+
+{%- macro articlecard(page) -%}
+<li class="card" aria-label="{{ page.title }}">
+  <a class="card-link" href="{{ macros::no_trailing_slash(link=page.permalink) | safe }}">
+    <div class="drawer">
+      <div class="title">
+        <p>{{ page.title }}</p>
+        {%- if page.year | as_str == now() | date(format="%Y") -%}
+        {{- macros::time(page=page, dateformat="%b %d") -}}
+        {%- else -%}
+        {{- macros::time(page=page, dateformat="%b %d, %Y") -}}
+        {%- endif -%}
+      </div>
+      <div class="summary">
+        <p>
+          {%- if page.summary -%}
+          {{ page.summary | safe | striptags }}
+          {%- endif -%}
+        </p>
+      </div>
+    </div>
+  </a>
+  {{- macros::image(path=page.extra.cover, width=400) -}}
+  {{- macros::tags(tags=page.taxonomies.tags) -}}
+</li>
+{%- endmacro articlecard -%}
+
+{%- macro photocard(image) -%}
+{%- set title=macros::titlefrompath(path=image) -%}
+<li class="card" aria-label="{{ title }}">
+  <a class="card-link" href="{{ macros::no_trailing_slash(link=image) | safe }}">
+    <div class="drawer">
+      <div class="title">
+        <h1>{{ title }}</h1>
+      </div>
+    </div>
+  </a>
+  {{- macros::image(path=image, width=800) -}}
+</li>
+{%- endmacro photocard -%}
+
+{%- macro articlecards(pages) -%}
+<nav aria-label="articles">
+  <ul class="cards">
+    {%- for page in pages -%}
+    {{- macros::articlecard(page=page) -}}
+    {%- endfor -%}
+  </ul>
+</nav>
+{%- endmacro articlecards -%}
+
+{%- macro photocards(images) -%}
+<nav aria-label="photos">
+  <ul class="cards">
+    {%- for image in images -%}
+    {{- macros::photocard(image=image) -}}
+    {%- endfor -%}
+  </ul>
+</nav>
+{%- endmacro photocards -%}
+
+{%- macro home(title, name, pages) -%}
+<header>
+  <h1>
+    {{ title }}
+  </h1>
+  <a class="feed-link" href="{{ config.feed_filename }}" aria-label="atom feed for {{ name }}"><svg class="icon"
+      focusable="false">
+      <title>atom feed for {{ name }}</title>
+      <use xlink:href=/svg/icons.svg#feed></use>
+    </svg></a>
+</header>
+{{- macros::articlecards(pages=pages) -}}
+{%- endmacro home -%}
