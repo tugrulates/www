@@ -1,0 +1,7 @@
+comment:
+  glob-options:
+    dot: true
+  snippets:
+    - id: review-url-{{ deploy_id }}
+      files: ["*"]
+      body: 🧪 Preview is [ready]({{ preview_url }})!

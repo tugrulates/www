@@ -1,0 +1,48 @@
+name: Deploy
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  deploy:
+    outputs:
+      preview_url: ${{ steps.preview.outputs.preview_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "17"
+          cache: "npm"
+      - name: Install dependencies
+        run: |
+          npm install
+          npm install netlify-cli
+          sudo apt-get install graphicsmagick
+          wget -q -O - "https://github.com/getzola/zola/releases/download/v0.15.3/zola-v0.15.3-x86_64-unknown-linux-gnu.tar.gz" | tar xzf - -C /usr/local/bin
+      - name: Deploy preview
+        id: preview
+        run: |
+          OUTPUT=$(mktemp)
+          netlify deploy --build --dir=public --context=deploy-preview | tee $OUTPUT
+          PREVIEW_URL=$(grep -oP '(?<=Website Draft URL: )((.*))' $OUTPUT)
+          DEPLOY_ID=$(echo $PREVIEW_URL | grep -oP '(?<=https://)((.*))((?=--))')
+          echo "::set-output name=preview_url::$PREVIEW_URL"
+          echo "::set-output name=deploy_id::$DEPLOY_ID"
+        env:
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      - name: Comment on PR
+        uses: exercism/pr-commenter-action@v1.3.0
+        with:
+          github-token: "${{ github.token }}"
+          config-file: ".github/preview-url-comment.yml"
+          template-variables: |
+            {
+              "preview_url": "${{ steps.preview.outputs.preview_url }}",
+              "deploy_id":   "${{ steps.preview.outputs.deploy_id }}"
+            }
