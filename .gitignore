@@ -1,3 +1,4 @@
+.netlify
 content/[!_]*.md
 content/photos/*.jpg
 node_modules/
