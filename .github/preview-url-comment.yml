@@ -1,0 +1,5 @@
+comment:
+  snippets:
+    - id: review-url-{{ deploy_id }}
+      files: ["*"]
+      body: 🧪 Preview is [ready]({{ preview_url }})!
