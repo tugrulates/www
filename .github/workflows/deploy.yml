@@ -15,11 +15,11 @@ jobs:
       - name: Setup env
         if: github.event_name == 'pull_request'
         run: |
-          echo "DEPLOY_ARGS='--context=deploy-preview'" >> $GITHUB_ENV
+          echo "DEPLOY_ARGS=--context=deploy-preview" >> $GITHUB_ENV
       - name: Setup env
         if: github.event_name == 'push'
         run: |
-          echo "DEPLOY_ARGS='--prod'" >> $GITHUB_ENV
+          echo "DEPLOY_ARGS=--prod" >> $GITHUB_ENV
       - name: Checkout
         uses: actions/checkout@v2
         with:
