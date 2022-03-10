@@ -4,7 +4,7 @@ $tiny-gap: 0.1rem;
 $small-gap: 0.2rem;
 $normal-gap: 0.4rem;
 $large-gap: 0.8rem;
-$huge-gap: 2.4rem;
+$huge-gap: 1.6rem;
 
 $icon-size: 1.5rem;
 $small-icon-size: 0.75rem;
@@ -38,6 +38,13 @@ $small-icon-size: 0.75rem;
   margin: {
     top: $normal-gap;
     bottom: $normal-gap;
+  }
+}
+
+@mixin needs-large-vertical-space {
+  margin: {
+    top: $large-gap;
+    bottom: $large-gap;
   }
 }
 

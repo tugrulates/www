@@ -20,7 +20,7 @@
       $justify: space-between,
       $grow: ".control-box"
     );
-    @include needs-vertical-space-on-desktop;
+    @include needs-huge-vertical-space-on-desktop;
     @include slim-on-mobile;
     .home-link {
       @include navigation;
@@ -59,7 +59,7 @@
 
   & > main.home {
     header {
-      @include needs-huge-vertical-space;
+      @include needs-large-vertical-space;
       @include row($align: center);
       @include padded;
       h1 {
@@ -80,7 +80,7 @@
 
   & > footer {
     @include row($align: center, $justify: center, $gap: 0);
-    @include needs-vertical-space-on-desktop;
+    @include needs-huge-vertical-space-on-desktop;
     @include slim-on-mobile;
     & > * {
       @include navigation;
