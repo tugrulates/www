@@ -32,15 +32,8 @@ $delay-duration: 1s;
   transition: $transition;
 }
 
-@mixin hover(
-  $children: null,
-  $after: null,
-  $before: null,
-  $mobile: false,
-  $delay: false
-) {
+@mixin hover($children: null, $after: null, $before: null, $delay: false) {
   @each $child in $children {
-    // @if $mobile {
     @media (hover: hover) {
       & #{$child} {
         @each $prop, $value in $before {
@@ -65,21 +58,6 @@ $delay-duration: 1s;
       }
       @include transition(map-keys($after)...);
     }
-    // } @else {
-    //   @media (hover: hover) {
-    //     & #{$child} {
-    //       @each $prop, $value in $before {
-    //         #{$prop}: $value;
-    //       }
-    //       @include transition(map-keys($after)...);
-    //     }
-    //     &:hover #{$child} {
-    //       @each $prop, $value in $after {
-    //         #{$prop}: $value;
-    //       }
-    //     }
-    //   }
-    // }
   }
 }
 
@@ -94,8 +72,7 @@ $delay-duration: 1s;
     $after: (
       background-color: $background-primary-color,
       box-shadow: $shadow,
-    ),
-    $mobile: true
+    )
   );
 }
 
@@ -118,9 +95,9 @@ $delay-duration: 1s;
     .tune {
       opacity: 0%;
       height: $icon-size;
-      width: 0;
+      width: 1px;
       margin: {
-        left: 0;
+        left: -1px;
         right: 0;
       }
     }
