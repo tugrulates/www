@@ -184,7 +184,8 @@
 @mixin has-video {
   & > div > iframe {
     @include block;
-    height: calc(min(100vw, #{$width}) * 0.5625);
+    background-color: transparent;
+    height: calc(min(100vw, #{round($width * 0.5625)}));
     border: 0;
     padding: 0;
   }
