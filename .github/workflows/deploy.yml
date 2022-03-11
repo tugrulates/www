@@ -12,14 +12,6 @@ jobs:
       preview_url: ${{ steps.preview.outputs.preview_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Setup env
-        if: github.event_name == 'pull_request'
-        run: |
-          echo "DEPLOY_ARGS=--context=deploy-preview" >> $GITHUB_ENV
-      - name: Setup env
-        if: github.event_name == 'push'
-        run: |
-          echo "DEPLOY_ARGS=--prod" >> $GITHUB_ENV
       - name: Checkout
         uses: actions/checkout@v2
         with:
@@ -37,7 +29,7 @@ jobs:
         id: preview
         run: |
           OUTPUT=$(mktemp)
-          npx netlify deploy --build --dir=public $DEPLOY_ARGS | tee $OUTPUT
+          npx netlify deploy --build --dir=public --context=deploy-preview | tee $OUTPUT
           PREVIEW_URL=$(grep -oP '(?<=(?:Website Draft|Unique Deploy) URL: )((.*))' $OUTPUT)
           DEPLOY_ID=$(echo $PREVIEW_URL | grep -oP '(?<=https://)((.*))((?=--))')
           echo "::set-output name=preview_url::$PREVIEW_URL"
@@ -56,3 +48,46 @@ jobs:
               "preview_url": "${{ steps.preview.outputs.preview_url }}",
               "deploy_id":   "${{ steps.preview.outputs.deploy_id }}"
             }
+      # - name: Deploy to production
+      #   if: github.event_name == 'push'
+      #   run: npx netlify deploy --dir=public --prod
+
+  screenshot-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install selenium
+        run: |
+          pip3 install selenium
+          pip3 install --upgrade requests
+      - name: Install geckodriver
+        run: |
+          wget https://github.com/mozilla/geckodriver/releases/download/v0.30.0/geckodriver-v0.30.0-linux32.tar.gz
+          tar -xvzf geckodriver*
+          chmod +x geckodriver
+          export PATH=$PATH:./geckodriver
+      - name: Run selenium
+        run: python3 tests/screenshot.py --browser=firefox --out=linux-firefox.png
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: Linux Firefox
+          path: "linux-firefox.png"
+          retention-days: 1
+
+  screenshot-linux:
+    runs-on: macOS-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install selenium
+        run: |
+          pip3 install selenium
+          pip3 install --upgrade requests
+      - name: Run selenium
+        run: python3 tests/screenshot.py --browser=firefox --out=macos-safari.png
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: MacOS Safari
+          path: "macos-safari.png"
+          retention-days: 1
