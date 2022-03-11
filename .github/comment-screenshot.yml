@@ -1,0 +1,16 @@
+comment:
+  glob-options:
+    dot: true
+  snippets:
+    - id: deploy-{{ id }}
+      files: ["**/*"]
+      body: |
+        🧪 Preview is [ready]({{ url }})!
+        <br>
+        🖼️ Screenshots:
+        | Chrome  | Firefox | Safari  |
+        | ------- | ------- | ------- |
+        | ![]({{ base }}/chrome-desktop-dark.png)  | ![]({{ base }}/firefox-desktop-dark.png)  | ![]({{ base }}/safari-desktop-dark.png)  |
+        | ![]({{ base }}/chrome-desktop-light.png) | ![]({{ base }}/firefox-desktop-light.png) | ![]({{ base }}/safari-desktop-light.png) |
+        | ![]({{ base }}/chrome-mobile-dark.png)   | ![]({{ base }}/firefox-mobile-dark.png)   | ![]({{ base }}/safari-mobile-dark.png)   |
+        | ![]({{ base }}/chrome-mobile-light.png)  | ![]({{ base }}/firefox-mobile-light.png)  | ![]({{ base }}/safari-mobile-light.png)  |
