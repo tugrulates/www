@@ -53,6 +53,7 @@ jobs:
         run: npx netlify deploy --dir=public --prod
 
   screenshot:
+    if: github.event_name == 'pull_request'
     needs: preview
     strategy:
       matrix:
@@ -90,8 +91,8 @@ jobs:
           --width=${{ matrix.width }}
           --height=${{ matrix.height }}
           --dpr=${{ matrix.dpr }}
-          --out=${{ matrix.browser }}-${{ matrix.platform }}-${{ matrix.theme }}.png
-          --url=https://tugrul.blog/
+          --out="${{ matrix.browser }}-${{ matrix.platform }}-${{ matrix.theme }}.png"
+          --url="${{ needs.preview.outputs.preview_url }}"
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
