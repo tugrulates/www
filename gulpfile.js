@@ -97,8 +97,8 @@ const docs = {
 // Copy post photos.
 const photos = {
     input: "docs/photos/*.jpg",
-    output: "content/photos",
-    delete: "content/photos/*.jpg",
+    output: "static/photos",
+    delete: "static/photos/*.jpg",
 
     build: () => gulp
         .src(photos.input)
@@ -111,6 +111,21 @@ const photos = {
 
     watch: () => gulp.watch(photos.input, photos.build),
     clean: () => del(photos.delete),
+};
+
+
+// Copy post files.
+const files = {
+    input: "docs/files/**/*",
+    output: "static/files",
+    delete: "static/files",
+
+    build: () => gulp
+        .src(files.input)
+        .pipe(gulp.dest(files.output)),
+
+    watch: () => gulp.watch(files.input, files.build),
+    clean: () => del(files.delete),
 };
 
 
@@ -167,7 +182,7 @@ const site = {
 };
 
 
-const objs = { docs, photos, favicon, site };
+const objs = { docs, photos, files, favicon, site };
 for (const obj in objs) {
     for (const attr in objs[obj]) {
         if (objs[obj][attr] instanceof Function) {
@@ -178,15 +193,15 @@ for (const obj in objs) {
 }
 
 export const build = gulp.series(
-    gulp.parallel(docs.build, photos.build, favicon.build),
+    gulp.parallel(docs.build, photos.build, files.build, favicon.build),
     site.build);
 
 export const dev = gulp.parallel(
-    docs.watch, photos.watch, favicon.watch, site.serve);
+    docs.watch, photos.watch, favicon.watch, files.watch, site.serve);
 
 export const check = gulp.series(build, site.check);
 
 export const clean = gulp.parallel(
-    docs.clean, photos.clean, favicon.clean, site.clean);
+    docs.clean, photos.clean, files.clean, favicon.clean, site.clean);
 
 export default build;
