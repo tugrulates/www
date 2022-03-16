@@ -98,7 +98,7 @@ const docs = {
 const photos = {
     input: "docs/photos/*.jpg",
     output: "static/photos",
-    delete: "static/photos/*.jpg",
+    delete: "static/photos",
 
     build: () => gulp
         .src(photos.input)
@@ -117,8 +117,13 @@ const photos = {
 // Copy post files.
 const files = {
     input: "docs/files/**/*",
-    output: "static/files",
-    delete: "static/files",
+    output: "static",
+    delete: ["static/*",
+        "!static/js",
+        "!static/png",
+        "!static/svg",
+        "!static/photos",
+        "!static/processed_images"],
 
     build: () => gulp
         .src(files.input)
