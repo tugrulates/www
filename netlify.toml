@@ -7,3 +7,10 @@
     to = "https://tugrul.blog/:splat"
     status = 301
     force = true
+
+## TODO: #45 Remove files redirect sometime in 2023
+[[redirects]]
+  from = "/files/*"
+  to = "/:splat"
+  status = 301
+  force = true
