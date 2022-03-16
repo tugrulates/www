@@ -30,6 +30,9 @@ const docs = {
     output: "content",
     delete: "content/[!_]*.md",
 
+    internal_link: /\[(?!\])(.*?)(?<!\[)\]\(([a-z-]+\.md)\)/g,
+    internal_link_replace: "[$1](@/$2)",
+
     scripts: {
         math: /(\$(?=[^\s]).*(?<=[^\s])\$)|(\$\$.*\$\$)/,
         graph: /^```mermaid/,
@@ -44,9 +47,6 @@ const docs = {
                 .split("\n\n")
                 .map(x => x.trim());
             const data = file.data;
-
-            // Enforce no trailing slashes.
-            data.permalink = `/${file.path}`
 
             // Docs are draft by default.
             if (data.draft !== false) {
@@ -68,6 +68,11 @@ const docs = {
             if (data.tags) {
                 data.taxonomies = { tags: data.tags.split(" ") };
             }
+
+            // Update internal links.
+            blocks = blocks.map(
+                x => x.replaceAll(docs.internal_link,
+                    docs.internal_link_replace));
 
             // Determine which js to load based on content.
             var scripts = [];
