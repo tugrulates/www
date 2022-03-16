@@ -2,30 +2,6 @@
   publish = "public/"
   command = "npx gulp"
 
-[[redirects]]
-    from = "https://tugrul.netlify.app/*"
-    to = "https://tugrul.blog/:splat"
-    status = 301
-    force = true
-
-[[redirects]]
-    from = "https://tugrulates.com/*"
-    to = "https://tugrul.blog/:splat"
-    status = 301
-    force = true
-
-[[redirects]]
-    from = "https://tugrulates.net/*"
-    to = "https://tugrul.blog/:splat"
-    status = 301
-    force = true
-
-[[redirects]]
-    from = "https://tugrulates.org/*"
-    to = "https://tugrul.blog/:splat"
-    status = 301
-    force = true
-
 ## TODO: #45 Remove files redirect sometime in 2023
 [[redirects]]
   from = "/files/*"
