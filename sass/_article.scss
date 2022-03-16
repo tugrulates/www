@@ -129,6 +129,13 @@
   & > ol {
     @include rounded;
     padding: $small-gap (3 * $large-gap);
+    li {
+      @include highlight;
+      @include padded;
+      p {
+        @include needs-vertical-space;
+      }
+    }
   }
 }
 
