@@ -2,8 +2,8 @@
 content/[!_]*.md
 node_modules/
 public/
-static/*.*
-static/files/
-static/photos/
-static/processed_images/
+static/*
+!static/js/
+!static/png/
+!static/svg/
 templates/favicon.html

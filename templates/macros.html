@@ -1,11 +1,6 @@
-{%- macro no_trailing_slash(link) -%}
-{{ link | trim_end_matches(pat='/') | safe }}
-{%- endmacro stem -%}
-
 {%- macro titlefrompath(path) -%}
 {{ path | split(pat="/") | last | split(pat=".") | first | replace(from="-", to=" ") }}
 {%- endmacro image -%}
-
 
 {%- macro resizedimage(path, width, height) -%}
 {%- set image = resize_image(path=path, width=width, height=height, op="fit", quality=85) -%}
@@ -58,7 +53,7 @@
 
 {%- macro card(page) -%}
 <li class="card" aria-label="{{ page.title }}">
-  <a class="card-link" href="{{ macros::no_trailing_slash(link=page.path) | safe }}">
+  <a class="card-link" href="{{ page.path | safe }}">
     <div class="drawer">
       <div class="title">
         <p>{{ page.title }}</p>
