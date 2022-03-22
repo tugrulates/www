@@ -49,9 +49,7 @@ const docs = {
             const data = file.data;
 
             // Docs are draft by default.
-            if (data.draft !== false) {
-                data.draft = true;
-            }
+            data.draft = data.state != 'public';
 
             // Move first header in doc to front matter "title".
             if (!data.title && blocks.length > 0 && blocks[0].startsWith('#')) {
