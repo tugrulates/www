@@ -47,7 +47,7 @@
 {%- macro cover(page) -%}
 <header class="cover">
   {{- macros::image(path=page.extra.cover, width=800) -}}
-  {{- macros::tags(tags=page.taxonomies.tags) -}}
+  {#{- macros::tags(tags=page.taxonomies.tags) -}#}
 </header>
 {%- endmacro cover -%}
 
@@ -73,7 +73,7 @@
     </div>
   </a>
   {{- macros::image(path=page.extra.cover, width=400) -}}
-  {{- macros::tags(tags=page.taxonomies.tags) -}}
+  {#{- macros::tags(tags=page.taxonomies.tags) -}#}
 </li>
 {%- endmacro card -%}
 

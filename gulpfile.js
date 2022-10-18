@@ -63,9 +63,9 @@ const docs = {
             }
 
             // Copy "tags" into "taxonomies.tags".
-            if (data.tags) {
-                data.taxonomies = { tags: data.tags.split(" ") };
-            }
+            // if (data.tags) {
+            //     data.taxonomies = { tags: data.tags.split(" ") };
+            // }
 
             // Update internal links.
             blocks = blocks.map(
