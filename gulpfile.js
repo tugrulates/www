@@ -16,10 +16,14 @@ import minimist from "minimist"
 import through2 from "through2";
 
 
-var options = minimist(process.argv.slice(2), {
-    boolean: "drafts",
-    default: false
-});
+var options = minimist(process.argv.slice(2),
+    {
+        string: "output_dir",
+        boolean: "drafts",
+        default: {
+            "output_dir": "public",
+        }
+    });
 
 
 // Convert markdown files into what zola will accept.
@@ -179,7 +183,7 @@ const site = {
 
     command: (command) => spawn(
         "zola",
-        [command].concat(options.drafts ? ["--drafts"] : []),
+        [command].concat(["--output-dir", options.output_dir], options.drafts ? ["--drafts"] : []),
         { stdio: "inherit" }),
 
     build: () => site.command("build"),

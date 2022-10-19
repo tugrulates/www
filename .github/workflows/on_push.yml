@@ -1,0 +1,40 @@
+name: Push
+
+on:
+  push:
+    branches: [main]
+
+
+jobs:
+  container:
+    uses: ./.github/workflows/container.yml
+
+
+  build:
+    needs: container
+    uses: ./.github/workflows/build.yml
+    with:
+      container: ${{ needs.container.outputs.container }}
+
+
+  deploy:
+    needs: build
+    uses: ./.github/workflows/deploy.yml
+    with:
+      environment: production
+      container: ${{ needs.container.outputs.container }}
+      artifact: ${{ needs.build.outputs.artifact }}
+    secrets:
+      NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+
+
+  test:
+    needs: deploy
+    uses: ./.github/workflows/test.yml
+    with:
+      container: ${{ needs.container.outputs.container }}
+      url: ${{ needs.deploy.outputs.url }}
+    secrets:
+      NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
