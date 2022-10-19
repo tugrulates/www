@@ -2,6 +2,6 @@ comment:
   glob-options:
     dot: true
   snippets:
-    - id: deploy-{{ id }}
+    - id: preview-{{ id }}
       files: ["**/*"]
       body: 🧪 Preview is [ready]({{ url }})!

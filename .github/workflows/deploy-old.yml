@@ -1,0 +1,135 @@
+name: Deploy
+
+on:
+  workflow_call:
+
+jobs:
+  preview:
+    outputs:
+      preview_url: ${{ steps.deploy.outputs.preview_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "17"
+          cache: "npm"
+      - name: Install dependencies
+        run: |
+          npm install
+          sudo apt-get install graphicsmagick
+          wget -q -O - "https://github.com/getzola/zola/releases/download/v0.15.3/zola-v0.15.3-x86_64-unknown-linux-gnu.tar.gz" | tar xzf - -C /usr/local/bin
+      - name: Deploy preview
+        id: deploy
+        run: |
+          OUTPUT=$(mktemp)
+          npx netlify deploy --build --dir=public --context=deploy-preview | tee $OUTPUT
+          PREVIEW_URL=$(grep -oP '(?<=Website Draft URL: )((.*))' $OUTPUT)
+          DEPLOY_ID=$(echo $PREVIEW_URL | grep -oP '(?<=https://)((.*))((?=--))')
+          echo "::set-output name=preview_url::$PREVIEW_URL"
+          echo "::set-output name=deploy_id::$DEPLOY_ID"
+        env:
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      - name: Comment on PR
+        if: github.event_name == 'pull_request'
+        uses: exercism/pr-commenter-action@v1.3.0
+        with:
+          github-token: "${{ github.token }}"
+          config-file: ".github/comment-preview.yml"
+          template-variables: |
+            {
+              "id": "${{ steps.deploy.outputs.deploy_id }}",
+              "url": "${{ steps.deploy.outputs.preview_url }}"
+            }
+      - name: Deploy to production
+        if: github.event_name == 'push'
+        run: npx netlify deploy --dir=public --prod
+        env:
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+
+  screenshot:
+    if: github.event_name == 'pull_request'
+    needs: preview
+    strategy:
+      matrix:
+        browser: [chrome, firefox, safari]
+        platform: [desktop, mobile]
+        theme: [dark, light]
+        include:
+          - browser: chrome
+            os: windows-latest
+          - browser: firefox
+            os: ubuntu-latest
+          - browser: safari
+            os: macos-latest
+          - platform: desktop
+            width: 1600
+            height: 1200
+            dpr: 2.0
+          - platform: mobile
+            width: 400
+            height: 800
+            dpr: 3.0
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install selenium
+        run: |
+          pip3 install selenium
+          pip3 install --upgrade requests
+      - name: Run selenium
+        run: >
+          python3 tests/screenshot.py
+          --browser=${{ matrix.browser }}
+          --platform=${{ matrix.platform }}
+          --theme=${{ matrix.theme }}
+          --width=${{ matrix.width }}
+          --height=${{ matrix.height }}
+          --dpr=${{ matrix.dpr }}
+          --out="${{ matrix.browser }}-${{ matrix.platform }}-${{ matrix.theme }}.png"
+          --url="${{ needs.preview.outputs.preview_url }}"
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: screenshots
+          path: "${{ matrix.browser }}-${{ matrix.platform }}-${{ matrix.theme }}.png"
+          retention-days: 1
+
+  upload-screenshots:
+    if: github.event_name == 'pull_request'
+    needs: [preview, screenshot]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: screenshots
+          path: screenshots
+      - name: Deploy screenshots
+        id: deploy
+        run: |
+          OUTPUT=$(mktemp)
+          npx netlify deploy --dir=screenshots | tee $OUTPUT
+          PREVIEW_URL=$(grep -oP '(?<=Website Draft URL: )((.*))' $OUTPUT)
+          DEPLOY_ID=$(echo $PREVIEW_URL | grep -oP '(?<=https://)((.*))((?=--))')
+          echo "::set-output name=base_url::$PREVIEW_URL"
+          echo "::set-output name=deploy_id::$DEPLOY_ID"
+        env:
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      - name: Comment on PR
+        uses: exercism/pr-commenter-action@v1.3.0
+        with:
+          github-token: "${{ github.token }}"
+          config-file: ".github/comment-screenshot.yml"
+          template-variables: |
+            {
+              "id": "${{ steps.deploy.outputs.deploy_id }}",
+              "url": "${{ needs.preview.outputs.preview_url }}",
+              "base": "${{ steps.deploy.outputs.base_url }}"
+            }

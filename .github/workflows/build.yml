@@ -1,0 +1,47 @@
+name: Build
+
+
+on:
+  workflow_call:
+    inputs:
+      container:
+        required: true
+        type: string
+    outputs:
+      artifact:
+        description: "Build artifact name"
+        value: ${{ jobs.build.outputs.artifact }}
+
+
+env:
+  OUTPUT_DIR: public
+  ARTIFACT: build
+
+
+jobs:
+  build:
+    name: Build blog
+    outputs:
+      artifact: ${{ env.ARTIFACT }}
+    runs-on: ubuntu-latest
+    container: ${{ inputs.container }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+            submodules: true
+
+      - name: Setup
+        run: sudo chown $(whoami) .
+
+      - name: Install node dependencies
+        run: npm ci
+
+      - name: Build site
+        run: npx gulp --output_dir ${{ env.OUTPUT_DIR }}
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ env.ARTIFACT }}
+          path: ${{ env.OUTPUT_DIR }}

@@ -1,0 +1,116 @@
+name: Screenshot
+
+
+on:
+  workflow_call:
+    inputs:
+      container:
+        required: true
+        type: string
+      artifact:
+        required: true
+        type: string
+      url:
+        required: true
+        type: string
+    secrets:
+      NETLIFY_SITE_ID:
+        required: true
+      NETLIFY_AUTH_TOKEN:
+        required: true
+
+
+env:
+  ARTIFACT: screenshots
+  OUTPUT_DIR: screenshots
+
+
+jobs:
+  screenshot:
+    name: "Take screenshots"
+    strategy:
+      matrix:
+        browser: [chrome, firefox, safari]
+        platform: [desktop, mobile]
+        theme: [dark, light]
+        include:
+          - browser: chrome
+            os: windows-latest
+          - browser: firefox
+            os: ubuntu-latest
+          - browser: safari
+            os: macos-latest
+          - platform: desktop
+            width: 1600
+            height: 1200
+            dpr: 2.0
+          - platform: mobile
+            width: 400
+            height: 800
+            dpr: 3.0
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install selenium
+        run: |
+          pip3 install selenium
+          pip3 install --upgrade requests
+
+      - name: Run selenium
+        run: >
+          python3 tests/screenshot.py
+          --browser=${{ matrix.browser }}
+          --platform=${{ matrix.platform }}
+          --theme=${{ matrix.theme }}
+          --width=${{ matrix.width }}
+          --height=${{ matrix.height }}
+          --dpr=${{ matrix.dpr }}
+          --out="${{ matrix.browser }}-${{ matrix.platform }}-${{ matrix.theme }}.png"
+          --url="${{ inputs.url }}"
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ env.ARTIFACT }}
+          path: "${{ matrix.browser }}-${{ matrix.platform }}-${{ matrix.theme }}.png"
+          retention-days: 1
+
+
+  upload-screenshots:
+    name: "Screenshot tests"
+    needs: screenshot
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: ${{ env.ARTIFACT }}
+          path: ${{ env.OUTPUT_DIR }}
+
+      - name: Deploy screenshots
+        id: deploy
+        run: |
+          OUTPUT=$(mktemp)
+          npx netlify deploy --message "Screenshots from ${{ github.ref_name }}" --dir=${{ env.OUTPUT_DIR }} | tee $OUTPUT
+          URL=$(cat ${OUTPUT} | grep -E "Website.*URL:" | grep "http.*" -o)
+          DEPLOY_ID=$(grep -E 'Logs:' ${OUTPUT} | grep '[^/]*$' -o)
+          echo "url=${URL}" >> ${GITHUB_OUTPUT}
+          echo "deploy_id=${DEPLOY_ID}" >> ${GITHUB_OUTPUT}
+        env:
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+
+      - name: Comment on PR
+        if: github.event_name == 'pull_request'
+        uses: exercism/pr-commenter-action@v1.3.0
+        with:
+          github-token: "${{ github.token }}"
+          config-file: ".github/comment-screenshot.yml"
+          template-variables: |
+            {
+              "id":  "${{ steps.deploy.outputs.deploy_id }}",
+              "base": "${{ steps.deploy.outputs.url }}",
+              "url": "${{ inputs.url }}"
+            }
