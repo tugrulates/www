@@ -6,6 +6,9 @@ on:
       container:
         required: true
         type: string
+      build_args:
+        required: false
+        type: string
     outputs:
       artifact:
         description: "Build artifact name"
@@ -35,7 +38,7 @@ jobs:
         run: npm ci
 
       - name: Build site
-        run: npx gulp
+        run: npx gulp ${{ inputs.build_args }}
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
