@@ -18,11 +18,7 @@ import through2 from "through2";
 
 var options = minimist(process.argv.slice(2),
     {
-        string: "output_dir",
         boolean: "drafts",
-        default: {
-            "output_dir": "public",
-        }
     });
 
 
@@ -184,7 +180,7 @@ const site = {
 
     command: (command) => spawn(
         "zola",
-        [command].concat(["--output-dir", options.output_dir], options.drafts ? ["--drafts"] : []),
+        [command].concat(options.drafts ? ["--drafts"] : []),
         { stdio: "inherit" }),
 
     build: () => site.command("build"),
