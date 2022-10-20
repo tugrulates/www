@@ -30,12 +30,13 @@ var options = minimist(process.argv.slice(2),
 //
 // This task exists because obsidian and zola have differences in opinion.
 const docs = {
-    input: "docs/[!_]*.md",
+    input: "docs/posts/[!_]*.md",
     output: "content",
     delete: "content/[!_]*.md",
 
-    internal_link: /\[(?!\])(.*?)(?<!\[)\]\(([a-z-]+\.md)\)/g,
-    internal_link_replace: "[$1](@/$2)",
+    wiki_link: /\[\[(?!\])((.*?))(?<!\[)\]\]/g,
+    internal_link: /\[(?!\])(.*?)(?<!\[)\]\((?!@\/)(.+?)\.md\)/g,
+    link_replace: (match, name, link) => { return `[${name}](@/${link.replace(" ", "%20")}.md)`; },
 
     scripts: {
         math: /(\$(?=[^\s]).*(?<=[^\s])\$)|(\$\$.*\$\$)/,
@@ -55,10 +56,9 @@ const docs = {
             // Docs are draft by default.
             data.draft = data.state != 'public';
 
-            // Move first header in doc to front matter "title".
-            if (!data.title && blocks.length > 0 && blocks[0].startsWith('#')) {
-                data.title = blocks[0].slice(2).trim();
-                blocks.shift();
+            // Generate title from file name.
+            if (!data.title) {
+                data.title = path.parse(file.path).name;
             }
 
             // Mark end of first paragraph to generate summary.
@@ -73,8 +73,9 @@ const docs = {
 
             // Update internal links.
             blocks = blocks.map(
-                x => x.replaceAll(docs.internal_link,
-                    docs.internal_link_replace));
+                x => x
+                    .replaceAll(docs.wiki_link, docs.link_replace)
+                    .replaceAll(docs.internal_link, docs.link_replace));
 
             // Determine which js to load based on content.
             var scripts = [];
