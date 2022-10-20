@@ -52,7 +52,7 @@ jobs:
           OUTPUT=$(mktemp)
           netlify deploy --json --message "Deploy from ${{ github.ref_name }}" \
             --dir=${{ env.OUTPUT_DIR }} ${{ inputs.deploy_args }} | tee ${OUTPUT}
-          echo "url=$(jq -r '.deploy_url' $OUTPUT)" >> ${GITHUB_OUTPUT}
+          echo "url=$(jq -r '.url,.deploy_url' $OUTPUT | grep https | head -n 1)" >> ${GITHUB_OUTPUT}
           echo "deploy_id=$(jq -r '.deploy_id' $OUTPUT)" >> ${GITHUB_OUTPUT}
         env:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
