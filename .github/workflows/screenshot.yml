@@ -1,15 +1,8 @@
 name: Screenshot
 
-
 on:
   workflow_call:
     inputs:
-      container:
-        required: true
-        type: string
-      artifact:
-        required: true
-        type: string
       url:
         required: true
         type: string
@@ -19,11 +12,9 @@ on:
       NETLIFY_AUTH_TOKEN:
         required: true
 
-
 env:
   ARTIFACT: screenshots
   OUTPUT_DIR: screenshots
-
 
 jobs:
   screenshot:
@@ -77,7 +68,6 @@ jobs:
           path: "${{ matrix.browser }}-${{ matrix.platform }}-${{ matrix.theme }}.png"
           retention-days: 1
 
-
   upload-screenshots:
     name: "Screenshot tests"
     needs: screenshot
@@ -93,7 +83,7 @@ jobs:
         id: deploy
         run: |
           OUTPUT=$(mktemp)
-          npx netlify deploy --message "Screenshots from ${{ github.ref_name }}" --dir=${{ env.OUTPUT_DIR }} | tee $OUTPUT
+          netlify deploy --message "Screenshots from ${{ github.ref_name }}" --dir=${{ env.OUTPUT_DIR }} | tee $OUTPUT
           URL=$(cat ${OUTPUT} | grep -E "Website.*URL:" | grep "http.*" -o)
           DEPLOY_ID=$(grep -E 'Logs:' ${OUTPUT} | grep '[^/]*$' -o)
           echo "url=${URL}" >> ${GITHUB_OUTPUT}
