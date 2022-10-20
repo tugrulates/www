@@ -83,11 +83,10 @@ jobs:
         id: deploy
         run: |
           OUTPUT=$(mktemp)
-          netlify deploy --message "Screenshots from ${{ github.ref_name }}" --dir=${{ env.OUTPUT_DIR }} | tee $OUTPUT
-          URL=$(cat ${OUTPUT} | grep -E "Website.*URL:" | grep "http.*" -o)
-          DEPLOY_ID=$(grep -E 'Logs:' ${OUTPUT} | grep '[^/]*$' -o)
-          echo "url=${URL}" >> ${GITHUB_OUTPUT}
-          echo "deploy_id=${DEPLOY_ID}" >> ${GITHUB_OUTPUT}
+          netlify deploy --json --message "Screenshots from ${{ github.ref_name }}" \
+            --dir=${{ env.OUTPUT_DIR }} | tee $OUTPUT
+          echo "url=$(jq -r '.deploy_url' $OUTPUT)" >> ${GITHUB_OUTPUT}
+          echo "deploy_id=$(jq -r '.deploy_id' $OUTPUT)" >> ${GITHUB_OUTPUT}
         env:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
@@ -100,7 +99,7 @@ jobs:
           config-file: ".github/comment-screenshot.yml"
           template-variables: |
             {
-              "id":  "${{ steps.deploy.outputs.deploy_id }}",
+              "id":   "${{ steps.deploy.outputs.deploy_id }}",
               "base": "${{ steps.deploy.outputs.url }}",
-              "url": "${{ inputs.url }}"
+              "url":  "${{ inputs.url }}"
             }

@@ -29,7 +29,6 @@ jobs:
   deploy:
     name: Deploy blog
     outputs:
-      deploy_id: ${{ steps.publish.outputs.deploy_id }}
       url: ${{ steps.publish.outputs.url }}
     environment:
       name: ${{ inputs.environment}}
@@ -51,11 +50,10 @@ jobs:
         id: publish
         run: |
           OUTPUT=$(mktemp)
-          netlify deploy --message "Deploy from ${{ github.ref_name }}" --dir=${{ env.OUTPUT_DIR }} ${{ inputs.deploy_args }} | tee ${OUTPUT}
-          URL=$(cat ${OUTPUT} | grep -E "Website.*URL:" | grep "http.*" -o)
-          DEPLOY_ID=$(grep -E 'Logs:' ${OUTPUT} | grep '[^/]*$' -o)
-          echo "url=${URL}" >> ${GITHUB_OUTPUT}
-          echo "deploy_id=${DEPLOY_ID}" >> ${GITHUB_OUTPUT}
+          netlify deploy --json --message "Deploy from ${{ github.ref_name }}" \
+            --dir=${{ env.OUTPUT_DIR }} ${{ inputs.deploy_args }} | tee ${OUTPUT}
+          echo "url=$(jq -r '.deploy_url' $OUTPUT)" >> ${GITHUB_OUTPUT}
+          echo "deploy_id=$(jq -r '.deploy_id' $OUTPUT)" >> ${GITHUB_OUTPUT}
         env:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
@@ -68,6 +66,6 @@ jobs:
           config-file: ".github/comment-preview.yml"
           template-variables: |
             {
-              "id":  "${{ steps.publish.output.deploy_id }}",
+              "id":  "${{ steps.publish.outputs.deploy_id }}",
               "url": "${{ steps.publish.outputs.url }}"
             }
