@@ -9,6 +9,9 @@ on:
       artifact:
         required: true
         type: string
+      deploy_args:
+        required: false
+        type: string
     secrets:
       NETLIFY_SITE_ID:
         required: true
@@ -21,7 +24,6 @@ on:
 
 env:
   OUTPUT_DIR: public
-  PROD_DEPLOY_ARGS: --prod
 
 jobs:
   deploy:
@@ -45,16 +47,11 @@ jobs:
           name: ${{ inputs.artifact }}
           path: ${{ env.OUTPUT_DIR }}
 
-      - name: Setup args
-        id: args
-        if: inputs.environment == 'production'
-        run: echo "deploy_args=${{ env.PROD_DEPLOY_ARGS }}" >> ${GITHUB_OUTPUT}
-
       - name: Publish
         id: publish
         run: |
           OUTPUT=$(mktemp)
-          netlify deploy --message "${{ github.ref_name }}" --dir=${{ env.OUTPUT_DIR }} ${{ steps.args.outputs.deploy_args }} | tee ${OUTPUT}
+          netlify deploy --message "${{ github.ref_name }}" --dir=${{ env.OUTPUT_DIR }} ${{ inputs.deploy_args }} | tee ${OUTPUT}
           URL=$(cat ${OUTPUT} | grep -E "Website.*URL:" | grep "http.*" -o)
           DEPLOY_ID=$(grep -E 'Logs:' ${OUTPUT} | grep '[^/]*$' -o)
           echo "url=${URL}" >> ${GITHUB_OUTPUT}
