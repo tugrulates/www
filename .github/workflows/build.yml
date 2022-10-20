@@ -35,7 +35,7 @@ jobs:
         run: npm ci
 
       - name: Build site
-        run: npx gulp --output_dir ${{ env.OUTPUT_DIR }}
+        run: npx gulp
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
