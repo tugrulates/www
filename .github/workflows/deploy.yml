@@ -51,7 +51,7 @@ jobs:
         id: publish
         run: |
           OUTPUT=$(mktemp)
-          netlify deploy --message "${{ github.ref_name }}" --dir=${{ env.OUTPUT_DIR }} ${{ inputs.deploy_args }} | tee ${OUTPUT}
+          netlify deploy --message "Deploy from ${{ github.ref_name }}" --dir=${{ env.OUTPUT_DIR }} ${{ inputs.deploy_args }} | tee ${OUTPUT}
           URL=$(cat ${OUTPUT} | grep -E "Website.*URL:" | grep "http.*" -o)
           DEPLOY_ID=$(grep -E 'Logs:' ${OUTPUT} | grep '[^/]*$' -o)
           echo "url=${URL}" >> ${GITHUB_OUTPUT}
