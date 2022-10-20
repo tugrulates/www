@@ -14,7 +14,7 @@ highlight_theme = "css"
 external_links_target_blank = true
 
 [slugify]
-paths = "off"
+paths = "on"
 taxonomies = "off"
 anchors = "on"
 
