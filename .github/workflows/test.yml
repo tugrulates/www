@@ -1,12 +1,8 @@
 name: Test
 
-
 on:
   workflow_call:
     inputs:
-      container:
-        required: true
-        type: string
       url:
         required: true
         type: string
@@ -16,13 +12,10 @@ on:
       NETLIFY_AUTH_TOKEN:
         required: true
 
-
 jobs:
   screenshot:
     uses: ./.github/workflows/screenshot.yml
     with:
-      container: ${{ inputs.container }}
-      artifact: ${{ inputs.artifact }}
       url: ${{ inputs.url }}
     secrets:
       NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
