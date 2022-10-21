@@ -6,6 +6,9 @@ on:
       container:
         required: true
         type: string
+      update_docs:
+        required: false
+        type: string
       build_args:
         required: false
         type: string
@@ -31,8 +34,12 @@ jobs:
         with:
           submodules: true
 
-      - name: Setup
+      - name: Setup permissions
         run: sudo chown $(whoami) .
+
+      - name: Update docs
+        if: inputs.update_docs
+        run: git submodule update --init --recursive --remote docs
 
       - name: Install node dependencies
         run: npm ci

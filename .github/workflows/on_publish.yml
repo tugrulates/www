@@ -1,15 +1,16 @@
 name: Publish
 
 on:
-  push:
-    branches: [staging]
   workflow_dispatch:
+  repository_dispatch:
+    types: [publish]
 
 jobs:
   build:
     uses: ./.github/workflows/build.yml
     with:
       container: ghcr.io/tugrulates/blog-devcontainer:main
+      update_docs: true
       build_args: --drafts
 
   deploy:
@@ -32,16 +33,15 @@ jobs:
       NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
       NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
 
-  rebase:
+  update:
     needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          ref: main
-      - run: |
+      - name: Create update commit
+        run: |
+          git submodule update --init --recursive --remote docs
           git config user.email "actions@github.com"
           git config user.name "GitHub Actions"
-          git fetch origin staging
-          git merge origin/staging --no-commit
-          git push
+          git add docs
+          git commit -m "Update docs" && git push || echo "No changes to commit"
