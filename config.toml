@@ -25,8 +25,6 @@ skip_prefixes = [
 
 [extra.author]
 name = "Tugrul Ates"
-first_name = "Tugrul"
-last_name = "Ates"
 picture = "/png/me.png"
 linkedin = "tugrulates"
 github = "tugrulates"

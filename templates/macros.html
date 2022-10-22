@@ -23,16 +23,19 @@
 {%- endmacro image -%}
 
 {%- macro time(page, update=false, dateformat="%B %d, %Y") -%}
-<time datetime="{{ page.date | date(format='%Y-%m-%d')  }}">
+<div>
   {%- if page.updated -%}
-  {{ page.updated | date(format=dateformat) }}
-  {%- if update -%}
-  <br>- originally published {{ page.updated | date(format=dateformat) }}
+  <time datetime="{{ page.updated | date(format='%Y-%m-%d')  }}">
+    {{- page.updated | date(format=dateformat) -}}
+  </time>
   {%- endif -%}
-  {%- else -%}
-  {{ page.date | date(format=dateformat) }}
+  {%- if update or not page.updated -%}
+  <time datetime="{{ page.date | date(format='%Y-%m-%d')  }}">
+    {%- if page.updated -%}- originally published {%- endif -%}
+    {{- page.date | date(format=dateformat) -}}
+  </time>
   {%- endif -%}
-</time>
+</div>
 {%- endmacro time -%}
 
 {%- macro tag(tag) -%}
@@ -53,7 +56,7 @@
 <div class="cover">
   {{- macros::image(path=page.extra.cover, width=800,
                     source=page.extra.cover | replace(from='/photos/', to='/photos/large/')) -}}
-  {#{- macros::tags(tags=page.taxonomies.tags) -}#}
+  {#{ macros::tags(tags=page.taxonomies.tags) }#}
 </div>
 {%- endmacro cover -%}
 
@@ -112,17 +115,16 @@
 {%- set image_meta = get_image_metadata(path=image) -%}
 <title>{{ title }}</title>
 <link rel="canonical" href="{{ current_url | safe }}">
-<meta name="author" content="{{ config.extra.author.name }}" />
-<meta name="description" content="{{ description | safe | striptags }}" />
-<meta property="og:url" content="{{ current_url | safe }}" />
-<meta property="og:title" content="{{ title }}" />
-<meta property="og:description" content="{{ description | safe | striptags }}" />
-<meta property="og:site_name" content="{{ config.title }}" />
-<meta property="og:image" content="{{ image_url | safe }}" />
-<meta property="og:image:width" content="{{ image_meta.width }}" />
-<meta property="og:image:height" content="{{ image_meta.height }}" />
-<meta property="og:image:type" content="image/{{ image_meta.format | replace(from='jpg', to='jpeg') }}" />
-<meta property="og:image:alt" content="{{ macros::titlefrompath(path=image) }}" />
-<meta name="twitter:creator" content="@{{ config.extra.author.twitter }}" />
-<meta name="twitter:site" content="@{{ config.extra.author.twitter }}" />
+<meta name="author" content="{{ config.extra.author.name }}">
+<meta name="description" content="{{ description | safe | striptags }}">
+<meta property="og:url" content="{{ current_url | safe }}">
+<meta property="og:title" content="{{ title }}">
+<meta property="og:description" content="{{ description | safe | striptags }}">
+<meta property="og:site_name" content="{{ config.title }}">
+<meta property="og:image" content="{{ image_url | safe }}">
+<meta property="og:image:width" content="{{ image_meta.width }}">
+<meta property="og:image:height" content="{{ image_meta.height }}">
+<meta property="og:image:alt" content="{{ macros::titlefrompath(path=image) }}">
+<meta name="twitter:creator" content="@{{ config.extra.author.twitter }}">
+<meta name="twitter:site" content="@{{ config.extra.author.twitter }}">
 {%- endmacro meta -%}
