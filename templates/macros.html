@@ -18,7 +18,7 @@
 {%- endmacro image -%}
 
 {%- macro time(page, update=false, dateformat="%B %d, %Y") -%}
-<time>
+<time datetime="{{ page.date | date(format='%Y-%m-%d') }}">
   {%- if page.updated -%}
   {{ page.updated | date(format=dateformat) }}
   {%- if update -%}
@@ -45,10 +45,10 @@
 {%- endmacro tags -%}
 
 {%- macro cover(page) -%}
-<header class="cover">
+<div class="cover">
   {{- macros::image(path=page.extra.cover, width=800) -}}
   {#{- macros::tags(tags=page.taxonomies.tags) -}#}
-</header>
+</div>
 {%- endmacro cover -%}
 
 {%- macro card(page) -%}

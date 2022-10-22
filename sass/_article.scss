@@ -54,9 +54,16 @@
 }
 
 @mixin has-title {
-  & > h1 {
-    font-size: 250%;
-    @include paragraph;
+  & > header {
+    margin: {
+      top: $huge-gap;
+      bottom: $huge-gap;
+    }
+    h1 {
+      @include paragraph;
+      font-size: 250%;
+      margin: 0;
+    }
     time {
       display: block;
       font: {
@@ -66,6 +73,15 @@
       }
       text-align: end;
     }
+  }
+  & > time {
+    display: block;
+    font: {
+      size: 1rem;
+      style: oblique;
+      weight: 600;
+    }
+    text-align: end;
   }
   & > h1,
   & > h2,

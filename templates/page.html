@@ -8,12 +8,12 @@
 {%- endblock script -%}
 
 {%- block content -%}
-{{- macros::cover(page=page) -}}
 <article>
-  <h1>
-    {{ page.title }}
+  <header>
+    {{- macros::cover(page=page) -}}
+    <h1>{{ page.title }}</h1>
     {{- macros::time(page=page, update=true) -}}
-  </h1>
+  </header>
   {%- if page.draft != false -%}
   <alert>
     This is a <strong>draft</strong> post.
