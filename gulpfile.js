@@ -104,6 +104,7 @@ const docs = {
 // Copy post photos.
 const photos = {
   input: "docs/photos/*.jpg",
+  output_large: "static/photos/large",
   output: "static/photos",
   delete: "static/photos",
 
@@ -117,6 +118,12 @@ const photos = {
         })
       )
       .pipe(imagemin([mozjpeg({ quality: 75, progressive: true })]))
+      .pipe(gulp.dest(photos.output_large))
+      .pipe(
+        gm(function (gmfile) {
+          return gmfile.resize(1200);
+        })
+      )
       .pipe(gulp.dest(photos.output)),
 
   watch: () => gulp.watch(photos.input, photos.build),

@@ -7,14 +7,17 @@
 {{ image.static_path | trim_start_matches(pat="static") | safe }}
 {%- endmacro resizedimage -%}
 
-{%- macro image(path, width) -%}
-{%- set meta = get_image_metadata(path=path) -%}
+{%- macro image(path, width, source="") -%}
+{%- if not source -%}
+{%- set source = path -%}
+{%- endif -%}
+{%- set meta = get_image_metadata(path=source) -%}
 {%- set height = meta.height * width / meta.width | round | int -%}
 <img src="{{ path | safe }}" alt="{{ macros::titlefrompath(path=path) }}" srcset="
-          {{ macros::resizedimage(path=path, width=width*1, height=height*1) }} 1x,
-          {{ macros::resizedimage(path=path, width=width*2, height=height*2) }} 2x,
-          {{ macros::resizedimage(path=path, width=width*3, height=height*3) }} 3x,
-          {{ macros::resizedimage(path=path, width=width*4, height=height*4) }} 4x">
+          {{ macros::resizedimage(path=source, width=width*1, height=height*1) }} 1x,
+          {{ macros::resizedimage(path=source, width=width*2, height=height*2) }} 2x,
+          {{ macros::resizedimage(path=source, width=width*3, height=height*3) }} 3x,
+          {{ macros::resizedimage(path=source, width=width*4, height=height*4) }} 4x">
 {%- endmacro image -%}
 
 {%- macro time(page, update=false, dateformat="%B %d, %Y") -%}
@@ -46,7 +49,8 @@
 
 {%- macro cover(page) -%}
 <div class="cover">
-  {{- macros::image(path=page.extra.cover, width=800) -}}
+  {{- macros::image(path=page.extra.cover, width=800,
+                    source=page.extra.cover | replace(from='/photos/', to='/photos/large/')) -}}
   {#{- macros::tags(tags=page.taxonomies.tags) -}#}
 </div>
 {%- endmacro cover -%}
