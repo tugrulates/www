@@ -4,7 +4,7 @@ MathJax = {
   },
   loader: { load: ["input/tex", "output/svg"] },
   tex: {
-    inlineMath: [['$', '$', /\$(?=[^\s\$])/, /(?<=[^\s\$])\$/]],
+    inlineMath: [["$", "$", /\$(?=[^\s\$])/, /(?<=[^\s\$])\$/]],
     displayMath: [["$$", "$$", /^\$\$/, /\$\$$/]],
     processEscapes: false,
   },
@@ -17,17 +17,24 @@ MathJax = {
         addPattern(starts, delims, display) {
           let [open, close, start, end] = delims;
           if (start && end) {
-            starts.push(start.toString().slice(1).replace(/\/$/, ''));
-            this.end[open] = [close, display, this.endPattern(null, end.toString().slice(1).replace(/\/$/, ''))];
+            starts.push(start.toString().slice(1).replace(/\/$/, ""));
+            this.end[open] = [
+              close,
+              display,
+              this.endPattern(null, end.toString().slice(1).replace(/\/$/, "")),
+            ];
           } else {
             super.addPattern(starts, delims, display);
           }
         }
       }
-      const options = selectOptionsFromKeys(MathJax.config.tex, myFindTeX.OPTIONS);
+      const options = selectOptionsFromKeys(
+        MathJax.config.tex,
+        myFindTeX.OPTIONS
+      );
       MathJax.config.tex.FindTeX = new myFindTeX(options);
       MathJax.startup.defaultReady();
-    }
-  }
+    },
+  },
 };
 $.getScript("/js/third_party/tex-svg.js");
