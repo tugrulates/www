@@ -1,7 +1,15 @@
 {%- extends "base.html" -%}
 
 {%- block class -%}home{%- endblock class -%}
-{%- block title -%}{{ section.title }}{%- endblock title -%}
+
+{%- block meta -%}
+{{- macros::meta(title=section.title, description=config.description, image=config.extra.author.picture) -}}
+<meta property="og:type" content="profile" />
+<meta property="profile:first_name" content="{{ config.extra.author.first_name }}" />
+<meta property="profile:last_name" content="{{ config.extra.author.last_name }}" />
+<meta name="twitter:card" content="summary">
+{%- endblock meta -%}
+
 {%- block content -%}
 {{- macros::home(title="~", name=section.title, pages=section.pages) -}}
 {%- endblock content -%}
