@@ -55,10 +55,7 @@
 
 @mixin has-title {
   & > header {
-    margin: {
-      top: $huge-gap;
-      bottom: $huge-gap;
-    }
+    @include needs-huge-vertical-space-on-desktop;
     h1 {
       @include paragraph;
       font-size: 250%;
