@@ -194,7 +194,7 @@ const site = {
 const objs = { docs, photos, files, favicon, site };
 for (const obj in objs) {
     for (const attr in objs[obj]) {
-        if (objs[obj][attr] instanceof Function) {
+        if (objs[obj][attr] instanceof Function && objs[obj][attr].length == 0) {
             objs[obj][attr].displayName = `${obj}.${attr}`;
             gulp.task(objs[obj][attr]);
         }
