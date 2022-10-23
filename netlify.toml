@@ -1,6 +1,6 @@
 [build]
   publish = "public/"
-  command = "npx gulp"
+  command = "grunt"
 
 [[redirects]]
   from = "https://tugrul.netlify.app/*"
