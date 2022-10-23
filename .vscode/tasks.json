@@ -4,7 +4,7 @@
     {
       "label": "server",
       "type": "shell",
-      "command": "npx gulp dev --drafts",
+      "command": "grunt dev --drafts",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -16,8 +16,8 @@
       },
       "problemMatcher": {
         "background": {
-          "beginsPattern": "^Building site...$",
-          "endsPattern": "^Web server is available.*$"
+          "beginsPattern": "Building site...",
+          "endsPattern": "Web server is available"
         },
         "pattern": [
           {
