@@ -30,6 +30,8 @@ jobs:
     uses: ./.github/workflows/test.yml
     with:
       url: ${{ needs.deploy.outputs.url }}
+      lhci_config: tests/lighthouserc.preview.js
     secrets:
+      LHCI_GITHUB_TOKEN: ${{ secrets.LHCI_GITHUB_TOKEN }}
       NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
       NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
