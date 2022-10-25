@@ -2,34 +2,19 @@ name: Pull Request
 
 on:
   pull_request:
-    branches: [main]
+    branches:
+      - main
+    paths:
+      - "**"
+      - "!.devcontainer/**"
   workflow_dispatch:
 
 jobs:
-  container:
-    uses: ./.github/workflows/container.yml
-
-  build:
-    needs: container
-    uses: ./.github/workflows/build.yml
-    with:
-      container: ${{ needs.container.outputs.container }}
-
-  deploy:
-    needs: build
-    uses: ./.github/workflows/deploy.yml
+  integrate:
+    uses: ./.github/workflows/integrate.yml
     with:
       environment: development
-      artifact: ${{ needs.build.outputs.artifact }}
-    secrets:
-      NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-      NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-
-  test:
-    needs: deploy
-    uses: ./.github/workflows/test.yml
-    with:
-      url: ${{ needs.deploy.outputs.url }}
+      container: ghcr.io/tugrulates/blog-devcontainer:main
     secrets:
       NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
       NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}

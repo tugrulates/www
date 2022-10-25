@@ -1,9 +1,12 @@
-name: Push
+name: Pull Request (Container Change)
 
 on:
-  push:
+  pull_request:
     branches:
       - main
+    paths:
+      - ".devcontainer/**"
+  workflow_dispatch:
 
 jobs:
   container:
@@ -13,7 +16,7 @@ jobs:
     needs: container
     uses: ./.github/workflows/integrate.yml
     with:
-      environment: production
+      environment: development
       container: ${{ needs.container.outputs.container }}
     secrets:
       NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}

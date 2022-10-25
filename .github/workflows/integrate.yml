@@ -1,0 +1,57 @@
+name: Integrate (Build, Deploy & Test)
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+      container:
+        required: true
+        type: string
+      update_docs:
+        required: false
+        type: string
+      build_args:
+        required: false
+        type: string
+      deploy_args:
+        required: false
+        type: string
+    secrets:
+      NETLIFY_SITE_ID:
+        required: true
+      NETLIFY_AUTH_TOKEN:
+        required: true
+    outputs:
+      url:
+        description: "URL for deployed site"
+        value: ${{ jobs.deploy.outputs.url }}
+
+jobs:
+  build:
+    uses: ./.github/workflows/build.yml
+    with:
+      container: ${{ inputs.container }}
+      update_docs: ${{ inputs.update_docs }}
+      build_args: ${{ inputs.build_args }}
+
+  deploy:
+    needs: build
+    uses: ./.github/workflows/deploy.yml
+    with:
+      environment: ${{ inputs.environment }}
+      artifact: ${{ needs.build.outputs.artifact }}
+      deploy_args: ${{ inputs.deploy_args }}
+    secrets:
+      NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+
+  test:
+    needs: deploy
+    uses: ./.github/workflows/test.yml
+    with:
+      url: ${{ needs.deploy.outputs.url }}
+    secrets:
+      NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}

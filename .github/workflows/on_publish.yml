@@ -6,35 +6,20 @@ on:
     types: [Publish]
 
 jobs:
-  build:
-    uses: ./.github/workflows/build.yml
+  integrate:
+    uses: ./.github/workflows/integrate.yml
     with:
+      environment: staging
       container: ghcr.io/tugrulates/blog-devcontainer:main
       update_docs: true
       build_args: --drafts
-
-  deploy:
-    needs: build
-    uses: ./.github/workflows/deploy.yml
-    with:
-      environment: staging
-      artifact: ${{ needs.build.outputs.artifact }}
       deploy_args: --alias drafts
     secrets:
       NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
       NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
 
-  test:
-    needs: deploy
-    uses: ./.github/workflows/test.yml
-    with:
-      url: ${{ needs.deploy.outputs.url }}
-    secrets:
-      NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-      NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-
   update:
-    needs: test
+    needs: integrate
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
