@@ -1,4 +1,5 @@
 module.exports = function (grunt) {
+  const favicons = require("favicons").favicons;
   const filesize = require("filesize");
   const fs = require("fs").promises;
   const gm = require("gm");
@@ -162,24 +163,65 @@ module.exports = function (grunt) {
 
   // Generate favicon and manifest files.
   const favicon = {
-    realFavicon: {
+    transform: {
       favicon: {
+        expand: true,
         src: "static/avatar/me.png",
         dest: "static",
-        options: "<%= pkg.favicon %>",
+        rename: (dest) => (grunt.task.current.flags.html ? "templates" : dest),
+        options: {
+          appName: "tugrul.blog",
+          background: "#2b2622",
+          icons: {
+            android:
+              "<%= grunt.task.current.flags.all || grunt.task.current.flags.android %>",
+            appleIcon:
+              "<%= grunt.task.current.flags.all || grunt.task.current.flags.apple %>",
+            favicons:
+              "<%= grunt.task.current.flags.all || grunt.task.current.flags.favicons %>",
+            windows:
+              "<%= grunt.task.current.flags.all || grunt.task.current.flags.windows %>",
+            yandex:
+              "<%= grunt.task.current.flags.all || grunt.task.current.flags.yandex %>",
+            appleStartup: false,
+          },
+          output: {
+            images: "<%= grunt.task.current.flags.images %>",
+            files: "<%= grunt.task.current.flags.files %>",
+            html: "<%= grunt.task.current.flags.html %>",
+          },
+        },
+        transform: (src, dest, args) =>
+          favicons(src, grunt.task.current.options()).then((response) => {
+            response.html = [
+              {
+                name: "favicon.html",
+                contents: response.html.join("\n"),
+              },
+            ];
+            return Promise.all(
+              response[args[0]].map((file) =>
+                fs.writeFile(path.join(dest, file.name), file.contents)
+              )
+            );
+          }),
       },
     },
-    rename: {
-      favicon: {
-        src: "static/*.html",
-        filter: "isFile",
-        dest: "templates/favicon.html",
-      },
+    concurrent: {
+      favicon: [
+        "transform:favicon:images:android",
+        "transform:favicon:images:apple",
+        "transform:favicon:images:favicons",
+        "transform:favicon:images:windows",
+        "transform:favicon:images:yandex",
+        "transform:favicon:files:all",
+        "transform:favicon:html:all",
+      ],
     },
     watch: {
       favicon: {
         files: "static/avatar/me.png",
-        tasks: ["realFavicon:favicon", "rename:favicon"],
+        tasks: ["concurrent:favicon"],
       },
     },
     clean: {
@@ -220,7 +262,7 @@ module.exports = function (grunt) {
           })
       )
     ).then((_) => {
-      grunt.log.ok(this.files.length + " path transformed.");
+      grunt.log.ok(`[${this.nameArgs}] ${this.files.length} path transformed.`);
       done();
     });
   });
@@ -229,8 +271,12 @@ module.exports = function (grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON("package.json"),
     concurrent: {
-      docs: ["transform:posts", "concurrent:photos", "copy:files"],
-      inputs: ["favicon", "concurrent:docs"],
+      build: [
+        "concurrent:favicon",
+        "transform:posts",
+        "concurrent:photos",
+        "copy:files",
+      ],
       dev: ["watch", "shell:zola:serve"],
       options: {
         logConcurrentOutput: true,
@@ -245,8 +291,7 @@ module.exports = function (grunt) {
 
   // Tasks.
   require("load-grunt-tasks")(grunt);
-  grunt.registerTask("favicon", ["realFavicon:favicon", "rename:favicon"]);
-  grunt.registerTask("build", ["concurrent:inputs", "shell:zola:build"]);
-  grunt.registerTask("dev", ["concurrent:docs", "concurrent:dev"]);
+  grunt.registerTask("build", ["concurrent:build", "shell:zola:build"]);
+  grunt.registerTask("dev", ["concurrent:build", "concurrent:dev"]);
   grunt.registerTask("default", "build");
 };
