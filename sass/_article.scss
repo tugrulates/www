@@ -62,6 +62,7 @@
       margin: 0;
     }
     time {
+      @include paragraph;
       display: block;
       font: {
         size: 1rem;
