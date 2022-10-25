@@ -58,14 +58,14 @@ jobs:
           --width=${{ matrix.width }}
           --height=${{ matrix.height }}
           --dpr=${{ matrix.dpr }}
-          --out="${{ matrix.browser }}-${{ matrix.platform }}-${{ matrix.theme }}.png"
+          --out="${{ matrix.browser }}-${{ matrix.platform }}-${{ matrix.theme }}.webp"
           --url="${{ inputs.url }}"
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
           name: ${{ env.ARTIFACT }}
-          path: "${{ matrix.browser }}-${{ matrix.platform }}-${{ matrix.theme }}.png"
+          path: "${{ matrix.browser }}-${{ matrix.platform }}-${{ matrix.theme }}.webp"
           retention-days: 1
 
   upload-screenshots:

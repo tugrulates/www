@@ -93,7 +93,7 @@ function updateLightIcon() {
       : light < 0.75
       ? "lighter"
       : "light";
-  $("#light-icon").attr("xlink:href", `/svg/icons.svg#${icon}`);
+  $("#light-icon").attr("xlink:href", `/icons/icons.svg#${icon}`);
 }
 
 function updateInputs() {
@@ -111,7 +111,7 @@ function createControl(controls, control) {
       <button id="${control.name}-switch" aria-label="${control.aria}">
         <svg class="icon" focusable="false">
           <title>${control.aria}</title>
-          <use id="${control.name}-icon" xlink:href=/svg/icons.svg#${control.name}></use>
+          <use id="${control.name}-icon" xlink:href=/icons/icons.svg#${control.name}></use>
         </svg>
       </button>
     </div>`

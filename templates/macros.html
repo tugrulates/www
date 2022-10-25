@@ -1,25 +1,24 @@
-<!-- <script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://stackoverflow.blog/#website","url":"https://stackoverflow.blog/","name":"Stack Overflow Blog","description":"Essays, opinions, and advice on the act of computer programming from Stack Overflow.","potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://stackoverflow.blog/?s={search_term_string}"},"query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"ImageObject","@id":"https://stackoverflow.blog/2022/09/15/why-the-number-input-is-the-worst-input/#primaryimage","inLanguage":"en-US","url":"https://149351115.v2.pressablecdn.com/wp-content/uploads/2022/09/090922-Stack-Overflow-Why-number-input-is-the-worst-input-scaled.jpg","contentUrl":"https://149351115.v2.pressablecdn.com/wp-content/uploads/2022/09/090922-Stack-Overflow-Why-number-input-is-the-worst-input-scaled.jpg","width":2560,"height":1344},{"@type":"Article","@id":"https://stackoverflow.blog/2022/09/15/why-the-number-input-is-the-worst-input/#webpage","url":"https://stackoverflow.blog/2022/09/15/why-the-number-input-is-the-worst-input/","name":"Why the number input is the worst input - Stack Overflow Blog","isPartOf":{"@id":"https://stackoverflow.blog/#website"},"primaryImageOfPage":{"@id":"https://stackoverflow.blog/2022/09/15/why-the-number-input-is-the-worst-input/#primaryimage"},"datePublished":"2022-09-15T14:00:00+00:00","dateModified":"2022-09-22T19:53:40+00:00","author":[{"@type":"Person","name":"Jared Toporek"}],"breadcrumb":{"@id":"https://stackoverflow.blog/2022/09/15/why-the-number-input-is-the-worst-input/#breadcrumb"},"inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://stackoverflow.blog/2022/09/15/why-the-number-input-is-the-worst-input/"]}]},{"@type":"BreadcrumbList","@id":"https://stackoverflow.blog/2022/09/15/why-the-number-input-is-the-worst-input/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://stackoverflow.blog/"},{"@type":"ListItem","position":2,"name":"Why the number input is the worst input"}]}]}</script> -->
-
 {%- macro titlefrompath(path) -%}
 {{ path | split(pat="/") | last | split(pat=".") | first | replace(from="-", to=" ") }}
 {%- endmacro titlefrompath -%}
 
 {%- macro resizedimage(path, width, height) -%}
-{%- set image = resize_image(path=path, width=width, height=height, op="fit", quality=85) -%}
+{%- set image = resize_image(path=path, format="webp", width=width, height=height, op="fit", quality=85) -%}
 {{ image.static_path | trim_start_matches(pat="static") | safe }}
 {%- endmacro resizedimage -%}
 
-{%- macro image(path, width, source="") -%}
-{%- if not source -%}
-{%- set source = path -%}
-{%- endif -%}
-{%- set meta = get_image_metadata(path=source) -%}
+{%- macro image(path, width) -%}
+{%- set meta = get_image_metadata(path=path) -%}
 {%- set height = meta.height * width / meta.width | round | int -%}
-<img src="{{ path | safe }}" alt="{{ macros::titlefrompath(path=path) }}" srcset="
-          {{ macros::resizedimage(path=source, width=width*1, height=height*1) }} 1x,
-          {{ macros::resizedimage(path=source, width=width*2, height=height*2) }} 2x,
-          {{ macros::resizedimage(path=source, width=width*3, height=height*3) }} 3x,
-          {{ macros::resizedimage(path=source, width=width*4, height=height*4) }} 4x">
+{%- set source = path | replace(from=".jpg", to=".webp") -%}
+<picture>
+  <source srcset="
+  {{ macros::resizedimage(path=source, width=width*1, height=height*1) }} 1x,
+  {{ macros::resizedimage(path=source, width=width*2, height=height*2) }} 2x,
+  {{ macros::resizedimage(path=source, width=width*3, height=height*3) }} 3x,
+  {{ macros::resizedimage(path=source, width=width*4, height=height*4) }} 4x" type="image/webp">
+  <img src="{{ path | safe }}" alt="{{ macros::titlefrompath(path=path) }}" width="{{ width }}" height="{{ height }}" >
+</picture>
 {%- endmacro image -%}
 
 {%- macro time(page, update=false, dateformat="%B %d, %Y") -%}
@@ -54,8 +53,7 @@
 
 {%- macro cover(page) -%}
 <div class="cover">
-  {{- macros::image(path=page.extra.cover, width=800,
-                    source=page.extra.cover | replace(from='/photos/', to='/photos/large/')) -}}
+  {{- macros::image(path=page.extra.cover, width=780) -}}
   {#{ macros::tags(tags=page.taxonomies.tags) }#}
 </div>
 {%- endmacro cover -%}
@@ -81,7 +79,7 @@
       </div>
     </div>
   </a>
-  {{- macros::image(path=page.extra.cover, width=400) -}}
+  {{- macros::image(path=page.extra.cover, width=374) -}}
   {#{- macros::tags(tags=page.taxonomies.tags) -}#}
 </li>
 {%- endmacro card -%}
@@ -104,7 +102,7 @@
   <a class="feed-link" href="{{ config.feed_filename }}" aria-label="atom feed for {{ name }}"><svg class="icon"
       focusable="false">
       <title>atom feed for {{ name }}</title>
-      <use xlink:href=/svg/icons.svg#feed></use>
+      <use xlink:href=/icons/icons.svg#feed></use>
     </svg></a>
 </header>
 {{- macros::cards(pages=pages) -}}
