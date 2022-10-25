@@ -59,7 +59,7 @@
 {%- endmacro cover -%}
 
 {%- macro card(page) -%}
-<li class="card" aria-label="{{ page.title }}">
+<div role="listitem" class="card" aria-label="{{ page.title }}">
   <a class="card-link" href="{{ page.path | safe }}">
     <div class="drawer">
       <div class="title">
@@ -81,16 +81,16 @@
   </a>
   {{- macros::image(path=page.extra.cover, width=374) -}}
   {#{- macros::tags(tags=page.taxonomies.tags) -}#}
-</li>
+</div>
 {%- endmacro card -%}
 
 {%- macro cards(pages) -%}
 <nav aria-label="articles">
-  <ul class="cards">
+  <div role="list" class="cards">
     {%- for page in pages -%}
     {{- macros::card(page=page) -}}
     {%- endfor -%}
-  </ul>
+  </div>
 </nav>
 {%- endmacro cards -%}
 
