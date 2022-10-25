@@ -23,6 +23,7 @@ module.exports = function (grunt) {
         cwd: "docs/posts",
         src: "*.md",
         dest: "content",
+        nonull: true,
         transform: (src, dest) => {
           [src] = src;
           return fs.readFile(src).then((buffer) => {
@@ -103,6 +104,7 @@ module.exports = function (grunt) {
         src: "*.jpg",
         dest: "static/photos",
         ext: ".<%= grunt.task.current.args %>",
+        nonull: true,
         transform: (src, dest) => {
           const input = gm(src)
             .noProfile()
@@ -134,6 +136,7 @@ module.exports = function (grunt) {
         cwd: "docs/files",
         src: "**/*",
         dest: "static",
+        nonull: true,
       },
     },
     watch: {
