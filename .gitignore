@@ -3,7 +3,7 @@ content/[!_]*.md
 node_modules/
 public/
 static/*
-!static/js/
-!static/png/
-!static/svg/
+!static/avatar/
+!static/icons/
+!static/scripts/
 templates/favicon.html

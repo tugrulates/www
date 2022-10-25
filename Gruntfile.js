@@ -34,7 +34,7 @@ module.exports = function (grunt) {
               .split("\n\n")
               .map((x) => x.trim());
 
-            // posts are draft by default.
+            // Posts are draft by default.
             file.data.draft = file.data.state != "public";
 
             // Generate title from file name.
@@ -53,8 +53,8 @@ module.exports = function (grunt) {
             // }
 
             // Update internal links.
-            blocks = blocks.map((x) =>
-              x
+            blocks = blocks.map((block) =>
+              block
                 .replaceAll(posts.wiki_link, posts.link_replace)
                 .replaceAll(posts.internal_link, posts.link_replace)
             );
@@ -97,11 +97,12 @@ module.exports = function (grunt) {
   // Prepare and copy post photos.
   const photos = {
     transform: {
-      large_photos: {
+      photos: {
         expand: true,
         cwd: "docs/photos",
         src: "*.jpg",
-        dest: "static/photos/large",
+        dest: "static/photos",
+        ext: ".<%= grunt.task.current.args %>",
         transform: (src, dest) => {
           const input = gm(src)
             .noProfile()
@@ -110,21 +111,14 @@ module.exports = function (grunt) {
           return util.promisify(input.write).bind(input)(dest);
         },
       },
-      small_photos: {
-        expand: true,
-        cwd: "static/photos/large",
-        src: "*",
-        dest: "static/photos",
-        transform: (src, dest) => {
-          const input = gm(src).resize(1200);
-          return util.promisify(input.write).bind(input)(dest);
-        },
-      },
+    },
+    concurrent: {
+      photos: ["transform:photos:jpg", "transform:photos:webp"],
     },
     watch: {
       photos: {
-        files: "docs/photos/*.jpg",
-        tasks: ["transform:large_photos", "transform:small_photos"],
+        files: "docs/photos/*",
+        tasks: ["transform:photos"],
       },
     },
     clean: {
@@ -152,11 +146,11 @@ module.exports = function (grunt) {
       files: {
         src: [
           "static/*",
-          "!static/js",
-          "!static/png",
-          "!static/svg",
+          "!static/avatar",
+          "!static/icons",
           "!static/photos",
           "!static/processed_images",
+          "!static/scripts",
         ],
         filter: "isDirectory",
       },
@@ -167,7 +161,7 @@ module.exports = function (grunt) {
   const favicon = {
     realFavicon: {
       favicon: {
-        src: "static/png/me.png",
+        src: "static/avatar/me.png",
         dest: "static",
         options: "<%= pkg.favicon %>",
       },
@@ -181,7 +175,7 @@ module.exports = function (grunt) {
     },
     watch: {
       favicon: {
-        files: "static/png/me.png",
+        files: "static/avatar/me.png",
         tasks: ["realFavicon:favicon", "rename:favicon"],
       },
     },
@@ -213,13 +207,13 @@ module.exports = function (grunt) {
       this.files.map((file) =>
         fs
           .mkdir(path.dirname(file.dest), { recursive: true })
-          .then((_) => this.data.transform(file.src, file.dest))
+          .then((_) => this.data.transform(file.src, file.dest, this.args))
           .then((_) => fs.stat(file.dest))
           .then((stats) => {
             const size = grunt.verbose.wordlist([
-              `${filesize.filesize(stats.size, { round: 0 }).padStart(6)}`,
+              filesize.filesize(stats.size, { round: 0 }).padStart(6),
             ]);
-            grunt.verbose.writeln(`  [${size}] ${file.dest}`);
+            grunt.verbose.writeln(`${size} ${file.dest}`);
           })
       )
     ).then((_) => {
@@ -232,6 +226,8 @@ module.exports = function (grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON("package.json"),
     concurrent: {
+      docs: ["transform:posts", "concurrent:photos", "copy:files"],
+      inputs: ["favicon", "concurrent:docs"],
       dev: ["watch", "shell:zola:serve"],
       options: {
         logConcurrentOutput: true,
@@ -247,13 +243,7 @@ module.exports = function (grunt) {
   // Tasks.
   require("load-grunt-tasks")(grunt);
   grunt.registerTask("favicon", ["realFavicon:favicon", "rename:favicon"]);
-  grunt.registerTask("build", [
-    "transform:posts",
-    "transform:large_photos",
-    "transform:small_photos",
-    "copy:files",
-    "shell:zola:build",
-  ]);
-  grunt.registerTask("dev", ["build", "concurrent:dev"]);
-  grunt.registerTask("default", ["favicon", "build"]);
+  grunt.registerTask("build", ["concurrent:inputs", "shell:zola:build"]);
+  grunt.registerTask("dev", ["concurrent:docs", "concurrent:dev"]);
+  grunt.registerTask("default", "build");
 };

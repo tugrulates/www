@@ -32,13 +32,13 @@
       )
     );
     &[rel="noopener"] {
-      @include link-hint("/svg/link-external.svg");
+      @include link-hint("/icons/link-external.svg");
     }
     &[href$=".pdf"] {
-      @include link-hint("/svg/link-pdf.svg");
+      @include link-hint("/icons/link-pdf.svg");
     }
     &[href$=".zip"] {
-      @include link-hint("/svg/link-download.svg");
+      @include link-hint("/icons/link-download.svg");
     }
   }
 }
@@ -88,7 +88,7 @@
   & > h6 {
     @include paragraph;
     a.anchor {
-      @include icon-mask("/svg/link-anchor.svg");
+      @include icon-mask("/icons/link-anchor.svg");
       margin: {
         left: $normal-gap;
         right: $normal-gap;
