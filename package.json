@@ -18,66 +18,8 @@
     "url": "https://github.com/tugrulates/blog-code/issues"
   },
   "homepage": "https://github.com/tugrulates/blog-code#readme",
-  "favicon": {
-    "design": {
-      "ios": {
-        "pictureAspect": "backgroundAndMargin",
-        "backgroundColor": "#2b2622",
-        "margin": "14%",
-        "assets": {
-          "ios6AndPriorIcons": false,
-          "ios7AndLaterIcons": false,
-          "precomposedIcons": false,
-          "declareOnlyDefaultIcon": true
-        }
-      },
-      "desktopBrowser": {
-        "design": "raw"
-      },
-      "windows": {
-        "pictureAspect": "noChange",
-        "backgroundColor": "#c1af83",
-        "onConflict": "override",
-        "assets": {
-          "windows80Ie10Tile": false,
-          "windows10Ie11EdgeTiles": {
-            "small": false,
-            "medium": true,
-            "big": false,
-            "rectangle": false
-          }
-        }
-      },
-      "androidChrome": {
-        "pictureAspect": "noChange",
-        "themeColor": "#ffffff",
-        "manifest": {
-          "display": "browser",
-          "orientation": "notSet",
-          "onConflict": "override",
-          "declared": true
-        },
-        "assets": {
-          "legacyIcon": false,
-          "lowResolutionIcons": false
-        }
-      },
-      "safariPinnedTab": {
-        "pictureAspect": "blackAndWhite",
-        "threshold": 60,
-        "themeColor": "#2b2622"
-      }
-    },
-    "settings": {
-      "compression": 1,
-      "scalingAlgorithm": "Mitchell",
-      "errorOnImageTooSmall": false,
-      "readmeFile": false,
-      "htmlCodeFile": true,
-      "usePathAsIs": false
-    }
-  },
   "devDependencies": {
+    "favicons": "^7.0.2",
     "filesize": "^10.0.5",
     "gm": "^1.25.0",
     "gray-matter": "^4.0.3",
@@ -87,7 +29,6 @@
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-rename": "^0.2.0",
     "grunt-contrib-watch": "^1.1.0",
-    "grunt-real-favicon": "^0.2.4",
     "grunt-shell": "^4.0.0",
     "load-grunt-tasks": "^5.1.0",
     "path": "^0.12.7",
