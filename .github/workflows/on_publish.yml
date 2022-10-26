@@ -5,13 +5,13 @@ on:
   repository_dispatch:
     types: [publish]
 
-concurrency: staging
+concurrency: drafts
 
 jobs:
-  ci:
+  drafts:
     uses: ./.github/workflows/ci.yml
     with:
-      environment: staging
+      environment: drafts
       update_docs: true
       build_args: --drafts
       deploy_args: --alias drafts
@@ -21,7 +21,7 @@ jobs:
       LHCI_GITHUB_TOKEN: ${{ secrets.LHCI_GITHUB_TOKEN }}
 
   update:
-    needs: ci
+    needs: drafts
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
