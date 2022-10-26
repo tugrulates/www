@@ -1,6 +1,6 @@
 [build]
   publish = "public/"
-  command = "grunt"
+  command = "npm run build"
 
 [[redirects]]
   from = "https://tugrul.netlify.app/*"

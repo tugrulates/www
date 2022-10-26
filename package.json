@@ -5,8 +5,32 @@
   "directories": {
     "doc": "docs"
   },
+  "config": {
+    "posts": "docs/posts/*.md",
+    "photos": "docs/photos/*",
+    "files": "docs/files/*",
+    "favicon": "static/avatar/me.png",
+    "clean": "public content/[!_]* static/[!avatar,icons,scripts]* templates/favicon.html"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prebuild": "concurrently 'npm:build:posts $npm_package_config_posts' 'npm:build:photos $npm_package_config_photos' 'npm:build:files $npm_package_config_files' 'npm:build:favicon $npm_package_config_favicon'",
+    "build": "zola build",
+    "test": "npm run build --",
+    "posttest": "concurrently -g npm:test:*",
+    "prestart": "npm run build",
+    "start": "zola serve",
+    "poststart": "concurrently npm:watch:*",
+    "clean": "rm -Rf $npm_package_config_clean",
+    "build:posts": "ts-node scripts/posts.ts --output=content",
+    "build:photos": "concurrently -P 'ts-node scripts/photos.ts --ext=.jpg --output=static/photos {@}' 'ts-node scripts/photos.ts --ext=.webp --output=static/photos {@}' --",
+    "build:files": "cp -R -t static",
+    "build:favicon": "ts-node scripts/favicon.ts --html=templates/favicon.html --output=static",
+    "watch:posts": "onchange -f add -f change \"$npm_package_config_posts\" -- npm run build:posts {{file}}",
+    "watch:photos": "onchange -f add -f change \"$npm_package_config_photos\" -- npm run build:photos {{file}}",
+    "watch:files": "onchange -f add -f change \"$npm_package_config_files\" -- npm run build:files {{file}}",
+    "watch:favicon": "onchange -f add -f change \"$npm_package_config_favicon\" -- npm run build:favicon {{file}}",
+    "test:lint": "eslint scripts",
+    "test:validate": "html-validator public && ! html-validator public | grep '✘ fail'"
   },
   "repository": {
     "type": "git",
@@ -19,19 +43,40 @@
   },
   "homepage": "https://github.com/tugrulates/blog-code#readme",
   "devDependencies": {
+    "@types/gm": "^1.18.12",
+    "@types/yargs": "^17.0.13",
+    "@typescript-eslint/eslint-plugin": "^5.41.0",
+    "eslint": "^8.26.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-standard-with-typescript": "^23.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.3.0",
+    "eslint-plugin-promise": "^6.1.1",
     "favicons": "^7.0.2",
-    "filesize": "^10.0.5",
     "gm": "^1.25.0",
     "gray-matter": "^4.0.3",
-    "grunt": "^1.5.3",
-    "grunt-concurrent": "^3.0.0",
-    "grunt-contrib-clean": "^2.0.1",
-    "grunt-contrib-copy": "^1.0.0",
-    "grunt-contrib-rename": "^0.2.0",
-    "grunt-contrib-watch": "^1.1.0",
-    "grunt-shell": "^4.0.0",
-    "load-grunt-tasks": "^5.1.0",
     "path": "^0.12.7",
-    "util": "^0.12.5"
+    "typescript": "^4.8.4",
+    "util": "^0.12.5",
+    "yargs": "^17.6.0"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "es2021": true
+    },
+    "extends": [
+      "standard-with-typescript",
+      "prettier"
+    ],
+    "overrides": [],
+    "parserOptions": {
+      "ecmaVersion": "latest",
+      "sourceType": "module",
+      "project": [
+        "tsconfig.json"
+      ]
+    },
+    "rules": {}
   }
 }
