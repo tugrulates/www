@@ -22,7 +22,6 @@ env:
 
 jobs:
   deploy:
-    name: Deploy blog
     outputs:
       url: ${{ steps.publish.outputs.url }}
     environment:

@@ -28,7 +28,6 @@ env:
 
 jobs:
   container:
-    name: Create container
     outputs:
       container: ${{ steps.first.outputs.container }}
     runs-on: ubuntu-latest
@@ -71,7 +70,6 @@ jobs:
 
   build:
     needs: container
-    name: Build blog
     outputs:
       artifact: ${{ env.ARTIFACT }}
     runs-on: ubuntu-latest

@@ -16,7 +16,6 @@ env:
 
 jobs:
   lighthouse:
-    name: Lighthouse
     strategy:
       matrix:
         form: [desktop, mobile]
@@ -41,7 +40,6 @@ jobs:
           LHCI_GITHUB_TOKEN: ${{ secrets.LHCI_GITHUB_TOKEN }}
 
   screenshot:
-    name: "Take screenshots"
     strategy:
       matrix:
         browser: [chrome, firefox, safari]
@@ -92,7 +90,6 @@ jobs:
           retention-days: 1
 
   upload-screenshots:
-    name: "Screenshot tests"
     needs: screenshot
     runs-on: ubuntu-latest
     steps:
