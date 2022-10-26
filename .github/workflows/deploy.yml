@@ -12,11 +12,6 @@ on:
       deploy_args:
         required: false
         type: string
-    secrets:
-      NETLIFY_SITE_ID:
-        required: true
-      NETLIFY_AUTH_TOKEN:
-        required: true
     outputs:
       url:
         description: "URL for deployed site"
