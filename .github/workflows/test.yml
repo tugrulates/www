@@ -3,6 +3,12 @@ name: Test
 on:
   workflow_call:
     inputs:
+      container:
+        required: true
+        type: string
+      artifact:
+        required: true
+        type: string
       url:
         required: true
         type: string
@@ -18,7 +24,25 @@ on:
       NETLIFY_AUTH_TOKEN:
         required: true
 
+env:
+  OUTPUT_DIR: public
+
 jobs:
+  local:
+    name: Local tests
+    runs-on: ubuntu-latest
+    container: ${{ inputs.container }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/download-artifact@v3
+        with:
+          name: ${{ inputs.artifact }}
+          path: ${{ env.OUTPUT_DIR }}
+      - name: Install node dependencies
+        run: npm ci
+      - name: Run tests
+        run: grunt test
+
   lighthouse:
     name: Lighthouse
     strategy:

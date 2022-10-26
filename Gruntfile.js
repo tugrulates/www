@@ -245,6 +245,16 @@ module.exports = function (grunt) {
     },
   };
 
+  // Run tests.
+  const test = {
+    shell: {
+      validator: {
+        command: (command) =>
+          "html-validator public && ! html-validator public | grep '✘ fail'",
+      },
+    },
+  };
+
   // Generic transform task. Maybe split this out to its own package.
   grunt.registerMultiTask("transform", "Transform input files", function () {
     const done = this.async();
@@ -270,6 +280,7 @@ module.exports = function (grunt) {
   // Grunt config.
   grunt.initConfig({
     pkg: grunt.file.readJSON("package.json"),
+    shell: {},
     concurrent: {
       build: [
         "concurrent:favicon",
@@ -288,10 +299,12 @@ module.exports = function (grunt) {
   grunt.config.merge(files);
   grunt.config.merge(favicon);
   grunt.config.merge(zola);
+  grunt.config.merge(test);
 
   // Tasks.
   require("load-grunt-tasks")(grunt);
   grunt.registerTask("build", ["concurrent:build", "shell:zola:build"]);
   grunt.registerTask("dev", ["concurrent:build", "concurrent:dev"]);
+  grunt.registerTask("test", ["shell:validator"]);
   grunt.registerTask("default", "build");
 };
