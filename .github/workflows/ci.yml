@@ -28,9 +28,9 @@ jobs:
       update_docs: true
       build_args: ${{ inputs.build_args }}
 
-  test_local:
+  test:
     needs: build
-    uses: ./.github/workflows/test_local.yml
+    uses: ./.github/workflows/test.yml
     with:
       container: ${{ needs.build.outputs.container }}
       artifact: ${{ needs.build.outputs.artifact }}
@@ -44,9 +44,9 @@ jobs:
       deploy_args: ${{ inputs.deploy_args }}
     secrets: inherit
 
-  test_e2e:
+  e2e:
     needs: deploy
-    uses: ./.github/workflows/test_e2e.yml
+    uses: ./.github/workflows/e2e.yml
     with:
       url: ${{ needs.deploy.outputs.url }}
       environment: ${{ inputs.environment }}
