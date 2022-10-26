@@ -1,44 +1,25 @@
-name: Publish
+name: On Publish
 
 on:
   workflow_dispatch:
   repository_dispatch:
-    types: [Publish]
+    types: [publish]
 
 jobs:
-  build:
-    uses: ./.github/workflows/build.yml
-    with:
-      container: ghcr.io/tugrulates/blog-devcontainer:main
-      update_docs: true
-      build_args: --drafts
-
-  deploy:
-    needs: build
-    uses: ./.github/workflows/deploy.yml
+  ci:
+    uses: ./.github/workflows/ci.yml
     with:
       environment: staging
-      artifact: ${{ needs.build.outputs.artifact }}
+      update_docs: true
+      build_args: --drafts
       deploy_args: --alias drafts
     secrets:
       NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
       NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-
-  test:
-    needs: [build, deploy]
-    uses: ./.github/workflows/test.yml
-    with:
-      container: ghcr.io/tugrulates/blog-devcontainer:main
-      artifact: ${{ needs.build.outputs.artifact }}
-      url: ${{ needs.deploy.outputs.url }}
-      lhci_config: tests/lighthouserc.preview.js
-    secrets:
       LHCI_GITHUB_TOKEN: ${{ secrets.LHCI_GITHUB_TOKEN }}
-      NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-      NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
 
   update:
-    needs: test
+    needs: ci
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
