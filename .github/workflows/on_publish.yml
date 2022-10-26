@@ -25,9 +25,11 @@ jobs:
       NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
 
   test:
-    needs: deploy
+    needs: [build, deploy]
     uses: ./.github/workflows/test.yml
     with:
+      container: ghcr.io/tugrulates/blog-devcontainer:main
+      artifact: ${{ needs.build.outputs.artifact }}
       url: ${{ needs.deploy.outputs.url }}
       lhci_config: tests/lighthouserc.preview.js
     secrets:

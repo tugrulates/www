@@ -26,9 +26,11 @@ jobs:
       NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
 
   test:
-    needs: deploy
+    needs: [container, build, deploy]
     uses: ./.github/workflows/test.yml
     with:
+      container: ${{ needs.container.outputs.container }}
+      artifact: ${{ needs.build.outputs.artifact }}
       url: ${{ needs.deploy.outputs.url }}
     secrets:
       LHCI_GITHUB_TOKEN: ${{ secrets.LHCI_GITHUB_TOKEN }}
