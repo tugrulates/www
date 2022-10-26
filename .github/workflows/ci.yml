@@ -6,10 +6,6 @@ on:
       environment:
         required: true
         type: string
-      container:
-        required: false
-        type: string
-        default: ghcr.io/tugrulates/blog-devcontainer:main
       update_docs:
         required: false
         type: string
@@ -35,7 +31,7 @@ jobs:
   build:
     uses: ./.github/workflows/build.yml
     with:
-      container: ${{ inputs.container }}
+      latest: ${{ inputs.environment == 'live' }}
       update_docs: true
       build_args: ${{ inputs.build_args }}
 
@@ -43,7 +39,7 @@ jobs:
     needs: build
     uses: ./.github/workflows/test_local.yml
     with:
-      container: ${{ inputs.container }}
+      container: ${{ needs.build.outputs.container }}
       artifact: ${{ needs.build.outputs.artifact }}
 
   deploy:

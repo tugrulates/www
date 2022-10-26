@@ -6,15 +6,10 @@ on:
   workflow_dispatch:
 
 jobs:
-  container:
-    uses: ./.github/workflows/container.yml
-
   preview:
-    needs: container
     uses: ./.github/workflows/ci.yml
     with:
       environment: preview
-      container: ${{ needs.container.outputs.container }}
     secrets:
       NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
       NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}

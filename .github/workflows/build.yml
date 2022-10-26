@@ -3,12 +3,12 @@ name: Build
 on:
   workflow_call:
     inputs:
-      container:
-        required: true
-        type: string
+      latest:
+        required: false
+        type: boolean
       update_docs:
         required: false
-        type: string
+        type: boolean
       build_args:
         required: false
         type: string
@@ -16,18 +16,66 @@ on:
       artifact:
         description: "Build artifact name"
         value: ${{ jobs.build.outputs.artifact }}
+      container:
+        description: "Container tag"
+        value: ${{ jobs.container.outputs.container }}
 
 env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository_owner }}/blog-devcontainer
   OUTPUT_DIR: public
   ARTIFACT: build
 
 jobs:
+  container:
+    name: Create container
+    outputs:
+      container: ${{ steps.first.outputs.container }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Setup Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Login
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: "${{ github.token }}"
+
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          flavor: latest=${{ inputs.latest }}
+
+      - name: Extract container name
+        id: first
+        env:
+          TAGS: ${{ steps.meta.outputs.tags }}
+        run: echo "container=${TAGS##*,}" >> ${GITHUB_OUTPUT}
+
+      - name: Build and Push
+        uses: docker/build-push-action@v3
+        with:
+          context: "{{ defaultContext }}:.devcontainer"
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: ${{ steps.first.outputs.tag }}
+          cache-to: type=inline
+
   build:
+    needs: container
     name: Build blog
     outputs:
       artifact: ${{ env.ARTIFACT }}
     runs-on: ubuntu-latest
-    container: ${{ inputs.container }}
+    container: ${{ needs.container.outputs.container }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
