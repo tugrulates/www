@@ -5,6 +5,8 @@ on:
   repository_dispatch:
     types: [publish]
 
+concurrency: staging
+
 jobs:
   ci:
     uses: ./.github/workflows/ci.yml

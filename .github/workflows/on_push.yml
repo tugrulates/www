@@ -4,16 +4,28 @@ on:
   push:
     branches: [main]
 
+ concurrency: production
+
 jobs:
   container:
     uses: ./.github/workflows/container.yml
 
-  ci:
+  ci_development:
     needs: container
     uses: ./.github/workflows/ci.yml
     with:
-      environment: production
+      environment: development
       container: ${{ needs.container.outputs.container }}
+    secrets:
+      NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      LHCI_GITHUB_TOKEN: ${{ secrets.LHCI_GITHUB_TOKEN }}
+
+  ci_production:
+    needs: ci_development
+    uses: ./.github/workflows/ci.yml
+    with:
+      environment: production
     secrets:
       NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
       NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
