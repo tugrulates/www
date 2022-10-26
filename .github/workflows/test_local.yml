@@ -14,8 +14,7 @@ env:
   OUTPUT_DIR: public
 
 jobs:
-  local:
-    name: Local tests
+  test:
     runs-on: ubuntu-latest
     container: ${{ inputs.container }}
     steps:
