@@ -1,4 +1,4 @@
-name: Push
+name: On Push
 
 on:
   push:
@@ -8,31 +8,13 @@ jobs:
   container:
     uses: ./.github/workflows/container.yml
 
-  build:
+  ci:
     needs: container
-    uses: ./.github/workflows/build.yml
-    with:
-      container: ${{ needs.container.outputs.container }}
-
-  deploy:
-    needs: build
-    uses: ./.github/workflows/deploy.yml
+    uses: ./.github/workflows/ci.yml
     with:
       environment: production
-      artifact: ${{ needs.build.outputs.artifact }}
-      deploy_args: --prod
-    secrets:
-      NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-      NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-
-  test:
-    needs: [container, build, deploy]
-    uses: ./.github/workflows/test.yml
-    with:
       container: ${{ needs.container.outputs.container }}
-      artifact: ${{ needs.build.outputs.artifact }}
-      url: ${{ needs.deploy.outputs.url }}
     secrets:
-      LHCI_GITHUB_TOKEN: ${{ secrets.LHCI_GITHUB_TOKEN }}
       NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
       NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      LHCI_GITHUB_TOKEN: ${{ secrets.LHCI_GITHUB_TOKEN }}

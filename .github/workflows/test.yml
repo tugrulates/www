@@ -17,11 +17,11 @@ on:
         type: string
         default: tests/lighthouserc.js
     secrets:
-      LHCI_GITHUB_TOKEN:
-        required: true
       NETLIFY_SITE_ID:
         required: true
       NETLIFY_AUTH_TOKEN:
+        required: true
+      LHCI_GITHUB_TOKEN:
         required: true
 
 env:
