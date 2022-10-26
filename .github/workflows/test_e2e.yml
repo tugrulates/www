@@ -1,4 +1,4 @@
-name: Screenshot
+name: Test (E2E)
 
 on:
   workflow_call:
@@ -6,17 +6,47 @@ on:
       url:
         required: true
         type: string
+      environment:
+        required: true
+        type: string
     secrets:
       NETLIFY_SITE_ID:
         required: true
       NETLIFY_AUTH_TOKEN:
         required: true
+      LHCI_GITHUB_TOKEN:
+        required: true
 
 env:
   ARTIFACT: screenshots
-  OUTPUT_DIR: screenshots
+  OUTPUT_DIR: public
 
 jobs:
+  lighthouse:
+    name: Lighthouse
+    strategy:
+      matrix:
+        form: [desktop, mobile]
+        url: ["/", "/research/"]
+        include:
+          - form: desktop
+            preset: --collect.settings.preset=desktop
+          - form: mobile
+            preset:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Install Lighthouse
+        run: npm install && npm install -g @lhci/cli@0.9.x
+      - name: Run Lighthouse
+        run: lhci autorun ${{ inputs.lhci_args }} ${{ matrix.preset }} --collect.url="${{ inputs.url }}${{ matrix.url }}"
+        env:
+          LHCI_CONFIG: tests/lighthouserc.${{ inputs.environment }}.js
+          LHCI_GITHUB_TOKEN: ${{ secrets.LHCI_GITHUB_TOKEN }}
+
   screenshot:
     name: "Take screenshots"
     strategy:

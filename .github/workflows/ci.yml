@@ -39,6 +39,13 @@ jobs:
       update_docs: true
       build_args: ${{ inputs.build_args }}
 
+  test_local:
+    needs: build
+    uses: ./.github/workflows/test_local.yml
+    with:
+      container: ${{ inputs.container }}
+      artifact: ${{ needs.build.outputs.artifact }}
+
   deploy:
     needs: build
     uses: ./.github/workflows/deploy.yml
@@ -50,14 +57,12 @@ jobs:
       NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
       NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
 
-  test:
-    needs: [build, deploy]
-    uses: ./.github/workflows/test.yml
+  test_e2e:
+    needs: deploy
+    uses: ./.github/workflows/test_e2e.yml
     with:
-      container: ${{ inputs.container }}
-      artifact: ${{ needs.build.outputs.artifact }}
       url: ${{ needs.deploy.outputs.url }}
-      lhci_config: tests/lighthouserc.${{ inputs.environment }}.js
+      environment: ${{ inputs.environment }}
     secrets:
       NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
       NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
