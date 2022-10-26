@@ -8,7 +8,7 @@ on:
 concurrency: drafts
 
 jobs:
-  drafts:
+  publish:
     uses: ./.github/workflows/ci.yml
     with:
       environment: drafts
@@ -21,7 +21,7 @@ jobs:
       LHCI_GITHUB_TOKEN: ${{ secrets.LHCI_GITHUB_TOKEN }}
 
   update:
-    needs: drafts
+    needs: publish
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
