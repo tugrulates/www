@@ -4,7 +4,7 @@
     {
       "label": "server",
       "type": "shell",
-      "command": "grunt dev --drafts",
+      "command": "npm start -- --drafts",
       "group": {
         "kind": "build",
         "isDefault": true

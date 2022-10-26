@@ -91,7 +91,7 @@ jobs:
         run: npm ci
 
       - name: Build site
-        run: grunt ${{ inputs.build_args }}
+        run: npm run build ${{ inputs.build_args }}
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
