@@ -6,8 +6,8 @@ import time
 from argparse import ArgumentParser, Namespace
 
 from selenium import webdriver
-from selenium.webdriver import Remote
 from selenium.common.exceptions import WebDriverException
+from selenium.webdriver import Remote
 
 
 def main() -> None:
@@ -76,16 +76,15 @@ def chrome(namespace: Namespace) -> Remote:
                 ),
             },
         )
-    return webdriver.Chrome(chrome_options=options)
+    return webdriver.Chrome(options=options)
 
 
 def firefox(namespace: Namespace) -> Remote:
     """Return Firefox driver."""
     options = webdriver.FirefoxOptions()
     options.add_argument("--headless")
-    profile = webdriver.FirefoxProfile()
-    profile.set_preference("layout.css.devPixelsPerPx", str(namespace.dpr))
-    return webdriver.Firefox(options=options, firefox_profile=profile)
+    options.set_preference("layout.css.devPixelsPerPx", str(namespace.dpr))
+    return webdriver.Firefox(options=options)
 
 
 def safari(_: Namespace) -> Remote:
