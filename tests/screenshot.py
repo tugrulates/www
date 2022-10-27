@@ -1,15 +1,20 @@
 """Run screenshots of the site on different browsers."""
 
+import logging
 import sys
 import time
 from argparse import ArgumentParser, Namespace
 
 from selenium import webdriver
 from selenium.webdriver import Remote
+from selenium.common.exceptions import WebDriverException
 
 
 def main() -> None:
-    """Initialize webdriver and take screenshots."""
+    """Setup args, logging and run webdriver."""
+    logging.basicConfig(format="%(message)s")
+    log = logging.getLogger(__name__)
+
     parser = ArgumentParser(description="Take screenshots.")
     parser.add_argument("--url", default="https://tugrul.blog")
     parser.add_argument("--browser", required=True)
@@ -19,15 +24,25 @@ def main() -> None:
     parser.add_argument("--height", type=int, required=True)
     parser.add_argument("--dpr", type=float, required=True)
     parser.add_argument("--out", required=True)
+    parser.add_argument("--retries", type=int, default=1)
     namespace = parser.parse_args(sys.argv[1:])
 
+    for i in range(namespace.retries):
+        try:
+            screenshot(namespace)
+        except WebdriverException as err:
+            log.error("Webdriver error: %s", err.msg)
+            log.warn("%d retries left", namespace.retries - i - 1)
+
+
+def screnshot(namespace):
+    """Initialize webdriver and take screenshots."""
     if namespace.browser == "chrome":
         browser = chrome(namespace)
     if namespace.browser == "firefox":
         browser = firefox(namespace)
     if namespace.browser == "safari":
         browser = safari(namespace)
-
     browser.set_window_size(namespace.width, namespace.height)
     browser.get(namespace.url)
     time.sleep(3)

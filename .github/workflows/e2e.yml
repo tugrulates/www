@@ -81,6 +81,7 @@ jobs:
           --dpr=${{ matrix.dpr }}
           --out="${{ matrix.browser }}-${{ matrix.platform }}-${{ matrix.theme }}.webp"
           --url="${{ inputs.url }}"
+          --retries=3
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
