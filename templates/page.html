@@ -27,10 +27,10 @@
     {{ macros::time(page=page, update=true) }}
   </header>
   {% if page.draft != false %}
-  <alert>
+  <div class="alert">
     This is a <strong>draft</strong> post.
     Let me know if you have any feedback.
-  </alert>
+  </div>
   {%- endif -%}
   {{ page.content | safe }}
 </article>

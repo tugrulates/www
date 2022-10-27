@@ -2,7 +2,7 @@
  * Copies cover photos from docs repo and makes web ready.
  */
 
-import transform from "./transform";
+import transform from "./transform.js";
 
 import { FaviconOptions, favicons } from "favicons";
 import { promises as fs } from "fs";

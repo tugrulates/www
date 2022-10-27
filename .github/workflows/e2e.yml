@@ -36,7 +36,7 @@ jobs:
       - name: Run Lighthouse
         run: lhci autorun ${{ inputs.lhci_args }} ${{ matrix.preset }} --collect.url="${{ inputs.url }}${{ matrix.url }}"
         env:
-          LHCI_CONFIG: tests/lighthouserc.${{ inputs.environment }}.js
+          LHCI_CONFIG: tests/lighthouserc.${{ inputs.environment }}.cjs
           LHCI_GITHUB_TOKEN: ${{ secrets.LHCI_GITHUB_TOKEN }}
 
   screenshot:

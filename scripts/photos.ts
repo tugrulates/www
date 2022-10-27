@@ -2,7 +2,7 @@
  * Copies cover photos from docs repo and makes web ready.
  */
 
-import transform from "./transform";
+import transform from "./transform.js";
 
 import gm from "gm";
 import util from "util";
@@ -12,6 +12,7 @@ import { hideBin } from "yargs/helpers";
 const ARGV = yargs(hideBin(process.argv))
   .usage("$0 FILES... --ext=FMT [--output=DIR]")
   .string("_")
+  .array("_")
   .options({
     ext: { desc: "Image format", type: "string" },
     output: { desc: "Output folder", type: "string", default: "." },
