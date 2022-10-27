@@ -10,7 +10,7 @@ comment:
         🖼️ Screenshots:
         | Chrome  | Firefox | Safari  |
         | ------- | ------- | ------- |
-        | ![]({{ base }}/chrome-desktop-dark.webp)  | ![]({{ base }}/firefox-desktop-dark.webp)  | ![]({{ base }}/safari-desktop-dark.webp)  |
-        | ![]({{ base }}/chrome-desktop-light.webp) | ![]({{ base }}/firefox-desktop-light.webp) | ![]({{ base }}/safari-desktop-light.webp) |
-        | ![]({{ base }}/chrome-mobile-dark.webp)   | ![]({{ base }}/firefox-mobile-dark.webp)   | ![]({{ base }}/safari-mobile-dark.webp)   |
-        | ![]({{ base }}/chrome-mobile-light.webp)  | ![]({{ base }}/firefox-mobile-light.webp)  | ![]({{ base }}/safari-mobile-light.webp)  |
+        | ![]({{ base }}/chrome-desktop-dark.png)  | ![]({{ base }}/firefox-desktop-dark.png)  | ![]({{ base }}/safari-desktop-dark.png)  |
+        | ![]({{ base }}/chrome-desktop-light.png) | ![]({{ base }}/firefox-desktop-light.png) | ![]({{ base }}/safari-desktop-light.png) |
+        | ![]({{ base }}/chrome-mobile-dark.png)   | ![]({{ base }}/firefox-mobile-dark.png)   | ![]({{ base }}/safari-mobile-dark.png)   |
+        | ![]({{ base }}/chrome-mobile-light.png)  | ![]({{ base }}/firefox-mobile-light.png)  | ![]({{ base }}/safari-mobile-light.png)  |
