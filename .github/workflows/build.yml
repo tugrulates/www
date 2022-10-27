@@ -51,6 +51,7 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           flavor: latest=${{ inputs.latest }}
+          sep-tags: ","
 
       - name: Extract container name
         id: first
