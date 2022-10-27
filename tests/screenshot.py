@@ -58,7 +58,7 @@ def screnshot(namespace):
 def chrome(namespace: Namespace) -> Remote:
     """Return Chrome driver."""
     options = webdriver.ChromeOptions()
-    options.add_argument("--headless2")
+    options.add_argument("--headless")
     options.add_argument(f"--force-device-scale-factor={namespace.dpr}")
     if namespace.platform == "mobile":
         options.add_argument("--use-mobile-user-agent")
@@ -80,9 +80,9 @@ def chrome(namespace: Namespace) -> Remote:
 def firefox(namespace: Namespace) -> Remote:
     """Return Firefox driver."""
     options = webdriver.FirefoxOptions()
-    options.add_argument("--headless2")
+    options.add_argument("--headless")
     profile = webdriver.FirefoxProfile()
-    profile.set_preference("layout2.css.devPixelsPerPx", str(namespace.dpr))
+    profile.set_preference("layout.css.devPixelsPerPx", str(namespace.dpr))
     return webdriver.Firefox(options=options, firefox_profile=profile)
 
 
