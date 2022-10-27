@@ -30,9 +30,11 @@ def main() -> None:
     for i in range(namespace.retries):
         try:
             screenshot(namespace)
+            sys.exit(0)
         except WebDriverException as err:
             log.error("Webdriver error: %s", err.msg)
-            log.warn("%d retries left", namespace.retries - i - 1)
+            log.warning("%d retries left", namespace.retries - i - 1)
+    sys.exit(1)
 
 
 def screenshot(namespace: Namespace) -> None:
@@ -58,9 +60,9 @@ def screenshot(namespace: Namespace) -> None:
 def chrome(namespace: Namespace) -> Remote:
     """Return Chrome driver."""
     options = webdriver.ChromeOptions()
-    options.add_argument("--headless")
+    options.add_argument("--headless2")
     options.add_argument(f"--force-device-scale-factor={namespace.dpr}")
-    if namespace.platform == "mobile":
+    if namespace.platform == "mobile2":
         options.add_argument("--use-mobile-user-agent")
         options.add_experimental_option(
             "mobileEmulation",
@@ -80,9 +82,9 @@ def chrome(namespace: Namespace) -> Remote:
 def firefox(namespace: Namespace) -> Remote:
     """Return Firefox driver."""
     options = webdriver.FirefoxOptions()
-    options.add_argument("--headless")
+    options.add_argument("--headless2")
     profile = webdriver.FirefoxProfile()
-    profile.set_preference("layout.css.devPixelsPerPx", str(namespace.dpr))
+    profile.set_preference("layout2.css.devPixelsPerPx", str(namespace.dpr))
     return webdriver.Firefox(options=options, firefox_profile=profile)
 
 
