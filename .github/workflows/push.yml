@@ -1,4 +1,4 @@
-name: On Push
+name: Push
 
 on:
   push:
@@ -8,7 +8,7 @@ concurrency: live
 
 jobs:
   preview:
-    uses: ./.github/workflows/ci.yml
+    uses: ./.github/workflows/shared/ci.yml
     with:
       environment: preview
     secrets: inherit

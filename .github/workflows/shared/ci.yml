@@ -22,7 +22,7 @@ on:
 
 jobs:
   build:
-    uses: ./.github/workflows/build.yml
+    uses: ./.github/workflows/shared/build.yml
     with:
       latest: ${{ inputs.environment == 'live' }}
       update_docs: ${{ inputs.update_docs }}
@@ -30,14 +30,14 @@ jobs:
 
   test:
     needs: build
-    uses: ./.github/workflows/test.yml
+    uses: ./.github/workflows/shared/test.yml
     with:
       container: ${{ needs.build.outputs.container }}
       artifact: ${{ needs.build.outputs.artifact }}
 
   deploy:
     needs: build
-    uses: ./.github/workflows/deploy.yml
+    uses: ./.github/workflows/shared/deploy.yml
     with:
       environment: ${{ inputs.environment }}
       artifact: ${{ needs.build.outputs.artifact }}
@@ -46,7 +46,7 @@ jobs:
 
   e2e:
     needs: deploy
-    uses: ./.github/workflows/e2e.yml
+    uses: ./.github/workflows/shared/e2e.yml
     with:
       url: ${{ needs.deploy.outputs.url }}
       environment: ${{ inputs.environment }}

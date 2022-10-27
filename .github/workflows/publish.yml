@@ -1,4 +1,4 @@
-name: On Publish
+name: Publish
 
 on:
   workflow_dispatch:
@@ -9,7 +9,7 @@ concurrency: drafts
 
 jobs:
   publish:
-    uses: ./.github/workflows/ci.yml
+    uses: ./.github/workflows/shared/ci.yml
     with:
       environment: drafts
       update_docs: true
