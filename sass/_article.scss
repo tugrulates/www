@@ -302,7 +302,7 @@
 }
 
 @mixin has-alert {
-  & alert {
+  & .alert {
     @include block;
     &::before {
       content: "⚠️ ";

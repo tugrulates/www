@@ -2,7 +2,7 @@
  * Copies markdown files from docs repo and converts for Zola.
  */
 
-import transform from "./transform";
+import transform from "./transform.js";
 
 import { promises as fs } from "fs";
 import matter from "gray-matter";
@@ -13,6 +13,7 @@ import { hideBin } from "yargs/helpers";
 const ARGV = yargs(hideBin(process.argv))
   .usage("$0 [files...] [--output=DIR]")
   .string("_")
+  .array("_")
   .options({
     output: { desc: "Output folder", type: "string", default: "." },
   })
