@@ -29,7 +29,7 @@ env:
 jobs:
   container:
     outputs:
-      container: ${{ steps.first.outputs.container }}
+      container: ${{ steps.name.outputs.container }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -53,20 +53,31 @@ jobs:
           flavor: latest=${{ inputs.latest }}
           sep-tags: ","
 
-      - name: Extract container name
-        id: first
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Check diff
+        id: name
         env:
           TAGS: ${{ steps.meta.outputs.tags }}
-        run: echo "container=${TAGS##*,}" >> ${GITHUB_OUTPUT}
+        run: |
+          git fetch origin main
+          if [[ $(git diff origin/main --name-only .devcontainer) ]]; then
+            echo "container=${TAGS##*,}" >> ${GITHUB_OUTPUT}
+            echo "build=true" >> ${GITHUB_OUTPUT}
+          else
+            echo "container=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest" >> ${GITHUB_OUTPUT}
+          fi
 
       - name: Build and Push
+        if: steps.name.outputs.build
         uses: docker/build-push-action@v3
         with:
           context: "{{ defaultContext }}:.devcontainer"
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          cache-from: ${{ steps.first.outputs.tag }}
+          cache-from: ${{ steps.name.outputs.tag }}
           cache-to: type=inline
 
   build:
