@@ -2,13 +2,11 @@ name: Prune
 
 on:
   workflow_dispatch:
-  pull_request:
-    branches: [main]
 
 env:
   USERNAME: tugrulates
   CONTAINER: blog-devcontainer
-  MAX_AGE_DAYS: 6
+  MAX_AGE_DAYS: 7
 
 jobs:
   container:
