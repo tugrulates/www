@@ -30,7 +30,7 @@
   {%- endif -%}
   {%- if update or not page.updated -%}
   <time datetime="{{ page.date | date(format='%Y-%m-%d')  }}">
-    {%- if page.updated -%}- originally published {%- endif -%}
+    {%- if page.updated -%}- originally published {% endif -%}
     {{- page.date | date(format=dateformat) -}}
   </time>
   {%- endif -%}
