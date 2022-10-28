@@ -121,7 +121,7 @@ jobs:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
 
       - name: Comment on PR
-        if: github.event_name == 'pull_request'
+        if: ${{ github.event_name == 'pull_request' }}
         uses: exercism/pr-commenter-action@v1.3.0
         with:
           github-token: "${{ github.token }}"

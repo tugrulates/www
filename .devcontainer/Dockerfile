@@ -8,6 +8,5 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 # Install global node modules
 RUN su node -c "npm install -g concurrently hyperlink netlify-cli onchange"
 
-
 # Install zola
 RUN wget -q -O - "https://github.com/getzola/zola/releases/download/v0.16.1/zola-v0.16.1-x86_64-unknown-linux-gnu.tar.gz" | tar xzf - -C /usr/local/bin

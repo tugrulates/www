@@ -21,18 +21,24 @@ on:
         value: ${{ jobs.deploy.outputs.url }}
 
 jobs:
-  build:
-    uses: ./.github/workflows/build.yml
+  container:
+    uses: ./.github/workflows/container.yml
     with:
       latest: ${{ inputs.environment == 'live' }}
+
+  build:
+    needs: container
+    uses: ./.github/workflows/build.yml
+    with:
+      container: ${{ needs.container.outputs.container }}
       update_docs: ${{ inputs.update_docs }}
       build_args: ${{ inputs.build_args }}
 
   test:
-    needs: build
+    needs: [container, build]
     uses: ./.github/workflows/test.yml
     with:
-      container: ${{ needs.build.outputs.container }}
+      container: ${{ needs.container.outputs.container }}
       artifact: ${{ needs.build.outputs.artifact }}
 
   deploy:
