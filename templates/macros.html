@@ -7,7 +7,7 @@
 {{ image.static_path | trim_start_matches(pat="static") | safe }}
 {%- endmacro resizedimage -%}
 
-{%- macro image(path, width) -%}
+{%- macro image(path, width, class="") -%}
 {%- set meta = get_image_metadata(path=path) -%}
 {%- set height = meta.height * width / meta.width | round | int -%}
 {%- set source = path | replace(from=".jpg", to=".webp") -%}
@@ -17,7 +17,7 @@
   {{ macros::resizedimage(path=source, width=width*2, height=height*2) }} 2x,
   {{ macros::resizedimage(path=source, width=width*3, height=height*3) }} 3x,
   {{ macros::resizedimage(path=source, width=width*4, height=height*4) }} 4x" type="image/webp">
-  <img src="{{ path | safe }}" alt="{{ macros::titlefrompath(path=path) }}" width="{{ width }}" height="{{ height }}" >
+  <img src="{{ path | safe }}"  {% if class -%} class="{{ class }}"{%- endif -%} alt="{{ macros::titlefrompath(path=path) }}" width="{{ width }}" height="{{ height }}" >
 </picture>
 {%- endmacro image -%}
 
