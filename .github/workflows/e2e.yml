@@ -39,7 +39,7 @@ jobs:
           LHCI_CONFIG: tests/lighthouserc.${{ inputs.environment }}.cjs
           LHCI_GITHUB_TOKEN: ${{ secrets.LHCI_GITHUB_TOKEN }}
 
-  security:
+  snyk:
     runs-on: ubuntu-latest
     steps:
       - name: Test for public vulnerabilities
