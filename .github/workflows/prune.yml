@@ -22,8 +22,8 @@ jobs:
             await github.rest.packages
               .getAllPackageVersionsForPackageOwnedByUser({
                 package_type: "container",
-                username: "${{ USERNAME }}",
-                package_name: "${{ CONTAINER }}",
+                username: "${{ env.USERNAME }}",
+                package_name: "${{ env.CONTAINER }}",
               })
               .then(
                 async ({ data }) =>
@@ -33,7 +33,7 @@ jobs:
                         const age = today - new Date(version.created_at).getDate();
                         const tags = version.metadata?.container?.tags ?? [];
                         return (
-                          age > ${{ MAX_AGE_DAYS }} &&
+                          age > ${{ env.MAX_AGE_DAYS }} &&
                           tags.filter((tag) => tag.match(/^pr-\d+$/) == null).length === 0
                         );
                       })
@@ -41,8 +41,8 @@ jobs:
                         const response =
                           await github.rest.packages.deletePackageVersionForUser({
                             package_type: "container",
-                            username: "${{ USERNAME }}",
-                            package_name: "${{ CONTAINER }}",
+                            username: "${{ env.USERNAME }}",
+                            package_name: "${{ env.CONTAINER }}",
                             package_version_id: version.id,
                           });
                         if (response.status !== 204) {
