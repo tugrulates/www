@@ -6,7 +6,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get -y install --no-install-recommends graphicsmagick
 
 # Install global node modules
-RUN su node -c "npm install -g concurrently onchange netlify-cli"
+RUN su node -c "npm install -g concurrently hyperlink netlify-cli onchange"
 
 
 # Install zola
