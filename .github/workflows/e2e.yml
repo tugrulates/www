@@ -39,6 +39,14 @@ jobs:
           LHCI_CONFIG: tests/lighthouserc.${{ inputs.environment }}.cjs
           LHCI_GITHUB_TOKEN: ${{ secrets.LHCI_GITHUB_TOKEN }}
 
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test for public vulnerabilities
+        uses: lirantal/is-website-vulnerable@master
+        with:
+          scan-url: "${{ inputs.url }}"
+
   screenshot:
     strategy:
       matrix:
