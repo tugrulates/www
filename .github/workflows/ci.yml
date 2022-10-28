@@ -6,6 +6,12 @@ on:
       environment:
         required: true
         type: string
+      container:
+        required: false
+        type: string
+      artifact:
+        required: false
+        type: string
       update_docs:
         required: false
         type: boolean
@@ -19,11 +25,28 @@ on:
       url:
         description: "URL for deployed site"
         value: ${{ jobs.deploy.outputs.url }}
+      container:
+        description: "Container tag"
+        value: ${{ jobs.container.outputs.container }}
+      artifact:
+        description: "Build artifact name"
+        value: ${{ jobs.build.outputs.artifact }}
 
 jobs:
-  build:
+  container:
+    if: ${{ !inputs.container }}
     uses: ./.github/workflows/build.yml
     with:
+      latest: ${{ inputs.environment == 'live' }}
+      update_docs: ${{ inputs.update_docs }}
+      build_args: ${{ inputs.build_args }}
+
+  build:
+    if: ${{ !inputs.artifact }}
+    needs: container
+    uses: ./.github/workflows/build.yml
+    with:
+      container: ${{ inputs.container }}${{ needs.container.outputs.container }}
       latest: ${{ inputs.environment == 'live' }}
       update_docs: ${{ inputs.update_docs }}
       build_args: ${{ inputs.build_args }}
@@ -32,15 +55,15 @@ jobs:
     needs: build
     uses: ./.github/workflows/test.yml
     with:
-      container: ${{ needs.build.outputs.container }}
-      artifact: ${{ needs.build.outputs.artifact }}
+      container: ${{ inputs.container }}${{ needs.container.outputs.container }}
+      artifact: ${{ inputs.artifact }}${{ needs.build.outputs.artifact }}
 
   deploy:
     needs: build
     uses: ./.github/workflows/deploy.yml
     with:
       environment: ${{ inputs.environment }}
-      artifact: ${{ needs.build.outputs.artifact }}
+      artifact: ${{ inputs.artifact }}${{ needs.build.outputs.artifact }}
       deploy_args: ${{ inputs.deploy_args }}
     secrets: inherit
 
