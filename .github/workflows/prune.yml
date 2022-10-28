@@ -8,7 +8,7 @@ on:
 env:
   USERNAME: tugrulates
   CONTAINER: blog-devcontainer
-  MAX_AGE_DAYS: 7
+  MAX_AGE_DAYS: 6
 
 jobs:
   container:
@@ -33,7 +33,7 @@ jobs:
                         const age = today - new Date(version.created_at).getDate();
                         const tags = version.metadata?.container?.tags ?? [];
                         return (
-                          age > 2 &&
+                          age > ${{ MAX_AGE_DAYS }} &&
                           tags.filter((tag) => tag.match(/^pr-\d+$/) == null).length === 0
                         );
                       })
@@ -41,8 +41,8 @@ jobs:
                         async (version) =>
                           await github.rest.packages.deletePackageVersionForUser({
                             package_type: "container",
-                            username: "tugrulates",
-                            package_name: "blog-devcontainer2",
+                            username: "${{ env.USERNAME }}",
+                            package_name: "${{ env.CONTAINER }}",
                             package_version_id: version.id,
                           })
                       )
