@@ -24,7 +24,7 @@ env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository_owner }}/blog-devcontainer
   OUTPUT_DIR: public
-  ARTIFACT: build
+  ARTIFACT: public
 
 jobs:
   container:
