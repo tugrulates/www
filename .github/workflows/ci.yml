@@ -35,7 +35,7 @@ jobs:
       build_args: ${{ inputs.build_args }}
 
   test:
-    needs: build
+    needs: [container, build]
     uses: ./.github/workflows/test.yml
     with:
       container: ${{ needs.container.outputs.container }}
