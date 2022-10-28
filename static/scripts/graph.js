@@ -33,5 +33,5 @@ function initializeGraph() {
 }
 
 $(document).ready(function () {
-  $.getScript("/js/third_party/mermaid.min.js", initializeGraph);
+  $.getScript("/scripts/third_party/mermaid.min.js", initializeGraph);
 });

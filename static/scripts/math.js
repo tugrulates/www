@@ -37,4 +37,4 @@ MathJax = {
     },
   },
 };
-$.getScript("/js/third_party/tex-svg.js");
+$.getScript("/scripts/third_party/tex-svg.js");
