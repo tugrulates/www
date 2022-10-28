@@ -1,0 +1,53 @@
+name: Prune
+
+on:
+  workflow_dispatch:
+
+env:
+  USERNAME: tugrulates
+  CONTAINER: blog-devcontainer
+  MAX_AGE_DAYS: 7
+
+jobs:
+  container:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger publish
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.CR_TOKEN }}
+          script: |
+            await github.rest.packages
+              .getAllPackageVersionsForPackageOwnedByUser({
+                package_type: "container",
+                username: "${{ USERNAME }}",
+                package_name: "${{ CONTAINER }}",
+              })
+              .then(
+                async ({ data }) =>
+                  await Promise.all(
+                    data
+                      .filter((version) => {
+                        const age = today - new Date(version.created_at).getDate();
+                        const tags = version.metadata?.container?.tags ?? [];
+                        return (
+                          age > ${{ MAX_AGE_DAYS }} &&
+                          tags.filter((tag) => tag.match(/^pr-\d+$/) == null).length === 0
+                        );
+                      })
+                      .map(async (version) => {
+                        const response =
+                          await github.rest.packages.deletePackageVersionForUser({
+                            package_type: "container",
+                            username: "${{ USERNAME }}",
+                            package_name: "${{ CONTAINER }}",
+                            package_version_id: version.id,
+                          });
+                        if (response.status !== 204) {
+                          console.error("Deletion failed");
+                          console.error(response);
+                          process.exit(1);
+                        }
+                      })
+                  )
+              )
