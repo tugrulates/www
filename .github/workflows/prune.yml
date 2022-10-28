@@ -8,7 +8,7 @@ on:
 env:
   USERNAME: tugrulates
   CONTAINER: blog-devcontainer
-  MAX_AGE_DAYS: 6
+  MAX_AGE_DAYS: 7
 
 jobs:
   container:
@@ -33,7 +33,7 @@ jobs:
                         const age = today - new Date(version.created_at).getDate();
                         const tags = version.metadata?.container?.tags ?? [];
                         return (
-                          age > ${{ MAX_AGE_DAYS }} &&
+                          age > ${{ env.MAX_AGE_DAYS }} &&
                           tags.filter((tag) => tag.match(/^pr-\d+$/) == null).length === 0
                         );
                       })
