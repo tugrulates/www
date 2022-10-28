@@ -54,7 +54,7 @@ jobs:
           TAGS: ${{ steps.meta.outputs.tags }}
         run: |
           git fetch origin main
-          if ${{ github.event_name == 'push' }} || git diff origin/main --name-only .devcontainer
+          if ${{ github.event_name == 'push' }} || git diff origin/main --name-only .devcontainer | grep .
           then
             echo "container=${TAGS##*,}" >> ${GITHUB_OUTPUT}
             echo "build=true" >> ${GITHUB_OUTPUT}
