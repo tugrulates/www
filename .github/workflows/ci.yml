@@ -32,7 +32,7 @@ on:
 jobs:
   container:
     if: ${{ !inputs.container }}
-    uses: ./.github/workflows/build.yml
+    uses: ./.github/workflows/container.yml
     with:
       latest: ${{ inputs.environment == 'live' }}
       update_docs: ${{ inputs.update_docs }}
