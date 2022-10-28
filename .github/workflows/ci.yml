@@ -35,15 +35,12 @@ jobs:
     uses: ./.github/workflows/container.yml
     with:
       latest: ${{ inputs.environment == 'live' }}
-      update_docs: ${{ inputs.update_docs }}
-      build_args: ${{ inputs.build_args }}
 
   build:
     needs: container
     uses: ./.github/workflows/build.yml
     with:
       container: ${{ inputs.container }}${{ needs.container.outputs.container }}
-      latest: ${{ inputs.environment == 'live' }}
       update_docs: ${{ inputs.update_docs }}
       build_args: ${{ inputs.build_args }}
 
