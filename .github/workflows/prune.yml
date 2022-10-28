@@ -33,16 +33,16 @@ jobs:
                         const age = today - new Date(version.created_at).getDate();
                         const tags = version.metadata?.container?.tags ?? [];
                         return (
-                          age > 3 &&
+                          age > 7 &&
                           tags.filter((tag) => tag.match(/^pr-\d+$/) == null).length === 0
                         );
                       })
                       .map(
                         async (version) =>
-                          await octokit.rest.packages.deletePackageVersionForUser({
+                          await github.rest.packages.deletePackageVersionForUser({
                             package_type: "container",
                             username: "tugrulates",
-                            package_name: "blog-devcontainer2",
+                            package_name: "blog-devcontainer",
                             package_version_id: version.id,
                           })
                       )
