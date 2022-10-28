@@ -37,7 +37,7 @@ jobs:
         run: sudo chown $(whoami) .
 
       - name: Update docs
-        if: inputs.update_docs
+        if: ${{ inputs.update_docs }}
         run: git submodule update --init --recursive --remote docs
 
       - name: Install node dependencies

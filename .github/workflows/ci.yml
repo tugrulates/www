@@ -9,9 +9,6 @@ on:
       container:
         required: false
         type: string
-      artifact:
-        required: false
-        type: string
       update_docs:
         required: false
         type: boolean
@@ -42,7 +39,6 @@ jobs:
       build_args: ${{ inputs.build_args }}
 
   build:
-    if: ${{ !inputs.artifact }}
     needs: container
     uses: ./.github/workflows/build.yml
     with:
@@ -56,14 +52,14 @@ jobs:
     uses: ./.github/workflows/test.yml
     with:
       container: ${{ inputs.container }}${{ needs.container.outputs.container }}
-      artifact: ${{ inputs.artifact }}${{ needs.build.outputs.artifact }}
+      artifact: ${{ needs.build.outputs.artifact }}
 
   deploy:
     needs: build
     uses: ./.github/workflows/deploy.yml
     with:
       environment: ${{ inputs.environment }}
-      artifact: ${{ inputs.artifact }}${{ needs.build.outputs.artifact }}
+      artifact: ${{ needs.build.outputs.artifact }}
       deploy_args: ${{ inputs.deploy_args }}
     secrets: inherit
 

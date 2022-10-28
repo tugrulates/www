@@ -54,7 +54,7 @@ jobs:
           TAGS: ${{ steps.meta.outputs.tags }}
         run: |
           git fetch origin main
-          if [[ $(git diff origin/main --name-only .devcontainer) ]]; then
+          if [[ ${{ github.event_name == 'pull_request' }} || $(git diff origin/main --name-only .devcontainer) ]]; then
             echo "container=${TAGS##*,}" >> ${GITHUB_OUTPUT}
             echo "build=true" >> ${GITHUB_OUTPUT}
           else
@@ -62,7 +62,7 @@ jobs:
           fi
 
       - name: Build and Push
-        if: steps.name.outputs.build
+        if: ${{ steps.name.outputs.build }}
         uses: docker/build-push-action@v3
         with:
           context: "{{ defaultContext }}:.devcontainer"

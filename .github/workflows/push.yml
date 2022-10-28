@@ -18,7 +18,5 @@ jobs:
     uses: ./.github/workflows/ci.yml
     with:
       environment: live
-      container: ${{ needs.preview.outputs.container }}
-      artifact: ${{ needs.preview.outputs.artifact }}
       deploy_args: --prod
     secrets: inherit
