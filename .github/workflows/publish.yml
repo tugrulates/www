@@ -26,6 +26,7 @@ jobs:
           token: ${{ secrets.BLOG_PUBLISH_TOKEN }}
       - name: Create update commit
         run: |
+          git pull
           git submodule update --init --recursive --remote docs
           git config user.email "actions@github.com"
           git config user.name "GitHub Actions"
