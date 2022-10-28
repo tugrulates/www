@@ -33,7 +33,7 @@ jobs:
                         const age = today - new Date(version.created_at).getDate();
                         const tags = version.metadata?.container?.tags ?? [];
                         return (
-                          age > 7 &&
+                          age > 2 &&
                           tags.filter((tag) => tag.match(/^pr-\d+$/) == null).length === 0
                         );
                       })
@@ -42,7 +42,7 @@ jobs:
                           await github.rest.packages.deletePackageVersionForUser({
                             package_type: "container",
                             username: "tugrulates",
-                            package_name: "blog-devcontainer",
+                            package_name: "blog-devcontainer2",
                             package_version_id: version.id,
                           })
                       )
