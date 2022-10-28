@@ -54,7 +54,7 @@ jobs:
           TAGS: ${{ steps.meta.outputs.tags }}
         run: |
           git fetch origin main
-          if [[ ${{ github.event_name == 'pull_request' }} || $(git diff origin/main --name-only .devcontainer) ]]; then
+          if [[ ${{ github.ref == 'refs/heads/main' }} || $(git diff origin/main --name-only .devcontainer) ]]; then
             echo "container=${TAGS##*,}" >> ${GITHUB_OUTPUT}
             echo "build=true" >> ${GITHUB_OUTPUT}
           else
