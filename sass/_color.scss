@@ -1,9 +1,10 @@
-$contrast: 0.875;
+$light-contrast: 0.925;
+$dark-contrast: 0.875;
 
-$primary-color: hsl(var(--hue), 80%, calc(66% - 33% * var(--light)));
+$primary-color: hsl(var(--hue), 20%, calc(66% - 33% * var(--light)));
 $background-color: hsl(var(--hue), 0%, calc(100% * var(--light)));
 $background-primary-color: hsl(var(--hue), 40%, calc(20% + 60% * var(--light)));
-$background-highlight-color: hsla(var(--hue), 40%, 50%, 0.15);
+$background-highlight-color: hsla(var(--hue), 40%, 50%, 0.12);
 $selection-color: hsl(var(--hue), 80%, calc(33% + 33% * var(--light)));
 
 $text-color: hsl(0, 0%, var(--negative));
@@ -14,7 +15,7 @@ $negative-color: hsl(
   calc(100% * max(0.2, min(0.8, (100 * (var(--light) - 0.5)))))
 );
 
-$hover-filter: brightness(200%) saturate(70%);
+$hover-filter: brightness(calc(var(--negative) * 2)) saturate(70%);
 
 // $indigo: 240;
 // $pink: 329;
@@ -29,17 +30,17 @@ $hover-filter: brightness(200%) saturate(70%);
 // $red: 0;
 
 html {
-  --light: #{1 - $contrast};
+  --light: #{1 - $dark-contrast};
   --positive: calc(100% * min(0.2, var(--light)));
   --negative: calc(100% * max(0.8, 1 - var(--light)));
   &[data-theme="light"] {
-    --light: #{$contrast};
+    --light: #{$light-contrast};
     --positive: calc(100% * max(0.8, var(--light)));
     --negative: calc(100% * min(0.2, 1 - var(--light)));
   }
   @media (prefers-color-scheme: light) {
     &:not([data-theme]) {
-      --light: #{1 - $contrast};
+      --light: #{1 - $dark-contrast};
     }
   }
   --hue: 240;
