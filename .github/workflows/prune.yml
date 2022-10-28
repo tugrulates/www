@@ -8,7 +8,7 @@ on:
 env:
   USERNAME: tugrulates
   CONTAINER: blog-devcontainer
-  MAX_AGE_DAYS: 7
+  MAX_AGE_DAYS: 6
 
 jobs:
   container:
