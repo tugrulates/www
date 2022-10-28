@@ -41,6 +41,7 @@ jobs:
       - name: Publish
         id: publish
         run: |
+          set -o pipefail
           OUTPUT=$(mktemp)
           netlify deploy --json --message "Deploy from ${{ github.ref_name }}" \
             --dir=${{ env.OUTPUT_DIR }} ${{ inputs.deploy_args }} | tee ${OUTPUT}
