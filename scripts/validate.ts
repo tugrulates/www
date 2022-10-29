@@ -12,9 +12,13 @@ const ARGV = yargs(hideBin(process.argv))
   .array("_")
   .parseSync();
 
-await Promise.all(
+const responses = await Promise.all(
   ARGV._.map(async (file) => {
     const options = { filename: file, ignoreLevel: "info" as const };
-    await w3cHtmlValidator.validate(options).then(w3cHtmlValidator.reporter);
+    return await w3cHtmlValidator
+      .validate(options)
+      .then(w3cHtmlValidator.reporter);
   })
 );
+
+process.exit(responses.every((r) => r.validates) ? 0 : 1);
