@@ -108,9 +108,7 @@ jobs:
         id: deploy
         run: |
           OUTPUT=$(mktemp)
-          netlify --telemetry-disable deploy --json \
-            --message "Screenshots from ${{ github.ref_name }}" \
-            --dir=${{ env.OUTPUT_DIR }} | tee $OUTPUT
+          netlify --telemetry-disable deploy --json --message screenshots --dir=${{ env.OUTPUT_DIR }} | tee $OUTPUT
           echo "url=$(jq -r '.deploy_url' $OUTPUT)" >> ${GITHUB_OUTPUT}
           echo "deploy_id=$(jq -r '.deploy_id' $OUTPUT)" >> ${GITHUB_OUTPUT}
         env:

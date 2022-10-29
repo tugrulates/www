@@ -20,12 +20,9 @@
     config = ".htmlvalidate.json"
 
 [[plugins]]
-package = "netlify-plugin-checklinks"
+  package = "netlify-plugin-checklinks"
   [plugins.inputs]
-  entryPoints = [
-    "*.html",
-    "**.html",
-  ]
+  entryPoints = [ "*.html", "**.html", ]
   recursive = true
   pretty = true
   checkExternal = false
