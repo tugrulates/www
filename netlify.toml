@@ -1,6 +1,34 @@
 [build]
   publish = "public/"
-  command = "npm run build"
+  command = "zola build"
+
+[context.drafts]
+  command = "zola build --drafts"
+
+[dev]
+  publish = "public/"
+  framework = "#custom"
+  command = "zola serve --drafts --port 1111"
+  targetPort = 1111
+  port = 1001
+  autoLaunch = false
+
+[[plugins]]
+  package = "netlify-plugin-html-validate"
+  [plugins.inputs]
+    path = "public"
+    config = ".htmlvalidate.json"
+
+[[plugins]]
+package = "netlify-plugin-checklinks"
+  [plugins.inputs]
+  entryPoints = [
+    "*.html",
+    "**.html",
+  ]
+  recursive = true
+  pretty = true
+  checkExternal = false
 
 [[redirects]]
   from = "https://tugrul.netlify.app/*"

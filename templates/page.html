@@ -26,7 +26,7 @@
     <h1>{{ page.title }}</h1>
     {{ macros::time(page=page, update=true) }}
   </header>
-  {% if page.draft != false %}
+  {%- if page.draft != false -%}
   <div class="alert">
     This is a <strong>draft</strong> post.
     Let me know if you have any feedback.
