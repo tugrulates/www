@@ -18,17 +18,17 @@ on:
         value: ${{ jobs.deploy.outputs.url }}
 
 jobs:
-  container:
-    uses: ./.github/workflows/container.yml
+  prepare:
+    uses: ./.github/workflows/prepare.yml
     with:
       latest: ${{ inputs.environment == 'live' }}
 
   deploy:
-    needs: container
+    needs: prepare
     uses: ./.github/workflows/deploy.yml
     with:
       environment: ${{ inputs.environment }}
-      container: ${{ needs.container.outputs.container }}
+      container: ${{ needs.prepare.outputs.container }}
       update_docs: ${{ inputs.update_docs }}
       deploy_args: ${{ inputs.deploy_args }}
     secrets: inherit
