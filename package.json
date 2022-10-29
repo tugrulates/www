@@ -26,7 +26,7 @@
     "watch:files": "onchange -f add -f change \"$npm_package_config_files\" -- npm run build:files {{file}}",
     "watch:favicon": "onchange -f add -f change \"$npm_package_config_favicon\" -- npm run build:favicon {{file}}",
     "dev": "concurrently npm:watch:* 'netlify --telemetry-disable dev'",
-    "deploy": "netlify --telemetry-disable deploy --build --json",
+    "deploy": "netlify --telemetry-disable deploy --build",
     "lint": "eslint scripts",
     "clean": "rm -Rf $npm_package_config_clean"
   },
