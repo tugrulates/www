@@ -20,11 +20,16 @@
   recursive = true
   pretty = true
   checkExternal = false
+
+[[plugins]]
+  package = "netlify-plugin-chromium"
+
 [[plugins]]
   package = "netlify-plugin-html-validate"
   [plugins.inputs]
     path = "public"
     config = ".htmlvalidate.json"
+
 [[plugins]]
   package = "netlify-plugin-is-website-vulnerable"
 
