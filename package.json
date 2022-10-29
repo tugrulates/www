@@ -15,7 +15,7 @@
   },
   "scripts": {
     "prebuild": "concurrently 'npm:build:posts $npm_package_config_posts' 'npm:build:photos $npm_package_config_photos' 'npm:build:files $npm_package_config_files' 'npm:build:favicon $npm_package_config_favicon'",
-    "build": "npx netlify --telemetry-disable build",
+    "build": "netlify --telemetry-disable build",
     "build:posts": "ts-node scripts/posts.ts --output=content",
     "build:photos": "concurrently -P 'ts-node scripts/photos.ts --ext=.jpg --output=static/photos {@}' 'ts-node scripts/photos.ts --ext=.webp --output=static/photos {@}' --",
     "build:files": "cp -R -t static",
@@ -25,8 +25,8 @@
     "watch:photos": "onchange -f add -f change \"$npm_package_config_photos\" -- npm run build:photos {{file}}",
     "watch:files": "onchange -f add -f change \"$npm_package_config_files\" -- npm run build:files {{file}}",
     "watch:favicon": "onchange -f add -f change \"$npm_package_config_favicon\" -- npm run build:favicon {{file}}",
-    "dev": "concurrently npm:watch:* 'npx netlify --telemetry-disable dev'",
-    "deploy": "npx netlify --telemetry-disable deploy --build --json",
+    "dev": "concurrently npm:watch:* 'netlify --telemetry-disable dev'",
+    "deploy": "netlify --telemetry-disable deploy --build --json",
     "lint": "eslint scripts",
     "clean": "rm -Rf $npm_package_config_clean"
   },
@@ -54,7 +54,6 @@
     "gm": "^1.25.0",
     "gray-matter": "^4.0.3",
     "html-validate": "^7.7.1",
-    "netlify-cli": "^12.0.11",
     "netlify-plugin-checklinks": "^4.1.1",
     "netlify-plugin-csp-generator": "^1.5.0",
     "netlify-plugin-html-validate": "^1.1.1",
