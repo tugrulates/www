@@ -31,7 +31,7 @@
     "test": "npm run build --",
     "test:links": "npm run check:links -- --internal",
     "test:lint": "eslint scripts",
-    "test:validate": "ts-node scripts/validate.ts public/*.html public/**/*.html",
+    "test:validate": "npx html-validate public",
     "posttest": "concurrently -g npm:test:*",
     "clean": "rm -Rf $npm_package_config_clean",
     "check:links": "hyperlink -r --canonicalroot=https://tugrul.blog/ public/*.html public/**.html"
@@ -59,11 +59,11 @@
     "favicons": "^7.0.2",
     "gm": "^1.25.0",
     "gray-matter": "^4.0.3",
+    "html-validate": "^7.7.1",
     "path": "^0.12.7",
     "ts-node": "^10.9.1",
     "typescript": "^4.8.4",
     "util": "^0.12.5",
-    "w3c-html-validator": "^1.2.0",
     "yargs": "^17.6.0"
   },
   "eslintConfig": {
