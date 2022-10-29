@@ -44,6 +44,7 @@ jobs:
       - name: Deploy
         id: deploy
         run: |
+          which netlify
           OUTPUT=$(mktemp)
           npm run deploy -- --context ${{ inputs.environment }} --message ${{ github.ref_name }} ${{ inputs.deploy_args }}
           cat $OUTPUT
