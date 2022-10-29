@@ -31,3 +31,16 @@ $line-height: 1.6em;
 @mixin no-text {
   line-height: 0em;
 }
+
+@mixin has-time {
+  time {
+    display: block;
+    font: {
+      size: 0.8rem;
+      style: oblique;
+      weight: 600;
+    }
+    line-height: 2em;
+    text-align: end;
+  }
+}
