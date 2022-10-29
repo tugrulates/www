@@ -30,8 +30,9 @@
   {%- endif -%}
   {%- if update or not page.updated -%}
   <time datetime="{{ page.date | date(format='%Y-%m-%d')  }}">
-    {%- if page.updated -%}- originally published {% endif -%}
+    {%- if page.updated -%}(originally published {% endif -%}
     {{- page.date | date(format=dateformat) -}}
+    {%- if page.updated -%}){%- endif -%}
   </time>
   {%- endif -%}
 </div>
@@ -59,18 +60,18 @@
 {%- endmacro cover -%}
 
 {%- macro card(page) -%}
-<div role="listitem" class="card" aria-label="{{ page.title }}">
+<li class="card" aria-labelledby="{{ page.slug }}-title" aria-describedby="{{ page.slug }}-summary">
   <a class="card-link" href="{{ page.path | safe }}">
     <div class="drawer">
-      <div class="title">
+      <div id="{{ page.slug }}-title" class="title">
         <p>{{ page.title }}</p>
         {%- if page.year | as_str == now() | date(format="%Y") -%}
-        {{- macros::time(page=page, dateformat="%b %d") -}}
+        {{- macros::time(page=page, dateformat="%B %d") -}}
         {%- else -%}
-        {{- macros::time(page=page, dateformat="%b %d, %Y") -}}
+        {{- macros::time(page=page, dateformat="%B %d, %Y") -}}
         {%- endif -%}
       </div>
-      <div class="summary">
+      <div id="{{ page.slug }}-summary" class="summary">
         <p>
           {%- if page.summary -%}
           {{ page.summary | safe | striptags }}
@@ -81,16 +82,16 @@
   </a>
   {{- macros::image(path=page.extra.cover, width=374) -}}
   {#{- macros::tags(tags=page.taxonomies.tags) -}#}
-</div>
+</li>
 {%- endmacro card -%}
 
 {%- macro cards(pages) -%}
 <nav aria-label="articles">
-  <div role="list" class="cards">
+  <ul class="cards">
     {%- for page in pages -%}
     {{- macros::card(page=page) -}}
     {%- endfor -%}
-  </div>
+  </ul>
 </nav>
 {%- endmacro cards -%}
 
