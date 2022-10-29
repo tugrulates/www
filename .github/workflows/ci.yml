@@ -9,9 +9,6 @@ on:
       update_docs:
         required: false
         type: boolean
-      build_args:
-        required: false
-        type: string
       deploy_args:
         required: false
         type: string
@@ -26,27 +23,13 @@ jobs:
     with:
       latest: ${{ inputs.environment == 'live' }}
 
-  build:
-    needs: container
-    uses: ./.github/workflows/build.yml
-    with:
-      container: ${{ needs.container.outputs.container }}
-      update_docs: ${{ inputs.update_docs }}
-      build_args: ${{ inputs.build_args }}
-
-  test:
-    needs: [container, build]
-    uses: ./.github/workflows/test.yml
-    with:
-      container: ${{ needs.container.outputs.container }}
-      artifact: ${{ needs.build.outputs.artifact }}
-
   deploy:
-    needs: build
+    needs: container
     uses: ./.github/workflows/deploy.yml
     with:
       environment: ${{ inputs.environment }}
-      artifact: ${{ needs.build.outputs.artifact }}
+      container: ${{ needs.container.outputs.container }}
+      update_docs: ${{ inputs.update_docs }}
       deploy_args: ${{ inputs.deploy_args }}
     secrets: inherit
 

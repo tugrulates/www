@@ -4,7 +4,7 @@
     {
       "label": "server",
       "type": "shell",
-      "command": "npm start -- --drafts",
+      "command": "npm run dev",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -16,8 +16,8 @@
       },
       "problemMatcher": {
         "background": {
-          "beginsPattern": "Building site...",
-          "endsPattern": "Web server is available"
+          "beginsPattern": "Setting up local development server",
+          "endsPattern": "Server now ready"
         },
         "pattern": [
           {

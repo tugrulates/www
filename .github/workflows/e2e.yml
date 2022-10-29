@@ -12,7 +12,7 @@ on:
 
 env:
   ARTIFACT: screenshots
-  OUTPUT_DIR: public
+  OUTPUT_DIR: screenshots
 
 jobs:
   lighthouse:
@@ -72,12 +72,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-
       - name: Install selenium
         run: |
           pip3 install selenium
           pip3 install --upgrade requests
-
       - name: Run selenium
         run: >
           python3 tests/screenshot.py
@@ -90,7 +88,6 @@ jobs:
           --out="${{ matrix.browser }}-${{ matrix.platform }}-${{ matrix.theme }}.png"
           --url="${{ inputs.url }}"
           --retries=3
-
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
@@ -107,19 +104,16 @@ jobs:
         with:
           name: ${{ env.ARTIFACT }}
           path: ${{ env.OUTPUT_DIR }}
-
       - name: Deploy screenshots
         id: deploy
         run: |
           OUTPUT=$(mktemp)
-          netlify deploy --json --message "Screenshots from ${{ github.ref_name }}" \
-            --dir=${{ env.OUTPUT_DIR }} | tee $OUTPUT
+          netlify --telemetry-disable deploy --json --message screenshots --dir=${{ env.OUTPUT_DIR }} | tee $OUTPUT
           echo "url=$(jq -r '.deploy_url' $OUTPUT)" >> ${GITHUB_OUTPUT}
           echo "deploy_id=$(jq -r '.deploy_id' $OUTPUT)" >> ${GITHUB_OUTPUT}
         env:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-
       - name: Comment on PR
         if: ${{ github.event_name == 'pull_request' }}
         uses: exercism/pr-commenter-action@v1.3.0
