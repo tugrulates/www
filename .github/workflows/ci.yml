@@ -19,7 +19,7 @@ on:
 
 jobs:
   prepare:
-    uses: ./.github/workflows/container.yml
+    uses: ./.github/workflows/prepare.yml
     with:
       latest: ${{ inputs.environment == 'live' }}
 
