@@ -14,8 +14,9 @@
     "clean": "public content/[!_]* static/[!avatar,icons,scripts]* templates/favicon.html"
   },
   "scripts": {
+    "lint": "npx eslint scripts",
     "prebuild": "concurrently 'npm:build:posts $npm_package_config_posts' 'npm:build:photos $npm_package_config_photos' 'npm:build:files $npm_package_config_files' 'npm:build:favicon $npm_package_config_favicon'",
-    "build": "netlify --telemetry-disable build",
+    "build": "npm run netlify -- build --offline",
     "build:posts": "ts-node scripts/posts.ts --output=content",
     "build:photos": "concurrently -P 'ts-node scripts/photos.ts --ext=.jpg --output=static/photos {@}' 'ts-node scripts/photos.ts --ext=.webp --output=static/photos {@}' --",
     "build:files": "cp -R -t static",
@@ -25,10 +26,13 @@
     "watch:photos": "onchange -f add -f change \"$npm_package_config_photos\" -- npm run build:photos {{file}}",
     "watch:files": "onchange -f add -f change \"$npm_package_config_files\" -- npm run build:files {{file}}",
     "watch:favicon": "onchange -f add -f change \"$npm_package_config_favicon\" -- npm run build:favicon {{file}}",
-    "dev": "concurrently npm:watch:* 'netlify --telemetry-disable dev'",
-    "deploy": "netlify --telemetry-disable deploy",
-    "lint": "eslint scripts",
-    "clean": "rm -Rf $npm_package_config_clean"
+    "dev": "concurrently npm:watch:* 'npm run netlify -- dev'",
+    "test": "npm run netlify -- build --offline --context test",
+    "lighthouse": "run-s -s \"netlify -s -- build --context=lighthouse-{1}\" --",
+    "lighthouse:parse": "awk 'BEGIN{printf \"console.log(JSON.stringify({ audits: [\"} /^{/{f=1} /^}/{f=0;print;printf \",\"} END{printf \"]}));\"} f' | node | jq",
+    "deploy": "npm run netlify -- deploy --offline",
+    "clean": "rm -Rf $npm_package_config_clean",
+    "netlify": "netlify --telemetry-disable"
   },
   "repository": {
     "type": "git",
@@ -41,11 +45,9 @@
   },
   "homepage": "https://github.com/tugrulates/blog-code#readme",
   "devDependencies": {
-    "@netlify/plugin-a11y": "^1.0.0-beta.1",
     "@types/gm": "^1.18.12",
     "@types/yargs": "^17.0.13",
     "@typescript-eslint/eslint-plugin": "^5.41.0",
-    "chromium": "^3.0.3",
     "eslint": "^8.26.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-standard-with-typescript": "^23.0.0",
@@ -57,8 +59,9 @@
     "gray-matter": "^4.0.3",
     "html-validate": "^7.7.1",
     "netlify-plugin-checklinks": "^4.1.1",
-    "netlify-plugin-csp-generator": "^1.5.0",
+    "netlify-plugin-chromium": "^1.1.4",
     "netlify-plugin-html-validate": "^1.1.1",
+    "npm-run-all": "^4.1.5",
     "path": "^0.12.7",
     "ts-node": "^10.9.1",
     "typescript": "^4.8.4",
@@ -83,5 +86,8 @@
       ]
     },
     "rules": {}
+  },
+  "dependencies": {
+    "chromium": "^3.0.3"
   }
 }

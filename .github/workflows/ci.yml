@@ -6,37 +6,204 @@ on:
       environment:
         required: true
         type: string
+      latest:
+        type: boolean
       update_docs:
-        required: false
         type: boolean
       deploy_args:
-        required: false
         type: string
     outputs:
       url:
         description: "URL for deployed site"
         value: ${{ jobs.deploy.outputs.url }}
+      lighthouse:
+        description: "Lighthouse results"
+        value: |
+          {
+            "desktop": ${{ jobs.lighthouse.outputs.desktop }},
+            "mobile": ${{ jobs.lighthouse.outputs.mobile }}
+          }
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository_owner }}/blog-devcontainer
+  NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+  NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
 
 jobs:
-  prepare:
-    uses: ./.github/workflows/prepare.yml
-    with:
-      latest: ${{ inputs.environment == 'live' }}
+  container:
+    outputs:
+      container: ${{ steps.name.outputs.container }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: docker/setup-buildx-action@v2
+      - uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: "${{ github.token }}"
+      - id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          labels: |
+            org.opencontainers.image.title=tugrul-blog-devcontainer
+            org.opencontainers.image.description=Devcontainer for building tugrul.blog
+          flavor: latest=${{ inputs.latest }}
+          sep-tags: ","
+      - uses: actions/checkout@v3
+      - id: name
+        env:
+          TAGS: ${{ steps.meta.outputs.tags }}
+        run: |
+          git fetch origin main
+          if ${{ github.event_name == 'push' }} || git diff origin/main --name-only .devcontainer | grep .
+          then
+            echo "container=${TAGS##*,}" >> ${GITHUB_OUTPUT}
+            echo "build=true" >> ${GITHUB_OUTPUT}
+          else
+            echo "container=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest" >> ${GITHUB_OUTPUT}
+          fi
+      - if: ${{ steps.name.outputs.build }}
+        uses: docker/build-push-action@v3
+        with:
+          context: "{{ defaultContext }}:.devcontainer"
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: ${{ steps.name.outputs.tag }}
+          cache-to: type=inline
+
+  lint:
+    needs: container
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: npm ci
+      - run: npm run lint
+
+  build:
+    needs: container
+    runs-on: ubuntu-latest
+    container: ${{ needs.container.outputs.container }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+      - run: sudo chown $(whoami) .
+      - if: ${{ inputs.update_docs }}
+        run: git submodule update --init --recursive --remote docs
+      - run: npm ci
+      - run: npm run build -- --context ${{ inputs.environment }}
+      - uses: actions/upload-artifact@v3
+        with:
+          name: public
+          path: public
+
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    container: ${{ needs.container.outputs.container }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/download-artifact@v3
+        with:
+          name: public
+          path: public
+      - run: npm ci
+      - run: npm run test
+
+  lighthouse:
+    needs: build
+    outputs:
+      desktop: ${{ steps.lighthouse.outputs.desktop }}
+      mobile: ${{ steps.lighthouse.outputs.mobile }}
+    strategy:
+      matrix:
+        platform: [desktop, mobile]
+    runs-on: ubuntu-latest
+    container: ${{ needs.container.outputs.container }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/download-artifact@v3
+        with:
+          name: public
+          path: public
+      - run: npm ci
+      - name: Lighthouse
+        id: lighthouse
+        run: echo ${{ matrix.platform }}=$(npm run -s lighthouse ${{ matrix.platform }} | npm run -s lighthouse:parse) >> ${GITHUB_OUTPUT}
+      - uses: actions/upload-artifact@v3
+        with:
+          name: reports
+          path: lighthouse
 
   deploy:
-    needs: prepare
-    uses: ./.github/workflows/deploy.yml
-    with:
-      environment: ${{ inputs.environment }}
-      container: ${{ needs.prepare.outputs.container }}
-      update_docs: ${{ inputs.update_docs }}
-      deploy_args: ${{ inputs.deploy_args }}
-    secrets: inherit
+    needs: build
+    outputs:
+      url: ${{ fromJSON(steps.deploy.outputs.json).deploy_url }}${{ fromJSON(steps.deploy.outputs.json).url }}
+    environment:
+      name: ${{ inputs.environment }}
+      url: ${{ fromJSON(steps.deploy.outputs.json).deploy_url }}${{ fromJSON(steps.deploy.outputs.json).url }}
+    runs-on: ubuntu-latest
+    container: ${{ needs.container.outputs.container }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/download-artifact@v3
+        with:
+          name: public
+          path: public
+      - name: Deploy
+        id: deploy
+        run: echo json=$(npm run -s deploy -- --message ${{ github.ref_name }} ${{ inputs.deploy_args }} --json) >> ${GITHUB_OUTPUT}
 
-  e2e:
+  screenshots:
     needs: deploy
-    uses: ./.github/workflows/e2e.yml
-    with:
-      url: ${{ needs.deploy.outputs.url }}
-      environment: ${{ inputs.environment }}
-    secrets: inherit
+    strategy:
+      matrix:
+        browser: [chrome, firefox, safari]
+        platform: [desktop, mobile]
+        theme: [dark, light]
+        include:
+          - browser: chrome
+            os: windows-latest
+          - browser: firefox
+            os: ubuntu-latest
+          - browser: safari
+            os: macos-latest
+          - platform: desktop
+            width: 1600
+            height: 1200
+            dpr: 2.0
+          - platform: mobile
+            width: 400
+            height: 800
+            dpr: 3.0
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install selenium
+        run: |
+          pip3 install selenium
+          pip3 install --upgrade requests
+      - name: Run selenium
+        run: >
+          python3 tests/screenshot.py
+          --browser=${{ matrix.browser }}
+          --platform=${{ matrix.platform }}
+          --theme=${{ matrix.theme }}
+          --width=${{ matrix.width }}
+          --height=${{ matrix.height }}
+          --dpr=${{ matrix.dpr }}
+          --out="${{ matrix.browser }}-${{ matrix.platform }}-${{ matrix.theme }}.png"
+          --url="${{ needs.deploy.outputs.url }}"
+          --retries=3
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: reports
+          path: "${{ matrix.browser }}-${{ matrix.platform }}-${{ matrix.theme }}.png"

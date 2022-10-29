@@ -1,0 +1,32 @@
+comment:
+  glob-options:
+    dot: true
+  snippets:
+    - id: status-{{id}}
+      files: ["**/*"]
+      body: |
+        🚩 **Result:** {{result}}
+    - id: preview-{{id}}
+      files: ["**/*"]
+      body: |
+        🧪 **Preview:** [link]({{preview}})
+    - id: lighthouse-test-{{id}}
+      files: ["**/*"]
+      body: |
+        🕯️ **Lighthouse:**
+        | Audit                                           | {{#lighthouse.desktop.audits.0.results}} {{title}} | {{/lighthouse.desktop.audits.0.results}}
+        | ----------------------------------------------- | {{#lighthouse.desktop.audits.0.results}} :-------: | {{/lighthouse.desktop.audits.0.results}}
+        | [Desktop (home)]({{reports}}/desktop-home.html) | {{#lighthouse.desktop.audits.0.results}} {{score}} | {{/lighthouse.desktop.audits.0.results}}
+        | [Desktop (page)]({{reports}}/desktop-page.html) | {{#lighthouse.desktop.audits.1.results}} {{score}} | {{/lighthouse.desktop.audits.1.results}}
+        | [Mobile (home)]({{reports}}/mobile-home.html)   | {{#lighthouse.mobile.audits.0.results}}  {{score}} | {{/lighthouse.mobile.audits.0.results}}
+        | [Mobile (page)]({{reports}}/mobile-page.html)   | {{#lighthouse.mobile.audits.1.results}}  {{score}} | {{/lighthouse.mobile.audits.1.results}}
+    - id: screenshot-{{id}}
+      files: ["**/*"]
+      body: |
+        🖼️ **Screenshots:**
+        | Chrome                                    | Firefox                                    | Safari                                    |
+        | :---------------------------------------: | :----------------------------------------: | :---------------------------------------: |
+        | ![]({{reports}}/chrome-desktop-dark.png)  | ![]({{reports}}/firefox-desktop-dark.png)  | ![]({{reports}}/safari-desktop-dark.png)  |
+        | ![]({{reports}}/chrome-desktop-light.png) | ![]({{reports}}/firefox-desktop-light.png) | ![]({{reports}}/safari-desktop-light.png) |
+        | ![]({{reports}}/chrome-mobile-dark.png)   | ![]({{reports}}/firefox-mobile-dark.png)   | ![]({{reports}}/safari-mobile-dark.png)   |
+        | ![]({{reports}}/chrome-mobile-light.png)  | ![]({{reports}}/firefox-mobile-light.png)  | ![]({{reports}}/safari-mobile-light.png)  |

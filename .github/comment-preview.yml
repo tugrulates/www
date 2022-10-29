@@ -1,7 +1,0 @@
-comment:
-  glob-options:
-    dot: true
-  snippets:
-    - id: preview-{{ id }}
-      files: ["**/*"]
-      body: 🧪 Preview is [ready]({{ url }})!

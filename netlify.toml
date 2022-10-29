@@ -13,20 +13,20 @@
   port = 1001
   autoLaunch = false
 
-[context.check]
+[context.test]
   command = "echo Running checks"
-  [[context.check.plugins]]
+  [[context.test.plugins]]
     package = "netlify-plugin-checklinks"
-    [context.check.plugins.inputs]
+    [context.test.plugins.inputs]
       entryPoints = [ "*.html", "**.html", ]
       recursive = true
       pretty = true
       checkExternal = false
-  [[context.check.plugins]]
+  [[context.test.plugins]]
     package = "netlify-plugin-chromium"
-  [[context.check.plugins]]
+  [[context.test.plugins]]
     package = "netlify-plugin-html-validate"
-    [context.check.plugins.inputs]
+    [context.test.plugins.inputs]
       path = "public"
       config = ".htmlvalidate.json"
   [[context.snyk.plugins]]
@@ -44,10 +44,10 @@
       best-practices = 1
       seo = 1
     [[context.lighthouse-desktop.plugins.inputs.audits]]
-      output_path = "lighthouse/desktop-home.html"
+      output_path = "../lighthouse/desktop-home.html"
     [[context.lighthouse-desktop.plugins.inputs.audits]]
       path = "research/"
-      output_path = "lighthouse/desktop-page.html"
+      output_path = "../lighthouse/desktop-page.html"
 
 [context.lighthouse-mobile]
   command = "echo Running Lighthouse for mobile"
@@ -59,10 +59,10 @@
       best-practices = 1
       seo = 1
     [[context.lighthouse-mobile.plugins.inputs.audits]]
-      output_path = "lighthouse/mobile-home.html"
+      output_path = "../lighthouse/mobile-home.html"
     [[context.lighthouse-mobile.plugins.inputs.audits]]
       path = "research/"
-      output_path = "lighthouse/mobile-page.html"
+      output_path = "../lighthouse/mobile-page.html"
 
 [[redirects]]
   from = "https://tugrul.netlify.app/*"
