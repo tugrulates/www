@@ -20,8 +20,44 @@ on:
         description: "URL for deployed site"
         value: ${{ jobs.deploy.outputs.url }}
 
+env:
+  NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+  NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: ${{ inputs.container }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+      - run: sudo chown $(whoami) .
+      - if: ${{ inputs.update_docs }}
+        run: git submodule update --init --recursive --remote docs
+      - run: npm ci
+      - run: npm run build -- --context ${{ inputs.environment }}
+      - uses: actions/upload-artifact@v3
+        with:
+          - name: public
+          - path: public
+
+  check:
+    needs: build
+    runs-on: ubuntu-latest
+    container: ${{ inputs.container }}
+    steps:
+      - uses: actions/checkout@v3
+      - run: npm run build -- --context check
+      - run: npm run build -- --context lighthouse-desktop
+      - run: npm run build -- --context lighthouse-mobile
+      - uses: actions/upload-artifact@v3
+        with:
+          - name: lighthouse
+          - path: public/lighthouse
+
   deploy:
+    needs: build
     outputs:
       url: ${{ steps.deploy.outputs.url }}
     environment:
@@ -30,35 +66,19 @@ jobs:
     runs-on: ubuntu-latest
     container: ${{ inputs.container }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
+      - uses: actions/download-artifact@v3
         with:
-          submodules: true
-      - name: Setup permissions
-        run: sudo chown $(whoami) .
-      - name: Update docs
-        if: ${{ inputs.update_docs }}
-        run: git submodule update --init --recursive --remote docs
-      - name: Install node dependencies
-        run: npm ci
-      - name: Build
-        run: npm run build --context ${{ inputs.environment }}
-        env:
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-      - name: Deploy
-        id: deploy
+          - name: public
+          - path: public
+      - id: deploy
         run: |
           OUTPUT=$(mktemp)
           npm run deploy --silent -- --json \
             --message ${{ github.ref_name }} ${{ inputs.deploy_args }} | tee ${OUTPUT}
           echo "url=$(jq -r '.url,.deploy_url' ${OUTPUT} | grep https | head -n 1)" >> ${GITHUB_OUTPUT}
           echo "deploy_id=$(jq -r '.deploy_id' ${OUTPUT})" >> ${GITHUB_OUTPUT}
-        env:
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-      - name: Comment on PR
-        if: ${{ github.event_name == 'pull_request' }}
+      - if: ${{ github.event_name == 'pull_request' }}
         uses: exercism/pr-commenter-action@v1.3.0
         with:
           github-token: "${{ github.token }}"

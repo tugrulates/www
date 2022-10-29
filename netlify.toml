@@ -13,25 +13,56 @@
   port = 1001
   autoLaunch = false
 
-[[plugins]]
-  package = "netlify-plugin-checklinks"
-  [plugins.inputs]
-  entryPoints = [ "*.html", "**.html", ]
-  recursive = true
-  pretty = true
-  checkExternal = false
+[context.check]
+  command = "echo Running checks"
+  [[context.check.plugins]]
+    package = "netlify-plugin-checklinks"
+    [context.check.plugins.inputs]
+      entryPoints = [ "*.html", "**.html", ]
+      recursive = true
+      pretty = true
+      checkExternal = false
+  [[context.check.plugins]]
+    package = "netlify-plugin-chromium"
+  [[context.check.plugins]]
+    package = "netlify-plugin-html-validate"
+    [context.check.plugins.inputs]
+      path = "public"
+      config = ".htmlvalidate.json"
+  [[context.snyk.plugins]]
+    package = "netlify-plugin-is-website-vulnerable"
 
-[[plugins]]
-  package = "netlify-plugin-chromium"
+[context.lighthouse-desktop]
+  command = "echo Running Lighthouse for desktop"
+  [[context.lighthouse-desktop.plugins]]
+    package = "@netlify/plugin-lighthouse"
+    [context.lighthouse-desktop.plugins.inputs.settings]
+      preset = "desktop"
+    [context.lighthouse-desktop.plugins.inputs.thresholds]
+      performance = 0.9
+      accessibility = 1
+      best-practices = 1
+      seo = 1
+    [[context.lighthouse-desktop.plugins.inputs.audits]]
+      output_path = "lighthouse/desktop-home.html"
+    [[context.lighthouse-desktop.plugins.inputs.audits]]
+      path = "research/"
+      output_path = "lighthouse/desktop-page.html"
 
-[[plugins]]
-  package = "netlify-plugin-html-validate"
-  [plugins.inputs]
-    path = "public"
-    config = ".htmlvalidate.json"
-
-[[plugins]]
-  package = "netlify-plugin-is-website-vulnerable"
+[context.lighthouse-mobile]
+  command = "echo Running Lighthouse for mobile"
+  [[context.lighthouse-mobile.plugins]]
+    package = "@netlify/plugin-lighthouse"
+    [context.lighthouse-mobile.plugins.inputs.thresholds]
+      performance = 0.9
+      accessibility = 1
+      best-practices = 1
+      seo = 1
+    [[context.lighthouse-mobile.plugins.inputs.audits]]
+      output_path = "lighthouse/mobile-home.html"
+    [[context.lighthouse-mobile.plugins.inputs.audits]]
+      path = "research/"
+      output_path = "lighthouse/mobile-page.html"
 
 [[redirects]]
   from = "https://tugrul.netlify.app/*"

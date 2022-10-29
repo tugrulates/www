@@ -41,9 +41,11 @@
   },
   "homepage": "https://github.com/tugrulates/blog-code#readme",
   "devDependencies": {
+    "@netlify/plugin-a11y": "^1.0.0-beta.1",
     "@types/gm": "^1.18.12",
     "@types/yargs": "^17.0.13",
     "@typescript-eslint/eslint-plugin": "^5.41.0",
+    "chromium": "^3.0.3",
     "eslint": "^8.26.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-standard-with-typescript": "^23.0.0",
