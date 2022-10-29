@@ -43,7 +43,7 @@ jobs:
         id: deploy
         run: |
           OUTPUT=$(mktemp)
-          npm run --silent deploy -- --context ${{ inputs.environment }} --message ${{ github.ref_name }} ${{ inputs.deploy_args }} | tee ${OUTPUT}
+          npm run deploy -- --context ${{ inputs.environment }} --message ${{ github.ref_name }} ${{ inputs.deploy_args }} | tee ${OUTPUT}
           echo "url=$(jq -r '.url,.deploy_url' $OUTPUT | grep https | head -n 1)" >> ${GITHUB_OUTPUT}
           echo "deploy_id=$(jq -r '.deploy_id' $OUTPUT)" >> ${GITHUB_OUTPUT}
         env:

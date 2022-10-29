@@ -45,7 +45,7 @@ jobs:
       - name: Test for public vulnerabilities
         uses: lirantal/is-website-vulnerable@master
         with:
-          scan-url: "${{ inputs.url }}"
+          scan-url: ${{ inputs.url }}
 
   screenshot:
     strategy:
