@@ -41,11 +41,12 @@ jobs:
         run: git submodule update --init --recursive --remote docs
       - name: Install node dependencies
         run: npm ci
+      - name: Build
+        run: npm run build
       - name: Deploy
         id: deploy
         run: |
           OUTPUT=$(mktemp)
-          npm run build
           npm run deploy --silent -- --json --context ${{ inputs.environment }} \
             --message ${{ github.ref_name }} ${{ inputs.deploy_args }} > ${OUTPUT}
           echo "url=$(jq -r '.url,.deploy_url' ${OUTPUT} | grep https | head -n 1)" >> ${GITHUB_OUTPUT}
