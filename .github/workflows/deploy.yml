@@ -44,13 +44,12 @@ jobs:
       - name: Deploy
         id: deploy
         run: |
-          which netlify
-          netlify --telemetry-disable deploy --build -context ${{ inputs.environment }} --message ${{ github.ref_name }} ${{ inputs.deploy_args }}
           OUTPUT=$(mktemp)
-          npm run deploy -- --context ${{ inputs.environment }} --message ${{ github.ref_name }} ${{ inputs.deploy_args }}
-          cat $OUTPUT
-          echo "url=$(jq -r '.url,.deploy_url' $OUTPUT | grep https | head -n 1)" >> ${GITHUB_OUTPUT}
-          echo "deploy_id=$(jq -r '.deploy_id' $OUTPUT)" >> ${GITHUB_OUTPUT}
+          npm run build
+          npm run --silent deploy -- --json --context ${{ inputs.environment }} \
+            --message ${{ github.ref_name }} ${{ inputs.deploy_args }} > ${OUTPUT}
+          echo "url=$(jq -r '.url,.deploy_url' ${OUTPUT} | grep https | head -n 1)" >> ${GITHUB_OUTPUT}
+          echo "deploy_id=$(jq -r '.deploy_id' ${OUTPUT})" >> ${GITHUB_OUTPUT}
         env:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
