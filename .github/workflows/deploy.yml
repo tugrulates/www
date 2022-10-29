@@ -34,6 +34,8 @@ jobs:
         uses: actions/checkout@v3
         with:
           submodules: true
+      - name: Setup permissions
+        run: sudo chown $(whoami) .
       - name: Update docs
         if: ${{ inputs.update_docs }}
         run: git submodule update --init --recursive --remote docs
