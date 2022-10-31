@@ -14,6 +14,7 @@ jobs:
     with:
       environment: drafts
       update_docs: true
+      deploy_args: --alias drafts
 
   update:
     needs: drafts
