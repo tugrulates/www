@@ -9,14 +9,15 @@ concurrency: live
 jobs:
   preview:
     uses: ./.github/workflows/ci.yml
+    secrets: inherit
     with:
       environment: preview
-    secrets: inherit
 
   live:
     needs: preview
     uses: ./.github/workflows/ci.yml
+    secrets: inherit
     with:
       environment: live
+      latest: true
       deploy_args: --prod
-    secrets: inherit

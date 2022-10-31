@@ -10,10 +10,10 @@ concurrency: drafts
 jobs:
   publish:
     uses: ./.github/workflows/ci.yml
+    secrets: inherit
     with:
       environment: drafts
       update_docs: true
-    secrets: inherit
 
   update:
     needs: publish
