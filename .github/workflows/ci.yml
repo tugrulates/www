@@ -147,7 +147,7 @@ jobs:
       url: ${{ steps.deploy.outputs.url }}
     environment:
       name: ${{ inputs.environment }}
-      url: ${{ steps.url.outputs.url }}
+      url: ${{ steps.deploy.outputs.url }}
     runs-on: ubuntu-latest
     container: ${{ needs.container.outputs.container }}
     steps:
