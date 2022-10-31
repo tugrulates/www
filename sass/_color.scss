@@ -3,7 +3,7 @@ $dark-contrast: 0.875;
 
 $primary-color: hsl(var(--hue), 20%, calc(66% - 33% * var(--light)));
 $background-color: hsl(var(--hue), 0%, calc(100% * var(--light)));
-$background-primary-color: hsl(var(--hue), 40%, calc(20% + 60% * var(--light)));
+$background-primary-color: hsl(var(--hue), 20%, calc(20% + 60% * var(--light)));
 $background-highlight-color: hsla(var(--hue), 40%, 50%, 0.12);
 $selection-color: hsl(var(--hue), 80%, calc(33% + 33% * var(--light)));
 
