@@ -8,6 +8,7 @@ from argparse import ArgumentParser, Namespace
 from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
 from selenium.webdriver import Remote
+from selenium.webdriver.common.by import By
 
 
 def main() -> None:
@@ -32,7 +33,6 @@ def main() -> None:
             screenshot(namespace)
             sys.exit(0)
         except WebDriverException as err:
-            log.error("Webdriver error: %s", err)
             log.error("Webdriver error: %s", err.msg)
             log.warning("%d retries left", namespace.retries - i - 1)
     sys.exit(1)
@@ -50,7 +50,7 @@ def screenshot(namespace: Namespace) -> None:
     browser.get(namespace.url)
     time.sleep(3)
     if namespace.theme == "dark":
-        browser.find_element_by_id("light-switch").click()
+        browser.find_element(By.ID, "light-switch").click()
     #     browser.execute_script("javascript:switchLight()")
     #     time.sleep(1)
     #     browser.refresh()
