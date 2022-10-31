@@ -48,11 +48,11 @@ def screenshot(namespace: Namespace) -> None:
     browser.set_window_size(namespace.width, namespace.height)
     browser.get(namespace.url)
     time.sleep(3)
-    if namespace.theme == "dark":
-        browser.execute_script("javascript:switchLight()")
-        time.sleep(1)
-        browser.refresh()
-        time.sleep(3)
+    # if namespace.theme == "dark":
+    #     browser.execute_script("javascript:switchLight()")
+    #     time.sleep(1)
+    #     browser.refresh()
+    #     time.sleep(3)
     browser.save_screenshot(namespace.out)
     browser.quit()
 
