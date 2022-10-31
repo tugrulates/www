@@ -32,6 +32,8 @@
         frameSrc = "'self' https://www.youtube.com"
         imgSrc = "'self'"
         manifestSrc = "'self'"
+        frameAncestors = "'none'"
+        formAction = "'none'"
         baseUri = "'none'"
         defaultSrc = "'none'"
 

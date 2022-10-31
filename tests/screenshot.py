@@ -8,7 +8,6 @@ from argparse import ArgumentParser, Namespace
 from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
 from selenium.webdriver import Remote
-from selenium.webdriver.common.by import By
 
 
 def main() -> None:
@@ -50,7 +49,10 @@ def screenshot(namespace: Namespace) -> None:
     browser.get(namespace.url)
     time.sleep(3)
     if namespace.theme == "dark":
-        browser.find_element(By.ID, "light-switch").click()
+        browser.execute_script("javascript:switchLight()")
+        time.sleep(1)
+        browser.refresh()
+        time.sleep(3)
     browser.save_screenshot(namespace.out)
     browser.quit()
 
