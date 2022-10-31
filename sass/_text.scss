@@ -6,7 +6,13 @@ $line-height: 1.6em;
     min(#{$font-size}, max(#{100 * $font-size / $width}vw, 6vw))
   );
   font: 400 unquote("#{$responsive-font-size}/#{$line-height/1em}") -apple-system,
-    BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  @media print {
+    font: 300 12pt "Apple Garamond", "Baskerville", "Times New Roman",
+      "Droid Serif", "Times", "Source Serif Pro", serif;
+    text-align: justify;
+  }
   font: {
     feature-settings: "kern" 1;
     kerning: normal;

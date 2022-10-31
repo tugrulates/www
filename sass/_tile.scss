@@ -51,10 +51,12 @@
       @include border-overlap-fix;
       min-width: $card-width;
       height: $card-height;
+      @media print {
+        height: fit-content;
+      }
       .card-link {
         @include normal-text;
         @include column($gap: 0, $justify: flex-end);
-        height: $card-height;
         .drawer {
           @include responsive-rounded-box;
           @include padded;
@@ -70,9 +72,11 @@
                 weight: bold;
               }
               margin: 0;
+              overflow: visible;
             }
           }
           .summary {
+            @include noninteractive(max-height, $card-height);
             p {
               @include max-lines(4);
               font-size: smaller;

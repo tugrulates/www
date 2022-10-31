@@ -29,6 +29,7 @@
     );
     @include needs-huge-vertical-space-on-desktop;
     @include slim-on-mobile;
+    @include hidden-on-print;
     .home-link {
       @include navigation;
       @include thin-padded;
@@ -59,6 +60,9 @@
   }
 
   & > main {
+    @media print {
+      @include needs-large-vertical-space;
+    }
     & > p {
       @include paragraph;
     }
@@ -76,6 +80,7 @@
     a.feed-link {
       @include navigation;
       @include square-padded;
+      @include hidden-on-print;
     }
   }
 
@@ -89,6 +94,7 @@
     @include row($align: center, $justify: center, $gap: 0);
     @include needs-huge-vertical-space-on-desktop;
     @include slim-on-mobile;
+    @include hidden-on-print;
     & > * {
       @include navigation;
       @include square-padded;

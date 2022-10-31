@@ -13,6 +13,7 @@
 @mixin link-hint($icon) {
   &::after {
     @include icon-mask($icon, $small-icon-size);
+    @include hidden-on-print;
     background-color: $link-color;
     content: "";
     margin-left: $small-gap;
@@ -57,6 +58,9 @@
   & > header {
     @include needs-huge-vertical-space-on-desktop;
     @include has-time;
+    picture {
+      @include hidden-on-print;
+    }
     h1 {
       @include paragraph;
       font-size: 250%;
@@ -190,6 +194,7 @@
 @mixin has-video {
   & > div > iframe {
     @include block;
+    @include hidden-on-print;
     background-color: transparent;
     height: calc(min(100vw, #{round($width * 0.5625)}));
     border: 0;
