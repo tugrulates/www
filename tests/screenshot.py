@@ -32,6 +32,7 @@ def main() -> None:
             screenshot(namespace)
             sys.exit(0)
         except WebDriverException as err:
+            log.error("Webdriver error: %s", err)
             log.error("Webdriver error: %s", err.msg)
             log.warning("%d retries left", namespace.retries - i - 1)
     sys.exit(1)
