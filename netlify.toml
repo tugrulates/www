@@ -5,12 +5,34 @@
 [context.drafts]
   command = "zola build --drafts"
 
+[context.local]
+  command = "zola build --drafts"
+  [[context.local.plugins]]
+  package = "netlify-plugin-csp-generator"
+    [context.local.plugins.inputs.policies]
+      connectSrc = "*"
+
 [dev]
   framework = "#custom"
   command = "zola serve --drafts --port 1111"
   targetPort = 1111
   port = 1001
   autoLaunch = false
+
+[[plugins]]
+package = "netlify-plugin-csp-generator"
+  [plugins.inputs]
+  buildDir = "public"
+  # Need unsafe inline style and the following two SHA for mermaid.js to work (#11).
+  # No need to disable style hashes if a stricter policy is set.
+  disableGeneratedPolicies = ["styleSrc"]
+  [plugins.inputs.policies]
+    scriptSrc = "'self' 'unsafe-inline' 'unsafe-hashes' 'sha256-JBhAzDOM5zUvFs5wf3KR6W1uAcXAi9aUaaHIyfL6nVQ=' 'sha256-YCI1+jSo7EVM0oHgxtxB82JSp+59HeM97qAuRzm/+88='"
+    styleSrc = "'self' 'unsafe-inline'"
+    frameSrc = "'self' https://www.youtube.com"
+    objectSrc = "'none'"
+    baseUri = "'none'"
+    defaultSrc = "'self'"
 
 [context.test]
   command = "echo Running checks"
@@ -28,7 +50,7 @@
     [context.test.plugins.inputs]
       path = "public"
       config = ".htmlvalidate.json"
-  [[context.snyk.plugins]]
+  [[context.test.plugins]]
     package = "netlify-plugin-is-website-vulnerable"
 
 [context.lighthouse-desktop]
