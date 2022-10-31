@@ -161,7 +161,7 @@ jobs:
         run: echo url=$(npm run -s deploy -- --message ${{ github.ref_name }} ${{ inputs.deploy_args }} --json | jq -er '.url//.deploy_url') >> ${GITHUB_OUTPUT}
 
   screenshots:
-    needs: deploy
+    # needs: deploy
     strategy:
       matrix:
         browser: [chrome, firefox, safari]
@@ -200,7 +200,7 @@ jobs:
           --height=${{ matrix.height }}
           --dpr=${{ matrix.dpr }}
           --out="${{ matrix.browser }}-${{ matrix.platform }}-${{ matrix.theme }}.png"
-          --url="${{ needs.deploy.outputs.url }}"
+          --url="https://6360100ba639380fe2d8b626--tugrul.netlify.app/"
           --retries=3
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
