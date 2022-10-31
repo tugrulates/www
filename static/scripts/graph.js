@@ -2,7 +2,7 @@ function initializeGraph() {
   const hue = $("html").css("--hue");
   const light = $("html").css("--light");
 
-  const positive = light > 0.5 ? 80 : 20;
+  const positive = light > 0.5 ? 92.5 : 12.5;
   const negative = 100 - positive;
 
   const textColor = `hsl(0, 0%, ${negative}%)`;
@@ -12,13 +12,13 @@ function initializeGraph() {
   const highlightColor = `hsla(${hue}, 40%, 50%, 0.15)`;
   const none = "transparent";
 
-  var config = {
+  const config = {
     startOnLoad: true,
     theme: "base",
     themeVariables: {
-      primaryColor: primaryColor,
-      lineColor: lineColor,
-      textColor: textColor,
+      primaryColor,
+      lineColor,
+      textColor,
       titleColor: textColor,
       nodeTextColor: textColor,
       mainBkg: backgroundColor,
