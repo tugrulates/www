@@ -25,7 +25,6 @@ const ARGV = yargs(hideBin(process.argv))
 void transform(
   { srcs: ARGV._, dest: ARGV.output, ext: ARGV.ext },
   async (src: string, dest: string) => {
-    console.log(src);
     const input = gm(src).noProfile().colorspace("Rec709Luma").resize(3200);
     await util.promisify(input.write).bind(input)(dest);
     return dest;
