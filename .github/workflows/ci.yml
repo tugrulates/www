@@ -144,10 +144,10 @@ jobs:
   deploy:
     needs: build
     outputs:
-      url: ${{ fromJSON(steps.deploy.outputs.json).deploy_url }}${{ fromJSON(steps.deploy.outputs.json).url }}
+      url: ${{ steps.url.outputs.url }}
     environment:
       name: ${{ inputs.environment }}
-      url: ${{ fromJSON(steps.deploy.outputs.json).deploy_url }}${{ fromJSON(steps.deploy.outputs.json).url }}
+      url: ${{ steps.url.outputs.url }}
     runs-on: ubuntu-latest
     container: ${{ needs.container.outputs.container }}
     steps:
@@ -159,6 +159,9 @@ jobs:
       - name: Deploy
         id: deploy
         run: echo json=$(npm run -s deploy -- --message ${{ github.ref_name }} ${{ inputs.deploy_args }} --json) >> ${GITHUB_OUTPUT}
+      - name: URL
+        id: url echo url=$(echo ${{ steps.deploy.outputs.json }} | jq -e '.url//.deploy_url') >> ${GITHUB_OUTPUT}
+        run:
 
   screenshots:
     needs: deploy
