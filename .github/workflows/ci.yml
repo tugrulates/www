@@ -164,7 +164,7 @@ jobs:
     needs: deploy
     strategy:
       matrix:
-        browser: [chrome, firefox]
+        browser: [chrome, firefox, safari]
         platform: [desktop, mobile]
         theme: [dark, light]
         include:
@@ -172,8 +172,8 @@ jobs:
             os: windows-latest
           - browser: firefox
             os: ubuntu-latest
-          # - browser: safari
-          #   os: macos-latest
+          - browser: safari
+            os: macos-latest
           - platform: desktop
             width: 1600
             height: 1200
