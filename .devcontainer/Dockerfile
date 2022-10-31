@@ -6,7 +6,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get -y install --no-install-recommends chromium graphicsmagick
 
 # Install global node modules
-RUN su node -c "npm install -g netlify-cli@12.0 concurrently onchange"
+RUN su node -c "npm install -g netlify-cli@12.0 npm-run-all onchange"
 
 # Install zola
 RUN wget -q -O - "https://github.com/getzola/zola/releases/download/v0.16.1/zola-v0.16.1-x86_64-unknown-linux-gnu.tar.gz" | tar xzf - -C /usr/local/bin
