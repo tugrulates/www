@@ -29,12 +29,12 @@ def main() -> None:
     namespace = parser.parse_args(sys.argv[1:])
 
     for i in range(namespace.retries):
-        # try:
+        try:
             screenshot(namespace)
             sys.exit(0)
-        # except WebDriverException as err:
-        #     log.error("Webdriver error: %s", err.msg)
-        #     log.warning("%d retries left", namespace.retries - i - 1)
+        except WebDriverException as err:
+            log.error("Webdriver error: %s", err.msg)
+            log.warning("%d retries left", namespace.retries - i - 1)
     sys.exit(1)
 
 
@@ -51,10 +51,6 @@ def screenshot(namespace: Namespace) -> None:
     time.sleep(3)
     if namespace.theme == "dark":
         browser.find_element(By.ID, "light-switch").click()
-    #     browser.execute_script("javascript:switchLight()")
-    #     time.sleep(1)
-    #     browser.refresh()
-    #     time.sleep(3)
     browser.save_screenshot(namespace.out)
     browser.quit()
 
