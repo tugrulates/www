@@ -200,7 +200,7 @@ jobs:
           --height=${{ matrix.height }}
           --dpr=${{ matrix.dpr }}
           --out="${{ matrix.browser }}-${{ matrix.platform }}-${{ matrix.theme }}.png"
-          --url="https://6360100ba639380fe2d8b626--tugrul.netlify.app/"
+          --url="https://63601309a81e9f11b787f27f--tugrul.netlify.app/"
           --retries=3
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
