@@ -32,6 +32,9 @@ $small-icon-size: 0.75rem;
   }
   width: 100%;
   max-width: $width;
+  @media print {
+    max-width: 100%;
+  }
 }
 
 @mixin needs-vertical-space {

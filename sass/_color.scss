@@ -43,6 +43,12 @@ html {
       --light: #{1 - $dark-contrast};
     }
   }
+  @media print {
+    --light: 1;
+    --positive: 1;
+    --negative: 0;
+    filter: grayscale(100%);
+  }
   --hue: 240;
 }
 
@@ -55,10 +61,12 @@ html {
 }
 
 @mixin primary-color {
+  @include text-color-on-print;
   color: $primary-color;
 }
 
 @mixin code-color($hue-shift) {
+  @include text-color-on-print;
   color: hsl(
     calc(var(--hue) + #{$hue-shift}),
     50%,
@@ -71,6 +79,7 @@ html {
 }
 
 @mixin background-primary-color {
+  @include background-color-on-print;
   background-color: $background-primary-color;
 }
 

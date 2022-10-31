@@ -5,17 +5,25 @@ $responsive-border-radius: calc(
   min(#{$border-radius}, (100vw - #{$width}) / 2)
 );
 
-@mixin rounded() {
+@mixin rounded {
   border-radius: $border-radius;
 }
 
-@mixin responsive-rounded() {
+@mixin responsive-rounded {
   border-radius: $responsive-border-radius;
+  @media print {
+    @include rounded;
+  }
 }
 
 @mixin box {
   @include background-primary-color;
   box-shadow: $shadow;
+  @media print {
+    box-shadow: none;
+    border: 2px solid;
+    border-color: $text-color;
+  }
 }
 
 @mixin rounded-box {

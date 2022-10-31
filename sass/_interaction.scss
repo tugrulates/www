@@ -13,6 +13,7 @@ $delay-duration: 1s;
 }
 
 @mixin transition($props...) {
+  @include noninteractive(transition, none);
   $transition: ();
   @each $prop in $props {
     $transition: append($transition, $prop $transition-duration ease, comma);
@@ -131,4 +132,13 @@ $delay-duration: 1s;
       background-color: $background-highlight-color,
     )
   );
+}
+
+@mixin noninteractive($prop, $value) {
+  @media (hover: none) {
+    #{$prop}: $value;
+  }
+  @media print {
+    #{$prop}: $value;
+  }
 }

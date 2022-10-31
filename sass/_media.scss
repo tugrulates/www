@@ -1,0 +1,24 @@
+@mixin hidden-on-print {
+  @media print {
+    display: none;
+  }
+}
+
+@mixin visible-on-print {
+  display: none;
+  @media print {
+    display: initial;
+  }
+}
+
+@mixin text-color-on-print {
+  @media print {
+    @include text-color;
+  }
+}
+
+@mixin background-color-on-print {
+  @media print {
+    @include background-color;
+  }
+}
