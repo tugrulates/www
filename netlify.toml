@@ -6,7 +6,6 @@
   command = "zola build --drafts"
 
 [dev]
-  publish = "public/"
   framework = "#custom"
   command = "zola serve --drafts --port 1111"
   targetPort = 1111
