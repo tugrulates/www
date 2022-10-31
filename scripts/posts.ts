@@ -42,7 +42,9 @@ void transform(
   async (src: string, dest: string) => {
     // Generate internal links in Zola's format.
     function linkReplace(_: string, name: string, link: string): string {
-      return `[${name}](@/${link.replace(" ", "%20")}.md)`;
+      const ext = path.extname(link) === "" ? ".md" : "";
+      const dir = path.extname(link) === ".jpg" ? "/photos/" : "@";
+      return `[${name}](${dir}/${link.replace(" ", "%20")}${ext})`;
     }
 
     // Split file into markdown blocks.
