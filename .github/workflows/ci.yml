@@ -145,7 +145,7 @@ jobs:
           name: reports
           path: lighthouse
       - name: Check result
-        run: test {{ steps.lighthouse.outputs.result }}
+        run: test ${{ steps.lighthouse.outputs.result }}
 
   deploy:
     needs: build
