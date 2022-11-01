@@ -27,7 +27,7 @@
 
 @mixin has-icons {
   .icon {
-    fill: $text-color;
+    @include icon-color;
     width: $icon-size;
     height: $icon-size;
   }
