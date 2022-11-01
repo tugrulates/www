@@ -21,8 +21,8 @@
 </picture>
 {%- endmacro image -%}
 
-{%- macro icon(id, alt) -%}
-<img class="icon" src="/icons/{{ id }}.svg" alt="{{ alt }}">
+{%- macro icon(icon, alt) -%}
+<img class="icon" src="/icons/{{ icon }}.svg" alt="{{ alt }}">
 {%- endmacro icon -%}
 
 {%- macro time(page, update=false, dateformat="%B %d, %Y") -%}
@@ -105,7 +105,7 @@
     {{ title }}
   </h1>
   <a class="feed-link" href="{{ config.feed_filename }}" aria-label="atom feed for {{ name }}">
-    {{ macros::icon(id='link-feed', alt='atom feed for ' ~ name) }}
+    {{ macros::icon(icon='link-feed', alt='atom feed for ' ~ name) }}
   </a>
 </header>
 {{- macros::cards(pages=pages) -}}
