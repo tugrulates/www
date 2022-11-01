@@ -121,7 +121,9 @@ jobs:
     outputs:
       desktop: ${{ steps.lighthouse.outputs.desktop }}
       mobile: ${{ steps.lighthouse.outputs.mobile }}
+      failure: ${{ steps.lighthouse.outputs.desktop_failure }}${{ steps.lighthouse.outputs.mobile_failure }}
     strategy:
+      fail-fast: false
       matrix:
         platform: [desktop, mobile]
     runs-on: ubuntu-latest
@@ -135,11 +137,21 @@ jobs:
       - run: npm ci
       - name: Lighthouse
         id: lighthouse
-        run: echo ${{ matrix.platform }}=$(npm run -s lighthouse ${{ matrix.platform }} | npm run -s lighthouse:parse) >> ${GITHUB_OUTPUT}
+        run: |
+          OUTPUT=$((npm run -s lighthouse ${{ matrix.platform }} || echo failure > .result) | npm run -s lighthouse:parse)
+          echo ${{ matrix.platform }}=${OUTPUT} >> ${GITHUB_OUTPUT}
+          echo ${{ matrix.platform }}_failure=$(cat .result) >> ${GITHUB_OUTPUT}
       - uses: actions/upload-artifact@v3
         with:
           name: reports
           path: lighthouse
+
+  lighthouse-check:
+    needs: lighthouse
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Lighthouse result
+        run: test ! ${{ needs.lighthouse.outputs.failure }}
 
   deploy:
     needs: build
