@@ -3,7 +3,7 @@ name: Prune
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "0 0 * * 0"
 
 env:
   USERNAME: tugrulates
@@ -29,8 +29,8 @@ jobs:
                   await Promise.all(
                     data
                       .filter((version) => {
-                        const today = new Date().getDate();
-                        const age = today - new Date(version.created_at).getDate();
+                        const msPerDay = 24 * 60 * 60 * 1000;
+                        const age = (new Date() - new Date(version.created_at)) / msPerDay;
                         const tags = version.metadata?.container?.tags ?? [];
                         return (
                           age > ${{ env.MAX_AGE_DAYS }} &&
