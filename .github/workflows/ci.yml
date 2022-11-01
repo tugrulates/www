@@ -135,7 +135,9 @@ jobs:
       - run: npm ci
       - name: Lighthouse
         id: lighthouse
-        run: echo ${{ matrix.platform }}=$(npm run -s lighthouse ${{ matrix.platform }} | npm run -s lighthouse:parse) >> ${GITHUB_OUTPUT}
+        run: |
+          OUTPUT=$(npm run -s lighthouse ${{ matrix.platform }})
+          echo ${{ matrix.platform }}=$(echo "${OUTPUT}" | npm run -s lighthouse:parse) >> ${GITHUB_OUTPUT}
       - uses: actions/upload-artifact@v3
         with:
           name: reports
