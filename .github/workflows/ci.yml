@@ -122,6 +122,7 @@ jobs:
       desktop: ${{ steps.lighthouse.outputs.desktop }}
       mobile: ${{ steps.lighthouse.outputs.mobile }}
     strategy:
+      fail-fast: false
       matrix:
         platform: [desktop, mobile]
     runs-on: ubuntu-latest
