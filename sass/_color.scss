@@ -87,6 +87,10 @@ html {
   background-color: $background-highlight-color;
 }
 
+@mixin icon-color {
+  filter: brightness(var(--negative));
+}
+
 @mixin has-selection {
   ::selection {
     background-color: $selection-color;
