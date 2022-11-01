@@ -93,7 +93,7 @@ function updateLightIcon() {
       : light < 0.75
       ? "lighter"
       : "light";
-  $("#light-icon").attr("xlink:href", `/icons/icons.svg#${icon}`);
+  $("#light-icon").attr("src", `/icons/theme-${icon}.svg`);
 }
 
 function updateInputs() {
@@ -109,10 +109,7 @@ function createControl(controls, control) {
       <input class="tune" id="${control.name}-tune" type="range"
              min=${control.min} max=${control.max} step=${control.step}>
       <button id="${control.name}-switch" aria-label="${control.aria}">
-        <svg class="icon" focusable="false">
-          <title>${control.aria}</title>
-          <use id="${control.name}-icon" xlink:href=/icons/icons.svg#${control.name}></use>
-        </svg>
+        <img id="${control.name}-icon" class="icon" src="/icons/theme-${control.name}.svg" alt="${control.aria}">
       </button>
     </div>`
     )
