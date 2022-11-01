@@ -137,13 +137,15 @@ jobs:
       - name: Lighthouse
         id: lighthouse
         run: |
-          OUTPUT=$(npm run -s lighthouse ${{ matrix.platform }} && touch .success)
+          OUTPUT=$(npm run -s lighthouse ${{ matrix.platform }} && echo success > .result)
           echo ${{ matrix.platform }}=$(echo "${OUTPUT}" | npm run -s lighthouse:parse) >> ${GITHUB_OUTPUT}
-          test -f .success
+          echo result=$(cat .result) >> ${GITHUB_OUTPUT}
       - uses: actions/upload-artifact@v3
         with:
           name: reports
           path: lighthouse
+      - name: Check result
+        run: test {{ steps.lighthouse.outputs.result }}
 
   deploy:
     needs: build
