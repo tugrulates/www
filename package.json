@@ -34,7 +34,7 @@
     "scripts:files": "cp -R -t static",
     "scripts:favicon": "ts-node scripts/favicon.ts --html=templates/favicon.html --output=static",
     "dev": "run-s 'build -- --context local' start",
-    "start": "run-p watch 'netlify -- dev'",
+    "start": "run-p watch 'netlify -- dev --offline'",
     "test": "npm run netlify -- build --offline --context test",
     "lighthouse": "run-s -s \"netlify -s -- build --context=lighthouse-{1}\" --",
     "lighthouse:parse": "awk 'BEGIN{printf \"console.log(JSON.stringify({ audits: [\"} /^{/{f=1} /^}/{f=0;print;printf \",\"} END{printf \"]}));\"} f' | node | jq",
