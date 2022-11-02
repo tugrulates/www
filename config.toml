@@ -33,6 +33,5 @@ stackoverflow = "634336/tugrul-ates"
 twitter = "turugula"
 youtube = "@TugrulAtes"
 
-
 [extra.content]
 greeting = "Hello, I’m Tugrul!"
