@@ -57,6 +57,7 @@
       .card-link {
         @include normal-text;
         @include column($gap: 0, $justify: flex-end);
+        height: $card-height; // full tile is click target
         .drawer {
           @include responsive-rounded-box;
           @include padded;
