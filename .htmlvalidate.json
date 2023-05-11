@@ -1,15 +1,6 @@
 {
   "extends": ["html-validate:standard", "html-validate:a11y"],
-  "elements": [
-    "html5",
-    {
-      "th": {
-        "attributes": {
-          "scope": {
-            "required": false
-          }
-        }
-      }
-    }
-  ]
+  "rules": {
+    "wcag/h63": "off"
+  }
 }
