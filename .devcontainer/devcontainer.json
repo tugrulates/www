@@ -16,6 +16,7 @@
       // Add the IDs of extensions you want installed when the container is created.
       "extensions": [
         "esbenp.prettier-vscode",
+        "GitHub.vscode-github-actions",
         "GitHub.vscode-pull-request-github"
       ]
     }
