@@ -9,16 +9,22 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout zola
+        uses: actions/checkout@v3
         with:
           repository: getzola/zola
           submodules: true
-      - run: sudo apt-get -y install --no-install-recommends musl-tools
-      - run: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -y | sh
-      - run: export CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER=/usr/bin/aarch64-linux-gnu-gcc
-      - run: rustup target add aarch64-unknown-linux-gnu
-      - run: cargo build --release --target=aarch64-unknown-linux-gnu --verbose
-      - uses: actions/upload-artifact@v3
+      - name: Install rust
+        run: |
+          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -y | sh
+          rustup target add aarch64-unknown-linux-gnu
+          export CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER=/usr/bin/aarch64-linux-gnu-gcc
+      - name: Install dependencies
+        run: sudo apt-get -y install --no-install-recommends musl-tools
+      - name: Build zola
+        run: cargo build --release --target=aarch64-unknown-linux-gnu --verbose
+      - name: Create package
+        uses: actions/upload-artifact@v3
         with:
           name: zola-aarch64-linux
           path: "target/release/zola"
