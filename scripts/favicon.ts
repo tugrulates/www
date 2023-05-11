@@ -4,7 +4,7 @@
 
 import transform from "./transform.js";
 
-import { FaviconOptions, favicons } from "favicons";
+import { type FaviconOptions, favicons } from "favicons";
 import { promises as fs } from "fs";
 import path from "path";
 import yargs from "yargs";
@@ -86,7 +86,7 @@ void transform(
           response.images.map(async (image) => {
             const output = path.join(ARGV.output, image.name);
             outputs.push(output);
-            return await fs.writeFile(output, image.contents);
+            await fs.writeFile(output, image.contents);
           })
         );
 
@@ -95,7 +95,7 @@ void transform(
           response.files.map(async (file) => {
             const output = path.join(ARGV.output, file.name);
             outputs.push(output);
-            return await fs.writeFile(output, file.contents);
+            await fs.writeFile(output, file.contents);
           })
         );
 

@@ -24,9 +24,7 @@ const LINKS = {
   internal: /\[(?!\])(.*?)(?<!\[)\]\((?!@\/)(.+?)\.md\)/g,
 };
 
-interface Scripts {
-  [key: string]: RegExp;
-}
+type Scripts = Record<string, RegExp>;
 const SCRIPTS: Scripts = {
   math: /(\$(?=[^\s]).*(?<=[^\s])\$)|(\$\$.*\$\$)/,
   graph: /^```mermaid/,
