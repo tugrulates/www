@@ -117,7 +117,7 @@ jobs:
       - run: npm run test
 
   lighthouse:
-    needs: [build, container]
+    needs: build
     outputs:
       desktop: ${{ steps.lighthouse.outputs.desktop }}
       mobile: ${{ steps.lighthouse.outputs.mobile }}
@@ -127,7 +127,6 @@ jobs:
       matrix:
         platform: [desktop, mobile]
     runs-on: ubuntu-latest
-    container: ${{ needs.container.outputs.container }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/download-artifact@v3
