@@ -66,8 +66,9 @@
     [context.test.plugins.inputs]
       path = "public"
       config = ".htmlvalidate.json"
-  [[context.test.plugins]]
-    package = "netlify-plugin-is-website-vulnerable"
+  # TODO: #138 Add back vulnurability checks
+  # [[context.test.plugins]]
+  #   package = "netlify-plugin-is-website-vulnerable"
 
 [context.lighthouse-desktop]
   command = "echo Running Lighthouse for desktop"
