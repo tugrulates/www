@@ -24,9 +24,9 @@ comment:
       files: ["**/*"]
       body: |
         🖼️ **Screenshots:**
-        | Chrome                                    | Firefox                                    | Safari                                    |
-        | :---------------------------------------: | :----------------------------------------: | :---------------------------------------: |
-        | ![]({{reports}}/chrome-desktop-dark.png)  | ![]({{reports}}/firefox-desktop-dark.png)  | ![]({{reports}}/safari-desktop-dark.png)  |
-        | ![]({{reports}}/chrome-desktop-light.png) | ![]({{reports}}/firefox-desktop-light.png) | ![]({{reports}}/safari-desktop-light.png) |
-        | ![]({{reports}}/chrome-mobile-dark.png)   | ![]({{reports}}/firefox-mobile-dark.png)   | ![]({{reports}}/safari-mobile-dark.png)   |
-        | ![]({{reports}}/chrome-mobile-light.png)  | ![]({{reports}}/firefox-mobile-light.png)  | ![]({{reports}}/safari-mobile-light.png)  |
+        | Chrome                                    | Firefox                                    |
+        | :---------------------------------------: | :----------------------------------------: |
+        | ![]({{reports}}/chrome-desktop-dark.png)  | ![]({{reports}}/firefox-desktop-dark.png)  |
+        | ![]({{reports}}/chrome-desktop-light.png) | ![]({{reports}}/firefox-desktop-light.png) |
+        | ![]({{reports}}/chrome-mobile-dark.png)   | ![]({{reports}}/firefox-mobile-dark.png)   |
+        | ![]({{reports}}/chrome-mobile-light.png)  | ![]({{reports}}/firefox-mobile-light.png)  |
