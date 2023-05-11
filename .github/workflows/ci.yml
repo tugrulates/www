@@ -68,7 +68,7 @@ jobs:
             echo "container=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest" >> ${GITHUB_OUTPUT}
           fi
       - if: ${{ steps.name.outputs.build }}
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           context: "{{ defaultContext }}:.devcontainer"
           push: true
