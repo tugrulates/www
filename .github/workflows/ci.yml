@@ -104,7 +104,7 @@ jobs:
           path: public
 
   test:
-    needs: build
+    needs: [build, container]
     runs-on: ubuntu-latest
     container: ${{ needs.container.outputs.container }}
     steps:
@@ -117,7 +117,7 @@ jobs:
       - run: npm run test
 
   lighthouse:
-    needs: build
+    needs: [build, container]
     outputs:
       desktop: ${{ steps.lighthouse.outputs.desktop }}
       mobile: ${{ steps.lighthouse.outputs.mobile }}
@@ -154,7 +154,7 @@ jobs:
         run: test ! ${{ needs.lighthouse.outputs.failure }}
 
   deploy:
-    needs: build
+    needs: [build, container]
     outputs:
       url: ${{ steps.deploy.outputs.url }}
     environment:
