@@ -1,0 +1,21 @@
+name: Zola
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: ghcr.io/${{ github.repository_owner }}/blog-devcontainer:latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          repository: getzola/zola
+          submodules: true
+      - run: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+      - run: export CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER=/usr/bin/aarch64-linux-gnu-gcc
+      - run: cargo build --release --target=aarch64-unknown-linux-gnu --verbose
+      - uses: actions/upload-artifact@v3
+        with:
+          name: zola-aarch64-linux
+          path: "target/release/zola"
