@@ -15,13 +15,11 @@ jobs:
           repository: getzola/zola
           submodules: true
       - name: Install rust
-        run: |
-          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -y | sh
-          rustup target add aarch64-unknown-linux-gnu
-      - name: Install dependencies
-        run: sudo apt-get -y install --no-install-recommends gcc-aarch64-linux-gnu binutils-aarch64-linux-gnu musl-tools
+        run: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -y | sh
+      - name: Install cross
+        run: cargo install cross --git https://github.com/cross-rs/cross
       - name: Build zola
-        run: cargo build --release --target=aarch64-unknown-linux-gnu --verbose
+        run: cross build --release --target=aarch64-unknown-linux-gnu --verbose
       - name: Create package
         uses: actions/upload-artifact@v3
         with:
