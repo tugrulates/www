@@ -18,7 +18,6 @@ jobs:
         run: |
           curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -y | sh
           rustup target add aarch64-unknown-linux-gnu
-          export CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER=/usr/bin/aarch64-linux-gnu-gcc
       - name: Install dependencies
         run: sudo apt-get -y install --no-install-recommends gcc-aarch64-linux-gnu binutils-aarch64-linux-gnu musl-tools
       - name: Build zola
