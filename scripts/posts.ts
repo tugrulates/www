@@ -42,7 +42,7 @@ void transform(
     function linkReplace(_: string, name: string, link: string): string {
       const ext = path.extname(link) === "" ? ".md" : "";
       const dir = path.extname(link) === ".jpg" ? "/photos/" : "@";
-      return `[${name}](${dir}/${link.replace(" ", "%20")}${ext})`;
+      return `[${name}](${dir}/${link.replace(/" "/g, "%20")}${ext})`;
     }
 
     // Split file into markdown blocks.
