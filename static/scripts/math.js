@@ -15,7 +15,7 @@ MathJax = {
       const { selectOptionsFromKeys } = MathJax._.util.Options;
       class myFindTeX extends FindTeX {
         addPattern(starts, delims, display) {
-          let [open, close, start, end] = delims;
+          const [open, close, start, end] = delims;
           if (start && end) {
             starts.push(start.toString().slice(1).replace(/\/$/, ""));
             this.end[open] = [

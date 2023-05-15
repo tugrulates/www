@@ -27,7 +27,7 @@
       # No need to disable style hashes if a stricter policy is set.
       disableGeneratedPolicies = ["styleSrc"]
       [plugins.inputs.policies]
-        scriptSrc = "'self' 'unsafe-inline' 'unsafe-hashes' 'sha256-JBhAzDOM5zUvFs5wf3KR6W1uAcXAi9aUaaHIyfL6nVQ=' 'sha256-YCI1+jSo7EVM0oHgxtxB82JSp+59HeM97qAuRzm/+88='"
+        scriptSrc = "'self' 'unsafe-inline' 'unsafe-hashes' 'sha256-1CldwzdEg2k1wTmf7s5RWVd7NMXI/7nxxjJM2C4DqII=' 'sha256-YCI1+jSo7EVM0oHgxtxB82JSp+59HeM97qAuRzm/+88='"
         styleSrc = "'self' 'unsafe-inline'"
         frameSrc = "'self' https://www.youtube.com"
         imgSrc = "'self'"
