@@ -5,6 +5,7 @@ FROM mcr.microsoft.com/vscode/devcontainers/typescript-node:${VARIANT}
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get -y install --no-install-recommends chromium graphicsmagick
 
+
 # Install global node modules
 RUN su node -c "npm install -g netlify-cli@12.0 onchange"
 
