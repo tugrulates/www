@@ -11,6 +11,7 @@ jobs:
     secrets: inherit
     with:
       environment: preview
+      latest: true
 
   comment:
     needs: preview
