@@ -155,10 +155,10 @@ jobs:
   deploy:
     needs: [build, container]
     outputs:
-      url: ${{ steps.deploy.outputs.url }}
+      url: ${{ steps.url.outputs.url }}
     environment:
       name: ${{ inputs.environment }}
-      url: ${{ steps.deploy.outputs.url }}
+      url: ${{ steps.url.outputs.url }}
     runs-on: ubuntu-latest
     container: ${{ needs.container.outputs.container }}
     steps:
@@ -168,8 +168,10 @@ jobs:
           name: public
           path: public
       - name: Deploy
-        id: deploy
-        run: echo url=$(npm run -s deploy -- --message ${{ github.ref_name }} ${{ inputs.deploy_args }} --json | jq -er '.url//.deploy_url') >> ${GITHUB_OUTPUT}
+        run: npm run -s deploy -- --message ${{ github.ref_name }} ${{ inputs.deploy_args }} --json > deploy.json
+      - name: URL
+        id: url
+        run: echo url=$(cat deploy.json | jq -er '.url//.deploy_url') >> ${GITHUB_OUTPUT}
 
   # TODO: #150 Re-enable safari screenshots
   screenshots:
