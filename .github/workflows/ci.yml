@@ -169,7 +169,7 @@ jobs:
           path: public
       - name: Deploy
         run: npm run -s deploy -- --message ${{ github.ref_name }} ${{ inputs.deploy_args }} --json > deploy.json
-      - name: URL
+      - name: Parse URL
         id: url
         run: echo url=$(cat deploy.json | jq -er '.url//.deploy_url') >> ${GITHUB_OUTPUT}
 
