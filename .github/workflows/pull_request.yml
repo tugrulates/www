@@ -23,18 +23,20 @@ jobs:
           name: reports
           path: reports
       - name: Deploy
-        id: deploy
-        run: echo json=$(npm run -s deploy -- --message reports --dir=reports --json) >> ${GITHUB_OUTPUT}
+        run: npm run -s deploy -- --message reports --dir=reports --json > deploy.json
         env:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      - name: Get JSON
+        id: json
+        run: echo json=$(cat deploy.json) >> ${GITHUB_OUTPUT}
       - uses: exercism/pr-commenter-action@v1.4.0
         with:
           github-token: "${{ secrets.PR_COMMENT_TOKEN }}"
           template-variables: |
             {
-              "id":        "${{ fromJSON(steps.deploy.outputs.json).deploy_id }}",
-              "reports":   "${{ fromJSON(steps.deploy.outputs.json).deploy_url }}",
+              "id":        "${{ fromJSON(steps.json.outputs.json).deploy_id }}",
+              "reports":   "${{ fromJSON(steps.json.outputs.json).deploy_url }}",
               "result":    "${{ needs.preview.result }}",
               "preview":   "${{ needs.preview.outputs.url }}",
               "lighthouse": ${{ needs.preview.outputs.lighthouse }}
