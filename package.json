@@ -17,7 +17,7 @@
     "one": "concurrently -P 'npm run two -- {@} && npm run three' --",
     "two": "echo gulp build",
     "three": "echo another random command",
-    "lint": "npx eslint scripts",
+    "lint": "npx eslint 'scripts/*.ts'",
     "prebuild": "run-p build:posts build:photos build:files build:favicon",
     "build": "npm run netlify -- build --offline",
     "build:posts": "npm run scripts:posts $npm_package_config_posts",
