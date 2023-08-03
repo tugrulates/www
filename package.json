@@ -14,9 +14,6 @@
     "clean": "public content/[!_]* static/[!avatar,icons,scripts]* templates/favicon.html"
   },
   "scripts": {
-    "one": "concurrently -P 'npm run two -- {@} && npm run three' --",
-    "two": "echo gulp build",
-    "three": "echo another random command",
     "lint": "npx eslint 'scripts/*.ts'",
     "prebuild": "run-p lint build:posts build:photos build:files build:favicon",
     "build": "zola build",
