@@ -2,6 +2,9 @@
   publish = "public/"
   command = "zola build"
 
+[build.environment]
+  LIGHTHOUSE_RUN_ON_SUCCESS='true'
+
 [context.drafts]
   command = "zola build --drafts"
 
@@ -81,10 +84,10 @@
       best-practices = 1
       seo = 1
     [[context.lighthouse-desktop.plugins.inputs.audits]]
-      output_path = "../lighthouse/desktop-home.html"
+      output_path = "lighthouse/desktop-home.html"
     [[context.lighthouse-desktop.plugins.inputs.audits]]
       path = "research/"
-      output_path = "../lighthouse/desktop-page.html"
+      output_path = "lighthouse/desktop-page.html"
 
 [context.lighthouse-mobile]
   command = "echo Running Lighthouse for mobile"
@@ -96,10 +99,10 @@
       best-practices = 1
       seo = 1
     [[context.lighthouse-mobile.plugins.inputs.audits]]
-      output_path = "../lighthouse/mobile-home.html"
+      output_path = "lighthouse/mobile-home.html"
     [[context.lighthouse-mobile.plugins.inputs.audits]]
       path = "research/"
-      output_path = "../lighthouse/mobile-page.html"
+      output_path = "lighthouse/mobile-page.html"
 
 [[redirects]]
   from = "https://tugrul.netlify.app/*"

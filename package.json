@@ -36,7 +36,7 @@
     "dev": "run-s 'build -- --context local' start",
     "start": "run-p watch 'netlify -- dev --offline'",
     "test": "npm run netlify -- build --offline --context test",
-    "lighthouse": "run-s -s \"netlify -s -- build --context=lighthouse-{1}\" --",
+    "lighthouse": "run-s -s \"netlify -s -- deploy --build --context=lighthouse-{1}\" --",
     "lighthouse:parse": "awk 'BEGIN{printf \"console.log(JSON.stringify({ audits: [\"} /^{/{f=1} /^}/{f=0;print;printf \",\"} END{printf \"]}));\"} f' | node | jq",
     "deploy": "npm run netlify -- deploy",
     "clean": "rm -Rf $npm_package_config_clean",
