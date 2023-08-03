@@ -1,6 +1,6 @@
 [build]
-  publish = "public/"
-  command = "zola build"
+  publish = "public"
+  command = "npm run build"
 
 [context.drafts]
   command = "zola build --drafts"
