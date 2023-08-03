@@ -47,10 +47,10 @@
     best-practices = 1
     seo = 1
   [[plugins.inputs.audits]]
-    output_path = "../lighthouse/desktop-home.html"
+    output_path = "lighthouse/home.html"
   [[plugins.inputs.audits]]
     path = "research/"
-    output_path = "../lighthouse/desktop-page.html"
+    output_path = "lighthouse/page.html"
 
 [[headers]]
   for = "/*"
