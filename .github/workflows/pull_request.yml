@@ -39,5 +39,5 @@ jobs:
               "reports":   "${{ fromJSON(steps.json.outputs.json).deploy_url }}",
               "result":    "${{ needs.preview.result }}",
               "preview":   "${{ needs.preview.outputs.url }}",
-              "lighthouse": ${{ needs.preview.outputs.lighthouse }}
+              "lighthouse": ${{ needs.preview.outputs.url }}
             }

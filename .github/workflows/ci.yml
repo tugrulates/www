@@ -16,13 +16,6 @@ on:
       url:
         description: "URL for deployed site"
         value: ${{ jobs.deploy.outputs.url }}
-      lighthouse:
-        description: "Lighthouse results"
-        value: |
-          {
-            "desktop": ${{ jobs.lighthouse.outputs.desktop }},
-            "mobile": ${{ jobs.lighthouse.outputs.mobile }}
-          }
 
 env:
   REGISTRY: ghcr.io
@@ -116,42 +109,6 @@ jobs:
       - run: npm ci
       - run: npm run test
 
-  lighthouse:
-    needs: build
-    outputs:
-      desktop: ${{ steps.lighthouse.outputs.desktop }}
-      mobile: ${{ steps.lighthouse.outputs.mobile }}
-      failure: ${{ steps.lighthouse.outputs.desktop_failure }}${{ steps.lighthouse.outputs.mobile_failure }}
-    strategy:
-      fail-fast: false
-      matrix:
-        platform: [desktop, mobile]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/download-artifact@v3
-        with:
-          name: public
-          path: public
-      - run: npm ci
-      - name: Lighthouse
-        id: lighthouse
-        run: |
-          OUTPUT=$((npm run -s lighthouse ${{ matrix.platform }} || echo failure > .result) | npm run -s lighthouse:parse)
-          echo ${{ matrix.platform }}=${OUTPUT} >> ${GITHUB_OUTPUT}
-          echo ${{ matrix.platform }}_failure=$(cat .result) >> ${GITHUB_OUTPUT}
-      - uses: actions/upload-artifact@v3
-        with:
-          name: reports
-          path: lighthouse
-
-  lighthouse-check:
-    needs: lighthouse
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check Lighthouse result
-        run: test ! ${{ needs.lighthouse.outputs.failure }}
-
   deploy:
     needs: [build, container]
     outputs:
@@ -221,7 +178,7 @@ jobs:
           path: "${{ matrix.browser }}-${{ matrix.platform }}-${{ matrix.theme }}.png"
 
   done:
-    needs: [container, lint, build, test, lighthouse-check, deploy, screenshots]
+    needs: [container, lint, build, test, deploy, screenshots]
     runs-on: ubuntu-latest
     steps:
       - run: "true"

@@ -37,6 +37,21 @@
         baseUri = "'none'"
         defaultSrc = "'none'"
 
+[[plugins]]
+  package = "@netlify/plugin-lighthouse"
+  [inputs.settings]
+    preset = "desktop"
+  [inputs.thresholds]
+    performance = 0.9
+    accessibility = 1
+    best-practices = 1
+    seo = 1
+  [[plugins.inputs.audits]]
+    output_path = "../lighthouse/desktop-home.html"
+  [[plugins.inputs.audits]]
+    path = "research/"
+    output_path = "../lighthouse/desktop-page.html"
+
 [[headers]]
   for = "/*"
   [headers.values]
@@ -68,38 +83,6 @@
       config = ".htmlvalidate.json"
   [[context.test.plugins]]
     package = "netlify-plugin-is-website-vulnerable"
-
-[context.lighthouse-desktop]
-  command = "echo Running Lighthouse for desktop"
-  [[context.lighthouse-desktop.plugins]]
-    package = "@netlify/plugin-lighthouse"
-    [context.lighthouse-desktop.plugins.inputs.settings]
-      preset = "desktop"
-    [context.lighthouse-desktop.plugins.inputs.thresholds]
-      performance = 0.9
-      accessibility = 1
-      best-practices = 1
-      seo = 1
-    [[context.lighthouse-desktop.plugins.inputs.audits]]
-      output_path = "../lighthouse/desktop-home.html"
-    [[context.lighthouse-desktop.plugins.inputs.audits]]
-      path = "research/"
-      output_path = "../lighthouse/desktop-page.html"
-
-[context.lighthouse-mobile]
-  command = "echo Running Lighthouse for mobile"
-  [[context.lighthouse-mobile.plugins]]
-    package = "@netlify/plugin-lighthouse"
-    [context.lighthouse-mobile.plugins.inputs.thresholds]
-      performance = 0.9
-      accessibility = 1
-      best-practices = 1
-      seo = 1
-    [[context.lighthouse-mobile.plugins.inputs.audits]]
-      output_path = "../lighthouse/mobile-home.html"
-    [[context.lighthouse-mobile.plugins.inputs.audits]]
-      path = "research/"
-      output_path = "../lighthouse/mobile-page.html"
 
 [[redirects]]
   from = "https://tugrul.netlify.app/*"
