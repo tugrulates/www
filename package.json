@@ -30,8 +30,10 @@
     "scripts:photos": "ts-node scripts/photos.ts --output=static/photos",
     "scripts:files": "cp -R -t static",
     "scripts:favicon": "ts-node scripts/favicon.ts --html=templates/favicon.html --output=static",
-    "dev": "run-s 'build -- --context local' start",
-    "clean": "rm -Rf $npm_package_config_clean"
+    "predev": "run-s 'build -- --drafts'",
+    "dev": "run-p watch 'netlify -- dev --offline'",
+    "clean": "rm -Rf $npm_package_config_clean",
+    "netlify": "netlify --telemetry-disable"
   },
   "repository": {
     "type": "git",
