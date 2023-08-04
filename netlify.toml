@@ -42,7 +42,7 @@
   [inputs.settings]
     preset = "desktop"
   [inputs.thresholds]
-    performance = 0.9
+    performance = 1
     accessibility = 1
     best-practices = 1
     seo = 1
