@@ -36,7 +36,7 @@ export default async function transform(
       if (outputs.length > 0) {
         console.log(`${src.padStart(longest)} => ${outputs[0]}`);
         outputs.slice(1).forEach((output) => {
-          console.log(`${"".padStart(longest)}  + ${{ output }}`);
+          console.log(`${"".padStart(longest)}  + ${output}`);
         });
       }
     })
