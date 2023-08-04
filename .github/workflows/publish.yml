@@ -8,18 +8,20 @@ on:
 concurrency: drafts
 
 jobs:
-  publish:
+  deploy:
+    environment:
+      name: drafts
+      url: ${{ steps.url.outputs.url }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
-          token: ${{ secrets.BLOG_PUBLISH_TOKEN }}
-      - name: Create update commit
-        run: |
-          git pull
-          git submodule update --init --recursive --remote docs
-          git config user.email "actions@github.com"
-          git config user.name "GitHub Actions"
-          git add docs
-          git commit -m "Update docs" && git push || echo "No changes to commit"
-          git push
+          submodules: true
+      - name: Update docs
+        run: git submodule update --init --recursive --remote docs
+      - run: npm ci
+      - name: Deploy
+        run: npm run -s deploy -- --message ${{ github.ref_name }} --alias drafts --json > deploy.json
+      - name: Parse URL
+        id: url
+        run: echo url=$(cat deploy.json | jq -er '.url//.deploy_url') >> ${GITHUB_OUTPUT}
