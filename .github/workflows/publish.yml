@@ -24,7 +24,7 @@ jobs:
         run: git submodule update --init --recursive --remote docs
       - run: npm ci
       - name: Deploy
-        run: npm run netlify -- deploy --build --message ${{ github.ref_name }} --alias drafts --json > deploy.json
+        run: npm run netlify -- build
       - name: Parse URL
         id: url
         run: echo url=$(cat deploy.json | jq -er '.url//.deploy_url') >> ${GITHUB_OUTPUT}
