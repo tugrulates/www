@@ -38,6 +38,12 @@
         defaultSrc = "'none'"
 
 [[plugins]]
+  package = "netlify-plugin-html-validate"
+  [plugins.inputs]
+    ext = "html"
+    config = ".htmlvalidate.json"
+
+[[plugins]]
   package = "@netlify/plugin-lighthouse"
   [inputs.settings]
     preset = "desktop"
