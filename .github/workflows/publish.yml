@@ -4,6 +4,8 @@ on:
   workflow_dispatch:
   repository_dispatch:
     types: [Publish]
+  pull_request:
+    branches: [main]
 
 concurrency: drafts
 
