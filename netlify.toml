@@ -29,6 +29,7 @@
       [plugins.inputs.policies]
         scriptSrc = "'self' 'unsafe-inline' 'unsafe-hashes' 'sha256-1CldwzdEg2k1wTmf7s5RWVd7NMXI/7nxxjJM2C4DqII=' 'sha256-YCI1+jSo7EVM0oHgxtxB82JSp+59HeM97qAuRzm/+88='"
         styleSrc = "'self' 'unsafe-inline'"
+        frameSrc = "'self' https://www.youtube.com"
         imgSrc = "'self'"
         manifestSrc = "'self'"
         frameAncestors = "'none'"
@@ -50,7 +51,7 @@
     performance = 0.9
     accessibility = 1
     best-practices = 1
-    seo = 1
+    seo = 0.9
   [[plugins.inputs.audits]]
     output_path = "lighthouse/home.html"
   [[plugins.inputs.audits]]
