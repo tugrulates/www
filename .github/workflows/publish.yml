@@ -26,4 +26,4 @@ jobs:
           git config user.name "GitHub Actions"
           git add docs
           git commit -m "Update docs" && git push || echo "No changes to commit"
-          git push --set-upstream origin drafts
+          git push --set-upstream origin drafts --force
