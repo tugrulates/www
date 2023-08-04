@@ -44,6 +44,14 @@
     config = ".htmlvalidate.json"
 
 [[plugins]]
+  package = "netlify-plugin-checklinks"
+  [plugins.inputs]
+    entryPoints = [ "*.html", "**.html", ]
+    recursive = true
+    pretty = true
+    checkExternal = false
+
+[[plugins]]
   package = "@netlify/plugin-lighthouse"
   [plugins.inputs.thresholds]
     performance = 1
