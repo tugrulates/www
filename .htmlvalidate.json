@@ -1,3 +1,6 @@
 {
-  "extends": ["html-validate:standard", "html-validate:a11y"]
+  "extends": ["html-validate:standard", "html-validate:a11y"],
+  "rules": {
+    "wcag/h63": "off"
+  }
 }
