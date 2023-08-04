@@ -62,7 +62,7 @@ void transform(
 
     // Mark end of first paragraph to generate summary.
     if (blocks.length > 0) {
-      blocks[0] = blocks[0].concat("<bb><!-- more -->");
+      blocks[0] = blocks[0].concat("<!-- more -->");
     }
 
     // Copy "tags" into "taxonomies.tags".
