@@ -9,26 +9,19 @@ concurrency: drafts
 
 jobs:
   drafts:
-    uses: ./.github/workflows/ci.yml
-    secrets: inherit
-    with:
-      environment: drafts
-      update_docs: true
-      deploy_args: --alias drafts
-
-  update:
-    needs: drafts
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
+          ref: refactor/netlify
           token: ${{ secrets.BLOG_PUBLISH_TOKEN }}
       - name: Create update commit
         run: |
           git pull
+          git switch -c drafts
           git submodule update --init --recursive --remote docs
           git config user.email "actions@github.com"
           git config user.name "GitHub Actions"
           git add docs
           git commit -m "Update docs" && git push || echo "No changes to commit"
-          git push
+          git push --set-upstream origin drafts --force

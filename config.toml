@@ -18,12 +18,6 @@ paths = "on"
 taxonomies = "off"
 anchors = "on"
 
-[link_checker]
-skip_prefixes = [
-    "https://www.linkedin.com/",
-    "https://www.researchgate.net/",
-]
-
 [extra.author]
 name = "Tugrul Ates"
 picture = "/avatar/me.png"

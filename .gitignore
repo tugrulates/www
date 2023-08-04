@@ -1,6 +1,5 @@
 .netlify
 content/[!_]*.md
-lighthouse/
 node_modules/
 public/
 static/*
