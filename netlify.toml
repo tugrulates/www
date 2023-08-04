@@ -40,7 +40,7 @@
 [[plugins]]
   package = "netlify-plugin-html-validate"
   [plugins.inputs]
-    ext = "html"
+    path = "public"
     config = ".htmlvalidate.json"
 
 [[plugins]]
