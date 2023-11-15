@@ -1,9 +1,8 @@
-import { Component } from "preact/compat";
-import { type ComponentChildren } from 'preact';
+import React, { Component, type ReactNode } from "react";
 
 interface Props {
-  darkIcon?: ComponentChildren;
-  lightIcon?: ComponentChildren;
+  darkIcon?: ReactNode;
+  lightIcon?: ReactNode;
 }
 
 interface State {
@@ -51,7 +50,7 @@ export default class ThemeToggle extends Component<Props, State> {
             return null;
         }
         return (
-            <button onClick={this.toggleTheme} class="p-2 rounded-md hover:bg-orange-700 duration-200">
+            <button onClick={this.toggleTheme} className="p-2 rounded-md hover:bg-stone-300 dark:hover:bg-stone-700 duration-200">
                 {theme === "light" ? this.props.lightIcon : this.props.darkIcon}
             </button>
         );

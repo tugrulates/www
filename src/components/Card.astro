@@ -12,18 +12,14 @@ const snippet = post;
 const { remarkPluginFrontmatter: frontmatter } = await post.render();
 ---
 
-<!-- <Debug {frontmatter} /> -->
-<a
-  href={post.slug}
-  class:list={[className, "group/card h-80 bg-gray relative"]}
->
+<a href={post.slug} class:list={[className, "group h-80 relative"]}>
   <Image
     src={post.data.cover}
     alt={post.data.title}
-    class="w-full h-full object-cover rounded-md"
+    class="grayscale w-full h-full object-cover rounded-lg"
   />
   <div
-    class="flex flex-col gap-2 absolute bottom-0 p-4 rounded-md bg-orange-700 w-full"
+    class="flex flex-col gap-2 absolute bottom-0 p-4 rounded-lg bg-stone-300 dark:bg-stone-700 w-full"
   >
     <div class="flex flex-row items-end justify-between">
       <p class="font-bold text-2xl">{post.data.title}</p>
@@ -32,9 +28,7 @@ const { remarkPluginFrontmatter: frontmatter } = await post.render();
         class="font-bold italic whitespace-nowrap text-md">{date}</time
       >
     </div>
-    <p
-      class="flex-grow line-clamp-4 max-h-0 group-hover/card:max-h-80 duration-200"
-    >
+    <p class="flex-grow line-clamp-4 max-h-0 group-hover:max-h-80 duration-200">
       {frontmatter.description}
     </p>
   </div>

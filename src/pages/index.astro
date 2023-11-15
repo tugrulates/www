@@ -15,7 +15,7 @@ const posts = await getCollection("posts", ({ data }) => {
     {
       posts
         .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-        .map((post, index) => <Card post={post} class="last:odd:col-span-2" />)
+        .map((post) => <Card post={post} class="last:odd:col-span-2" />)
     }
   </div>
 </BaseLayout>
