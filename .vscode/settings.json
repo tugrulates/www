@@ -1,4 +1,2 @@
 {
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "githubPullRequests.defaultMergeMethod": "squash"
 }

@@ -1,0 +1,21 @@
+---
+import { getCollection } from "astro:content";
+import { AUTHOR } from "@consts";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import Card from "@components/Card.astro";
+import { Debug } from "astro:components";
+
+const posts = await getCollection("posts", ({ data }) => {
+  return data.draft !== true;
+});
+---
+
+<BaseLayout title={AUTHOR.name}>
+  <div class="grid grid-cols-2 gap-4">
+    {
+      posts
+        .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+        .map((post, index) => <Card post={post} class="last:odd:col-span-2" />)
+    }
+  </div>
+</BaseLayout>

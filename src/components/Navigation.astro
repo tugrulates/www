@@ -1,0 +1,21 @@
+---
+import Icon from "@components/Icon.astro";
+
+interface Props {
+  href: string;
+  alt: string;
+  icon: string;
+}
+const { href, alt, icon }: Props = Astro.props;
+const external = href.startsWith("http");
+---
+
+<a
+  aria-label={alt}
+  href={href}
+  target={external ? "_blank" : undefined}
+  rel={external ? "noopener noreferrer" : undefined}
+  class="p-2 rounded-md hover:bg-orange-700 duration-200"
+>
+  <Icon src={icon} alt={alt} />
+</a>

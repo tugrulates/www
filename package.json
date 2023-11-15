@@ -1,91 +1,36 @@
 {
-  "name": "blog-code",
+  "name": "blog",
   "type": "module",
-  "version": "1.0.0",
-  "description": "",
-  "directories": {
-    "doc": "docs"
-  },
-  "config": {
-    "posts": "docs/posts/*.md",
-    "photos": "docs/photos/*",
-    "files": "docs/files/*",
-    "favicon": "static/avatar/me.png",
-    "clean": "public content/[!_]* static/[!avatar,icons,scripts]* templates/favicon.html"
-  },
-  "scripts": {
-    "lint": "npx eslint 'scripts/*.ts'",
-    "prebuild": "run-p lint build:posts build:photos build:files build:favicon",
-    "build": "zola build",
-    "build:posts": "npm run scripts:posts $npm_package_config_posts",
-    "build:photos": "run-p 'scripts:photos -- --ext=.jpg {@}' 'scripts:photos -- --ext=.webp {@}' -- $npm_package_config_photos",
-    "build:files": "npm run scripts:files $npm_package_config_files",
-    "build:favicon": "npm run scripts:favicon $npm_package_config_favicon",
-    "watch": "run-p watch:*",
-    "watch:posts": "onchange -f add -f change $npm_package_config_posts -- npm run scripts:posts {{file}}",
-    "watch:photos": "onchange -f add -f change $npm_package_config_photos -- npm run scripts:photos {{file}}",
-    "watch:files": "onchange -f add -f change $npm_package_config_files -- npm run scripts:files {{file}}",
-    "watch:favicon": "onchange -f add -f change $npm_package_config_favicon -- npm run scripts:favicon {{file}}",
-    "scripts:posts": "ts-node scripts/posts.ts --output=content",
-    "scripts:photos": "ts-node scripts/photos.ts --output=static/photos",
-    "scripts:files": "cp -R -t static",
-    "scripts:favicon": "ts-node scripts/favicon.ts --html=templates/favicon.html --output=static",
-    "predev": "run-s 'build -- --drafts'",
-    "dev": "run-p watch 'netlify -- dev --offline'",
-    "clean": "rm -Rf $npm_package_config_clean",
-    "netlify": "netlify --telemetry-disable"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/tugrulates/blog-code.git"
-  },
+  "version": "2.0.0",
   "author": "Tugrul Ates",
   "license": "MIT",
+  "homepage": "https://github.com/tugrulates/blog#readme",
   "bugs": {
-    "url": "https://github.com/tugrulates/blog-code/issues"
+    "url": "https://github.com/tugrulates/blog/issues"
   },
-  "homepage": "https://github.com/tugrulates/blog-code#readme",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.3.1",
+    "@astrojs/sitemap": "^3.0.3",
+    "@headlessui/react": "^1.7.17",
+    "astro": "^3.5.3",
+    "astro-remark-description": "^1.1.1",
+    "preact": "^10.19.2",
+    "remark-toc": "^9.0.0",
+    "tailwindcss": "^3.3.5",
+    "typescript": "^5.2.2"
+  },
   "devDependencies": {
-    "@types/gm": "^1.18.12",
-    "@types/yargs": "^17.0.13",
-    "@typescript-eslint/eslint-plugin": "^5.61.0",
-    "chromium": "^3.0.3",
-    "eslint": "^8.47.0",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-config-standard-with-typescript": "^37.0.0",
-    "eslint-plugin-import": "^2.28.0",
-    "eslint-plugin-n": "^16.0.1",
-    "eslint-plugin-promise": "^6.1.1",
-    "favicons": "^7.1.4",
-    "gm": "^1.25.0",
-    "gray-matter": "^4.0.3",
-    "html-validate": "^8.2.0",
-    "netlify-plugin-csp-generator": "^1.5.0",
-    "npm-run-all": "^4.1.5",
-    "path": "^0.12.7",
-    "ts-node": "^10.9.1",
-    "typescript": "^5.1.6",
-    "util": "^0.12.5",
-    "yargs": "^17.6.0"
-  },
-  "eslintConfig": {
-    "env": {
-      "browser": true,
-      "es2021": true
-    },
-    "extends": [
-      "standard-with-typescript",
-      "prettier"
-    ],
-    "overrides": [],
-    "parserOptions": {
-      "ecmaVersion": "latest",
-      "sourceType": "module",
-      "project": [
-        "tsconfig.json"
-      ]
-    },
-    "rules": {}
+    "@astrojs/preact": "^3.0.1",
+    "@astrojs/tailwind": "^5.0.2",
+    "prettier": "^3.1.0",
+    "prettier-plugin-astro": "^0.12.2"
   },
   "prettier": {
     "xmlWhitespaceSensitivity": "ignore"

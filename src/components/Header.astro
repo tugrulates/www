@@ -1,0 +1,37 @@
+---
+import { Image } from "astro:assets";
+import avatar from "../images/me.png";
+import Icon from "@components/Icon.astro";
+import ThemeToggle from "@components/ThemeToggle.tsx";
+---
+
+<div class="flex flex-row justify-between">
+  <a
+    href="/"
+    class="flex flex-row items-center gap-2 px-2 py-1 rounded-md hover:bg-orange-700 duration-200"
+  >
+    <Image
+      src={avatar}
+      alt="me"
+      width="40"
+      height="40"
+      densities={[1, 2, 3, 4]}
+      class="object-scale-down"
+    />
+    <span class="text-3xl font-thin">Hello, I’m Tugrul!</span>
+  </a>
+  <ThemeToggle client:load>
+    <Icon
+      slot="darkIcon"
+      src="/icons/theme-darker.svg"
+      alt="switch to light theme"
+      class="dark:visible"
+    />
+    <Icon
+      slot="lightIcon"
+      src="/icons/theme-lighter.svg"
+      alt="switch to dark theme"
+      class="dark:hidden"
+    />
+  </ThemeToggle>
+</div>

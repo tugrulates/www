@@ -1,0 +1,50 @@
+---
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+
+const { title } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body
+    class="bg-white dark:bg-black text-black dark:text-white flex flex-col min-h-screen duration-200"
+  >
+    <header class="text-left max-w-prose w-full mx-auto my-6">
+      <Header />
+    </header>
+    <main class="text-left max-w-prose w-full mx-auto flex-1 my-6">
+      <h1>{title}</h1>
+      <slot />
+    </main>
+    <footer
+      class="text-left max-w-prose w-full mx-auto my-6 flex flex-row justify-center gap-0"
+    >
+      <Footer />
+    </footer>
+  </body>
+</html>
+
+<script is:inline>
+  const theme = (() => {
+    if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+      return localStorage.getItem("theme");
+    }
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      return "dark";
+    }
+    return "light";
+  })();
+
+  if (theme === "light") {
+    document.documentElement.classList.remove("dark");
+  } else {
+    document.documentElement.classList.add("dark");
+  }
+</script>

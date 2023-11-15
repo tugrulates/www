@@ -1,0 +1,41 @@
+---
+import { Image } from "astro:assets";
+import { Debug } from "astro:components";
+
+const { post, class: className } = Astro.props;
+const date = post.data.date.toLocaleDateString("en-US", {
+  month: "short",
+  day: "numeric",
+  year: "numeric",
+});
+const snippet = post;
+const { remarkPluginFrontmatter: frontmatter } = await post.render();
+---
+
+<!-- <Debug {frontmatter} /> -->
+<a
+  href={post.slug}
+  class:list={[className, "group/card h-80 bg-gray relative"]}
+>
+  <Image
+    src={post.data.cover}
+    alt={post.data.title}
+    class="w-full h-full object-cover rounded-md"
+  />
+  <div
+    class="flex flex-col gap-2 absolute bottom-0 p-4 rounded-md bg-orange-700 w-full"
+  >
+    <div class="flex flex-row items-end justify-between">
+      <p class="font-bold text-2xl">{post.data.title}</p>
+      <time
+        datetime={post.data.date}
+        class="font-bold italic whitespace-nowrap text-md">{date}</time
+      >
+    </div>
+    <p
+      class="flex-grow line-clamp-4 max-h-0 group-hover/card:max-h-80 duration-200"
+    >
+      {frontmatter.description}
+    </p>
+  </div>
+</a>
