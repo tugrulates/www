@@ -2,13 +2,13 @@
 import { Image } from "astro:assets";
 import avatar from "../images/me.png";
 import Icon from "@components/Icon.astro";
-import ThemeToggle from "@components/ThemeToggle.tsx";
+import ThemeToggle from "@components/ThemeControl";
 ---
 
-<div class="flex flex-row justify-between">
+<div class="flex flex-row items-center justify-between">
   <a
     href="/"
-    class="flex flex-row items-center gap-2 px-2 py-1 rounded-md hover:bg-stone-300 dark:hover:bg-stone-700 duration-200"
+    class="group flex flex-row items-center gap-2 rounded-md px-2 py-1"
   >
     <Image
       src={avatar}
@@ -16,22 +16,12 @@ import ThemeToggle from "@components/ThemeToggle.tsx";
       width="40"
       height="40"
       densities={[1, 2, 3, 4]}
-      class="object-scale-down"
+      class="ring-offset-red rounded-full object-scale-down ring-2 ring-transparent ring-offset-2 ring-offset-stone-200 transition duration-200 ease-in-out group-hover:ring-current dark:ring-offset-stone-800"
     />
-    <span class="text-3xl font-thin">Hello, I’m Tugrul!</span>
+    <span
+      class="text-3xl font-thin underline decoration-transparent decoration-2 underline-offset-2 transition group-hover:decoration-current"
+      >Hello, I’m Tugrul!</span
+    >
   </a>
-  <ThemeToggle client:load>
-    <Icon
-      slot="darkIcon"
-      src="/icons/theme-darker.svg"
-      alt="switch to light theme"
-      class="dark:visible"
-    />
-    <Icon
-      slot="lightIcon"
-      src="/icons/theme-lighter.svg"
-      alt="switch to dark theme"
-      class="dark:hidden"
-    />
-  </ThemeToggle>
+  <ThemeToggle client:load />
 </div>

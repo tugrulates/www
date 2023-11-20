@@ -2,21 +2,17 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 import Article from "@components/Article.astro";
 import { Image } from "astro:assets";
-import { Debug } from "astro:components";
 
 const { post, render } = Astro.props;
 ---
 
 <BaseLayout title={post.data.title}>
-  <!-- <Debug {post} />
-  <Debug {render} /> -->
   <div class="flex flex-col items-center">
     <Image
       src={post.data.cover}
       alt={post.data.title}
-      width={640}
       densities={[1, 2, 3, 4]}
-      class="aspect-2 rounded-lg mb-12"
+      class="aspect-2 mb-12 rounded-3xl shadow shadow-black"
     />
     <Article post={post}><slot /></Article>
   </div>

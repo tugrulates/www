@@ -15,7 +15,7 @@ const external = href.startsWith("http");
   href={href}
   target={external ? "_blank" : undefined}
   rel={external ? "noopener noreferrer" : undefined}
-  class="p-2 rounded-md hover:bg-stone-300 dark:hover:bg-stone-700 duration-200"
+  class="ease-in-ou transform rounded-md p-2 transition duration-200 hover:scale-150"
 >
-  <Icon src={icon} alt={alt} />
+  <Icon src={icon} alt={alt} class="shadow-black drop-shadow-lg" />
 </a>

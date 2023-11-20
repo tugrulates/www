@@ -8,15 +8,13 @@ const date = post.data.date.toLocaleDateString("en-US", {
 ---
 
 <article
-  class="prose md:prose-lg lg:prose-xl w-full dark:prose-invert
-               prose-h1:font-bold prose-h1:text-5xl
-               prose-a:text-blue-600 prose-p:text-justify prose-img:rounded-xl"
+  class="prose prose-lg prose-stone dark:prose-invert prose-a:decoration-stone-500/50 hover:prose-a:decoration-black prose-img:rounded-xl hover:dark:prose-a:decoration-white"
 >
   <header class="flex flex-col">
     <h1>{post.data.title}</h1>
     <time
       datetime={post.data.date}
-      class="self-end font-bold italic whitespace-nowrap text-md">{date}</time
+      class="text-md self-end whitespace-nowrap font-bold italic">{date}</time
     >
   </header>
   <slot />
@@ -28,10 +26,6 @@ const date = post.data.date.toLocaleDateString("en-US", {
   article > :global(ol),
   article > :global(table),
   article > :global(blockquote) {
-    @apply rounded-lg -mx-4 px-4 hover:bg-stone-300/10 dark:hover:bg-stone-700/10;
-  }
-  article > :global(ul),
-  article > :global(ol) {
-    @apply pl-12;
+    @apply rounded-lg  hover:bg-stone-500/10;
   }
 </style>

@@ -11,11 +11,11 @@ const posts = await getCollection("posts", ({ data }) => {
 ---
 
 <BaseLayout title={AUTHOR.name}>
-  <div class="grid grid-cols-2 gap-4">
+  <div class="flex flex-col gap-4">
     {
       posts
         .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-        .map((post) => <Card post={post} class="last:odd:col-span-2" />)
+        .map((post) => <Card post={post} />)
     }
   </div>
 </BaseLayout>
