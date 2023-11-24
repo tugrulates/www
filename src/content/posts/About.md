@@ -2,7 +2,7 @@
 title: About
 date: 2022-02-17
 loc: San Francisco, CA
-cover: ./photos/roundest-object-on-earth.jpeg
+cover: ../photos/sphere-of-perfection.jpg
 tags: [self, meta]
 ---
 

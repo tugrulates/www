@@ -14,17 +14,15 @@ const { title } = Astro.props;
     <title>{title}</title>
   </head>
   <body
-    class="flex min-h-screen flex-col bg-stone-200 text-black transition-colors duration-200 ease-in-out dark:bg-stone-800 dark:text-white"
+    class="mx-auto flex min-h-screen max-w-screen-md flex-col bg-stone-200 text-black transition-colors dark:bg-stone-800 dark:text-white sm:px-4"
   >
-    <header class="mx-auto w-full max-w-screen-md px-4 py-8 text-left">
+    <header class="px-4 py-8 text-left">
       <Header />
     </header>
-    <main class="mx-auto w-full max-w-screen-md flex-1 px-4 py-8 text-left">
+    <main class="flex-1 py-8 text-left">
       <slot />
     </main>
-    <footer
-      class="mx-auto flex w-full max-w-screen-md flex-row justify-center gap-0 px-4 py-8 text-left"
-    >
+    <footer class="flex flex-row justify-center gap-0 px-4 py-8 text-left">
       <Footer />
     </footer>
   </body>

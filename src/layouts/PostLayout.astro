@@ -11,8 +11,9 @@ const { post, render } = Astro.props;
     <Image
       src={post.data.cover}
       alt={post.data.title}
+      width={736}
       densities={[1, 2, 3, 4]}
-      class="aspect-2 mb-12 rounded-3xl shadow shadow-black"
+      class="aspect-2 mb-12 shadow shadow-stone-900 sm:rounded-2xl"
     />
     <Article post={post}><slot /></Article>
   </div>

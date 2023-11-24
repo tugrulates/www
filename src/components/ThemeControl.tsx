@@ -51,14 +51,14 @@ export default class ThemeToggle extends Component<Props, State> {
         checked={this.state.dark}
         onChange={this.toggleTheme}
         className={
-          "shadow-inner-lg group relative z-20 inline-flex h-10 w-20 shrink-0 cursor-pointer rounded-full border-2 border-transparent bg-stone-500/50 shadow-inner transition-colors duration-200 ease-in-out hover:bg-stone-500/75 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
+          "group relative z-20 inline-flex h-10 w-20 shrink-0 cursor-pointer rounded-full border-transparent ring-inset ring-stone-500/50 transition-colors hover:bg-stone-500/10 hover:ring-1 focus-visible:ring-2 focus-visible:ring-white/75"
         }
       >
         <span className="sr-only">Dark mode</span>
         <span
           aria-hidden="true"
           className={
-            "pointer-events-none flex h-9 w-9 translate-x-0 transform flex-row items-center justify-center rounded-full bg-stone-100 shadow ring-0 transition-all ease-in-out  dark:translate-x-10 dark:bg-stone-900 dark:brightness-100 "
+            "pointer-events-none flex h-8 w-8 translate-x-1 translate-y-1 transform flex-row items-center justify-center rounded-full bg-stone-200 ring-stone-500/50 transition-all  group-hover:ring-1 dark:translate-x-11 dark:bg-stone-800"
           }
         >
           <img

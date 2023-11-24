@@ -1,0 +1,3 @@
+[submodule "photos"]
+	path = src/content/photos
+	url = https://github.com/tugrulates/photos

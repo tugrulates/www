@@ -3,7 +3,7 @@ title: Object Permanence
 draft: false
 date: 2022-05-17
 loc: San Francisco, CA
-cover: ./photos/chihuly-glass-boat.jpeg
+cover: ../photos/winter-pause.jpg
 tags: [philosophy, mind, career]
 ---
 

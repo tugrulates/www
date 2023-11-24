@@ -3,13 +3,15 @@ import Navigation from "@components/Navigation.astro";
 import { AUTHOR } from "@consts";
 ---
 
-<Navigation href="/" alt="back to homepage" icon="/icons/link-home.svg" />
-{
-  AUTHOR.social.map((item) => (
-    <Navigation
-      href={item.url}
-      alt={`my ${item.name} profile`}
-      icon={item.icon}
-    />
-  ))
-}
+<div class="flex flex-row">
+  <Navigation href="/" alt="back to homepage" icon="/icons/link-home.svg" />
+  {
+    AUTHOR.social.map((item) => (
+      <Navigation
+        href={item.url}
+        alt={`my ${item.name} profile`}
+        icon={item.icon}
+      />
+    ))
+  }
+</div>

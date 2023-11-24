@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 
-const { post } = Astro.props;
+const { post, className } = Astro.props;
 const date = post.data.date.toLocaleDateString("en-US", {
   month: "short",
   day: "numeric",
@@ -12,44 +12,27 @@ const { remarkPluginFrontmatter: frontmatter } = await post.render();
 
 <a
   href={post.slug}
-  class="group flex h-32 flex-row gap-4 overflow-hidden rounded-3xl bg-stone-500/50 shadow shadow-black hover:bg-stone-500/75"
+  class:list={[
+    className,
+    "align-center group flex flex-row items-center gap-4 pl-4 ring-inset ring-stone-500/50 transition hover:bg-stone-500/10 hover:ring-1 sm:rounded-xl",
+  ]}
 >
   <div
-    class="flex h-full min-w-fit grow-0 transition duration-200 ease-in-out group-hover:scale-110"
+    class="hidden h-full min-w-fit grow-0 overflow-hidden rounded-2xl shadow shadow-stone-900 transition-all group-hover:scale-[1.15] sm:flex"
   >
     <Image
       src={post.data.cover}
       alt={post.data.title}
-      width={640}
-      class="transform-all h-32 w-32 -translate-x-4 translate-y-4 scale-150 rounded-full object-cover shadow shadow-black grayscale duration-200 ease-in-out"
+      width={256}
+      densities={[1, 2, 3, 4]}
+      class="transform-all h-full w-64 object-cover"
     />
   </div>
-  <div class="flex h-full flex-col gap-2 px-4 py-1">
-    <div class="flex flex-row items-end gap-2">
-      <p class="grow text-2xl font-bold">{post.data.title}</p>
-      <time
-        datetime={post.data.date}
-        class="text-md whitespace-nowrap font-bold italic">{date}</time
-      >
-    </div>
-    <p class="line-clamp-3">
+  <div class="group z-10 flex grow-0 flex-col p-4">
+    <time datetime={post.data.date} class="text-stone-500">{date}</time>
+    <p class="grow text-lg font-bold">{post.data.title}</p>
+    <p class="line-clamp-4 text-stone-600 dark:text-stone-400">
       {frontmatter.description}
     </p>
   </div>
-  <!-- <div
-    class="absolute bottom-0 flex w-full flex-col gap-2 rounded-3xl bg-stone-500/50 p-4 text-white group-hover:bg-stone-500/95"
-  >
-    <div class="flex flex-row items-end justify-between">
-      <p class="text-2xl font-bold">{post.data.title}</p>
-      <time
-        datetime={post.data.date}
-        class="text-md whitespace-nowrap font-bold italic">{date}</time
-      >
-    </div>
-    <p
-      class="line-clamp-6 max-h-0 flex-grow transition-all duration-200 group-hover:max-h-80"
-    >
-      {frontmatter.description}
-    </p>
-  </div> -->
 </a>

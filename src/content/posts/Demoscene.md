@@ -3,7 +3,7 @@ title: Demoscene
 draft: false
 date: 2022-02-16
 loc: San Francisco, CA
-cover: ./photos/sceners-in-nature.jpeg
+cover: ../photos/cosmic-encounter.jpg
 tags: [demoscene, coding, graphics]
 ---
 

@@ -9,9 +9,11 @@
     "url": "https://github.com/tugrulates/blog/issues"
   },
   "scripts": {
+    "fetch-photos": "git submodule update --init src/content/photos",
+    "fetch": "fetch-photos",
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro check && astro build",
+    "build": "fetch && astro check && astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
