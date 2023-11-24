@@ -10,10 +10,10 @@
   },
   "scripts": {
     "fetch-photos": "git submodule update --init --remote src/content/photos",
-    "fetch": "fetch-photos",
+    "fetch": "npm run fetch-photos",
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "fetch && astro check && astro build",
+    "build": "npm run fetch && astro check && astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
