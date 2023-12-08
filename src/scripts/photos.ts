@@ -20,7 +20,7 @@ async function extractMetadata(file: string) {
     description: tags.Description ?? "",
     date:
       (tags.CreateDate instanceof ExifDateTime
-        ? tags.CreateDate.rawValue
+        ? tags.CreateDate.toDate().toISOString()
         : tags.CreateDate) ?? "",
   };
   const json = JSON.stringify(data, null, 2);

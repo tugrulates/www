@@ -32,7 +32,7 @@ const frontmatters = Object.fromEntries(
       {
         posts
           .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-          .map((post, index) => (
+          .map((post) => (
             <Card
               link={post.slug}
               image={covers[post.slug].data.image}
