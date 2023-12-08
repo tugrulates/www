@@ -7,7 +7,7 @@ const posts = defineCollection({
       title: z.string(),
       draft: z.boolean().default(true),
       date: z.date(),
-      cover: reference("photos"),
+      cover: reference("photos").default("sphere-of-perfection"),
       tags: z.array(z.string()),
     }),
 });
@@ -19,7 +19,7 @@ const photos = defineCollection({
       image: image(),
       title: z.string(),
       description: z.string(),
-      // date: z.string().transform((value) => new Date(value)),
+      date: z.string().transform((value) => new Date(value)),
     }),
 });
 

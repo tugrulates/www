@@ -9,6 +9,7 @@ interface PhotoData {
   image: string;
   title: string;
   description: string;
+  date: string;
 }
 
 async function extractMetadata(file: string) {
@@ -17,11 +18,13 @@ async function extractMetadata(file: string) {
     image: `./${tags.FileName ?? ""}`,
     title: tags.Title ?? "",
     description: tags.Description ?? "",
+    date:
+      (tags.CreateDate instanceof ExifDateTime
+        ? tags.CreateDate.rawValue
+        : tags.CreateDate) ?? "",
   };
   const json = JSON.stringify(data, null, 2);
   fs.writeFileSync(`${DIR}/${file.replace(".jpg", ".json")}`, json);
-  console.log(data);
-  console.log(tags);
 }
 
 Promise.all(

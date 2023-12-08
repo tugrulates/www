@@ -5,7 +5,7 @@ import Article from "@components/Article.astro";
 import { Image } from "astro:assets";
 
 const { post } = Astro.props;
-const cover = await getEntry(post.data.cover);
+const cover = await getEntry("photos", post.data.cover);
 ---
 
 <BaseLayout title={post.data.title}>
