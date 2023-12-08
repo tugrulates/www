@@ -3,7 +3,7 @@ title: Demoscene
 draft: false
 date: 2022-02-16
 loc: San Francisco, CA
-cover: ../photos/cosmic-encounter.jpg
+cover: cloudcraft
 tags: [demoscene, coding, graphics]
 ---
 

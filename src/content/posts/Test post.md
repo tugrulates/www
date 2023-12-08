@@ -4,7 +4,7 @@ draft: true
 date: 2022-02-11
 updated: 2022-03-11
 loc: San Francisco, CA
-cover: ../photos/london-figaro.jpg
+cover: cloudcraft
 tags:
   [
     meta,

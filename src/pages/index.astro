@@ -1,5 +1,5 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, getEntry } from "astro:content";
 import { AUTHOR } from "@consts";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import Card from "@components/Card.astro";
@@ -8,6 +8,22 @@ import { Debug } from "astro:components";
 const posts = await getCollection("posts", ({ data }) => {
   return data.draft !== true;
 });
+const covers = Object.fromEntries(
+  await Promise.all(
+    posts.map(async (post) => {
+      const cover = await getEntry(post.data.cover);
+      return [post.slug, cover];
+    }),
+  ),
+);
+const frontmatters = Object.fromEntries(
+  await Promise.all(
+    posts.map(async (post) => {
+      const { remarkPluginFrontmatter: frontmatter } = await post.render();
+      return [post.slug, frontmatter];
+    }),
+  ),
+);
 ---
 
 <BaseLayout title={AUTHOR.name}>
@@ -16,7 +32,15 @@ const posts = await getCollection("posts", ({ data }) => {
       {
         posts
           .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-          .map((post, index) => <Card post={post} class="" />)
+          .map((post, index) => (
+            <Card
+              link={post.slug}
+              image={covers[post.slug].data.image}
+              title={post.data.title}
+              description={frontmatters[post.slug].description}
+              date={post.data.date}
+            />
+          ))
       }
     </div>
   </div>

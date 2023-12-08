@@ -3,7 +3,7 @@ title: Research
 draft: false
 date: 2022-02-15
 loc: San Francisco, CA
-cover: ../photos/imagined-breakthrough-mornings.jpg
+cover: where-the-bike-roam
 tags: [research, ai, graphics]
 ---
 

@@ -3,7 +3,7 @@ title: Object Permanence
 draft: false
 date: 2022-05-17
 loc: San Francisco, CA
-cover: ../photos/winter-pause.jpg
+cover: wheel-in-the-sky
 tags: [philosophy, mind, career]
 ---
 
