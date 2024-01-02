@@ -16,10 +16,15 @@ const photos = defineCollection({
   type: "data",
   schema: ({ image }) =>
     z.object({
-      image: image(),
+      cover: image(),
+      square: image(),
       title: z.string(),
       description: z.string(),
       date: z.string().transform((value) => new Date(value)),
+      location: z.string(),
+      city: z.string(),
+      state: z.string(),
+      country: z.string(),
     }),
 });
 

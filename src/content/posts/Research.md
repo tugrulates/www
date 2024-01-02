@@ -3,7 +3,7 @@ title: Research
 draft: false
 date: 2022-02-15
 loc: San Francisco, CA
-cover: where-the-bike-roam
+cover: submerged-cyclist
 tags: [research, ai, graphics]
 ---
 

@@ -1,6 +1,6 @@
 export const AUTHOR = {
   name: "Tugrul Ates",
-  picture: "/me.png",
+  picture: "/me.jpg",
   social: [
     {
       name: "LinkedIn",
@@ -20,7 +20,12 @@ export const AUTHOR = {
     {
       name: "YouTube",
       icon: "/icons/social-youtube.svg",
-      url: "https://www.youtube.com/@TugrulAtesDemoscene",
+      url: "https://www.youtube.com/@TugrulAtes",
+    },
+    {
+      name: "Instagram",
+      icon: "/icons/social-instagram.svg",
+      url: "https://www.instagram.com/turulier/",
     },
   ],
 };

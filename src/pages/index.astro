@@ -2,7 +2,7 @@
 import { getCollection, getEntry } from "astro:content";
 import { AUTHOR } from "@consts";
 import BaseLayout from "@layouts/BaseLayout.astro";
-import Card from "@components/Card.astro";
+import Post from "@components/Post.astro";
 import { Debug } from "astro:components";
 
 const posts = await getCollection("posts", ({ data }) => {
@@ -33,9 +33,9 @@ const frontmatters = Object.fromEntries(
         posts
           .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
           .map((post) => (
-            <Card
+            <Post
               link={post.slug}
-              image={covers[post.slug].data.image}
+              image={covers[post.slug].data.square}
               title={post.data.title}
               description={frontmatters[post.slug].description}
               date={post.data.date}

@@ -1,36 +1,55 @@
+import path from "path";
 import fs from "fs";
-import { ExifDateTime, ExifTool, exiftool } from "exiftool-vendored";
+import { glob } from "glob";
+import { ExifDateTime, exiftool } from "exiftool-vendored";
 
 const DIR = "src/content/photos";
 
-const files = fs.readdirSync(DIR);
-
 interface PhotoData {
-  image: string;
+  cover: string;
+  square: string;
   title: string;
   description: string;
   date: string;
+  location: string;
+  city: string;
+  state: string;
+  country: string;
 }
 
-async function extractMetadata(file: string) {
-  const tags = await exiftool.read(`${DIR}/${file}`);
+async function extractMetadata(photo: string) {
+  const cover = `${DIR}/${photo}/cover.jpg`;
+  const tags = await exiftool.read(cover);
+  const file = `./${photo}/${tags.FileName ?? ""}`;
   const data: PhotoData = {
-    image: `./${tags.FileName ?? ""}`,
-    title: tags.Title ?? "",
-    description: tags.Description ?? "",
+    cover: file,
+    square: file.replace("/cover.jpg", "/square.jpg"),
+    title: tags.Headline ?? "",
+    description: tags.ImageDescription ?? "",
     date:
       (tags.CreateDate instanceof ExifDateTime
         ? tags.CreateDate.toDate().toISOString()
         : tags.CreateDate) ?? "",
+    location: tags.Location ?? "",
+    city: tags.City ?? "",
+    state: tags.State ?? "",
+    country: tags.Country ?? "",
   };
   const json = JSON.stringify(data, null, 2);
-  fs.writeFileSync(`${DIR}/${file.replace(".jpg", ".json")}`, json);
+  console.log(tags);
+  console.log(json);
+  fs.writeFileSync(`${DIR}/${photo}.json`, json);
 }
 
+const covers = glob.sync(`${DIR}/*/cover.jpg`);
+const photos = covers.map((cover) => {
+  const photo = path.dirname(cover).split("/").pop();
+  return photo;
+});
 Promise.all(
-  files.map((file) => {
-    if (file.endsWith(".jpg")) {
-      return extractMetadata(file);
+  photos.map((photo) => {
+    if (photo) {
+      return extractMetadata(photo);
     }
   }),
 ).finally(() => {
