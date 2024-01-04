@@ -1,4 +1,5 @@
 ---
+import { ViewTransitions } from "astro:transitions";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 import { AUTHOR } from "@consts";
@@ -23,6 +24,7 @@ if (!description) {
     <meta name="author" content={AUTHOR.name} />
     <meta name="description" content={description} />
     <meta name="keywords" content={(keywords ?? []).join(", ")} />
+    <ViewTransitions />
   </head>
   <body
     class="mx-auto flex min-h-screen max-w-screen-md flex-col bg-stone-200 text-black transition-colors sm:px-4 dark:bg-stone-800 dark:text-white"
@@ -30,29 +32,31 @@ if (!description) {
     <header class="px-4 py-8 text-left">
       <Header />
     </header>
-    <main class="flex-1 py-8 text-left">
+    <main class="flex-1 py-8 text-left" }>
       <slot />
     </main>
     <footer class="flex flex-row justify-center gap-0 px-4 py-8 text-left">
       <Footer />
     </footer>
+    <script is:inline>
+      const theme = (() => {
+        if (
+          typeof localStorage !== "undefined" &&
+          localStorage.getItem("theme")
+        ) {
+          return localStorage.getItem("theme");
+        }
+        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+          return "dark";
+        }
+        return "light";
+      })();
+
+      if (theme === "light") {
+        document.documentElement.classList.remove("dark");
+      } else {
+        document.documentElement.classList.add("dark");
+      }
+    </script>
   </body>
 </html>
-
-<script is:inline>
-  const theme = (() => {
-    if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
-      return localStorage.getItem("theme");
-    }
-    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      return "dark";
-    }
-    return "light";
-  })();
-
-  if (theme === "light") {
-    document.documentElement.classList.remove("dark");
-  } else {
-    document.documentElement.classList.add("dark");
-  }
-</script>

@@ -10,5 +10,6 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [[remarkDescription, {}]],
   },
+  prefetch: true,
   integrations: [sitemap(), tailwind(), react()],
 });

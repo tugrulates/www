@@ -3,7 +3,7 @@ import Navigation from "@components/Navigation.astro";
 import { AUTHOR } from "@consts";
 ---
 
-<div class="flex flex-row">
+<div class="flex flex-row" transition:persist>
   <Navigation href="/" alt="back to homepage" icon="/icons/link-home.svg" />
   {
     AUTHOR.social.map((item) => (

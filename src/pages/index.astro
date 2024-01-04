@@ -1,5 +1,6 @@
 ---
 import { getCollection, getEntry } from "astro:content";
+import { fade } from "astro:transitions";
 import { AUTHOR } from "@consts";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import Post from "@components/Post.astro";
@@ -26,7 +27,10 @@ const frontmatters = Object.fromEntries(
 ---
 
 <BaseLayout title={AUTHOR.name} description="My homepage.">
-  <div class="flex flex-col gap-16">
+  <div
+    class="flex flex-col gap-16"
+    transition:animate={fade({ duration: "0.1s" })}
+  >
     <div class="flex flex-col gap-8">
       {
         posts
