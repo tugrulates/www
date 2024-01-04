@@ -4,6 +4,37 @@ import avatar from "../images/me.jpg";
 import ThemeToggle from "@components/ThemeToggle";
 ---
 
+<script is:inline>
+  function getDark() {
+    if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+      try {
+        const theme = JSON.parse(localStorage.getItem("theme") ?? "");
+        console.log(theme);
+        const { dark } = theme;
+        return dark;
+      } catch (e) {}
+    }
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      return true;
+    }
+    return false;
+  }
+
+  function setTheme(document) {
+    console.log(getDark());
+    if (getDark()) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }
+
+  setTheme(document);
+  document.addEventListener("astro:before-swap", (event) => {
+    setTheme(event.newDocument);
+  });
+</script>
+
 <div class="flex flex-row items-center justify-between" transition:persist>
   <a
     href="/"

@@ -43,12 +43,14 @@ const formatted_date = entry.data.date.toLocaleDateString("en-US", {
         alt="Previous photo"
         icon="/icons/link-previous.svg"
         className="absolute inset-y-2 left-2 bg-stone-200/50 opacity-0 transition-opacity hover:bg-stone-200 group-hover:opacity-100 dark:bg-stone-800/50 dark:hover:bg-stone-800"
+        overlay={true}
       />
       <Navigation
         href={`./${neighbors[2].id}`}
         alt="Next photo"
         icon="/icons/link-next.svg"
         className="absolute inset-y-2 right-2 bg-stone-200/50 opacity-0 transition-opacity hover:bg-stone-200 group-hover:opacity-100 dark:bg-stone-800/50 dark:hover:bg-stone-800"
+        overlay={true}
       />
       <Navigation
         href={entry.data.cover.src}
@@ -56,6 +58,7 @@ const formatted_date = entry.data.date.toLocaleDateString("en-US", {
         alt="Download photo in full size"
         icon="/icons/link-download.svg"
         className="absolute bottom-2 end-16 bg-stone-200/50 opacity-0 transition-opacity hover:bg-stone-200 group-hover:opacity-100 dark:bg-stone-800/50 dark:hover:bg-stone-800"
+        overlay={true}
       />
     </div>
     <Article title={entry.data.title}>
