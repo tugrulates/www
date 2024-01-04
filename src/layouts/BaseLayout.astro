@@ -5,10 +5,10 @@ import { AUTHOR } from "@consts";
 
 const { title, description, keywords } = Astro.props;
 if (!title) {
-    throw new Error("Title is required for all pages.");
+  throw new Error("Title is required for all pages.");
 }
 if (!description) {
-    throw new Error("Description is required for all pages.");
+  throw new Error("Description is required for all pages.");
 }
 ---
 
@@ -20,12 +20,12 @@ if (!description) {
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-    <meta name="author" content={AUTHOR.name}>
-    <meta name="description" content={description}>
-    <meta name="keywords" content={(keywords ?? []).join(", ")}>
+    <meta name="author" content={AUTHOR.name} />
+    <meta name="description" content={description} />
+    <meta name="keywords" content={(keywords ?? []).join(", ")} />
   </head>
   <body
-    class="mx-auto flex min-h-screen max-w-screen-md flex-col bg-stone-200 text-black transition-colors dark:bg-stone-800 dark:text-white sm:px-4"
+    class="mx-auto flex min-h-screen max-w-screen-md flex-col bg-stone-200 text-black transition-colors sm:px-4 dark:bg-stone-800 dark:text-white"
   >
     <header class="px-4 py-8 text-left">
       <Header />

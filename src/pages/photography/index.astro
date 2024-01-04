@@ -3,14 +3,15 @@ import { getCollection } from "astro:content";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import Photo from "@components/Photo.astro";
 
-const photos = await getCollection("photos");
+const photos = (await getCollection("photos")).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
 ---
 
 <BaseLayout title="photos" description="My photography.">
-  <div class="flex flex-row flex-wrap gap-4 justify-center">
+  <div class="flex flex-row flex-wrap justify-center gap-4">
     {
-      photos.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-        .map((photo) => (
+      photos.map((photo) => (
         <Photo
           link={`./photography/${photo.id}`}
           image={photo.data.square}

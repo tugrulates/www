@@ -3,6 +3,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
+      "@arrays": ["src/arrays"],
       "@consts": ["src/consts"],
       "@components/*": ["src/components/*"],
       "@layouts/*": ["src/layouts/*"]

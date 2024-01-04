@@ -1,10 +1,16 @@
 import path from "path";
 import fs from "fs";
 import { glob } from "glob";
-import { ExifDateTime, exiftool } from "exiftool-vendored";
+import { ExifDateTime, exiftool, type Tags } from "exiftool-vendored";
 
 const IMAGES_DIR = "src/images/photos";
 const CONTENT_DIR = "src/content/photos";
+
+export interface PhotoTags extends Tags {
+  License?: string;
+  AttributionName?: string;
+  AttributionURL?: string;
+}
 
 interface PhotoData {
   cover: string;
@@ -19,19 +25,24 @@ interface PhotoData {
   country: string;
   camera: string;
   lens: string;
-  license: string;
-  attribution: string;
+  editing: string;
+  license_name: string;
+  license_url: string;
+  attribution_name: string;
+  attribution_url: string;
 }
 
 async function extractMetadata(photo: string) {
   const cover = `${IMAGES_DIR}/${photo}/cover.jpg`;
-  const tags = await exiftool.read(cover);
+  const tags = await exiftool.read<PhotoTags>(cover);
   const data: PhotoData = {
     cover: `../../images/photos/${photo}/cover.jpg`,
     square: `../../images/photos/${photo}/square.jpg`,
     title: tags.Headline ?? "",
     description: tags.ImageDescription ?? "",
-    keywords: tags.Keywords ?? [],
+    keywords: Array.isArray(tags.Keywords)
+      ? tags.Keywords
+      : [tags.Keywords ?? ""],
     date:
       (tags.CreateDate instanceof ExifDateTime
         ? tags.CreateDate.toDate().toISOString()

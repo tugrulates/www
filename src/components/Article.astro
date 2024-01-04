@@ -1,6 +1,6 @@
 ---
 const { title, date } = Astro.props;
-const foramtted_date = date.toLocaleDateString("en-US", {
+const formatted_date = date.toLocaleDateString("en-US", {
   month: "long",
   day: "numeric",
   year: "numeric",
@@ -14,7 +14,8 @@ const foramtted_date = date.toLocaleDateString("en-US", {
     <h1>{title}</h1>
     <time
       datetime={date}
-      class="text-md self-end whitespace-nowrap font-bold italic">{foramtted_date}</time
+      class="text-md self-end whitespace-nowrap font-bold italic"
+      >{formatted_date}</time
     >
   </header>
   <slot />
