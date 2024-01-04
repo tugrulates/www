@@ -1,14 +1,17 @@
 ---
 import { Image } from "astro:assets";
 
-const { image } = Astro.props;
+const { image, className } = Astro.props;
 ---
 
 <Image
   slot="cover"
   src={image.data.cover}
   alt={image.data.description}
-  width={736}
+  width={720}
   densities={[1, 2, 3, 4]}
-  class="aspect-2 shadow shadow-stone-900 sm:rounded-2xl"
+  class:list={[
+    "aspect-2 z-10 shadow shadow-stone-900 sm:rounded-2xl",
+    className,
+  ]}
 />

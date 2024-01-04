@@ -18,12 +18,13 @@ const cover = await getEntry(entry.data.cover);
 ---
 
 <BaseLayout
+  tab="blog"
   title={entry.data.title}
   description={remarkPluginFrontmatter.description}
   keywords={entry.data.tags}
 >
-  <div class="flex flex-col gap-16">
-    <Cover image={cover} />
+  <div class="items-left flex flex-col gap-20 p-4 pt-12">
+    <Cover image={cover} className="scale-125" />
     <Article title={entry.data.title} date={entry.data.date}>
       <Content />
     </Article>

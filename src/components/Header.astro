@@ -2,6 +2,10 @@
 import { Image } from "astro:assets";
 import avatar from "../images/me.jpg";
 import ThemeToggle from "@components/ThemeToggle";
+import Icon from "./Icon.astro";
+import Tab from "./Tab.astro";
+
+const { tab } = Astro.props;
 ---
 
 <script is:inline>
@@ -35,21 +39,42 @@ import ThemeToggle from "@components/ThemeToggle";
   });
 </script>
 
-<div class="flex flex-row items-center justify-between" transition:persist>
-  <a
-    href="/"
-    class="group flex flex-row items-center gap-2 rounded-xl px-2 py-1 ring-inset ring-stone-500/50 transition hover:bg-stone-500/10 hover:ring-1"
-  >
-    <Image
-      src={avatar}
-      alt="me"
-      width="40"
-      height="40"
-      densities={[1, 2, 3, 4]}
-      class="rounded-full"
-    />
-    <span class="text-3xl font-thin">Hello, I’m Tugrul!</span>
-  </a>
-  <a href="/photography">Photography</a>
-  <ThemeToggle client:load />
+<div class="flex flex-col gap-4 pt-4">
+  <div class="relative">
+    <navigation class="items-begin flex flex-row gap-1">
+      <Tab
+        href="/about"
+        alt="About me"
+        icon="/icons/link-about.svg"
+        selected={tab == "about"}
+      >
+        <Image
+          src={avatar}
+          alt="me"
+          width="40"
+          height="40"
+          densities={[1, 2, 3, 4]}
+          class="rounded-full border border-black dark:border-white"
+        />
+      </Tab>
+      <Tab href="/" selected={tab == "blog"} className="grow">
+        <Icon src="/icons/link-blog.svg" alt="My essays" className="scale-75" />
+        Blog
+      </Tab>
+      <Tab href="/photography" selected={tab == "photos"} className="grow">
+        <Icon
+          src="/icons/link-photos.svg"
+          alt="My photography"
+          className="scale-75"
+        />
+        Photography
+      </Tab>
+      <ThemeToggle client:load />
+    </navigation>
+
+    <div
+      class="z-1 absolute bottom-0 left-0 h-4 w-full rounded-t-3xl bg-stone-200 dark:bg-stone-800"
+    >
+    </div>
+  </div>
 </div>

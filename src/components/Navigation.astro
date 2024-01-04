@@ -16,7 +16,10 @@ const external = newTab || href.startsWith("http");
     !overlay && "hover:bg-stone-500/10",
   ]}
 >
-  <div class="flex h-full flex-col items-center justify-center">
+  <div
+    class="text-md justify-left flex h-full flex-row items-center gap-2 font-bold"
+  >
     <Icon src={icon} alt={alt} class="group-hover:scale-100" />
+    <slot />
   </div>
 </a>

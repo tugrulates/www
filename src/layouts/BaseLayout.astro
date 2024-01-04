@@ -4,7 +4,7 @@ import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 import { AUTHOR } from "@consts";
 
-const { title, description, keywords } = Astro.props;
+const { tab, title, description, keywords } = Astro.props;
 if (!title) {
   throw new Error("Title is required for all pages.");
 }
@@ -27,15 +27,17 @@ if (!description) {
     <ViewTransitions />
   </head>
   <body
-    class="mx-auto flex min-h-screen max-w-screen-md flex-col bg-stone-200 text-black transition-colors sm:px-4 dark:bg-stone-800 dark:text-white"
+    class="mx-auto flex min-h-screen max-w-screen-md flex-col gap-0 bg-stone-300 text-black transition-colors sm:px-4 dark:bg-stone-700 dark:text-white"
   >
-    <header class="px-4 py-8 text-left">
-      <Header />
+    <header class="text-left">
+      <Header tab={tab} />
     </header>
-    <main class="flex-1 py-8 text-left" }>
+    <main
+      class="flex-1 rounded-b-3xl bg-stone-200 text-left shadow shadow-stone-900/20 dark:bg-stone-800"
+    >
       <slot />
     </main>
-    <footer class="flex flex-row justify-center gap-0 px-4 py-8 text-left">
+    <footer class="stext-left flex flex-row justify-center gap-0">
       <Footer />
     </footer>
   </body>

@@ -3,8 +3,7 @@ import Navigation from "@components/Navigation.astro";
 import { AUTHOR } from "@consts";
 ---
 
-<div class="flex flex-row" transition:persist>
-  <Navigation href="/" alt="back to homepage" icon="/icons/link-home.svg" />
+<div class="flex flex-row py-8" transition:persist>
   {
     AUTHOR.social.map((item) => (
       <Navigation

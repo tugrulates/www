@@ -1,12 +1,7 @@
 ---
 import { Image } from "astro:assets";
 
-interface Props {
-  src: string;
-  alt: string;
-  class?: string;
-}
-const { src, alt, class: className } = Astro.props;
+const { src, alt, className } = Astro.props;
 ---
 
 <Image

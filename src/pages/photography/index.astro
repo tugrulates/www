@@ -9,7 +9,7 @@ const photos = (await getCollection("photos")).sort(
 );
 ---
 
-<BaseLayout title="photos" description="My photography.">
+<BaseLayout tab="photos" title="Photography" description="My photography.">
   <div
     class="flex flex-row flex-wrap justify-center gap-4"
     transition:animate={fade({ duration: "0.1s" })}
