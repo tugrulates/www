@@ -22,7 +22,7 @@ const cover = await getEntry(entry.data.cover);
   description={remarkPluginFrontmatter.description}
   keywords={entry.data.tags}
 >
-  <div class="flex flex-col">
+  <div class="flex flex-col gap-16">
     <Cover image={cover} />
     <Article title={entry.data.title} date={entry.data.date}>
       <Content />

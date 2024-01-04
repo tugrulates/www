@@ -1,22 +1,14 @@
 ---
 import { Image } from "astro:assets";
-import Icon from "@components/Icon.astro";
 
 const { image } = Astro.props;
 ---
 
-<div>
-  <Image
-    slot="cover"
-    src={image.data.cover}
-    alt={image.data.description}
-    width={736}
-    densities={[1, 2, 3, 4]}
-    class="aspect-2 shadow shadow-stone-900 sm:rounded-2xl"
-  />
-  <Icon
-    src="download"
-    alt="Download photo in full size"
-    class="group-hover:scale-100"
-  />
-</div>
+<Image
+  slot="cover"
+  src={image.data.cover}
+  alt={image.data.description}
+  width={736}
+  densities={[1, 2, 3, 4]}
+  class="aspect-2 shadow shadow-stone-900 sm:rounded-2xl"
+/>

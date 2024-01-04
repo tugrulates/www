@@ -64,8 +64,8 @@ export default class ThemeToggle extends Component<Props, State> {
           <img
             src={
               this.state.dark
-                ? "/icons/theme-darker.svg"
-                : "/icons/theme-dark.svg"
+                ? "/icons/theme-dark.svg"
+                : "/icons/theme-light.svg"
             }
             alt={this.state.dark ? "night" : "day"}
             className="h-6 w-6 brightness-0 dark:brightness-100"

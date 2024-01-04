@@ -1,13 +1,8 @@
 ---
 import Icon from "@components/Icon.astro";
 
-interface Props {
-  href: string;
-  alt: string;
-  icon: string;
-}
-const { href, alt, icon }: Props = Astro.props;
-const external = href.startsWith("http");
+const { href, alt, icon, newTab, className } = Astro.props;
+const external = newTab || href.startsWith("http");
 ---
 
 <a
@@ -15,7 +10,12 @@ const external = href.startsWith("http");
   href={href}
   target={external ? "_blank" : undefined}
   rel={external ? "noopener noreferrer" : undefined}
-  class="group rounded-xl p-2 ring-inset ring-stone-500/50 transition hover:bg-stone-500/10 hover:ring-1"
+  class:list={[
+    "group rounded-xl p-2 ring-inset ring-stone-500/50 transition hover:bg-stone-500/10 hover:ring-1",
+    className,
+  ]}
 >
-  <Icon src={icon} alt={alt} class="group-hover:scale-100" />
+  <div class="flex h-full flex-col items-center justify-center">
+    <Icon src={icon} alt={alt} class="group-hover:scale-100" />
+  </div>
 </a>

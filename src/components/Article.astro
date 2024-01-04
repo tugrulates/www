@@ -1,10 +1,6 @@
 ---
+import { e } from "dist/_astro/index.iEt0lyHB";
 const { title, date } = Astro.props;
-const formatted_date = date.toLocaleDateString("en-US", {
-  month: "long",
-  day: "numeric",
-  year: "numeric",
-});
 ---
 
 <article
@@ -12,28 +8,37 @@ const formatted_date = date.toLocaleDateString("en-US", {
 >
   <header class="flex flex-col">
     <h1>{title}</h1>
-    <time
-      datetime={date}
-      class="text-md self-end whitespace-nowrap font-bold italic"
-      >{formatted_date}</time
-    >
+    {
+      date && (
+        <time
+          datetime={date}
+          class="text-md self-end whitespace-nowrap font-bold italic"
+        >
+          {date.toLocaleDateString("en-US", {
+            month: "long",
+            day: "numeric",
+            year: "numeric",
+          })}
+        </time>
+      )
+    }
+    <slot />
   </header>
-  <slot />
-</article>
 
-<style>
-  article > :global(p),
-  article > :global(ul),
-  article > :global(ol),
-  article > :global(table),
-  article > :global(blockquote) {
-    @apply px-4 py-2 hover:bg-stone-500/10 sm:rounded-2xl;
-  }
-  article > :global(ul),
-  article > :global(ol) {
-    @apply pl-12;
-  }
-  article > :global(pre) {
-    @apply !bg-stone-900 px-4 py-2 shadow shadow-black sm:rounded-2xl;
-  }
-</style>
+  <style>
+    article > :global(p),
+    article > :global(ul),
+    article > :global(ol),
+    article > :global(table),
+    article > :global(blockquote) {
+      @apply px-4 py-2 hover:bg-stone-500/10 sm:rounded-2xl;
+    }
+    article > :global(ul),
+    article > :global(ol) {
+      @apply pl-12;
+    }
+    article > :global(pre) {
+      @apply !bg-stone-900 px-4 py-2 shadow shadow-black sm:rounded-2xl;
+    }
+  </style>
+</article>

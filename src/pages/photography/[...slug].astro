@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import Article from "@components/Article.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import Cover from "@components/Cover.astro";
+import Navigation from "@components/Navigation.astro";
 import Photo from "@components/Photo.astro";
 import { circularSlice } from "@arrays";
 
@@ -19,7 +20,14 @@ const photos = (await getCollection("photos")).sort(
   (a, b) => b.data.date.getTime() - a.data.date.getTime(),
 );
 const index = photos.findIndex((photo) => photo.id === entry.id);
-const neighbors = circularSlice(photos, index - 2, index + 3);
+const neighbors = circularSlice(photos, index - 2, index + 4).filter(
+  (photo) => photo.id !== entry.id,
+);
+const formatted_date = entry.data.date.toLocaleDateString("en-US", {
+  month: "long",
+  day: "numeric",
+  year: "numeric",
+});
 ---
 
 <BaseLayout
@@ -27,24 +35,32 @@ const neighbors = circularSlice(photos, index - 2, index + 3);
   description={entry.data.description}
   keywords={entry.data.keywords}
 >
-  <div class="flex flex-col gap-4">
-    <Cover image={entry} />
-    <div
-      class="flex flex-row flex-nowrap justify-center gap-4 overflow-hidden py-4"
-    >
-      {
-        neighbors.map((photo) => (
-          <Photo
-            link={`./${photo.id}`}
-            image={photo.data.square}
-            description={photo.data.description}
-            className="opacity-25"
-          />
-        ))
-      }
+  <div class="flex flex-col gap-16">
+    <div class="group relative">
+      <Cover image={entry} />
+      <Navigation
+        href={`./${neighbors[1].id}`}
+        alt="Previous photo"
+        icon="/icons/link-previous.svg"
+        className="absolute inset-y-2 left-2 bg-stone-200/50 opacity-0 transition-opacity hover:bg-stone-200 group-hover:opacity-100 dark:bg-stone-800/50 dark:hover:bg-stone-800"
+      />
+      <Navigation
+        href={`./${neighbors[3].id}`}
+        alt="Next photo"
+        icon="/icons/link-next.svg"
+        className="absolute inset-y-2 right-2 bg-stone-200/50 opacity-0 transition-opacity hover:bg-stone-200 group-hover:opacity-100 dark:bg-stone-800/50 dark:hover:bg-stone-800"
+      />
+      <Navigation
+        href={entry.data.cover.src}
+        newTab={true}
+        alt="Download photo in full size"
+        icon="/icons/link-download.svg"
+        className="absolute bottom-2 end-16 bg-stone-200/50 opacity-0 transition-opacity hover:bg-stone-200 group-hover:opacity-100 dark:bg-stone-800/50 dark:hover:bg-stone-800"
+      />
     </div>
-    <Article title={entry.data.title} date={entry.data.date}>
+    <Article title={entry.data.title}>
       <table>
+        <tr><th>Date</th><td>{formatted_date}</td></tr>
         <tr><th>Location</th><td>{entry.data.location}</td></tr>
         <tr><th>City</th><td>{entry.data.city}</td></tr>
         <tr><th>State/Region</th><td>{entry.data.state}</td></tr>
@@ -66,5 +82,16 @@ const neighbors = circularSlice(photos, index - 2, index + 3);
         >
       </table>
     </Article>
+    <div class="flex h-32 flex-row flex-nowrap justify-center gap-4">
+      {
+        neighbors.map((photo) => (
+          <Photo
+            link={`./${photo.id}`}
+            image={photo.data.square}
+            description={photo.data.description}
+          />
+        ))
+      }
+    </div>
   </div>
 </BaseLayout>
