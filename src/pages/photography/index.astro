@@ -12,7 +12,7 @@ const photos = await getCollection("photos");
       photos.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
         .map((photo) => (
         <Photo
-          link={`photos/${photo.id}`}
+          link={`photography/${photo.id}`}
           image={photo.data.square}
           title={photo.data.title}
           city={photo.data.city}

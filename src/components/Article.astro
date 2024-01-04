@@ -1,6 +1,6 @@
 ---
-const { post } = Astro.props;
-const date = post.data.date.toLocaleDateString("en-US", {
+const { title, date } = Astro.props;
+const foramtted_date = date.toLocaleDateString("en-US", {
   month: "long",
   day: "numeric",
   year: "numeric",
@@ -11,10 +11,10 @@ const date = post.data.date.toLocaleDateString("en-US", {
   class="prose prose-lg prose-stone dark:prose-invert prose-headings:px-4 prose-a:decoration-stone-500/50 hover:prose-a:decoration-black prose-img:rounded-2xl hover:dark:prose-a:decoration-white"
 >
   <header class="flex flex-col">
-    <h1>{post.data.title}</h1>
+    <h1>{title}</h1>
     <time
-      datetime={post.data.date}
-      class="text-md self-end whitespace-nowrap font-bold italic">{date}</time
+      datetime={date}
+      class="text-md self-end whitespace-nowrap font-bold italic">{foramtted_date}</time
     >
   </header>
   <slot />

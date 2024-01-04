@@ -1,31 +1,31 @@
 ---
-import { getCollection, getEntry } from "astro:content";
+import { getCollection } from "astro:content";
 import Article from "@components/Article.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { Image } from "astro:assets";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("posts");
-  return posts.map((entry) => ({
-    params: { slug: entry.slug },
+  const photos = await getCollection("photos");
+  return photos.map((entry) => ({
+    params: { slug: entry.id },
     props: { entry },
   }));
 }
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
-const cover = await getEntry(entry.data.cover);
 ---
 
 <BaseLayout title={entry.data.title}>
   <div class="flex flex-col">
     <Image
-      src={cover.data.cover}
-      alt={cover.data.description}
+      src={entry.data.cover}
+      alt={entry.data.description}
       width={736}
       densities={[1, 2, 3, 4]}
       class="aspect-2 mb-12 shadow shadow-stone-900 sm:rounded-2xl"
     />
-    <Article title={entry.data.title} date={entry.data.date}><Content /></Article>
+    <Article title={entry.data.title} date={entry.data.date}>
+      <b>Location</b>: {entry.data.location}
+    </Article>
   </div>
 </BaseLayout>

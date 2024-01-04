@@ -9,7 +9,7 @@
     "url": "https://github.com/tugrulates/blog/issues"
   },
   "scripts": {
-    "fetch-photos": "git submodule update --init --remote src/content/photos",
+    "fetch-photos": "git submodule update --init --remote src/images/photos",
     "fetch": "npm run fetch-photos",
     "build-photos": "tsx src/scripts/photos.ts",
     "prebuild": "npm run fetch && npm run build-photos",
