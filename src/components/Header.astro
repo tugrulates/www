@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import avatar from "../images/me.jpg";
-import ThemeToggle from "@components/ThemeControl";
+import ThemeToggle from "@components/ThemeToggle";
 ---
 
 <div class="flex flex-row items-center justify-between">
@@ -19,5 +19,6 @@ import ThemeToggle from "@components/ThemeControl";
     />
     <span class="text-3xl font-thin">Hello, I’m Tugrul!</span>
   </a>
+  <a href="/photography">Photography</a>
   <ThemeToggle client:load />
 </div>

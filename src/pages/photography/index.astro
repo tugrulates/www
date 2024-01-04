@@ -6,19 +6,15 @@ import Photo from "@components/Photo.astro";
 const photos = await getCollection("photos");
 ---
 
-<BaseLayout title="photos">
-  <div class="flex flex-row flex-wrap gap-4 justify-around">
+<BaseLayout title="photos" description="My photography.">
+  <div class="flex flex-row flex-wrap gap-4 justify-center">
     {
       photos.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
         .map((photo) => (
         <Photo
-          link={`photography/${photo.id}`}
+          link={`./photography/${photo.id}`}
           image={photo.data.square}
-          title={photo.data.title}
-          city={photo.data.city}
-          state={photo.data.state}
-          country={photo.data.country}
-          date={photo.data.date}
+          description={photo.data.description}
         />
       ))
     }

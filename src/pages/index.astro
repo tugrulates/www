@@ -3,7 +3,6 @@ import { getCollection, getEntry } from "astro:content";
 import { AUTHOR } from "@consts";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import Post from "@components/Post.astro";
-import { Debug } from "astro:components";
 
 const posts = await getCollection("posts", ({ data }) => {
   return data.draft !== true;
@@ -26,7 +25,7 @@ const frontmatters = Object.fromEntries(
 );
 ---
 
-<BaseLayout title={AUTHOR.name}>
+<BaseLayout title={AUTHOR.name} description="My homepage.">
   <div class="flex flex-col gap-16">
     <div class="flex flex-col gap-8">
       {

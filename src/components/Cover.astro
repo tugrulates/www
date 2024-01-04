@@ -1,0 +1,24 @@
+---
+import { Image } from "astro:assets";
+import CoverToggle from "@components/CoverToggle";
+
+const { image } = Astro.props;
+---
+
+<!-- <CoverToggle client:load> -->
+  <Image
+    slot="cover"
+    src={image.data.cover}
+    alt={image.data.description}
+    width={736}
+    densities={[1, 2, 3, 4]}
+    class="aspect-2 mb-12 shadow shadow-stone-900 sm:rounded-2xl"
+  />
+<!-- </CoverToggle> -->
+<!-- <Image
+  src={image.data.cover}
+  alt={image.data.description}
+  width={736}
+  densities={[1, 2, 3, 4]}
+  class="aspect-2 mb-12 shadow shadow-stone-900 sm:rounded-2xl"
+/> -->

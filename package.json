@@ -21,17 +21,17 @@
     "tsx": "tsx"
   },
   "dependencies": {
-    "@astrojs/check": "^0.3.1",
-    "@astrojs/preact": "^3.0.1",
-    "@astrojs/react": "^3.0.4",
-    "@astrojs/sitemap": "^3.0.3",
-    "@astrojs/tailwind": "^5.0.2",
+    "@astrojs/check": "^0.3.4",
+    "@astrojs/preact": "^3.0.2",
+    "@astrojs/react": "^3.0.9",
+    "@astrojs/sitemap": "^3.0.4",
+    "@astrojs/tailwind": "^5.1.0",
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
     "@tailwindcss/typography": "^0.5.10",
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",
-    "astro": "^3.5.3",
+    "astro": "^4.0.9",
     "astro-remark-description": "^1.1.1",
     "exif": "^0.6.0",
     "exiftool-vendored": "^23.7.0",
@@ -43,17 +43,17 @@
     "typescript": "^5.2.2"
   },
   "devDependencies": {
+    "@prettier/plugin-xml": "^3.2.2",
     "@types/exif": "^0.6.5",
     "prettier": "^3.1.0",
     "prettier-plugin-astro": "^0.12.2",
-    "prettier-plugin-tailwindcss": "^0.5.7",
-    "prettier-plugin-xml": "^0.1.0"
+    "prettier-plugin-tailwindcss": "^0.5.7"
   },
   "prettier": {
     "plugins": [
+      "@prettier/plugin-xml",
       "prettier-plugin-astro",
-      "prettier-plugin-tailwindcss",
-      "prettier-plugin-xml"
+      "prettier-plugin-tailwindcss"
     ],
     "xmlWhitespaceSensitivity": "ignore"
   }

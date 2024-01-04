@@ -1,24 +1,20 @@
 ---
 import { Image } from "astro:assets";
 
-const { link, image, title, city, state, country, date } = Astro.props;
+const { link, image, description } = Astro.props;
 ---
 
 <a
   href={link}
-  class="align-center w-72 group gap-2 flex flex-col ring-inset ring-stone-500/50 transition hover:bg-stone-500/10 hover:ring-1 sm:rounded-xl",
+  class="align-center w-32 group gap-2 flex flex-col ring-inset ring-stone-500/50 transition hover:bg-stone-500/10 hover:ring-1 sm:rounded-xl",
 >
   <div class="hidden grow-0 overflow-hidden rounded-2xl shadow shadow-stone-900 transition-all group-hover:scale-[1.15] sm:flex">
     <Image
       src={image}
-      alt={title}
-      width={256}
+      alt={description}
+      width={128}
       densities={[1, 2, 3, 4]}
       class="transform-all w-full object-cover"
     />
-  </div>
-  <div class="group z-10 flex grow-0 flex-col p-4">
-    <p class="grow text-lg font-bold">{title}</p>
-    <time datetime={date} class="text-stone-500">{date.getFullYear()}</time>
   </div>
 </a>

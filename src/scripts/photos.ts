@@ -11,22 +11,27 @@ interface PhotoData {
   square: string;
   title: string;
   description: string;
+  keywords: string[];
   date: string;
   location: string;
   city: string;
   state: string;
   country: string;
+  camera: string;
+  lens: string;
+  license: string;
+  attribution: string;
 }
 
 async function extractMetadata(photo: string) {
   const cover = `${IMAGES_DIR}/${photo}/cover.jpg`;
   const tags = await exiftool.read(cover);
-  const file = `/${photo}/${tags.FileName ?? ""}`;
   const data: PhotoData = {
     cover: `../../images/photos/${photo}/cover.jpg`,
     square: `../../images/photos/${photo}/square.jpg`,
     title: tags.Headline ?? "",
     description: tags.ImageDescription ?? "",
+    keywords: tags.Keywords ?? [],
     date:
       (tags.CreateDate instanceof ExifDateTime
         ? tags.CreateDate.toDate().toISOString()
@@ -35,6 +40,13 @@ async function extractMetadata(photo: string) {
     city: tags.City ?? "",
     state: tags.State ?? "",
     country: tags.Country ?? "",
+    camera: `${tags.Make ?? ""} ${tags.Model ?? ""}`.replace(/\s+/g, " "),
+    lens: tags.LensModel ?? tags.Lens ?? "",
+    editing: "Affinity Photo 2",
+    license_name: "CC BY 4.0",
+    license_url: tags.License ?? "",
+    attribution_name: tags.AttributionName ?? "",
+    attribution_url: tags.AttributionURL ?? "",
   };
   const json = JSON.stringify(data, null, 2);
   fs.writeFileSync(`${CONTENT_DIR}/${photo}.json`, json);

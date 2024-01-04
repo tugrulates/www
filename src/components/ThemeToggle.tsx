@@ -1,5 +1,5 @@
-import { Component, type ReactNode } from "react";
-import { Popover, RadioGroup, Switch, Transition } from "@headlessui/react";
+import { Component } from "react";
+import { Switch } from "@headlessui/react";
 
 interface Props {}
 
