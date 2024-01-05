@@ -3,29 +3,45 @@ import { getCollection, getEntry } from "astro:content";
 import Article from "@components/Article.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import Cover from "@components/Cover.astro";
+import Navigation from "@components/Navigation.astro";
 
 export async function getStaticPaths() {
+  const pages = await getCollection("pages");
   const posts = await getCollection("posts");
-  return posts.map((entry) => ({
-    params: { slug: entry.slug },
-    props: { entry },
+  return [...pages, ...posts].map((page) => ({
+    params: { slug: page.slug },
+    props: { page },
   }));
 }
 
-const { entry } = Astro.props;
-const { Content, remarkPluginFrontmatter } = await entry.render();
-const cover = await getEntry(entry.data.cover);
+const { page } = Astro.props;
+const posts = (
+  await getCollection("posts", ({ data }) => {
+    return data.draft !== true;
+  })
+).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const index = posts.findIndex((other) => other.id === page.id);
+const { Content, remarkPluginFrontmatter } = await page.render();
+const cover = await getEntry(page.data.cover);
 ---
 
 <BaseLayout
-  tab="blog"
-  title={entry.data.title}
+  tab={page.data.tab ?? "blog"}
+  title={page.data.title}
   description={remarkPluginFrontmatter.description}
-  keywords={entry.data.tags}
 >
-  <div class="items-left flex flex-col gap-20 p-4 pt-12">
-    <Cover image={cover} className="scale-125" />
-    <Article title={entry.data.title} date={entry.data.date}>
+  <div class="flex flex-col items-center gap-20">
+    <Cover
+      image={cover}
+      previous={index > 0 && `./${posts[index - 1].slug}`}
+      next={index >= 0 &&
+        index < posts.length - 1 &&
+        `./${posts[index + 1].slug}`}
+      action_href={`/photography/${cover.id}`}
+      action_icon="/icons/link-image.svg"
+      action_alt="Image details"
+    />
+    <Article title={page.data.title} date={page.data.date}>
       <Content />
     </Article>
   </div>

@@ -27,17 +27,19 @@ if (!description) {
     <ViewTransitions />
   </head>
   <body
-    class="mx-auto flex min-h-screen max-w-screen-md flex-col gap-0 bg-stone-300 text-black transition-colors sm:px-4 dark:bg-stone-700 dark:text-white"
+    class="mx-auto flex min-h-screen max-w-fit flex-col items-center gap-0 overflow-y-scroll bg-stone-300 text-black transition-colors sm:px-4 dark:bg-stone-700 dark:text-white"
   >
-    <header class="text-left">
+    <header class="w-full text-left">
       <Header tab={tab} />
     </header>
     <main
-      class="flex-1 rounded-b-3xl bg-stone-200 text-left shadow shadow-stone-900/20 dark:bg-stone-800"
+      class="flex-1 rounded-b-3xl bg-stone-200 px-4 pb-4 text-left shadow shadow-stone-900/20 dark:bg-stone-800"
     >
-      <slot />
+      <div class="w-full max-w-screen-md">
+        <slot />
+      </div>
     </main>
-    <footer class="stext-left flex flex-row justify-center gap-0">
+    <footer class="flex w-full flex-row justify-center gap-0 text-left">
       <Footer />
     </footer>
   </body>

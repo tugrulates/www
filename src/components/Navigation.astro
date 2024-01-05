@@ -1,13 +1,14 @@
 ---
 import Icon from "@components/Icon.astro";
 
-const { href, alt, icon, overlay, newTab, className } = Astro.props;
-const external = newTab || href.startsWith("http");
+const { href, alt, icon, overlay, download, className } = Astro.props;
+const external = href.startsWith("http");
 ---
 
 <a
   aria-label={alt}
   href={href}
+  download={download}
   target={external ? "_blank" : undefined}
   rel={external ? "noopener noreferrer" : undefined}
   class:list={[

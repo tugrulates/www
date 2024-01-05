@@ -1,12 +1,23 @@
 import { defineCollection, reference, z } from "astro:content";
 
+const pages = defineCollection({
+  type: "content",
+  schema: z.object({
+    tab: z.string(),
+    title: z.string(),
+    date: z.date().optional(),
+    cover: reference("photos"),
+  }),
+});
+
 const posts = defineCollection({
   type: "content",
   schema: z.object({
+    tab: z.string().default("blog"),
     title: z.string(),
     draft: z.boolean().default(true),
     date: z.date(),
-    cover: reference("photos").default("sphere-of-perfection"),
+    cover: reference("photos"),
     tags: z.array(z.string()),
   }),
 });
@@ -29,15 +40,14 @@ const photos = defineCollection({
       lens: z.string(),
       editing: z.string(),
       license_name: z.string(),
-      license_url: z.string(),
+      license_url: z.string().url(),
       attribution_name: z.string(),
-      attribution_url: z.string(),
+      attribution_url: z.string().url(),
     }),
 });
 
-console.log(photos);
-
 export const collections = {
-  posts: posts,
-  photos: photos,
+  pages,
+  posts,
+  photos,
 };

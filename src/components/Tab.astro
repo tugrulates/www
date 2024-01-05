@@ -1,14 +1,12 @@
 ---
-import Icon from "@components/Icon.astro";
-
-const { href, alt, icon, selected, className } = Astro.props;
+const { href, alt, selected, className } = Astro.props;
 ---
 
 <a
   aria-label={alt}
   href={href}
   class:list={[
-    "transition-ring transition-color group rounded-t-3xl bg-stone-200 p-2 ring-inset ring-stone-500/50 transition hover:ring-1 dark:bg-stone-800",
+    "transition-ring transition-color group rounded-t-3xl p-2 ring-inset ring-stone-500/50 transition hover:ring-1 dark:bg-stone-800",
     selected
       ? "z-100 bg-stone-200 shadow-stone-900/20 dark:bg-stone-800"
       : "-z-100 bg-stone-100/20 hover:bg-stone-200/50 dark:bg-stone-900/20 hover:dark:bg-stone-800/50",
@@ -16,7 +14,7 @@ const { href, alt, icon, selected, className } = Astro.props;
   ]}
 >
   <div
-    class="flex h-full flex-row items-center justify-center gap-2 pb-4 text-sm font-thin"
+    class="justify-begin flex h-full flex-row items-center gap-2 px-2 pb-4 text-sm font-thin"
   >
     <slot />
   </div>

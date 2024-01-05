@@ -1,5 +1,5 @@
 import path from "path";
-import fs from "fs";
+import fs from "fs/promises";
 import { glob } from "glob";
 import { ExifDateTime, exiftool, type Tags } from "exiftool-vendored";
 
@@ -34,33 +34,34 @@ interface PhotoData {
 
 async function extractMetadata(photo: string) {
   const cover = `${IMAGES_DIR}/${photo}/cover.jpg`;
-  const tags = await exiftool.read<PhotoTags>(cover);
-  const data: PhotoData = {
-    cover: `../../images/photos/${photo}/cover.jpg`,
-    square: `../../images/photos/${photo}/square.jpg`,
-    title: tags.Headline ?? "",
-    description: tags.ImageDescription ?? "",
-    keywords: Array.isArray(tags.Keywords)
-      ? tags.Keywords
-      : [tags.Keywords ?? ""],
-    date:
-      (tags.CreateDate instanceof ExifDateTime
-        ? tags.CreateDate.toDate().toISOString()
-        : tags.CreateDate) ?? "",
-    location: tags.Location ?? "",
-    city: tags.City ?? "",
-    state: tags.State ?? "",
-    country: tags.Country ?? "",
-    camera: `${tags.Make ?? ""} ${tags.Model ?? ""}`.replace(/\s+/g, " "),
-    lens: tags.LensModel ?? tags.Lens ?? "",
-    editing: "Affinity Photo 2",
-    license_name: "CC BY 4.0",
-    license_url: tags.License ?? "",
-    attribution_name: tags.AttributionName ?? "",
-    attribution_url: tags.AttributionURL ?? "",
-  };
-  const json = JSON.stringify(data, null, 2);
-  fs.writeFileSync(`${CONTENT_DIR}/${photo}.json`, json);
+  return exiftool.read<PhotoTags>(cover).then((tags) => {
+    const data: PhotoData = {
+      cover: `../../images/photos/${photo}/cover.jpg`,
+      square: `../../images/photos/${photo}/square.jpg`,
+      title: tags.Headline ?? "",
+      description: tags.ImageDescription ?? "",
+      keywords: Array.isArray(tags.Keywords)
+        ? tags.Keywords
+        : [tags.Keywords ?? ""],
+      date:
+        (tags.CreateDate instanceof ExifDateTime
+          ? tags.CreateDate.toDate().toISOString()
+          : tags.CreateDate) ?? "",
+      location: tags.Location ?? "",
+      city: tags.City ?? "",
+      state: tags.State ?? "",
+      country: tags.Country ?? "",
+      camera: `${tags.Make ?? ""} ${tags.Model ?? ""}`.replace(/\s+/g, " "),
+      lens: tags.LensModel ?? tags.Lens ?? "",
+      editing: "Affinity Photo 2",
+      license_name: "CC BY 4.0",
+      license_url: tags.License ?? "",
+      attribution_name: tags.AttributionName ?? "",
+      attribution_url: tags.AttributionURL ?? "",
+    };
+    const json = JSON.stringify(data, null, 2);
+    fs.writeFile(`${CONTENT_DIR}/${photo}.json`, json);
+  });
 }
 
 const covers = glob.sync(`${IMAGES_DIR}/*/cover.jpg`);
@@ -68,15 +69,23 @@ const photos = covers.map((cover) => {
   const photo = path.dirname(cover).split("/").pop();
   return photo;
 });
-if (!fs.existsSync(CONTENT_DIR)) {
-  fs.mkdirSync(CONTENT_DIR);
-}
-Promise.all(
-  photos.map((photo) => {
-    if (photo) {
-      return extractMetadata(photo);
+
+await fs
+  .stat(CONTENT_DIR)
+  .then((stats) => {
+    if (stats !== undefined && !stats.isDirectory()) {
+      fs.mkdir(CONTENT_DIR);
     }
-  }),
-).finally(() => {
-  exiftool.end();
-});
+  })
+  .then(() =>
+    Promise.all(
+      photos.map((photo) => {
+        if (photo) {
+          return extractMetadata(photo);
+        }
+      }),
+    ),
+  )
+  .finally(() => {
+    exiftool.end();
+  });

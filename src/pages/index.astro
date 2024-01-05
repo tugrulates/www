@@ -1,13 +1,14 @@
 ---
 import { getCollection, getEntry } from "astro:content";
-import { fade } from "astro:transitions";
 import { AUTHOR } from "@consts";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import Post from "@components/Post.astro";
 
-const posts = await getCollection("posts", ({ data }) => {
-  return data.draft !== true;
-});
+const posts = (
+  await getCollection("posts", ({ data }) => {
+    return data.draft !== true;
+  })
+).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 const covers = Object.fromEntries(
   await Promise.all(
     posts.map(async (post) => {
@@ -27,24 +28,17 @@ const frontmatters = Object.fromEntries(
 ---
 
 <BaseLayout tab="blog" title={AUTHOR.name} description="My homepage.">
-  <div
-    class="flex flex-col gap-16"
-    transition:animate={fade({ duration: "0.1s" })}
-  >
-    <div class="flex flex-col gap-4">
-      {
-        posts
-          .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-          .map((post) => (
-            <Post
-              link={post.slug}
-              image={covers[post.slug].data.square}
-              title={post.data.title}
-              description={frontmatters[post.slug].description}
-              date={post.data.date}
-            />
-          ))
-      }
-    </div>
+  <div class="flex flex-col gap-4">
+    {
+      posts.map((post) => (
+        <Post
+          link={post.slug}
+          image={covers[post.slug].data.square}
+          title={post.data.title}
+          description={frontmatters[post.slug].description}
+          date={post.data.date}
+        />
+      ))
+    }
   </div>
 </BaseLayout>

@@ -13,7 +13,6 @@ const { tab } = Astro.props;
     if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
       try {
         const theme = JSON.parse(localStorage.getItem("theme") ?? "");
-        console.log(theme);
         const { dark } = theme;
         return dark;
       } catch (e) {}
@@ -25,7 +24,6 @@ const { tab } = Astro.props;
   }
 
   function setTheme(document) {
-    console.log(getDark());
     if (getDark()) {
       document.documentElement.classList.add("dark");
     } else {
@@ -39,24 +37,9 @@ const { tab } = Astro.props;
   });
 </script>
 
-<div class="flex flex-col gap-4 pt-4">
+<div class="flex flex-col gap-4 pt-8">
   <div class="relative">
     <navigation class="items-begin flex flex-row gap-1">
-      <Tab
-        href="/about"
-        alt="About me"
-        icon="/icons/link-about.svg"
-        selected={tab == "about"}
-      >
-        <Image
-          src={avatar}
-          alt="me"
-          width="40"
-          height="40"
-          densities={[1, 2, 3, 4]}
-          class="rounded-full border border-black dark:border-white"
-        />
-      </Tab>
       <Tab href="/" selected={tab == "blog"} className="grow">
         <Icon src="/icons/link-blog.svg" alt="My essays" className="scale-75" />
         Blog
@@ -68,6 +51,23 @@ const { tab } = Astro.props;
           className="scale-75"
         />
         Photography
+      </Tab>
+      <Tab
+        href="/about"
+        alt="About me"
+        icon="/icons/link-about.svg"
+        selected={tab == "about"}
+        className="grow"
+      >
+        <Image
+          src={avatar}
+          alt="me"
+          width="24"
+          height="24"
+          densities={[1, 2, 3, 4]}
+          class="rounded-full border border-black dark:border-white"
+        />
+        About
       </Tab>
       <ThemeToggle client:load />
     </navigation>

@@ -6,7 +6,8 @@
       "@arrays": ["src/arrays"],
       "@consts": ["src/consts"],
       "@components/*": ["src/components/*"],
-      "@layouts/*": ["src/layouts/*"]
+      "@layouts/*": ["src/layouts/*"],
+      "@pages/*": ["src/pages/*"]
     },
     "jsx": "react-jsx",
     "jsxImportSource": "react"
