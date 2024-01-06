@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import Navigation from "./Navigation.astro";
+import { fade } from "astro:transitions";
 
 const {
   image,
@@ -14,18 +15,18 @@ const {
 } = Astro.props;
 ---
 
-<div class="group relative pt-12">
-  <div class="scale-125">
+<div class="group relative z-50 pt-12">
+  <div
+    class="scale-125 bg-stone-200/20 shadow shadow-stone-800/20 sm:rounded-2xl"
+  >
     <Image
       slot="cover"
       src={image.data.cover}
       alt={image.data.description}
       width={800}
       densities={[1, 2, 3, 4]}
-      class:list={[
-        "aspect-2 z-10 shadow shadow-stone-900 sm:rounded-2xl",
-        className,
-      ]}
+      class:list={["aspect-2  sm:rounded-2xl", className]}
+      transition:animate={fade({ duration: "0.1s" })}
     />
     {
       previous && (
@@ -33,6 +34,7 @@ const {
           href={previous}
           alt="Previous"
           icon="/icons/link-previous.svg"
+          overlay={true}
           className="absolute inset-y-2 left-2 bg-stone-200/50 opacity-0 transition-opacity hover:bg-stone-200 group-hover:opacity-100 dark:bg-stone-800/50 dark:hover:bg-stone-800"
         />
       )
@@ -43,6 +45,7 @@ const {
           href={next}
           alt="Next"
           icon="/icons/link-next.svg"
+          overlay={true}
           className="absolute inset-y-2 right-2 bg-stone-200/50 opacity-0 transition-opacity hover:bg-stone-200 group-hover:opacity-100 dark:bg-stone-800/50 dark:hover:bg-stone-800"
         />
       )
@@ -52,8 +55,8 @@ const {
       download={action_download}
       alt={action_alt}
       icon={action_icon}
-      className="absolute bottom-2 end-16 bg-stone-200/50 opacity-0 transition-opacity hover:bg-stone-200 group-hover:opacity-100 dark:bg-stone-800/50 dark:hover:bg-stone-800"
       overlay={true}
+      className="absolute bottom-2 end-16 bg-stone-200/50 opacity-0 transition-opacity hover:bg-stone-200 group-hover:opacity-100 dark:bg-stone-800/50 dark:hover:bg-stone-800"
     />
   </div>
 </div>

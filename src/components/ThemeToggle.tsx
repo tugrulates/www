@@ -16,12 +16,12 @@ export default function ThemeToggle() {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    console.log(document.documentElement.classList);
     if (!isMounted) {
       setTheme({ dark: document.documentElement.classList.contains("dark") });
       setIsMounted(true);
       return;
     }
-    console.log("theme", theme);
     if (theme.dark) {
       document.documentElement.classList.add("dark");
     } else {
@@ -33,24 +33,30 @@ export default function ThemeToggle() {
     <Switch
       checked={theme.dark}
       onChange={() => toggleTheme(theme, setTheme)}
-      className={[
-        "group relative z-20 mt-2 inline-flex h-10 w-20 shrink-0 cursor-pointer rounded-full border-transparent ring-inset ring-stone-500/50 transition-colors hover:bg-stone-500/10 hover:ring-1 focus-visible:ring-2 focus-visible:ring-white/75",
-        isMounted ? "" : "opacity-0",
-      ].join(" ")}
+      className={["group h-12 w-12 ", isMounted ? "" : "opacity-0"].join(" ")}
     >
-      <span className="sr-only">Dark mode</span>
-      <span
-        aria-hidden="true"
-        className={
-          "pointer-events-none flex h-8 w-8 translate-x-1 translate-y-1 transform flex-row items-center justify-center rounded-full bg-stone-300 ring-stone-500/50 transition-all group-hover:ring-1 dark:translate-x-11 dark:bg-stone-700"
-        }
+      <div
+        className={[
+          "relative -z-10 h-24 w-24 -translate-x-14 translate-y-2 ",
+          theme.dark ? "rotate-180" : "rotate-0",
+          isMounted ? "transition-transform duration-1000" : "",
+        ].join(" ")}
       >
         <img
-          src={theme.dark ? "/icons/theme-dark.svg" : "/icons/theme-light.svg"}
-          alt={theme.dark ? "night" : "day"}
-          className="h-6 w-6 brightness-0 dark:brightness-100"
+          src="/icons/theme-light.svg"
+          alt="day"
+          width={32}
+          height={32}
+          className="p-l-12 absolute right-0 top-0 brightness-0 dark:brightness-100"
         />
-      </span>
+        <img
+          src="/icons/theme-dark.svg"
+          alt="night"
+          width={32}
+          height={32}
+          className="absolute bottom-0 left-0 rotate-180 brightness-0 dark:brightness-100"
+        />
+      </div>
     </Switch>
   );
 }

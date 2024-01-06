@@ -1,6 +1,5 @@
 ---
 import { getCollection } from "astro:content";
-import { fade } from "astro:transitions";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import Photo from "@components/Photo.astro";
 
@@ -10,10 +9,7 @@ const photos = (await getCollection("photos")).sort(
 ---
 
 <BaseLayout tab="photos" title="Photography" description="My photography.">
-  <div
-    class="flex flex-row flex-wrap justify-between gap-4"
-    transition:animate={fade({ duration: "0.1s" })}
-  >
+  <div class="flex flex-row flex-wrap justify-between gap-4">
     {
       photos.map((photo) => (
         <Photo

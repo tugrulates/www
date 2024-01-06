@@ -6,15 +6,20 @@ const { href, alt, selected, className } = Astro.props;
   aria-label={alt}
   href={href}
   class:list={[
-    "transition-ring transition-color group rounded-t-3xl p-2 ring-inset ring-stone-500/50 transition hover:ring-1 dark:bg-stone-800",
-    selected
-      ? "z-100 bg-stone-200 shadow-stone-900/20 dark:bg-stone-800"
-      : "-z-100 bg-stone-100/20 hover:bg-stone-200/50 dark:bg-stone-900/20 hover:dark:bg-stone-800/50",
+    "group z-0 rounded-t-3xl bg-stone-300 shadow shadow-stone-900/20 ring-inset ring-stone-500/50 hover:ring-1 dark:bg-stone-700",
     className,
   ]}
+  transition:persist
+  transition:name={`tab-${href}-${selected ? "selected" : "unselected"}}`}
+  transition:animate="none"
 >
   <div
-    class="justify-begin flex h-full flex-row items-center gap-2 px-2 pb-4 text-sm font-thin"
+    class:list={[
+      "justify-begin flex h-full flex-row items-center gap-2 rounded-t-3xl px-4 pb-4 pt-2 text-sm font-thin",
+      selected
+        ? "bg-stone-200 dark:bg-stone-800"
+        : "bg-stone-200/50 dark:bg-stone-800/50",
+    ]}
   >
     <slot />
   </div>

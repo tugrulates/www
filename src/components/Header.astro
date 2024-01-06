@@ -38,43 +38,36 @@ const { tab } = Astro.props;
 </script>
 
 <div class="flex flex-col gap-4 pt-8">
-  <div class="relative">
-    <navigation class="items-begin flex flex-row gap-1">
-      <Tab href="/" selected={tab == "blog"} className="grow">
-        <Icon src="/icons/link-blog.svg" alt="My essays" className="scale-75" />
-        Blog
-      </Tab>
-      <Tab href="/photography" selected={tab == "photos"} className="grow">
-        <Icon
-          src="/icons/link-photos.svg"
-          alt="My photography"
-          className="scale-75"
-        />
-        Photography
-      </Tab>
-      <Tab
-        href="/about"
-        alt="About me"
-        icon="/icons/link-about.svg"
-        selected={tab == "about"}
-        className="grow"
-      >
-        <Image
-          src={avatar}
-          alt="me"
-          width="24"
-          height="24"
-          densities={[1, 2, 3, 4]}
-          class="rounded-full border border-black dark:border-white"
-        />
-        About
-      </Tab>
-      <ThemeToggle client:load />
-    </navigation>
-
-    <div
-      class="z-1 absolute bottom-0 left-0 h-4 w-full rounded-t-3xl bg-stone-200 dark:bg-stone-800"
+  <navigation class="items-begin flex flex-row gap-1">
+    <Tab href="/" selected={tab == "blog"} className="grow">
+      <Icon src="/icons/link-blog.svg" alt="My essays" className="scale-75" />
+      Blog
+    </Tab>
+    <Tab href="/photography" selected={tab == "photos"} className="grow">
+      <Icon
+        src="/icons/link-photos.svg"
+        alt="My photography"
+        className="scale-75"
+      />
+      Photography
+    </Tab>
+    <Tab
+      href="/about"
+      alt="About me"
+      icon="/icons/link-about.svg"
+      selected={tab == "about"}
+      className="grow"
     >
-    </div>
-  </div>
+      <Image
+        src={avatar}
+        alt="me"
+        width="24"
+        height="24"
+        densities={[1, 2, 3, 4]}
+        class="rounded-full border border-black dark:border-white"
+      />
+      About
+    </Tab>
+    <ThemeToggle client:load transition:persist />
+  </navigation>
 </div>

@@ -20,6 +20,6 @@ Life Beyond Work: When I am not engrossed in technology, I am an avid traveler, 
 
 Join Me: As I continue on this journey of innovation and impact, I invite you to join me. Whether you're a budding entrepreneur, a tech enthusiast, or someone passionate about making a difference, there's a story here for you. Let's connect, collaborate, and create a future that resonates with our collective aspirations.
 
-|      Geeky Tugrul       |      Dreamy Tugrul      |
-| :---------------------: | :---------------------: |
-| ![Ankara](./ankara.jpg) | ![Carmel](./carmel.jpg) |
+|   Geeky Tugrul    |   Dreamy Tugrul   |
+| :---------------: | :---------------: |
+| ![](./ankara.jpg) | ![](./carmel.jpg) |
