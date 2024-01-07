@@ -15,9 +15,9 @@ const {
 } = Astro.props;
 ---
 
-<div class="group relative z-50 pt-12">
+<div class="group relative z-50 max-sm:-mx-4 lg:py-12">
   <div
-    class="scale-125 bg-stone-200/20 shadow shadow-stone-800/20 sm:rounded-2xl"
+    class="bg-stone-200/20 shadow shadow-stone-800/20 sm:rounded-2xl lg:scale-125"
   >
     <Image
       slot="cover"
@@ -25,7 +25,7 @@ const {
       alt={image.data.description}
       width={800}
       densities={[1, 2, 3, 4]}
-      class:list={["aspect-2  sm:rounded-2xl", className]}
+      class:list={["aspect-2 sm:rounded-2xl", className]}
       transition:animate={fade({ duration: "0.1s" })}
     />
     {

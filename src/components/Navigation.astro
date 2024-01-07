@@ -12,7 +12,7 @@ const external = href.startsWith("http");
   target={external ? "_blank" : undefined}
   rel={external ? "noopener noreferrer" : undefined}
   class:list={[
-    "transition-ring transition-color group rounded-xl p-2 ring-inset ring-stone-500/50 transition hover:ring-1",
+    "transition-ring transition-color group p-2 ring-inset ring-stone-500/50 transition hover:ring-1 sm:rounded-xl",
     className,
     !overlay && "hover:bg-stone-500/10",
   ]}

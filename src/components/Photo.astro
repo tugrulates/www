@@ -12,12 +12,12 @@ const { link, image, description, className } = Astro.props;
   ]}
 >
   <div
-    class="hidden overflow-hidden rounded-2xl shadow shadow-stone-900 transition-all group-hover:scale-110 sm:flex"
+    class="flex overflow-hidden shadow shadow-stone-900 transition-all sm:rounded-2xl sm:group-hover:scale-110"
   >
     <Image
       src={image}
       alt={description}
-      width={240}
+      width={200}
       densities={[1, 2, 3, 4]}
       class="transform-all w-full object-cover object-center"
     />

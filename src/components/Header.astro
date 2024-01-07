@@ -37,11 +37,11 @@ const { tab } = Astro.props;
   });
 </script>
 
-<div class="flex flex-col gap-4 pt-8">
+<div class="flex flex-col gap-4 sm:pt-8">
   <navigation class="items-begin flex flex-row gap-1">
     <Tab href="/" selected={tab == "blog"} className="grow">
       <Icon src="/icons/link-blog.svg" alt="My essays" className="scale-75" />
-      Blog
+      <span class="hidden sm:inline">Blog</span>
     </Tab>
     <Tab href="/photography" selected={tab == "photos"} className="grow">
       <Icon
@@ -49,7 +49,7 @@ const { tab } = Astro.props;
         alt="My photography"
         className="scale-75"
       />
-      Photography
+      <span class="hidden sm:inline">Photography</span>
     </Tab>
     <Tab
       href="/about"
@@ -66,7 +66,7 @@ const { tab } = Astro.props;
         densities={[1, 2, 3, 4]}
         class="rounded-full border border-black dark:border-white"
       />
-      About
+      <span class="hidden sm:inline">About</span>
     </Tab>
     <ThemeToggle client:load transition:persist />
   </navigation>

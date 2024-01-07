@@ -16,7 +16,6 @@ const photos = (await getCollection("photos")).sort(
           link={`./photography/${photo.id}`}
           image={photo.data.square}
           description={photo.data.description}
-          className="basis-1/4"
         />
       ))
     }
