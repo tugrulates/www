@@ -1,6 +1,6 @@
 ---
-import { Image } from "astro:assets";
-import Navigation from "./Navigation.astro";
+import CoverImage from "@components/CoverImage.astro";
+import Navigation from "@components/Navigation.astro";
 import { fade } from "astro:transitions";
 
 const {
@@ -15,48 +15,55 @@ const {
 } = Astro.props;
 ---
 
-<div class="group relative z-50 max-sm:-mx-4 lg:py-12">
+<div class:list={["group relative z-50 max-sm:-mx-4 lg:py-12", className]}>
   <div
-    class="bg-stone-200/20 shadow shadow-stone-800/20 sm:rounded-2xl lg:scale-125"
+    class="h-fit w-fit bg-stone-200/20 shadow shadow-stone-800/20 sm:rounded-2xl lg:scale-125"
   >
-    <Image
-      slot="cover"
+    <CoverImage
+      image={image}
+      className="max-sm:w-screen sm:rounded-2xl"
+      transition:animate={fade({ duration: "0.1s" })}
+    />
+    <!-- <Picture
       src={image.data.cover}
       alt={image.data.description}
       width={800}
       densities={[1, 2, 3, 4]}
-      class:list={["aspect-2 sm:rounded-2xl", className]}
+      class="aspect-2 sm:rounded-2xl"
       transition:animate={fade({ duration: "0.1s" })}
-    />
-    {
-      previous && (
-        <Navigation
-          href={previous}
-          alt="Previous"
-          icon="/icons/link-previous.svg"
-          overlay={true}
-          className="absolute inset-y-2 left-2 bg-stone-200/50 opacity-0 transition-opacity hover:bg-stone-200 group-hover:opacity-100 dark:bg-stone-800/50 dark:hover:bg-stone-800"
-        />
-      )
-    }
-    {
-      next && (
-        <Navigation
-          href={next}
-          alt="Next"
-          icon="/icons/link-next.svg"
-          overlay={true}
-          className="absolute inset-y-2 right-2 bg-stone-200/50 opacity-0 transition-opacity hover:bg-stone-200 group-hover:opacity-100 dark:bg-stone-800/50 dark:hover:bg-stone-800"
-        />
-      )
-    }
-    <Navigation
-      href={action_href}
-      download={action_download}
-      alt={action_alt}
-      icon={action_icon}
-      overlay={true}
-      className="absolute bottom-2 end-16 bg-stone-200/50 opacity-0 transition-opacity hover:bg-stone-200 group-hover:opacity-100 dark:bg-stone-800/50 dark:hover:bg-stone-800"
-    />
+    /> -->
+    <div class="absolute inset-2 flex flex-row items-end gap-2">
+      {
+        previous && (
+          <Navigation
+            href={previous}
+            alt="Previous"
+            icon="/icons/link-previous.svg"
+            overlay={true}
+            className="bg-stone-200/50 opacity-0 h-full transition-opacity hover:bg-stone-200 group-hover:opacity-100 dark:bg-stone-800/50 dark:hover:bg-stone-800"
+          />
+        )
+      }
+      <div class="grow"></div>
+      <Navigation
+        href={action_href}
+        download={action_download}
+        alt={action_alt}
+        icon={action_icon}
+        overlay={true}
+        className="bg-stone-200/50 opacity-0 transition-opacity hover:bg-stone-200 group-hover:opacity-100 max-sm:hidden dark:bg-stone-800/50 dark:hover:bg-stone-800"
+      />
+      {
+        next && (
+          <Navigation
+            href={next}
+            alt="Next"
+            icon="/icons/link-next.svg"
+            overlay={true}
+            className=" bg-stone-200/50 opacity-0 h-full transition-opacity hover:bg-stone-200 group-hover:opacity-100 dark:bg-stone-800/50 dark:hover:bg-stone-800"
+          />
+        )
+      }
+    </div>
   </div>
 </div>

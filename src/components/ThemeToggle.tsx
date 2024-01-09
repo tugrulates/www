@@ -16,7 +16,6 @@ export default function ThemeToggle() {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    console.log(document.documentElement.classList);
     if (!isMounted) {
       setTheme({ dark: document.documentElement.classList.contains("dark") });
       setIsMounted(true);

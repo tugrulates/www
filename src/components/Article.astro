@@ -1,9 +1,12 @@
 ---
-const { title, date } = Astro.props;
+const { title, date, className } = Astro.props;
 ---
 
 <article
-  class="prose prose-lg prose-stone w-full pb-2 dark:prose-invert prose-a:decoration-stone-500/50 hover:prose-a:decoration-black sm:prose-img:rounded-2xl hover:dark:prose-a:decoration-white"
+  class:list={[
+    "prose prose-lg prose-stone w-full pb-2 dark:prose-invert prose-a:decoration-stone-500/50 hover:prose-a:decoration-black sm:prose-img:rounded-2xl hover:dark:prose-a:decoration-white",
+    className,
+  ]}
 >
   <header class="flex flex-col">
     <h1>{title}</h1>
@@ -29,7 +32,7 @@ const { title, date } = Astro.props;
     article > :global(ol),
     article > :global(table),
     article > :global(blockquote) {
-      @apply -mx-2 px-2 outline-none outline-offset-0 transition-all hover:bg-stone-500/20  hover:outline-8 hover:outline-stone-500/20 sm:rounded-2xl;
+      @apply -mx-2 px-2 outline-none outline-offset-0 transition-all hover:bg-stone-500/20 hover:outline-8 hover:outline-stone-500/20 sm:rounded-2xl;
     }
     article > :global(ul),
     article > :global(ol) {

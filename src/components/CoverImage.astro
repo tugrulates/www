@@ -1,0 +1,56 @@
+---
+import { getImage } from "astro:assets";
+
+const { image, className } = Astro.props;
+
+const MOBILE_WIDTH = 640;
+const DESKTOP_WIDTH = 736;
+const DESKTOP_HEIGHT = 414;
+const [square, cover] = await Promise.all([
+  Promise.all(
+    [1, 2, 3, 4].map((scale) =>
+      getImage({
+        src: image.data.square,
+        format: "webp",
+        width: MOBILE_WIDTH * scale,
+        height: MOBILE_WIDTH * scale,
+      }),
+    ),
+  ),
+  Promise.all(
+    [1, 2, 3, 4].map((scale) =>
+      getImage({
+        src: image.data.cover,
+        format: "webp",
+        width: DESKTOP_WIDTH * scale,
+        height: (DESKTOP_WIDTH * scale) / 2,
+      }),
+    ),
+  ),
+]);
+---
+
+<picture>
+  <source
+    media="(orientation: landscape)"
+    srcset={`${square[0].src} 1x, ${square[1].src} 2x, ${square[2].src} 3x, ${square[3].src} 4x`}
+  />
+  <source
+    media={`(max-width: ${MOBILE_WIDTH - 1}px)`}
+    srcset={`${square[0].src} 1x, ${square[1].src} 2x, ${square[2].src} 3x, ${square[3].src} 4x`}
+  />
+  <source
+    media={`(min-width: ${MOBILE_WIDTH}px)`}
+    srcset={`${cover[0].src} 1x, ${cover[1].src} 2x, ${cover[2].src} 3x, ${cover[3].src} 4x`}
+  />
+  <img
+    class:list={[
+      "h-auto object-cover max-sm:aspect-square sm:aspect-video",
+      className,
+    ]}
+    src={image.data.cover}
+    alt={image.data.description}
+    width={DESKTOP_WIDTH}
+    height={DESKTOP_HEIGHT}
+  />
+</picture>
