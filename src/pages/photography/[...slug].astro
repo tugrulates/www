@@ -32,7 +32,6 @@ const formatted_date = photo.data.date.toLocaleDateString("en-US", {
 >
   <div class="flex flex-col items-center gap-20">
     <Cover
-      id="cover"
       image={photo}
       previous={index > 0 && `./${photos[index - 1].id}`}
       next={index >= 0 &&

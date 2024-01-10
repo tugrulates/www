@@ -1,7 +1,10 @@
 ---
-import CoverImage from "@components/CoverImage.astro";
-import Navigation from "@components/Navigation.astro";
+import { Image } from "astro:assets";
 import { fade } from "astro:transitions";
+import CoverImage from "@components/CoverImage.astro";
+import Icon from "@components/Icon.astro";
+import Navigation from "@components/Navigation.astro";
+import PhotoViewer from "@components/PhotoViewer.tsx";
 
 const {
   image,
@@ -21,7 +24,7 @@ const {
   >
     <CoverImage
       image={image}
-      className="max-sm:w-screen sm:rounded-2xl"
+      className="object-cover max-sm:w-screen sm:rounded-2xl"
       transition:animate={fade({ duration: "0.1s" })}
     />
     <!-- <Picture
@@ -32,7 +35,7 @@ const {
       class="aspect-2 sm:rounded-2xl"
       transition:animate={fade({ duration: "0.1s" })}
     /> -->
-    <div class="absolute inset-2 flex flex-row items-end gap-2">
+    <div class="absolute inset-2 flex flex-row items-center gap-2">
       {
         previous && (
           <Navigation
@@ -40,30 +43,48 @@ const {
             alt="Previous"
             icon="/icons/link-previous.svg"
             overlay={true}
-            className="bg-stone-200/50 opacity-0 h-full transition-opacity hover:bg-stone-200 group-hover:opacity-100 dark:bg-stone-800/50 dark:hover:bg-stone-800"
+            className="bg-stone-200/50 opacity-0 transition-opacity hover:bg-stone-200 group-hover:opacity-80 dark:bg-stone-800/50 dark:hover:bg-stone-800"
           />
         )
       }
       <div class="grow"></div>
-      <Navigation
-        href={action_href}
-        download={action_download}
-        alt={action_alt}
-        icon={action_icon}
-        overlay={true}
-        className="bg-stone-200/50 opacity-0 transition-opacity hover:bg-stone-200 group-hover:opacity-100 max-sm:hidden dark:bg-stone-800/50 dark:hover:bg-stone-800"
-      />
-      {
-        next && (
-          <Navigation
-            href={next}
-            alt="Next"
-            icon="/icons/link-next.svg"
-            overlay={true}
-            className=" bg-stone-200/50 opacity-0 h-full transition-opacity hover:bg-stone-200 group-hover:opacity-100 dark:bg-stone-800/50 dark:hover:bg-stone-800"
+      <div class="flex h-full flex-col justify-between">
+        <PhotoViewer client:only>
+          <Icon
+            slot="icon"
+            src="/icons/link-expand.svg"
+            alt="Expand image"
+            class="group-hover:scale-100"
           />
-        )
-      }
+          <Image
+            slot="image"
+            src={image.data.cover}
+            alt={image.data.description}
+            width={image.data.width}
+            height={image.data.height}
+            format="jpg"
+          />
+        </PhotoViewer>
+        {
+          next && (
+            <Navigation
+              href={next}
+              alt="Next"
+              icon="/icons/link-next.svg"
+              overlay={true}
+              className="bg-stone-200/50 opacity-0 transition-opacity hover:bg-stone-200 group-hover:opacity-80 dark:bg-stone-800/50 dark:hover:bg-stone-800"
+            />
+          )
+        }
+        <Navigation
+          href={action_href}
+          download={action_download}
+          alt={action_alt}
+          icon={action_icon}
+          overlay={true}
+          className="bg-stone-200/50 opacity-0 transition-opacity hover:bg-stone-200 group-hover:opacity-80 max-sm:hidden dark:bg-stone-800/50 dark:hover:bg-stone-800"
+        />
+      </div>
     </div>
   </div>
 </div>
