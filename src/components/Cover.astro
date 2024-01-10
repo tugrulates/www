@@ -27,14 +27,6 @@ const {
       className="object-cover max-sm:w-screen sm:rounded-2xl"
       transition:animate={fade({ duration: "0.1s" })}
     />
-    <!-- <Picture
-      src={image.data.cover}
-      alt={image.data.description}
-      width={800}
-      densities={[1, 2, 3, 4]}
-      class="aspect-2 sm:rounded-2xl"
-      transition:animate={fade({ duration: "0.1s" })}
-    /> -->
     <div class="absolute inset-2 flex flex-row items-center gap-2">
       {
         previous && (
@@ -63,6 +55,7 @@ const {
             width={image.data.width}
             height={image.data.height}
             format="jpg"
+            class="touch-auto"
           />
         </PhotoViewer>
         {
