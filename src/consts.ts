@@ -1,6 +1,11 @@
+export const SITE = {
+  title: "Tugrul Ates",
+  description: "Tugrul Ates's personal website",
+  url: "https://www.tugrulates.com",
+};
+
 export const AUTHOR = {
   name: "Tugrul Ates",
-  picture: "/me.jpg",
   social: [
     {
       name: "LinkedIn",

@@ -1,12 +1,13 @@
 ---
-import Navigation from "@components/Navigation.astro";
+import Social from "@components/Social.astro";
 import { AUTHOR } from "@consts";
 ---
 
-<div class="flex flex-row py-8">
+<div class="flex w-full flex-row justify-center py-8 sm:gap-4">
   {
     AUTHOR.social.map((item) => (
-      <Navigation
+      <Social
+        name={item.name}
         href={item.url}
         alt={`my ${item.name} profile`}
         icon={item.icon}

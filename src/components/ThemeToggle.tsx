@@ -28,17 +28,18 @@ export default function ThemeToggle() {
     }
   }, [theme]);
 
+  if (!isMounted) return <div className="h-12 w-12"></div>;
+
   return (
     <Switch
       checked={theme.dark}
       onChange={() => toggleTheme(theme, setTheme)}
-      className={["group h-12 w-12 ", isMounted ? "" : "opacity-0"].join(" ")}
+      className="group h-12 w-12"
     >
       <div
         className={[
-          "relative -z-10 h-24 w-24 -translate-x-14 translate-y-2 ",
+          "relative -z-10 h-24 w-24 -translate-x-14 translate-y-2 transition-transform duration-1000",
           theme.dark ? "rotate-180" : "rotate-0",
-          isMounted ? "transition-transform duration-1000" : "",
         ].join(" ")}
       >
         <img

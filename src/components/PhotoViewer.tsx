@@ -13,12 +13,12 @@ export default function PhotoViewer(props: Props) {
     <Dialog
       open={isOpen}
       as="div"
-      className="z-100 relative "
+      className="z-100 relative"
       onClose={() => setIsOpen(false)}
     >
       <Dialog.Panel
         onClick={() => setIsOpen(false)}
-        className="fixed inset-0 flex h-screen w-screen transform items-center justify-center overflow-hidden overflow-y-auto bg-stone-300 bg-transparent align-middle dark:bg-stone-700 "
+        className="fixed inset-0 flex h-screen w-screen transform items-center justify-center overflow-hidden overflow-y-auto bg-stone-300 align-middle dark:bg-stone-700 "
       >
         {props.image}
       </Dialog.Panel>

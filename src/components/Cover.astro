@@ -20,63 +20,66 @@ const {
 
 <div class:list={["group relative z-50 max-sm:-mx-4 lg:py-12", className]}>
   <div
-    class="h-fit w-fit bg-stone-200/20 shadow shadow-stone-800/20 sm:rounded-2xl lg:scale-125"
+    class="bg-stone-200/20 shadow shadow-stone-800/20 sm:rounded-2xl lg:scale-125"
   >
-    <CoverImage
-      image={image}
-      className="object-cover max-sm:w-screen sm:rounded-2xl"
-      transition:animate={fade({ duration: "0.1s" })}
-    />
-    <div class="absolute inset-2 flex flex-row items-center gap-2">
-      {
-        previous && (
-          <Navigation
-            href={previous}
-            alt="Previous"
-            icon="/icons/link-previous.svg"
-            overlay={true}
-            className="bg-stone-200/50 opacity-0 transition-opacity hover:bg-stone-200 group-hover:opacity-80 dark:bg-stone-800/50 dark:hover:bg-stone-800"
-          />
-        )
-      }
-      <div class="grow"></div>
-      <div class="flex h-full flex-col justify-between">
-        <PhotoViewer client:only>
-          <Icon
-            slot="icon"
-            src="/icons/link-expand.svg"
-            alt="Expand image"
-            class="group-hover:scale-100"
-          />
-          <Image
-            slot="image"
-            src={image.data.cover}
-            alt={image.data.description}
-            width={image.data.width}
-            height={image.data.height}
-            format="jpg"
-            class="touch-auto"
-          />
-        </PhotoViewer>
+    <div transition:animate={fade({ duration: "0.1s" })}>
+      <CoverImage
+        image={image}
+        className="object-cover max-sm:w-screen sm:rounded-2xl"
+      />
+      <div
+        class="absolute inset-2 flex flex-row gap-2 max-sm:items-end sm:items-center"
+      >
         {
-          next && (
+          previous && (
             <Navigation
-              href={next}
-              alt="Next"
-              icon="/icons/link-next.svg"
+              href={previous}
+              alt="Previous"
+              icon="/icons/link-previous.svg"
               overlay={true}
               className="bg-stone-200/50 opacity-0 transition-opacity hover:bg-stone-200 group-hover:opacity-80 dark:bg-stone-800/50 dark:hover:bg-stone-800"
             />
           )
         }
-        <Navigation
-          href={action_href}
-          download={action_download}
-          alt={action_alt}
-          icon={action_icon}
-          overlay={true}
-          className="bg-stone-200/50 opacity-0 transition-opacity hover:bg-stone-200 group-hover:opacity-80 max-sm:hidden dark:bg-stone-800/50 dark:hover:bg-stone-800"
-        />
+        <div class="grow"></div>
+        <div class="flex h-full flex-col justify-between">
+          <PhotoViewer client:only>
+            <Icon
+              slot="icon"
+              src="/icons/link-expand.svg"
+              alt="Expand image"
+              class="group-hover:scale-100"
+            />
+            <Image
+              slot="image"
+              src={image.data.cover}
+              alt={image.data.description}
+              width={image.data.width}
+              height={image.data.height}
+              format="jpg"
+              class="touch-auto"
+            />
+          </PhotoViewer>
+          {
+            next && (
+              <Navigation
+                href={next}
+                alt="Next"
+                icon="/icons/link-next.svg"
+                overlay={true}
+                className="bg-stone-200/50 opacity-0 transition-opacity hover:bg-stone-200 group-hover:opacity-80 dark:bg-stone-800/50 dark:hover:bg-stone-800"
+              />
+            )
+          }
+          <Navigation
+            href={action_href}
+            download={action_download}
+            alt={action_alt}
+            icon={action_icon}
+            overlay={true}
+            className="bg-stone-200/50 opacity-0 transition-opacity hover:bg-stone-200 group-hover:opacity-80 max-sm:hidden dark:bg-stone-800/50 dark:hover:bg-stone-800"
+          />
+        </div>
       </div>
     </div>
   </div>

@@ -3,8 +3,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@arrays": ["src/arrays"],
       "@consts": ["src/consts"],
+      "@favicon": ["src/favicon"],
       "@components/*": ["src/components/*"],
       "@layouts/*": ["src/layouts/*"],
       "@pages/*": ["src/pages/*"]

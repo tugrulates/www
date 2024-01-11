@@ -8,7 +8,7 @@ const DESKTOP_WIDTH = 736;
 const DESKTOP_HEIGHT = 414;
 const [square, cover] = await Promise.all([
   Promise.all(
-    [1, 2, 3, 4].map((scale) =>
+    [1, 2, 3, 4].map(async (scale) =>
       getImage({
         src: image.data.square,
         format: "webp",
@@ -18,7 +18,7 @@ const [square, cover] = await Promise.all([
     ),
   ),
   Promise.all(
-    [1, 2, 3, 4].map((scale) =>
+    [1, 2, 3, 4].map(async (scale) =>
       getImage({
         src: image.data.cover,
         format: "webp",
@@ -30,7 +30,7 @@ const [square, cover] = await Promise.all([
 ]);
 ---
 
-<picture class="h-full w-full object-contain">
+<picture class="object-contain">
   <source
     media="(orientation: landscape)"
     srcset={`${cover[0].src} 1x, ${cover[1].src} 2x, ${cover[2].src} 3x, ${cover[3].src} 4x`}

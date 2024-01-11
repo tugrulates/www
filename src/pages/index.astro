@@ -1,6 +1,6 @@
 ---
 import { getCollection, getEntry } from "astro:content";
-import { AUTHOR } from "@consts";
+import { SITE } from "@consts";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import Post from "@components/Post.astro";
 
@@ -27,7 +27,7 @@ const frontmatters = Object.fromEntries(
 );
 ---
 
-<BaseLayout tab="blog" title={AUTHOR.name} description="My homepage.">
+<BaseLayout tab="blog" title={SITE.title} description={SITE.description}>
   <div class="flex flex-col gap-4">
     {
       posts.map((post) => (

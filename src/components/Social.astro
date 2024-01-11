@@ -1,0 +1,24 @@
+---
+import Icon from "@components/Icon.astro";
+
+const { name, href, alt, icon } = Astro.props;
+const external = href.startsWith("http");
+---
+
+<a
+  aria-label={alt}
+  href={href}
+  target={external ? "_blank" : undefined}
+  rel={external ? "noopener noreferrer" : undefined}
+>
+  <div
+    class="justify-left transition-color group relative flex h-full flex-col items-center justify-end gap-2 p-2 opacity-50 transition-transform hover:opacity-100 sm:hover:scale-110"
+  >
+    <span
+      class="absolute text-center align-text-bottom text-xs font-bold opacity-0 transition-all group-hover:-translate-y-8 group-hover:opacity-100 max-sm:hidden"
+    >
+      {name}
+    </span>
+    <Icon src={icon} alt={alt} class="" />
+  </div>
+</a>
