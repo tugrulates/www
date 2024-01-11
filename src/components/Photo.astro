@@ -7,19 +7,20 @@ const { link, image, description, className } = Astro.props;
 <a
   href={link}
   class:list={[
-    "align-center aspect-1 group z-50 grow transition hover:bg-stone-500/10 hover:opacity-100 sm:rounded-xl",
+    "align-center group z-50 grow transition hover:bg-stone-500/10 hover:opacity-100 sm:rounded-xl",
     className,
   ]}
 >
   <div
-    class="flex overflow-hidden shadow shadow-stone-900 transition-all sm:rounded-2xl sm:group-hover:scale-110"
+    class="flex aspect-square h-auto overflow-hidden bg-stone-200/20 shadow shadow-stone-900 transition-all sm:rounded-2xl sm:group-hover:scale-110"
   >
     <Image
       src={image}
       alt={description}
-      width={200}
+      width={230}
+      height={230}
       densities={[1, 2, 3, 4]}
-      class="transform-all w-full object-cover object-center"
+      class="transform-all min-w-full object-cover object-center"
     />
   </div>
 </a>
