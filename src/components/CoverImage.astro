@@ -1,19 +1,17 @@
 ---
 import { getImage } from "astro:assets";
+import { DIMENSIONS } from "@consts";
 
 const { image, className } = Astro.props;
 
-const MOBILE_WIDTH = 640;
-const DESKTOP_WIDTH = 736;
-const DESKTOP_HEIGHT = 414;
 const [square, cover] = await Promise.all([
   Promise.all(
     [1, 2, 3, 4].map(async (scale) =>
       getImage({
         src: image.data.square,
         format: "webp",
-        width: MOBILE_WIDTH * scale,
-        height: MOBILE_WIDTH * scale,
+        width: DIMENSIONS.mobile_cover_size * scale,
+        height: DIMENSIONS.mobile_cover_size * scale,
       }),
     ),
   ),
@@ -22,8 +20,8 @@ const [square, cover] = await Promise.all([
       getImage({
         src: image.data.cover,
         format: "webp",
-        width: DESKTOP_WIDTH * scale,
-        height: (DESKTOP_WIDTH * scale) / 2,
+        width: DIMENSIONS.desktop_cover_width * scale,
+        height: DIMENSIONS.desktop_cover_height * scale,
       }),
     ),
   ),
@@ -36,11 +34,11 @@ const [square, cover] = await Promise.all([
     srcset={`${cover[0].src} 1x, ${cover[1].src} 2x, ${cover[2].src} 3x, ${cover[3].src} 4x`}
   />
   <source
-    media={`(max-width: ${MOBILE_WIDTH - 1}px)`}
+    media={`(max-width: ${DIMENSIONS.mobile_cover_size - 1}px)`}
     srcset={`${square[0].src} 1x, ${square[1].src} 2x, ${square[2].src} 3x, ${square[3].src} 4x`}
   />
   <source
-    media={`(min-width: ${MOBILE_WIDTH}px)`}
+    media={`(min-width: ${DIMENSIONS.mobile_cover_size}px)`}
     srcset={`${cover[0].src} 1x, ${cover[1].src} 2x, ${cover[2].src} 3x, ${cover[3].src} 4x`}
   />
   <img
@@ -50,7 +48,7 @@ const [square, cover] = await Promise.all([
     ]}
     src={image.data.cover}
     alt={image.data.description}
-    width={DESKTOP_WIDTH}
-    height={DESKTOP_HEIGHT}
+    width={DIMENSIONS.desktop_cover_width}
+    height={DIMENSIONS.desktop_cover_height}
   />
 </picture>

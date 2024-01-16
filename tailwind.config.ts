@@ -1,5 +1,6 @@
 import type { Config } from "tailwindcss";
 import typography from "@tailwindcss/typography";
+import { DIMENSIONS } from "./src/consts";
 
 export default {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
@@ -29,6 +30,16 @@ export default {
         "Source Serif Pro",
         "serif",
       ],
+    },
+    extend: {
+      height: {
+        "cover-desktop": `${DIMENSIONS.desktop_cover_height}px`,
+        "cover-mobile": `${DIMENSIONS.mobile_cover_size}px`,
+      },
+      width: {
+        "cover-desktop": `${DIMENSIONS.desktop_cover_width}px`,
+        "cover-mobile": `${DIMENSIONS.mobile_cover_size}px`,
+      },
     },
   },
   plugins: [typography],
