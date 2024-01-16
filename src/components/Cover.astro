@@ -18,11 +18,13 @@ const {
 } = Astro.props;
 ---
 
-<div class:list={["group relative z-50 max-sm:-mx-4 lg:pt-12", className]}>
+<div
+  class:list={["group relative z-50 w-full max-sm:-mx-4 lg:pt-12", className]}
+>
   <div
-    class="max-h-cover-desktop max-sm:max-h-cover-mobile bg-stone-200/20 shadow shadow-stone-800/20 sm:rounded-2xl lg:scale-125"
+    class="aspect-video w-full bg-stone-200/20 shadow shadow-stone-800/20 max-sm:aspect-square sm:rounded-2xl lg:scale-125"
   >
-    <div transition:animate={fade({ duration: "0.1s" })}>
+    <div transition:animate={fade({ duration: "0.1s" })} class="h-full w-full">
       <CoverImage
         image={image}
         className="object-cover max-sm:w-screen sm:rounded-2xl"
