@@ -13,7 +13,7 @@ export default function PhotoViewer(props: Props) {
     <Dialog
       open={isOpen}
       as="div"
-      className="z-100 relative"
+      className="relative z-50"
       onClose={() => setIsOpen(false)}
     >
       <Dialog.Panel
