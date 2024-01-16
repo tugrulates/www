@@ -34,11 +34,11 @@ export default function ThemeToggle() {
     <Switch
       checked={theme.dark}
       onChange={() => toggleTheme(theme, setTheme)}
-      className="group h-12 w-12"
+      className="group h-12 w-12 transition-transform hover:scale-110"
     >
       <div
         className={[
-          "relative -z-10 h-24 w-24 -translate-x-14 translate-y-2 transition-transform duration-1000",
+          "relative z-0 h-24 w-24 -translate-x-14 translate-y-2 transition-transform duration-1000",
           theme.dark ? "rotate-180" : "rotate-0",
         ].join(" ")}
       >
