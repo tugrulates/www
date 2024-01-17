@@ -3,7 +3,7 @@ import fs from "fs/promises";
 import { glob } from "glob";
 import { ExifDateTime, exiftool, type Tags } from "exiftool-vendored";
 
-const IMAGES_DIR = "src/images/photos";
+const IMAGES_DIR = "src/photos";
 const CONTENT_DIR = "src/content/photos";
 
 export interface PhotoTags extends Tags {
@@ -36,8 +36,8 @@ async function extractMetadata(photo: string) {
   const cover = `${IMAGES_DIR}/${photo}/cover.jpg`;
   return exiftool.read<PhotoTags>(cover).then((tags) => {
     const data: PhotoData = {
-      cover: `../../images/photos/${photo}/cover.jpg`,
-      square: `../../images/photos/${photo}/square.jpg`,
+      cover: `../../photos/${photo}/cover.jpg`,
+      square: `../../photos/${photo}/square.jpg`,
       title: tags.Headline ?? "",
       description: tags.ImageDescription ?? "",
       keywords: Array.isArray(tags.Keywords)
@@ -72,10 +72,12 @@ const photos = covers.map((cover) => {
 
 await fs
   .stat(CONTENT_DIR)
-  .then((stats) => {
-    if (stats !== undefined && !stats.isDirectory()) {
+  .catch((error) => {
+    if (error.code === "ENOENT") {
       fs.mkdir(CONTENT_DIR);
+      return;
     }
+    throw error;
   })
   .then(() =>
     Promise.all(
