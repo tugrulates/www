@@ -25,7 +25,7 @@ export const AUTHOR = {
     {
       name: "YouTube",
       icon: "/icons/social-youtube.svg",
-      url: "https://www.youtube.com/@TugrulAtes",
+      url: "https://www.youtube.com/@tugrulates.demoscene",
     },
     {
       name: "Instagram",

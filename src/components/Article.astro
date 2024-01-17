@@ -30,8 +30,8 @@ const { title, date, className } = Astro.props;
     article > :global(p),
     article > :global(ul),
     article > :global(ol),
-    article > :global(table),
-    article > :global(blockquote) {
+    article > :global(blockquote),
+    article > :global(lite-youtube) {
       @apply -mx-2 px-2 outline-none outline-offset-0 transition-all hover:bg-stone-500/20 hover:outline-8 hover:outline-stone-500/20 sm:rounded-2xl;
     }
     article > :global(ul),
@@ -40,6 +40,15 @@ const { title, date, className } = Astro.props;
     }
     article > :global(pre) {
       @apply !bg-stone-900 px-4 py-2 shadow shadow-black sm:rounded-2xl;
+    }
+    article > :global(lite-youtube) {
+      @apply aspect-video;
+    }
+    article > :global(lite-youtube::before) {
+      @apply bg-none;
+    }
+    article > :global(lite-youtube.lyt-activated) {
+      @apply !bg-none;
     }
   </style>
 </article>

@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.3.4",
+    "@astrojs/mdx": "^2.0.4",
     "@astrojs/preact": "^3.1.0",
     "@astrojs/react": "^3.0.9",
     "@astrojs/sitemap": "^3.0.4",
@@ -32,6 +33,7 @@
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",
     "astro": "^4.1.0",
+    "astro-embed": "^0.6.1",
     "astro-remark-description": "^1.1.1",
     "exif": "^0.6.0",
     "exiftool-vendored": "^23.7.0",
