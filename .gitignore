@@ -1,4 +1,6 @@
 # generated content
+src/content/files/
+src/content/posts/
 src/content/photos/
 
 # build output
