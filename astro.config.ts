@@ -11,12 +11,7 @@ import mdx from "@astrojs/mdx";
 export default defineConfig({
   site: SITE.url,
   markdown: {
-    rehypePlugins: [
-      [
-        rehypeExternalLinks,
-        { rel: ["noopener", "noreferrer"], target: "_blank" },
-      ],
-    ],
+    rehypePlugins: [[rehypeExternalLinks, { rel: ["nofollow"] }]],
     remarkPlugins: [[remarkDescription, {}]],
   },
   prefetch: true,

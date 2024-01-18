@@ -52,27 +52,43 @@ const { title, date, className } = Astro.props;
     }
     :global(article) :global(a::after) {
       @apply bg-black;
+      @apply inline-block h-3 w-3 align-text-top;
     }
     :global(.dark) article :global(a::after) {
       @apply bg-white;
     }
-    article :global(a[rel="noopener"]) {
+    article :global(a[rel="nofollow"]::after) {
       content: "";
       -webkit-mask-image: url("/icons/link-external.svg");
       mask-image: url("/icons/link-external.svg");
-      @apply ml-1 inline-block h-4 w-4;
+    }
+    article :global(a[href^="https://en.wikipedia.org/"]::after)
+    {
+      content: "";
+      -webkit-mask-image: url("/icons/link-wikipedia.svg");
+      mask-image: url("/icons/link-wikipedia.svg");
     }
     article :global(a[href$=".pdf"]::after) {
       content: "";
-      -webkit-mask-image: url("/icons/link-pdf.svg");
-      mask-image: url("/icons/link-pdf.svg");
-      @apply ml-1 inline-block h-4 w-4;
+      -webkit-mask-image: url("/icons/link-document.svg");
+      mask-image: url("/icons/link-document.svg");
     }
     article :global(a[href$=".zip"]::after) {
       content: "";
       -webkit-mask-image: url("/icons/link-download.svg");
       mask-image: url("/icons/link-download.svg");
-      @apply ml-1 inline-block h-4 w-4;
+    }
+    article :global(a[href^="https://www.linkedin.com/"]::after)
+    {
+      content: "";
+      -webkit-mask-image: url("/icons/social-linkedin.svg");
+      mask-image: url("/icons/social-linkedin.svg");
+    }
+    article :global(a[href^="https://twitter.com/"]::after)
+    {
+      content: "";
+      -webkit-mask-image: url("/icons/social-twitter.svg");
+      mask-image: url("/icons/social-twitter.svg");
     }
   </style>
 </article>

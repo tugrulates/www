@@ -5,12 +5,7 @@ const { name, href, alt, icon } = Astro.props;
 const external = href.startsWith("http");
 ---
 
-<a
-  aria-label={alt}
-  href={href}
-  target={external ? "_blank" : undefined}
-  rel={external ? "noopener noreferrer" : undefined}
->
+<a aria-label={alt} href={href} rel={external ? "nofollow" : undefined}>
   <div
     class="justify-left transition-color group relative flex h-full flex-col items-center justify-end gap-2 p-2 opacity-50 transition-transform hover:opacity-100 sm:hover:scale-110"
   >
