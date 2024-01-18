@@ -31,25 +31,24 @@ const favicon = await getFavicon(180);
     <link rel="manifest" href="/manifest.json" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="author" content={AUTHOR.name} />
+    <meta name="description" content={description} />
+    <meta name="keywords" content={(keywords ?? []).join(", ")} />
+    <ViewTransitions />
     <title>{title}</title>
   </head>
 
-  <meta name="author" content={AUTHOR.name} />
-  <meta name="description" content={description} />
-  <meta name="keywords" content={(keywords ?? []).join(", ")} />
-  <ViewTransitions />
-
   <body
-    class="relative mx-auto flex min-h-screen max-w-screen-md flex-col items-center gap-0 overflow-y-scroll bg-stone-300 text-black dark:bg-stone-700 dark:text-white"
+    class="relative mx-auto flex min-h-screen max-w-screen-md flex-col items-center gap-0 bg-stone-300 text-black dark:bg-stone-700 dark:text-white"
   >
     <header class="w-full text-left">
       <Header tab={tab} />
     </header>
     <main
-      class="z-10 w-full flex-1 bg-stone-200 px-4 pb-4 pt-0 text-left shadow shadow-stone-900/20 sm:rounded-b-3xl sm:rounded-t-xl dark:bg-stone-800"
+      class="z-10 w-full flex-1 bg-stone-200 px-4 pb-4 pt-0 text-left shadow shadow-stone-900/20 dark:bg-stone-800 sm:rounded-b-3xl sm:rounded-t-xl"
     >
       <div
-        class="absolute left-0 h-16 w-full bg-stone-200 max-sm:top-12 sm:top-20 sm:rounded-t-3xl dark:bg-stone-800"
+        class="absolute left-0 z-20 h-16 w-full bg-stone-200 dark:bg-stone-800 max-sm:top-12 sm:top-20 sm:rounded-t-3xl"
       >
       </div>
       <slot />
