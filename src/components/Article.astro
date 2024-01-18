@@ -52,7 +52,7 @@ const { title, date, className } = Astro.props;
     }
     :global(article) :global(a::after) {
       @apply bg-black;
-      @apply inline-block h-3 w-3 align-text-top;
+      @apply ml-1 inline-block h-5 w-5 align-text-top;
     }
     :global(.dark) article :global(a::after) {
       @apply bg-white;
