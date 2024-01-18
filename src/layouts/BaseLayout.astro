@@ -1,4 +1,6 @@
 ---
+import "@fontsource/fira-sans";
+import "@fontsource/fira-code";
 import { ViewTransitions } from "astro:transitions";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
@@ -48,7 +50,7 @@ const favicon = await getFavicon(180);
       class="z-10 w-full flex-1 bg-stone-200 px-4 pb-4 pt-0 text-left shadow shadow-stone-900/20 dark:bg-stone-800 sm:rounded-b-3xl sm:rounded-t-xl"
     >
       <div
-        class="absolute left-0 z-20 h-16 w-full bg-stone-200 dark:bg-stone-800 max-sm:top-12 sm:top-20 sm:rounded-t-3xl"
+        class="absolute left-0 z-20 h-16 w-full bg-stone-200 dark:bg-stone-800 max-sm:top-12 sm:top-16 sm:rounded-t-3xl lg:top-28"
       >
       </div>
       <slot />

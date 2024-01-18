@@ -30,6 +30,8 @@
     "@astrojs/react": "^3.0.9",
     "@astrojs/sitemap": "^3.0.4",
     "@astrojs/tailwind": "^5.1.0",
+    "@fontsource/fira-code": "^5.0.16",
+    "@fontsource/fira-sans": "^5.0.18",
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
     "@tailwindcss/typography": "^0.5.10",

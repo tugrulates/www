@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import defaultTheme from "tailwindcss/defaultTheme";
 import typography from "@tailwindcss/typography";
 
 export default {
@@ -6,29 +7,8 @@ export default {
   darkMode: "class",
   theme: {
     fontFamily: {
-      sans: [
-        "-apple-system",
-        "BlinkMacSystemFont",
-        "Segoe UI",
-        "Roboto",
-        "Helvetica Neue",
-        "Arial",
-        "Noto Sans",
-        "sans-serif",
-        "Apple Color Emoji",
-        "Segoe UI Emoji",
-        "Segoe UI Symbol",
-        "Noto Color Emoji",
-      ],
-      serif: [
-        "Apple Garamond",
-        "Baskerville",
-        "Times New Roman",
-        "Droid Serif",
-        "Times",
-        "Source Serif Pro",
-        "serif",
-      ],
+      sans: ["Fira Sans", ...defaultTheme.fontFamily.sans],
+      mono: ["Fira Code", ...defaultTheme.fontFamily.mono],
     },
   },
   plugins: [typography],
