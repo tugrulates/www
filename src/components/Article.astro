@@ -50,5 +50,29 @@ const { title, date, className } = Astro.props;
     article > :global(lite-youtube.lyt-activated) {
       @apply !bg-none;
     }
+    :global(article) :global(a::after) {
+      @apply bg-black;
+    }
+    :global(.dark) article :global(a::after) {
+      @apply bg-white;
+    }
+    article :global(a[rel="noopener"]) {
+      content: "";
+      -webkit-mask-image: url("/icons/link-external.svg");
+      mask-image: url("/icons/link-external.svg");
+      @apply ml-1 inline-block h-4 w-4;
+    }
+    article :global(a[href$=".pdf"]::after) {
+      content: "";
+      -webkit-mask-image: url("/icons/link-pdf.svg");
+      mask-image: url("/icons/link-pdf.svg");
+      @apply ml-1 inline-block h-4 w-4;
+    }
+    article :global(a[href$=".zip"]::after) {
+      content: "";
+      -webkit-mask-image: url("/icons/link-download.svg");
+      mask-image: url("/icons/link-download.svg");
+      @apply ml-1 inline-block h-4 w-4;
+    }
   </style>
 </article>

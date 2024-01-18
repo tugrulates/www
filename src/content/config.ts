@@ -22,11 +22,6 @@ const posts = defineCollection({
   }),
 });
 
-const files = defineCollection({
-  type: "data",
-  schema: z.object({}),
-});
-
 const photos = defineCollection({
   type: "data",
   schema: ({ image }) =>
@@ -54,6 +49,5 @@ const photos = defineCollection({
 export const collections = {
   pages,
   posts,
-  files,
   photos,
 };

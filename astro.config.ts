@@ -1,5 +1,6 @@
 import { SITE } from "./src/consts";
 import { defineConfig } from "astro/config";
+import rehypeExternalLinks from "rehype-external-links";
 import remarkDescription from "astro-remark-description";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
@@ -10,6 +11,12 @@ import mdx from "@astrojs/mdx";
 export default defineConfig({
   site: SITE.url,
   markdown: {
+    rehypePlugins: [
+      [
+        rehypeExternalLinks,
+        { rel: ["noopener", "noreferrer"], target: "_blank" },
+      ],
+    ],
     remarkPlugins: [[remarkDescription, {}]],
   },
   prefetch: true,
