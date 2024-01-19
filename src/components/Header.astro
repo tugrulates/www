@@ -39,19 +39,19 @@ const { tab } = Astro.props;
 
 <div class="flex flex-col gap-4 sm:pt-8 lg:pt-16">
   <navigation class="items-begin flex flex-row gap-1">
-    <Tab href="/" selected={tab == "blog"} className="grow">
-      <Icon src="/icons/tab-blog.svg" alt="My essays" className="scale-75" />
-      <span class="hidden pt-0.5 sm:inline">Posts</span>
-    </Tab>
-    <Tab href="/photography" selected={tab == "photos"} className="grow">
-      <Icon
-        src="/icons/tab-photos.svg"
-        alt="My photography"
-        className="scale-75"
-      />
-      <span class="hidden pt-0.5 sm:inline">Photography</span>
+    <Tab text="Posts" href="/" selected={tab == "blog"} className="grow">
+      <Icon src="/icons/tab-blog.svg" alt="My essays" size={24} />
     </Tab>
     <Tab
+      text="Photography"
+      href="/photography"
+      selected={tab == "photos"}
+      className="grow"
+    >
+      <Icon src="/icons/tab-photos.svg" alt="My photography" size={24} />
+    </Tab>
+    <Tab
+      text="About"
       href="/about"
       alt="About me"
       selected={tab == "about"}
@@ -67,7 +67,6 @@ const { tab } = Astro.props;
           class="rounded-full border border-black dark:border-white"
         />
       </div>
-      <span class="hidden pt-0.5 sm:inline">About</span>
     </Tab>
     <ThemeToggle client:load transition:persist />
   </navigation>

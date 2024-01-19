@@ -1,5 +1,5 @@
 ---
-const { href, alt, selected, className } = Astro.props;
+const { text, href, alt, selected, className } = Astro.props;
 ---
 
 <a
@@ -25,6 +25,7 @@ const { href, alt, selected, className } = Astro.props;
       class="sm:justify-begin flex h-8 w-fit flex-row items-center gap-1 text-sm font-thin max-sm:mx-auto"
     >
       <slot />
+      <span class="hidden pt-0.5 sm:inline">{text}</span>
     </div>
   </div>
 </a>

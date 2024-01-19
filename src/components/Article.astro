@@ -4,7 +4,7 @@ const { title, date, className } = Astro.props;
 
 <article
   class:list={[
-    "prose prose-stone w-full max-w-none px-2 pb-2 dark:prose-invert md:prose-lg prose-a:decoration-stone-500/50 hover:prose-a:decoration-black prose-img:m-0 hover:dark:prose-a:decoration-white sm:pb-4 sm:prose-img:rounded-2xl",
+    "prose prose-stone w-full max-w-none px-2 pb-2 dark:prose-invert md:prose-lg prose-a:decoration-stone-500/50 hover:prose-a:decoration-black prose-img:m-0 hover:dark:prose-a:decoration-white sm:pb-4 sm:prose-img:rounded-xl",
     className,
   ]}
 >
@@ -46,12 +46,13 @@ const { title, date, className } = Astro.props;
       @apply overflow-clip sm:rounded-xl;
     }
     article > :global(table) > ::global(thead) > ::global(tr) > ::global(th),
-    article > :global(table) > ::global(thead) > ::global(tr) > ::global(td) {
-      @apply p-4;
+    article > :global(table) > ::global(tbody) > ::global(tr) > ::global(td),
+    article > :global(table) > ::global(tbody) > ::global(tr) > ::global(th) {
+      @apply p-4 align-middle;
     }
     article > :global(table) > ::global(thead) > ::global(tr),
     article > :global(table) > ::global(tbody) > ::global(tr) {
-      @apply sm:hover:bg-stone-500/20;
+      @apply border-transparent sm:rounded-xl sm:hover:bg-stone-500/20;
     }
     article > :global(pre) {
       @apply !bg-stone-900 px-4 py-2 shadow shadow-black;
