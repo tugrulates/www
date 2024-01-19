@@ -1,26 +1,14 @@
 ---
 import Icon from "@components/Icon.astro";
 
-const { href, alt, icon, overlay, download, className } = Astro.props;
-const external = href.startsWith("http");
+const { alt, icon, className } = Astro.props;
 ---
 
-<a
-  aria-label={alt}
-  href={href}
-  download={download}
-  target={external ? "_blank" : undefined}
-  rel={external ? "noopener noreferrer" : undefined}
+<div
   class:list={[
-    "transition-ring transition-color group rounded-xl p-2 ring-inset ring-stone-500/50 transition hover:ring-1",
+    "flex h-12 w-12 flex-row items-center gap-2 rounded-xl bg-stone-200/50 p-2 opacity-0 ring-inset ring-stone-500/50 transition transition-all hover:scale-110 hover:bg-stone-200 hover:ring-1 group-hover:opacity-80 dark:bg-stone-800/50 dark:hover:bg-stone-800",
     className,
-    !overlay && "hover:bg-stone-500/10",
   ]}
 >
-  <div
-    class="text-md justify-left flex h-full flex-row items-center gap-2 font-bold"
-  >
-    <Icon src={icon} alt={alt} class="group-hover:scale-100" />
-    <slot />
-  </div>
-</a>
+  <Icon src={icon} alt={alt} />
+</div>

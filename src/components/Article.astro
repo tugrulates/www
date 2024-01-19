@@ -51,7 +51,7 @@ const { title, date, className } = Astro.props;
       @apply !bg-none;
     }
     :global(article) :global(a::after) {
-      @apply ml-0.5 inline-block h-3 w-3 bg-stone-500 align-text-top hover:bg-black;
+      @apply ml-px inline-block h-3 w-3 bg-stone-500 align-text-top hover:bg-black;
     }
     :global(.dark) article :global(a::after) {
       @apply hover:bg-white;
