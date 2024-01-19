@@ -51,11 +51,10 @@ const { title, date, className } = Astro.props;
       @apply !bg-none;
     }
     :global(article) :global(a::after) {
-      @apply bg-black;
-      @apply ml-1 inline-block h-5 w-5 align-text-top;
+      @apply ml-0.5 inline-block h-3 w-3 bg-stone-500 align-text-top hover:bg-black;
     }
     :global(.dark) article :global(a::after) {
-      @apply bg-white;
+      @apply hover:bg-white;
     }
     article :global(a[rel="nofollow"]::after) {
       content: "";
