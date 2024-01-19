@@ -4,7 +4,7 @@ const { title, date, className } = Astro.props;
 
 <article
   class:list={[
-    "prose prose-stone w-full max-w-none px-2 dark:prose-invert md:prose-lg prose-a:decoration-stone-500/50 hover:prose-a:decoration-black hover:dark:prose-a:decoration-white sm:prose-img:rounded-2xl",
+    "prose prose-stone w-full max-w-none pb-2 pl-2 pr-0 dark:prose-invert md:prose-lg prose-a:decoration-stone-500/50 hover:prose-a:decoration-black prose-img:m-0 hover:dark:prose-a:decoration-white sm:pb-4 sm:prose-img:rounded-2xl",
     className,
   ]}
 >
@@ -30,16 +30,31 @@ const { title, date, className } = Astro.props;
     article > :global(p),
     article > :global(ul),
     article > :global(ol),
-    article > :global(blockquote),
-    article > :global(lite-youtube) {
-      @apply -mx-2 px-2 outline-none outline-offset-0 transition-all hover:bg-stone-500/20 hover:outline-8 hover:outline-stone-500/20 sm:rounded-xl;
+    article > :global(pre),
+    article > :global(lite-youtube),
+    article :global(blockquote) {
+      @apply -mx-2 px-2 outline-none outline-offset-0 transition-all max-sm:rounded-none sm:rounded-xl sm:hover:bg-stone-500/20 sm:hover:outline-8 sm:hover:outline-stone-500/20;
     }
     article > :global(ul),
     article > :global(ol) {
       @apply pl-12;
     }
+    article > :global(p) > ::global(img) {
+      @apply py-2;
+    }
+    article > :global(table) {
+      @apply -mx-2 overflow-clip px-2 sm:rounded-xl;
+    }
+    article > :global(table) > ::global(thead) > ::global(tr) > ::global(th),
+    article > :global(table) > ::global(thead) > ::global(tr) > ::global(td) {
+      @apply p-4;
+    }
+    article > :global(table) > ::global(thead) > ::global(tr),
+    article > :global(table) > ::global(tbody) > ::global(tr) {
+      @apply sm:hover:bg-stone-500/20;
+    }
     article > :global(pre) {
-      @apply !bg-stone-900 px-4 py-2 shadow shadow-black sm:rounded-xl;
+      @apply !bg-stone-900 px-4 py-2 shadow shadow-black;
     }
     article > :global(lite-youtube) {
       @apply aspect-video;
