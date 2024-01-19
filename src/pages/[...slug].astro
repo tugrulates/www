@@ -22,6 +22,9 @@ const posts = (
 const index = posts.findIndex((other) => other.id === page.id);
 const { Content, remarkPluginFrontmatter } = await page.render();
 const cover = await getEntry(page.data.cover);
+if (!cover) {
+  throw new Error(`Cover not found for page ${page.id}`);
+}
 ---
 
 <BaseLayout

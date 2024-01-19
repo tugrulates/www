@@ -4,7 +4,7 @@ const { title, date, className } = Astro.props;
 
 <article
   class:list={[
-    "prose prose-stone w-full max-w-none pb-2 pl-2 pr-0 dark:prose-invert md:prose-lg prose-a:decoration-stone-500/50 hover:prose-a:decoration-black prose-img:m-0 hover:dark:prose-a:decoration-white sm:pb-4 sm:prose-img:rounded-2xl",
+    "prose prose-stone w-full max-w-none px-2 pb-2 dark:prose-invert md:prose-lg prose-a:decoration-stone-500/50 hover:prose-a:decoration-black prose-img:m-0 hover:dark:prose-a:decoration-white sm:pb-4 sm:prose-img:rounded-2xl",
     className,
   ]}
 >
@@ -43,7 +43,7 @@ const { title, date, className } = Astro.props;
       @apply py-2;
     }
     article > :global(table) {
-      @apply -mx-2 overflow-clip px-2 sm:rounded-xl;
+      @apply overflow-clip sm:rounded-xl;
     }
     article > :global(table) > ::global(thead) > ::global(tr) > ::global(th),
     article > :global(table) > ::global(thead) > ::global(tr) > ::global(td) {
