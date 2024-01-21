@@ -5,7 +5,8 @@ cover: sphere-of-perfection
 ---
 
 import { Image } from "astro:assets";
-import Icon from "./src/components/Icon.astro";
+import { AUTHOR } from "../../consts";
+import Icon from "../../components/Icon.astro";
 import logoMetu from "./logo-metu.svg";
 import logoTubitak from "./logo-tubitak.svg";
 import logoGoogle from "./logo-google.svg";
@@ -15,11 +16,11 @@ import c64 from "./c64.webp";
 
 ## Hello and Welcome!
 
-I am Tugrul Ates – a technologist, an artist, an explorer, and an enthusiast of the wonders that lie in between. Maybe we know each other already, or perhaps you are here to learn more about me. Either way, I am glad you are here.
+I am {AUTHOR.name} – a technologist, an artist, an explorer, and an enthusiast of the wonders that lie in between. Maybe we know each other already, or perhaps you are here to learn more about me. Either way, I am glad you are here.
 
-|   Geeky Tugrul    |   Dreamy Tugrul   |
-| :---------------: | :---------------: |
-| ![](./ankara.jpg) | ![](./carmel.jpg) |
+|                              Geeky Tugrul                               |                           Dreamy Tugrul                           |
+| :---------------------------------------------------------------------: | :---------------------------------------------------------------: |
+| ![A photograph of me in a bar with thick framed glasses.](./ankara.jpg) | ![A photograph of me sitting by the Pacific Ocean.](./carmel.jpg) |
 
 ## My story
 
@@ -35,14 +36,26 @@ Finally, I have a firm belief that **prosperity** can be generated through techn
 
 The current decade, and its meaning for humanity, makes me excited. I am committing to be a part of our shared story by building companies and technologies that advance the core needs of all humans. I cannot wait to connect and exchange ideas with other technologists, anywhere, and on this very website.
 
+<img
+  src={c64.src}
+  alt="Commodore 64 BASIC screen that shows BASIC code for printing the text TUGRUL ten times."
+  width={720}
+/>
+
 ## My career
 
-<Image src={c64} alt="Commodore 64" width={800} />
+I got my first taste of programming at the age of 9, on a Commodore 64. My cousin wrote a BASIC program that printed my name on the screen, and I was hooked. I spent the next few years writing programs that drew shapes on the screen, played music, and even made tax returns.
 
-|                             Where?                             | What?                                                                                                                                           |
-| :------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------- |
-|    <Icon src={logoMetu} alt="METU logo" className="w-24" />    | I have studied at **Middle East Technical University** from _2003 to 2007_. I have a Master's degree in electrical and electronics engineering. |
-| <Icon src={logoTubitak} alt="TUBITAK logo" className="w-24" /> | I was a researcher at **TUBITAK** from _2006 to 2011_.                                                                                          |
-|  <Icon src={logoGoogle} alt="Google logo" className="w-24" />  | I worked at **Google** as a software engineer from _2011 to 2017_.                                                                              |
-|    <Icon src={logoMeta} alt="Meta logo" className="w-24" />    | I worked at **Meta** as a software engineer from _2017 to 2021_.                                                                                |
-|    <Icon src={logoRoka} alt="Roka logo" className="w-24" />    | I am running a software company since _2023_.                                                                                                   |
+Aged {AUTHOR.age.year} years, {AUTHOR.age.month} months, and {AUTHOR.age.day} days, I am still spending a good chunk of time writing code. Even if the scale of the work I do has changed tremendously, I still have the same fun I had when I was 9.
+
+You will find a more detailed account of my career on [my LinkedIn profile](https://www.linkedin.com/in/tugrulates/). Feel to send a connection request! Here, I will share the main milestones.
+
+|                             Where?                             | What?                                                                                                                                                                                                                                                    |
+| :------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|    <Icon src={logoMetu} alt="METU logo" className="w-24" />    | I studied electronics engineering at **Middle East Technical University** from _2003 to 2007_, and earned a master's degree. I did research on recommendation systems, computer vision, and multimedia indexing.                                         |
+| <Icon src={logoTubitak} alt="TUBITAK logo" className="w-24" /> | I was a researcher at **TUBITAK**, the government science and technology agency in Turkey, from 2006 to 2011. I built large scale TV and radio censorship software. my options were either that or building military weapons until I could leave Ankara. |
+|  <Icon src={logoGoogle} alt="Google logo" className="w-24" />  | I was at **Google** as a software engineer from 2011 to 2017. I designed app discovery features in the Play Store and built Stadia up until it was launched to beta.                                                                                     |
+|    <Icon src={logoMeta} alt="Meta logo" className="w-24" />    | I was at **Meta** from 2017 to 2021, first as an engineer and later as a manager. The Facebook app hosts many features, is more organized, faster, and more accessible due to countless improvements I and the team I supported have added.              |
+|    <Icon src={logoRoka} alt="Roka logo" className="w-24" />    | I started a software company in Amsterdam, Netherlands in 2023 to build products aligned with my vision of the world outlined here.                                                                                                                      |
+
+I enjoy and take pride in what I do, and I am always happy to find like-minded souls to collaborate with. If you are one, please do not hesitate to reach out!

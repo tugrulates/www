@@ -4,8 +4,20 @@ export const SITE = {
   url: "https://www.tugrulates.com",
 };
 
+function getAge() {
+  const now = new Date();
+  const birthdate = new Date("1984-01-22");
+  const duration = new Date(now.getTime() - birthdate.getTime());
+  return {
+    year: duration.getFullYear() - 1970,
+    month: duration.getMonth(),
+    day: duration.getDate(),
+  };
+}
+
 export const AUTHOR = {
   name: "Tugrul Ates",
+  age: getAge(),
   social: [
     {
       name: "LinkedIn",
