@@ -47,6 +47,8 @@ const cover = await getCover(page);
   tab={page.data.tab ?? "blog"}
   title={page.data.title}
   description={remarkPluginFrontmatter.description}
+  image={cover.data.wide}
+  imageDescription={cover.data.description}
 >
   <div class="flex flex-col items-center gap-4 sm:gap-12 lg:gap-24">
     <Cover

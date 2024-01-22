@@ -1,8 +1,13 @@
 ---
 import { getImage } from "astro:assets";
 import { DIMENSIONS } from "@/consts";
+import type { CoverData } from "@/components/Cover.astro";
 
-const { image, className } = Astro.props;
+interface Props {
+  cover: CoverData;
+  className?: string;
+}
+const { cover: image, className } = Astro.props;
 
 const [wide, square] = await Promise.all([
   await Promise.all(
@@ -48,7 +53,7 @@ const [wide, square] = await Promise.all([
       "h-full w-full max-sm:aspect-square sm:aspect-video",
       className,
     ]}
-    src={image.data.wide}
+    src={image.data.wide.src}
     alt={image.data.description}
     width={DIMENSIONS.desktop_cover_width}
     height={DIMENSIONS.desktop_cover_height}
