@@ -1,11 +1,9 @@
 ---
-import { getCollection } from "astro:content";
-import BaseLayout from "@layouts/BaseLayout.astro";
-import Photo from "@components/Photo.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Photo from "@/components/Photo.astro";
+import { getPhotos } from "@/content";
 
-const photos = (await getCollection("photos")).sort(
-  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
-);
+const photos = await getPhotos();
 ---
 
 <BaseLayout tab="photos" title="Photography" description="My photography.">

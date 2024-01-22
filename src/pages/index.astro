@@ -1,14 +1,11 @@
 ---
-import { getCollection, getEntry } from "astro:content";
-import { SITE } from "@consts";
-import BaseLayout from "@layouts/BaseLayout.astro";
-import Post from "@components/Post.astro";
+import { getEntry } from "astro:content";
+import { SITE } from "@/consts";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Post from "@/components/Post.astro";
+import { getPosts } from "@/content";
 
-const posts = (
-  await getCollection("posts", ({ data }) => {
-    return !data.draft;
-  })
-).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const posts = await getPosts();
 const covers = Object.fromEntries(
   await Promise.all(
     posts.map(async (post) => {
@@ -42,3 +39,4 @@ const frontmatters = Object.fromEntries(
     }
   </div>
 </BaseLayout>
+src/collections

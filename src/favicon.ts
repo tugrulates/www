@@ -3,7 +3,7 @@ import { getImage } from "astro:assets";
 import path from "node:path";
 import sharp from "sharp";
 import ico from "sharp-ico";
-import avatar from "./images/me.png";
+import avatar from "@/images/me.png";
 
 export async function getFavicon(size?: number): Promise<GetImageResult> {
   return await getImage({

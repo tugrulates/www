@@ -2,10 +2,10 @@
 import "@fontsource/fira-sans";
 import "@fontsource/fira-code";
 import { ViewTransitions } from "astro:transitions";
-import Header from "@components/Header.astro";
-import Footer from "@components/Footer.astro";
-import { AUTHOR } from "@consts";
-import { getFavicon } from "@favicon";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import { AUTHOR } from "@/consts";
+import { getFavicon } from "@/favicon";
 
 const { tab, title, description, keywords } = Astro.props;
 if (title === undefined) {

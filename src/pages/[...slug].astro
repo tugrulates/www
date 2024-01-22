@@ -1,13 +1,14 @@
 ---
 import { type InferGetStaticPropsType, type GetStaticPaths } from "astro";
-import { getCollection, getEntry, type CollectionEntry } from "astro:content";
-import Article from "@components/Article.astro";
-import BaseLayout from "@layouts/BaseLayout.astro";
-import Cover, { type CoverData } from "@components/Cover.astro";
+import { getEntry, type CollectionEntry } from "astro:content";
+import Article from "@/components/Article.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Cover, { type CoverData } from "@/components/Cover.astro";
+import { getPages, getPosts } from "@/content";
 
 export const getStaticPaths = (async () => {
-  const pages = await getCollection("pages");
-  const posts = await getCollection("posts");
+  const pages = await getPages();
+  const posts = await getPosts();
   return [...pages, ...posts].map((page) => ({
     params: { slug: page.slug },
     props: { page },
@@ -36,11 +37,7 @@ export async function getCover(
 }
 
 const { page } = Astro.props;
-const posts = (
-  await getCollection("posts", ({ data }) => {
-    return !data.draft;
-  })
-).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const posts = await getPosts();
 const index = posts.findIndex((other) => other.id === page.id);
 const { Content, remarkPluginFrontmatter } = await page.render();
 const cover = await getCover(page);

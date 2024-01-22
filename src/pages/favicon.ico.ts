@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { getFaviconIco } from "@favicon";
+import { getFaviconIco } from "@/favicon";
 
 export const GET: APIRoute = async () => {
   const icoBuffer = await getFaviconIco();
