@@ -4,7 +4,7 @@ import "@fontsource/fira-code";
 import { ViewTransitions } from "astro:transitions";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
-import { AUTHOR } from "@/consts";
+import { AUTHOR, SITE } from "@/consts";
 import { getFavicon, getOgImage } from "@/images";
 
 interface Props {
@@ -23,7 +23,7 @@ if (image !== undefined && imageDescription === undefined) {
   throw new Error("Image description is required when image is provided");
 }
 
-const ogImage = image !== undefined ? await getOgImage(image) : undefined;
+const ogImage = await getOgImage(image);
 const appleTouchIcon = await getFavicon(180);
 const favicon = await getFavicon(180);
 ---
@@ -31,6 +31,7 @@ const favicon = await getFavicon(180);
 <html lang="en-US">
   <head>
     <meta charset="utf-8" />
+    <title>{title}</title>
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link
@@ -45,29 +46,25 @@ const favicon = await getFavicon(180);
     <meta name="author" content={AUTHOR.name} />
     <meta name="description" content={description} />
     <meta name="keywords" content={(keywords ?? []).join(", ")} />
-    {
-      ogImage !== undefined && (
-        <>
-          <meta property="og:image" content={ogImage.src} />
-          <meta
-            property="og:image:width"
-            content={ogImage.attributes.width.toString()}
-          />
-          <meta
-            property="og:image:height"
-            content={ogImage.attributes.height.toString()}
-          />
-          <meta
-            property="og:image:type"
-            content={`image/${ogImage.options.format}`}
-          />
-          <meta property="og:image:alt" content={imageDescription} />
-          <meta name="twitter:card" content="summary_large_image" />
-        </>
-      )
-    }
+    <meta property="og:title" content={title} />
+    <meta property="og:site_name" content={SITE.domain} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage.src} />
+    <meta
+      property="og:image:width"
+      content={ogImage.attributes.width.toString()}
+    />
+    <meta
+      property="og:image:height"
+      content={ogImage.attributes.height.toString()}
+    />
+    <meta
+      property="og:image:type"
+      content={`image/${ogImage.options.format}`}
+    />
+    <meta property="og:image:alt" content={imageDescription ?? AUTHOR.name} />
+    <meta name="twitter:card" content="summary_large_image" />
     <ViewTransitions />
-    <title>{title}</title>
   </head>
 
   <body
