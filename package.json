@@ -17,7 +17,7 @@
     "prebuild": "npm run fetch && npm run build-blog && npm run build-photos",
     "lint": "npx eslint .",
     "dev": "astro dev",
-    "build": "astro --version && npm run lint && astro check --minimumFailingSeverity=warning && astro build",
+    "build": "node --version && npm run lint && astro check --minimumFailingSeverity=warning && astro build",
     "preview": "astro preview",
     "astro": "astro",
     "tsx": "tsx"
