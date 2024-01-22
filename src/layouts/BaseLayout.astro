@@ -14,9 +14,10 @@ interface Props {
   keywords?: string[];
   image?: ImageMetadata;
   imageDescription?: string;
+  date?: Date;
 }
 
-const { tab, title, description, keywords, image, imageDescription } =
+const { tab, title, description, keywords, image, imageDescription, date } =
   Astro.props;
 
 if (image !== undefined && imageDescription === undefined) {
@@ -67,6 +68,17 @@ const favicon = await getFavicon(180);
           />
           <meta property="og:image:alt" content={imageDescription} />
           <meta name="twitter:card" content="summary_large_image" />
+        </>
+      )
+    }
+    {
+      date !== undefined && (
+        <>
+          <meta
+            property="article:published_time"
+            content={date.toISOString()}
+          />
+          <meta property="article:author" content={AUTHOR.name} />
         </>
       )
     }
