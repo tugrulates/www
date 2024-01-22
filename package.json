@@ -38,6 +38,7 @@
     "@types/react-dom": "^18.2.15",
     "astro": "^4.2.1",
     "astro-remark-description": "^1.1.1",
+    "astro-robots-txt": "^1.0.0",
     "exif": "^0.6.0",
     "exiftool-vendored": "^23.7.0",
     "glob": "^10.3.10",

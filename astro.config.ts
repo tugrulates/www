@@ -1,19 +1,43 @@
 import { SITE } from "./src/consts";
 import { defineConfig } from "astro/config";
+import mdx from "@astrojs/mdx";
+import react from "@astrojs/react";
 import rehypeExternalLinks from "rehype-external-links";
 import remarkDescription from "astro-remark-description";
-import react from "@astrojs/react";
+import robotsTxt from "astro-robots-txt";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
-import mdx from "@astrojs/mdx";
 
 // https://astro.build/config
 export default defineConfig({
   site: SITE.url,
   markdown: {
-    rehypePlugins: [[rehypeExternalLinks, { rel: ["nofollow"] }]],
+    rehypePlugins: [
+      [
+        rehypeExternalLinks,
+        {
+          rel: ["nofollow"],
+        },
+      ],
+    ],
     remarkPlugins: [[remarkDescription, {}]],
   },
   prefetch: true,
-  integrations: [sitemap(), tailwind(), react(), mdx()],
+  integrations: [
+    mdx(),
+    react(),
+    robotsTxt({
+      policy: [
+        {
+          userAgent: "*",
+          allow: "/",
+          disallow: "/test",
+        },
+      ],
+    }),
+    sitemap({
+      filter: (page) => page !== `${SITE.url}/test/`,
+    }),
+    tailwind(),
+  ],
 });
