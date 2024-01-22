@@ -47,6 +47,7 @@ const cover = await getCover(page);
   tab={page.data.tab ?? "blog"}
   title={page.data.title}
   description={remarkPluginFrontmatter.description}
+  keywords={page.data.tags}
   image={cover.data.wide}
   imageDescription={cover.data.description}
   date={page.data.date}

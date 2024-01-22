@@ -79,6 +79,9 @@ const favicon = await getFavicon(180);
             content={date.toISOString()}
           />
           <meta property="article:author" content={AUTHOR.name} />
+          {keywords?.map((keyword) => (
+            <meta property="article:tag" content={keyword} />
+          ))}
         </>
       )
     }

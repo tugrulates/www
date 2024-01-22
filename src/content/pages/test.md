@@ -2,6 +2,7 @@
 tab: test
 title: Test Page
 cover: london-figaro
+tags: [test]
 ---
 
 Testing build and formatting with this post. The paragraph is intentionally kept longer than seemingly necessary. This is needed to show how the summaries would look like.
