@@ -4,7 +4,17 @@ import { DIMENSIONS } from "@consts";
 
 const { image, className } = Astro.props;
 
-const [square, cover] = await Promise.all([
+const [rectangle, square] = await Promise.all([
+  Promise.all(
+    [1, 2, 3, 4].map(async (scale) =>
+      getImage({
+        src: image.data.rectangle,
+        format: "webp",
+        width: DIMENSIONS.desktop_cover_width * scale,
+        height: DIMENSIONS.desktop_cover_height * scale,
+      }),
+    ),
+  ),
   Promise.all(
     [1, 2, 3, 4].map(async (scale) =>
       getImage({
@@ -15,23 +25,13 @@ const [square, cover] = await Promise.all([
       }),
     ),
   ),
-  Promise.all(
-    [1, 2, 3, 4].map(async (scale) =>
-      getImage({
-        src: image.data.cover,
-        format: "webp",
-        width: DIMENSIONS.desktop_cover_width * scale,
-        height: DIMENSIONS.desktop_cover_height * scale,
-      }),
-    ),
-  ),
 ]);
 ---
 
 <picture class="object-contain">
   <source
     media="(orientation: landscape)"
-    srcset={`${cover[0].src} 1x, ${cover[1].src} 2x, ${cover[2].src} 3x, ${cover[3].src} 4x`}
+    srcset={`${rectangle[0].src} 1x, ${rectangle[1].src} 2x, ${rectangle[2].src} 3x, ${rectangle[3].src} 4x`}
   />
   <source
     media={`(max-width: ${DIMENSIONS.mobile_cover_size - 1}px)`}
@@ -39,7 +39,7 @@ const [square, cover] = await Promise.all([
   />
   <source
     media={`(min-width: ${DIMENSIONS.mobile_cover_size}px)`}
-    srcset={`${cover[0].src} 1x, ${cover[1].src} 2x, ${cover[2].src} 3x, ${cover[3].src} 4x`}
+    srcset={`${rectangle[0].src} 1x, ${rectangle[1].src} 2x, ${rectangle[2].src} 3x, ${rectangle[3].src} 4x`}
   />
   <img
     class:list={[

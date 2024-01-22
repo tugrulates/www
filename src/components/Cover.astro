@@ -41,12 +41,6 @@ const {
         <div class="grow"></div>
         <div class="flex h-full flex-col justify-between">
           <PhotoViewer client:only>
-            <!-- <Icon
-              slot="icon"
-              src="/icons/link-expand.svg"
-              alt="Expand image"
-              class="group-hover:scale-100"
-            /> -->
             <CoverButton
               slot="button"
               alt="Expand image"
@@ -54,7 +48,7 @@ const {
             />
             <Image
               slot="image"
-              src={image.data.cover}
+              src={image.data.rectangle}
               alt={image.data.description}
               width={image.data.width}
               height={image.data.height}
@@ -69,13 +63,17 @@ const {
               </a>
             )
           }
-          <a
-            aria-label={action_alt}
-            href={action_href}
-            download={action_download}
-          >
-            <CoverButton alt={action_alt} icon={action_icon} />
-          </a>
+          {
+            action_href && (
+              <a
+                aria-label={action_alt}
+                href={action_href}
+                download={action_download}
+              >
+                <CoverButton alt={action_alt} icon={action_icon} />
+              </a>
+            )
+          }
         </div>
       </div>
     </div>

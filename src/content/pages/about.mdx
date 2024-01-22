@@ -1,11 +1,13 @@
 ---
 tab: about
-title: About me
-cover: sphere-of-perfection
+title: "About"
+cover:
+  rectangle: ./rijksmuseum-cover.jpg
+  square: ./rijksmuseum-square.jpg
+  description: Me at Rijksmuseum library in Amsterdam.
 ---
 
 import { Image } from "astro:assets";
-import { AUTHOR } from "../../consts";
 import Icon from "../../components/Icon.astro";
 import logoMetu from "./logo-metu.svg";
 import logoTubitak from "./logo-tubitak.svg";
@@ -14,48 +16,18 @@ import logoMeta from "./logo-meta.svg";
 import logoRoka from "./logo-roka.svg";
 import c64 from "./c64.webp";
 
-## Hello and Welcome!
+Hello! I am Tugrul Ates – an enthusiast for technology, arts, and everything in between. This is my website where I publish what I want to share with the world.
 
-I am {AUTHOR.name} – a technologist, an artist, an explorer, and an enthusiast of the wonders that lie in between. Maybe we know each other already, or perhaps you are here to learn more about me. Either way, I am glad you are here.
+My first taste of programming was in 1994 on a Commodore 64, and I have been manipulating bytes and pixels ever since. I still have the same excitement and fun that I had back then.
 
-|                              Geeky Tugrul                               |                           Dreamy Tugrul                           |
-| :---------------------------------------------------------------------: | :---------------------------------------------------------------: |
-| ![A photograph of me in a bar with thick framed glasses.](./ankara.jpg) | ![A photograph of me sitting by the Pacific Ocean.](./carmel.jpg) |
+I worked at Google at Meta between 2011 and 2021, as a software engineer and a manager. Among a breadth of other things, I am proud of the improvements I made to the Google Play and Facebook apps. Today, I am the founder of Roka Software, which aims to increase digital productivity for everyone. I aim to write about these experiences in this space.
 
-## My story
+Digital art, animations, and photography give me joy. In person, you will find me giving long tirades about the spreadsheets I create. I also like snowboarding, scuba diving, yoga, board games, and cats.
 
-My life is fueled by a deep-seated belief in the transformative power of technology – a power that, when harnessed, has the potential to significantly enhance human lives. I am delighted to dedicate my life to being a part of this transformation.
-
-A fundamental pillar of the human experience is creating **art**, a mirror reflecting the models of our surroundings and emotions. Art and technology propose a fascinating fusion for me. I find joy in their convergence, ever since I put my crayons away and started drawing pixels on my CRT television in the late 1980s.
-
-Our need for **connection**, to multiply our joy and divide our grief with other people, is another core tenet of humanity. Technology has always redefined the boundaries of connection. However, it was during the 1990s, growing up in the _banlieues_ of Ankara, I have witnessed like-minded people from around the world visiting my home, first at 28.8 kb/s, later at the speed of light. This is not just inspiring to me, I want all the remaining barriers eliminated for humans to find solace in each other.
-
-The equation for **productivity** has changed forever in the 2000s, and I was a witness to the event. Driven by a desire to awe others with technology, I played with neural networks as they were about to make a comeback, scraped Wikipedia to build natural language models, and built algorithms to watch and judge our movements through cameras.
-
-Finally, I have a firm belief that **prosperity** can be generated through technology, on a scale previously unimaginable. It democratizes opportunities, breaks down barriers to entry, and broadens the participation in economic activity. Through my work, I have had the privilege of contributing to the technological leap of the 2010s, bringing the web, e-commerce, and global entertainment to billions of smartphones and their humans.
-
-The current decade, and its meaning for humanity, makes me excited. I am committing to be a part of our shared story by building companies and technologies that advance the core needs of all humans. I cannot wait to connect and exchange ideas with other technologists, anywhere, and on this very website.
+I get along with like-minded people, even if they are dog people, so you should feel free to reach out!
 
 <img
   src={c64.src}
   alt="Commodore 64 BASIC screen that shows BASIC code for printing the text TUGRUL ten times."
   width={720}
 />
-
-## My career
-
-I got my first taste of programming at the age of 9, on a Commodore 64. My cousin wrote a BASIC program that printed my name on the screen, and I was hooked. I spent the next few years writing programs that drew shapes on the screen, played music, and even made tax returns.
-
-Aged {AUTHOR.age.year} years, {AUTHOR.age.month} months, and {AUTHOR.age.day} days, I am still spending a good chunk of time writing code. Even if the scale of the work I do has changed tremendously, I still have the same fun I had when I was 9.
-
-You will find a more detailed account of my career on [my LinkedIn profile](https://www.linkedin.com/in/tugrulates/). Feel to send a connection request! Here, I will share the main milestones.
-
-|                             Where?                             | What?                                                                                                                                                                                                                                                    |
-| :------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|    <Icon src={logoMetu} alt="METU logo" className="w-24" />    | I studied electronics engineering at **Middle East Technical University** from _2003 to 2007_, and earned a master's degree. I did research on recommendation systems, computer vision, and multimedia indexing.                                         |
-| <Icon src={logoTubitak} alt="TUBITAK logo" className="w-24" /> | I was a researcher at **TUBITAK**, the government science and technology agency in Turkey, from 2006 to 2011. I built large scale TV and radio censorship software. my options were either that or building military weapons until I could leave Ankara. |
-|  <Icon src={logoGoogle} alt="Google logo" className="w-24" />  | I was at **Google** as a software engineer from 2011 to 2017. I designed app discovery features in the Play Store and built Stadia up until it was launched to beta.                                                                                     |
-|    <Icon src={logoMeta} alt="Meta logo" className="w-24" />    | I was at **Meta** from 2017 to 2021, first as an engineer and later as a manager. The Facebook app hosts many features, is more organized, faster, and more accessible due to countless improvements I and the team I supported have added.              |
-|    <Icon src={logoRoka} alt="Roka logo" className="w-24" />    | I started a software company in Amsterdam, Netherlands in 2023 to build products aligned with my vision of the world outlined here.                                                                                                                      |
-
-I enjoy and take pride in what I do, and I am always happy to find like-minded souls to collaborate with. If you are one, please do not hesitate to reach out!

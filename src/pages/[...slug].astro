@@ -13,6 +13,19 @@ export async function getStaticPaths() {
   }));
 }
 
+export async function getCover(page: any) {
+  if (
+    "collection" in page.data.cover &&
+    page.data.cover.collection === "photos"
+  ) {
+    const entry = await getEntry(page.data.cover);
+    if (!entry) {
+      throw new Error(`Photo cover not found: ${page.data.cover.id}`);
+    }
+  }
+  return { data: page.data.cover };
+}
+
 const { page } = Astro.props;
 const posts = (
   await getCollection("posts", ({ data }) => {
@@ -21,10 +34,7 @@ const posts = (
 ).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 const index = posts.findIndex((other) => other.id === page.id);
 const { Content, remarkPluginFrontmatter } = await page.render();
-const cover = await getEntry(page.data.cover);
-if (!cover) {
-  throw new Error(`Cover not found for page ${page.id}`);
-}
+const cover = await getCover(page);
 ---
 
 <BaseLayout
@@ -39,7 +49,7 @@ if (!cover) {
       next={index >= 0 &&
         index < posts.length - 1 &&
         `./${posts[index + 1].slug}`}
-      action_href={`/photography/${cover.id}`}
+      action_href={"id" in cover ? `/photography/${cover.id}` : undefined}
       action_icon="/icons/link-image.svg"
       action_alt="Image details"
     />

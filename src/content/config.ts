@@ -2,12 +2,19 @@ import { defineCollection, reference, z } from "astro:content";
 
 const pages = defineCollection({
   type: "content",
-  schema: z.object({
-    tab: z.string(),
-    title: z.string(),
-    date: z.date().optional(),
-    cover: reference("photos"),
-  }),
+  schema: ({ image }) =>
+    z.object({
+      tab: z.string(),
+      title: z.string(),
+      date: z.date().optional(),
+      cover: reference("photos").or(
+        z.object({
+          rectangle: image(),
+          square: image(),
+          description: z.string(),
+        }),
+      ),
+    }),
 });
 
 const posts = defineCollection({
@@ -26,7 +33,7 @@ const photos = defineCollection({
   type: "data",
   schema: ({ image }) =>
     z.object({
-      cover: image(),
+      rectangle: image(),
       square: image(),
       title: z.string(),
       description: z.string(),

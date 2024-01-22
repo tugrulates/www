@@ -37,7 +37,7 @@ const formatted_date = photo.data.date.toLocaleDateString("en-US", {
       next={index >= 0 &&
         index < photos.length - 1 &&
         `./${photos[index + 1].id}`}
-      action_href={photo.data.cover.src}
+      action_href={photo.data.rectangle.src}
       action_download={`${photo.id}.jpg`}
       action_icon="/icons/link-download.svg"
       action_alt="Download photo in full size"
