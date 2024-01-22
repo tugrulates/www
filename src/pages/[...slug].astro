@@ -38,7 +38,7 @@ export async function getCover(
 const { page } = Astro.props;
 const posts = (
   await getCollection("posts", ({ data }) => {
-    return !Boolean(data.draft);
+    return !data.draft;
   })
 ).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 const index = posts.findIndex((other) => other.id === page.id);
