@@ -141,7 +141,7 @@ flowchart LR
 
 [^2]: Hey, you found me!
 
-![](./ankara.jpg)
+![](./rijksmuseum-square.jpg)
 
 ### Header 3
 

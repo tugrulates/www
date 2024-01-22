@@ -4,7 +4,7 @@ const { title, date, className } = Astro.props;
 
 <article
   class:list={[
-    "prose prose-stone w-full max-w-none px-2 pb-2 dark:prose-invert md:prose-lg prose-a:decoration-stone-500/50 hover:prose-a:decoration-black prose-img:m-0 hover:dark:prose-a:decoration-white sm:prose-img:rounded-xl",
+    "prose prose-stone w-full max-w-none px-2 dark:prose-invert md:prose-lg prose-a:decoration-stone-500/50 hover:prose-a:decoration-black hover:dark:prose-a:decoration-white",
     className,
   ]}
 >
@@ -39,8 +39,14 @@ const { title, date, className } = Astro.props;
     article > :global(ol) {
       @apply pl-12;
     }
-    article > :global(p) > ::global(img) {
-      @apply py-2;
+    article > :global(p):has(> img) {
+      @apply px-0;
+    }
+    article :global(img) {
+      @apply m-0;
+    }
+    article > :global(p) > :global(img) {
+      @apply rounded-xl;
     }
     article > :global(table) {
       @apply overflow-clip sm:rounded-xl;
@@ -48,7 +54,7 @@ const { title, date, className } = Astro.props;
     article > :global(table) > ::global(thead) > ::global(tr) > ::global(th),
     article > :global(table) > ::global(tbody) > ::global(tr) > ::global(td),
     article > :global(table) > ::global(tbody) > ::global(tr) > ::global(th) {
-      @apply p-4 align-middle;
+      @apply p-4 align-top;
     }
     article > :global(table) > ::global(thead) > ::global(tr),
     article > :global(table) > ::global(tbody) > ::global(tr) {
@@ -66,11 +72,18 @@ const { title, date, className } = Astro.props;
     article > :global(lite-youtube.lyt-activated) {
       @apply !bg-none;
     }
-    :global(article) :global(a::after) {
-      @apply ml-px inline-block h-3 w-3 bg-stone-500 align-text-top hover:bg-black;
+    article :global(a::after) {
+      @apply -mr-3 ml-px inline-block h-3 w-3 whitespace-pre bg-stone-500 align-text-top hover:bg-black;
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
     }
     :global(.dark) article :global(a::after) {
       @apply hover:bg-white;
+    }
+    article :global(a[rel="nofollow"]),
+    article :global(a[href$=".pdf"]),
+    article :global(a[href$=".zip"]) {
+      @apply inline-block pr-3;
     }
     article :global(a[rel="nofollow"]::after) {
       content: "";

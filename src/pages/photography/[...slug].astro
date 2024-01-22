@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import Article from "@components/Article.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import Cover from "@components/Cover.astro";
+import { AUTHOR, SITE } from "@consts";
 
 export async function getStaticPaths() {
   const photos = await getCollection("photos");
@@ -30,7 +31,7 @@ const formatted_date = photo.data.date.toLocaleDateString("en-US", {
   description={photo.data.description}
   keywords={photo.data.keywords}
 >
-  <div class="flex flex-col items-center gap-12 lg:gap-20">
+  <div class="flex flex-col items-center gap-12 lg:gap-24">
     <Cover
       image={photo}
       previous={index > 0 && `./${photos[index - 1].id}`}
@@ -45,6 +46,7 @@ const formatted_date = photo.data.date.toLocaleDateString("en-US", {
     />
     <Article title={photo.data.title} className="">
       <table>
+        <tr><th>Description</th><td>{photo.data.description}</td></tr>
         <tr><th>Date</th><td>{formatted_date}</td></tr>
         <tr><th>Location</th><td>{photo.data.location}</td></tr>
         <tr><th>City</th><td>{photo.data.city}</td></tr>
@@ -53,19 +55,16 @@ const formatted_date = photo.data.date.toLocaleDateString("en-US", {
         <tr><th>Camera</th><td>{photo.data.camera}</td></tr>
         <tr><th>Lens</th><td>{photo.data.lens}</td></tr>
         <tr><th>Editing</th><td>{photo.data.editing}</td></tr>
-        <tr
-          ><th>License</th><td
-            ><a href={photo.data.license_url}>{photo.data.license_name}</a></td
-          ></tr
-        >
-        <tr
-          ><th>Attribution</th><td
-            ><a href={photo.data.attribution_url}
-              >{photo.data.attribution_name}</a
-            ></td
-          ></tr
-        >
       </table>
+      <p class="text-xs">
+        This photograph is provided under a <a href={photo.data.license}
+          >Creative Commons Attribution 4.0 International License (CC BY 4.0)</a
+        >. You are free to share, copy, distribute, and transmit the work or
+        adapt and make commercial use of it, provided that you attribute the
+        work to {AUTHOR.name} and this website
+        <a href={SITE.url}>{SITE.domain}</a>. For any reuse or distribution, you
+        must make clear to others the license terms of this work.
+      </p>
     </Article>
   </div>
 </BaseLayout>

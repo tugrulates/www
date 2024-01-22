@@ -43,7 +43,7 @@ const cover = await getCover(page);
   title={page.data.title}
   description={remarkPluginFrontmatter.description}
 >
-  <div class="flex flex-col items-center gap-4 sm:gap-12 lg:gap-20">
+  <div class="flex flex-col items-center gap-4 sm:gap-12 lg:gap-24">
     <Cover
       image={cover}
       previous={index > 0 && `./${posts[index - 1].slug}`}

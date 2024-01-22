@@ -8,8 +8,6 @@ const CONTENT_DIR = "src/content/photos";
 
 export interface PhotoTags extends Tags {
   License?: string;
-  AttributionName?: string;
-  AttributionURL?: string;
 }
 
 interface PhotoData {
@@ -26,10 +24,7 @@ interface PhotoData {
   camera: string;
   lens: string;
   editing: string;
-  license_name: string;
-  license_url: string;
-  attribution_name: string;
-  attribution_url: string;
+  license: string;
 }
 
 async function extractMetadata(photo: string) {
@@ -54,10 +49,7 @@ async function extractMetadata(photo: string) {
       camera: `${tags.Make ?? ""} ${tags.Model ?? ""}`.replace(/\s+/g, " "),
       lens: tags.LensModel ?? tags.Lens ?? "",
       editing: "Affinity Photo 2",
-      license_name: "CC BY 4.0",
-      license_url: tags.License ?? "",
-      attribution_name: tags.AttributionName ?? "",
-      attribution_url: tags.AttributionURL ?? "",
+      license: tags.License ?? "",
     };
     const json = JSON.stringify(data, null, 2);
     fs.writeFile(`${CONTENT_DIR}/${photo}.json`, json);

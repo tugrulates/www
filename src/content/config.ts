@@ -46,10 +46,7 @@ const photos = defineCollection({
       camera: z.string(),
       lens: z.string(),
       editing: z.string(),
-      license_name: z.string(),
-      license_url: z.string().url(),
-      attribution_name: z.string(),
-      attribution_url: z.string().url(),
+      license: z.string().url(),
     }),
 });
 

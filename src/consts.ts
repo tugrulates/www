@@ -1,6 +1,7 @@
 export const SITE = {
   title: "Tugrul Ates",
   description: "Tugrul Ates's personal website",
+  domain: "www.tugrulates.com",
   url: "https://www.tugrulates.com",
 };
 
