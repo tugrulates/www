@@ -13,7 +13,7 @@ export interface PhotoTags extends Tags {
 }
 
 interface PhotoData {
-  rectangle: string;
+  wide: string;
   square: string;
   title: string;
   description: string;
@@ -33,10 +33,10 @@ interface PhotoData {
 }
 
 async function extractMetadata(photo: string) {
-  const cover = `${IMAGES_DIR}/${photo}/cover.jpg`;
+  const cover = `${IMAGES_DIR}/${photo}/wide.jpg`;
   return exiftool.read<PhotoTags>(cover).then((tags) => {
     const data: PhotoData = {
-      rectangle: `../../photos/${photo}/cover.jpg`,
+      wide: `../../photos/${photo}/wide.jpg`,
       square: `../../photos/${photo}/square.jpg`,
       title: tags.Headline ?? "",
       description: tags.ImageDescription ?? "",
@@ -64,7 +64,7 @@ async function extractMetadata(photo: string) {
   });
 }
 
-const covers = glob.sync(`${IMAGES_DIR}/*/cover.jpg`);
+const covers = glob.sync(`${IMAGES_DIR}/*/wide.jpg`);
 const photos = covers.map((cover) => {
   const photo = path.dirname(cover).split("/").pop();
   return photo;

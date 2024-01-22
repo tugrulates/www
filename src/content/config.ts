@@ -9,7 +9,7 @@ const pages = defineCollection({
       date: z.date().optional(),
       cover: reference("photos").or(
         z.object({
-          rectangle: image(),
+          wide: image(),
           square: image(),
           description: z.string(),
         }),
@@ -33,7 +33,7 @@ const photos = defineCollection({
   type: "data",
   schema: ({ image }) =>
     z.object({
-      rectangle: image(),
+      wide: image(),
       square: image(),
       title: z.string(),
       description: z.string(),
