@@ -6,11 +6,11 @@ import ico from "sharp-ico";
 import avatar from "@/images/me.png";
 
 export async function getOgImage(
-  image?: ImageMetadata,
+  image: ImageMetadata,
 ): Promise<GetImageResult> {
   return await getImage({
-    src: image ?? avatar,
-    width: Math.min(3200, image?.width ?? avatar.width),
+    src: image,
+    width: Math.min(3200, image.width),
     format: "jpg",
   });
 }

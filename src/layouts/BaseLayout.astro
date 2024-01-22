@@ -23,7 +23,7 @@ if (image !== undefined && imageDescription === undefined) {
   throw new Error("Image description is required when image is provided");
 }
 
-const ogImage = await getOgImage(image);
+const ogImage = image !== undefined ? await getOgImage(image) : undefined;
 const appleTouchIcon = await getFavicon(180);
 const favicon = await getFavicon(180);
 ---
@@ -49,21 +49,27 @@ const favicon = await getFavicon(180);
     <meta property="og:title" content={title} />
     <meta property="og:site_name" content={SITE.domain} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={ogImage.src} />
-    <meta
-      property="og:image:width"
-      content={ogImage.attributes.width.toString()}
-    />
-    <meta
-      property="og:image:height"
-      content={ogImage.attributes.height.toString()}
-    />
-    <meta
-      property="og:image:type"
-      content={`image/${ogImage.options.format}`}
-    />
-    <meta property="og:image:alt" content={imageDescription ?? AUTHOR.name} />
-    <meta name="twitter:card" content="summary_large_image" />
+    {
+      ogImage !== undefined && (
+        <>
+          <meta property="og:image" content={ogImage.src} />
+          <meta
+            property="og:image:width"
+            content={ogImage.attributes.width.toString()}
+          />
+          <meta
+            property="og:image:height"
+            content={ogImage.attributes.height.toString()}
+          />
+          <meta
+            property="og:image:type"
+            content={`image/${ogImage.options.format}`}
+          />
+          <meta property="og:image:alt" content={imageDescription} />
+          <meta name="twitter:card" content="summary_large_image" />
+        </>
+      )
+    }
     <ViewTransitions />
   </head>
 
