@@ -5,7 +5,7 @@ import { ViewTransitions } from "astro:transitions";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import { AUTHOR } from "@/consts";
-import { getFavicon } from "@/favicon";
+import { getFavicon, getOgImage } from "@/images";
 
 interface Props {
   tab: string;
@@ -19,6 +19,11 @@ interface Props {
 const { tab, title, description, keywords, image, imageDescription } =
   Astro.props;
 
+if (image !== undefined && imageDescription === undefined) {
+  throw new Error("Image description is required when image is provided");
+}
+
+const ogImage = image !== undefined ? await getOgImage(image) : undefined;
 const appleTouchIcon = await getFavicon(180);
 const favicon = await getFavicon(180);
 ---
@@ -41,14 +46,23 @@ const favicon = await getFavicon(180);
     <meta name="description" content={description} />
     <meta name="keywords" content={(keywords ?? []).join(", ")} />
     {
-      image !== undefined && (
+      ogImage !== undefined && (
         <>
-          <meta property="og:image" content={image.src} />
-          <meta property="og:image:width" content={image.width.toString()} />
-          <meta property="og:image:height" content={image.height.toString()} />
-          <meta property="og:image:type" content={`image/${image.format}`} />
+          <meta property="og:image" content={ogImage.src} />
+          <meta
+            property="og:image:width"
+            content={ogImage.attributes.width.toString()}
+          />
+          <meta
+            property="og:image:height"
+            content={ogImage.attributes.height.toString()}
+          />
+          <meta
+            property="og:image:type"
+            content={`image/${ogImage.options.format}`}
+          />
           <meta property="og:image:alt" content={imageDescription} />
-          <meta name="twitter:image" content={image.src} />
+          <meta name="twitter:card" content="summary_large_image" />
         </>
       )
     }
@@ -77,5 +91,7 @@ const favicon = await getFavicon(180);
     >
       <Footer />
     </footer>
+
+    @/images
   </body>
 </html>
