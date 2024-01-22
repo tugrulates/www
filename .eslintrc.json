@@ -26,7 +26,10 @@
     },
     {
       "files": ["*.tsx"],
-      "extends": ["prettier", "plugin:react/recommended"]
+      "extends": ["prettier", "plugin:react/recommended"],
+      "rules": {
+        "react/react-in-jsx-scope": "off"
+      }
     }
   ],
   "parserOptions": {

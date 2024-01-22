@@ -5,13 +5,13 @@ interface State {
   dark: boolean;
 }
 
-function toggleTheme(theme: State, setTheme: any) {
+function toggleTheme(theme: State, setTheme: any): void {
   const newTheme = { dark: !theme.dark };
   setTheme(newTheme);
   localStorage.setItem("theme", JSON.stringify(newTheme));
 }
 
-export default function ThemeToggle() {
+export default function ThemeToggle(): JSX.Element {
   const [theme, setTheme] = useState({ dark: true });
   const [isMounted, setIsMounted] = useState(false);
 
@@ -33,7 +33,9 @@ export default function ThemeToggle() {
   return (
     <Switch
       checked={theme.dark}
-      onChange={() => toggleTheme(theme, setTheme)}
+      onChange={() => {
+        toggleTheme(theme, setTheme);
+      }}
       className="group h-12 w-12 transition-transform hover:scale-110"
     >
       <div
