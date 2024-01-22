@@ -6,7 +6,7 @@ import Post from "@components/Post.astro";
 
 const posts = (
   await getCollection("posts", ({ data }) => {
-    return !data.draft;
+    return Boolean(!data.draft);
   })
 ).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 const covers = Object.fromEntries(
