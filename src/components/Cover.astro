@@ -5,21 +5,36 @@ import CoverImage from "@components/CoverImage.astro";
 import CoverButton from "@components/CoverButton.astro";
 import PhotoViewer from "@components/PhotoViewer.tsx";
 
+export interface CoverData {
+  id?: string;
+  data: {
+    wide: ImageMetadata;
+    square: ImageMetadata;
+    description: string;
+  };
+}
+
+interface Props {
+  image: CoverData;
+  previous?: string;
+  next?: string;
+  actionHref?: string;
+  actionDownload?: string;
+  actionIcon?: string;
+  actionAlt?: string;
+}
 const {
   image,
   previous,
   next,
-  className,
-  action_href,
-  action_download,
-  action_icon,
-  action_alt,
+  actionHref,
+  actionDownload,
+  actionIcon,
+  actionAlt,
 } = Astro.props;
 ---
 
-<div
-  class:list={["group relative z-50 w-full max-sm:-mx-4 lg:pt-12", className]}
->
+<div class="group relative z-50 w-full max-sm:-mx-4 lg:pt-12">
   <div
     class="aspect-video w-full bg-stone-200/20 shadow shadow-stone-800/20 max-sm:aspect-square sm:rounded-2xl lg:scale-125"
   >
@@ -32,7 +47,7 @@ const {
         class="absolute inset-2 flex flex-row gap-2 max-sm:items-end sm:items-center"
       >
         {
-          previous && (
+          previous !== undefined && (
             <a aria-label="Previous" href={previous}>
               <CoverButton alt="Previous" icon="/icons/link-previous.svg" />
             </a>
@@ -50,27 +65,27 @@ const {
               slot="image"
               src={image.data.wide}
               alt={image.data.description}
-              width={image.data.width}
-              height={image.data.height}
+              width={image.data.wide.width}
+              height={image.data.wide.height}
               format="jpg"
               class="touch-auto"
             />
           </PhotoViewer>
           {
-            next && (
+            next !== undefined && (
               <a aria-label="Next" href={next}>
                 <CoverButton alt="Next" icon="/icons/link-next.svg" />
               </a>
             )
           }
           {
-            action_href && (
+            actionHref !== undefined && (
               <a
-                aria-label={action_alt}
-                href={action_href}
-                download={action_download}
+                aria-label={actionAlt}
+                href={actionHref}
+                download={actionDownload}
               >
-                <CoverButton alt={action_alt} icon={action_icon} />
+                <CoverButton alt={actionAlt} icon={actionIcon} />
               </a>
             )
           }

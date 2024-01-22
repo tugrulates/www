@@ -9,9 +9,11 @@ const pages = defineCollection({
       date: z.date().optional(),
       cover: reference("photos").or(
         z.object({
-          wide: image(),
-          square: image(),
-          description: z.string(),
+          data: z.object({
+            wide: image(),
+            square: image(),
+            description: z.string(),
+          }),
         }),
       ),
     }),

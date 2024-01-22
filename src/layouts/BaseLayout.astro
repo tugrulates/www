@@ -8,10 +8,10 @@ import { AUTHOR } from "@consts";
 import { getFavicon } from "@favicon";
 
 const { tab, title, description, keywords } = Astro.props;
-if (!title) {
+if (title === undefined) {
   throw new Error("Title is required for all pages.");
 }
-if (!description) {
+if (description === undefined) {
   throw new Error("Description is required for all pages.");
 }
 

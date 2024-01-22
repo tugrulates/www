@@ -1,14 +1,15 @@
 ---
-const { text, href, alt, selected, className } = Astro.props;
+interface Props {
+  href: string;
+  text: string;
+  selected: boolean;
+}
+const { text, href, selected } = Astro.props;
 ---
 
 <a
-  aria-label={alt}
   href={href}
-  class:list={[
-    "group z-10 h-full bg-stone-300 shadow shadow-stone-900/20 ring-inset ring-stone-500/50 hover:ring-1 dark:bg-stone-700 sm:rounded-t-3xl",
-    className,
-  ]}
+  class="group z-10 h-full grow bg-stone-300 shadow shadow-stone-900/20 ring-inset ring-stone-500/50 hover:ring-1 dark:bg-stone-700 sm:rounded-t-3xl"
   transition:persist
   transition:name={`tab-${href}-${selected ? "selected" : "unselected"}}`}
   transition:animate="none"

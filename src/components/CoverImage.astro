@@ -5,24 +5,26 @@ import { DIMENSIONS } from "@consts";
 const { image, className } = Astro.props;
 
 const [wide, square] = await Promise.all([
-  Promise.all(
-    [1, 2, 3, 4].map(async (scale) =>
-      getImage({
-        src: image.data.wide,
-        format: "webp",
-        width: DIMENSIONS.desktop_cover_width * scale,
-        height: DIMENSIONS.desktop_cover_height * scale,
-      }),
+  await Promise.all(
+    [1, 2, 3, 4].map(
+      async (scale) =>
+        await getImage({
+          src: image.data.wide,
+          format: "webp",
+          width: DIMENSIONS.desktop_cover_width * scale,
+          height: DIMENSIONS.desktop_cover_height * scale,
+        }),
     ),
   ),
-  Promise.all(
-    [1, 2, 3, 4].map(async (scale) =>
-      getImage({
-        src: image.data.square,
-        format: "webp",
-        width: DIMENSIONS.mobile_cover_size * scale,
-        height: DIMENSIONS.mobile_cover_size * scale,
-      }),
+  await Promise.all(
+    [1, 2, 3, 4].map(
+      async (scale) =>
+        await getImage({
+          src: image.data.square,
+          format: "webp",
+          width: DIMENSIONS.mobile_cover_size * scale,
+          height: DIMENSIONS.mobile_cover_size * scale,
+        }),
     ),
   ),
 ]);

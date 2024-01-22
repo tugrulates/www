@@ -27,9 +27,9 @@ interface PhotoData {
   license: string;
 }
 
-async function extractMetadata(photo: string) {
+async function extractMetadata(photo: string): Promise<void> {
   const cover = `${IMAGES_DIR}/${photo}/wide.jpg`;
-  return exiftool.read<PhotoTags>(cover).then((tags) => {
+  await exiftool.read<PhotoTags>(cover).then(async (tags) => {
     const data: PhotoData = {
       wide: `../../photos/${photo}/wide.jpg`,
       square: `../../photos/${photo}/square.jpg`,
@@ -52,34 +52,36 @@ async function extractMetadata(photo: string) {
       license: tags.License ?? "",
     };
     const json = JSON.stringify(data, null, 2);
-    fs.writeFile(`${CONTENT_DIR}/${photo}.json`, json);
+    await fs.writeFile(`${CONTENT_DIR}/${photo}.json`, json);
   });
 }
 
 const covers = glob.sync(`${IMAGES_DIR}/*/wide.jpg`);
 const photos = covers.map((cover) => {
   const photo = path.dirname(cover).split("/").pop();
+  if (photo == null) {
+    throw new Error("Could not get photo name");
+  }
   return photo;
 });
 
 await fs
   .stat(CONTENT_DIR)
-  .catch((error) => {
+  .catch(async (error) => {
     if (error.code === "ENOENT") {
-      fs.mkdir(CONTENT_DIR);
+      await fs.mkdir(CONTENT_DIR);
       return;
     }
     throw error;
   })
-  .then(() =>
-    Promise.all(
-      photos.map((photo) => {
-        if (photo) {
-          return extractMetadata(photo);
-        }
-      }),
-    ),
+  .then(
+    async () =>
+      await Promise.all(
+        photos.map(async (photo) => {
+          await extractMetadata(photo);
+        }),
+      ),
   )
-  .finally(() => {
-    exiftool.end();
+  .then(async () => {
+    await exiftool.end();
   });

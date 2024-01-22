@@ -39,24 +39,13 @@ const { tab } = Astro.props;
 
 <div class="flex flex-col gap-4 sm:pt-8 lg:pt-16">
   <navigation class="items-begin flex flex-row gap-1">
-    <Tab text="Posts" href="/" selected={tab == "blog"} className="grow">
+    <Tab text="Posts" href="/" selected={tab === "blog"}>
       <Icon src="/icons/tab-blog.svg" alt="My essays" size={24} />
     </Tab>
-    <Tab
-      text="Photography"
-      href="/photography"
-      selected={tab == "photos"}
-      className="grow"
-    >
+    <Tab text="Photography" href="/photography" selected={tab === "photos"}>
       <Icon src="/icons/tab-photos.svg" alt="My photography" size={24} />
     </Tab>
-    <Tab
-      text="About"
-      href="/about"
-      alt="About me"
-      selected={tab == "about"}
-      className="grow"
-    >
+    <Tab text="About" href="/about" selected={tab === "about"}>
       <div class="row flex h-6 w-6 items-center justify-center">
         <Image
           src={avatar}
