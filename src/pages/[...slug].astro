@@ -22,6 +22,7 @@ export async function getCover(page: any) {
     if (!entry) {
       throw new Error(`Photo cover not found: ${page.data.cover.id}`);
     }
+    return entry;
   }
   return { data: page.data.cover };
 }
