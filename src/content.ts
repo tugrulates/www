@@ -7,7 +7,7 @@ export async function getPages(): Promise<Array<CollectionEntry<"pages">>> {
 export async function getPosts(): Promise<Array<CollectionEntry<"posts">>> {
   return (
     await getCollection("posts", ({ data }) => {
-      return !data.draft;
+      return !data.draft || import.meta.env.DRAFTS;
     })
   ).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 }

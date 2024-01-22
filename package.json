@@ -16,7 +16,7 @@
     "build-photos": "tsx src/scripts/build-photos.ts",
     "prebuild": "npm run fetch && npm run build-blog && npm run build-photos",
     "lint": "npx eslint .",
-    "dev": "astro dev",
+    "dev": "DRAFTS=true astro dev",
     "build": "npm run lint && astro check --minimumFailingSeverity=warning && astro build",
     "preview": "astro preview",
     "astro": "astro",
