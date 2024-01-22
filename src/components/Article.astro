@@ -4,7 +4,7 @@ const { title, date, className } = Astro.props;
 
 <article
   class:list={[
-    "prose prose-stone w-full max-w-none px-2 dark:prose-invert md:prose-lg prose-a:decoration-stone-500/50 hover:prose-a:decoration-black hover:dark:prose-a:decoration-white",
+    "prose prose-stone w-full max-w-none px-2 dark:prose-invert md:prose-lg",
     className,
   ]}
 >
@@ -39,7 +39,7 @@ const { title, date, className } = Astro.props;
     article > :global(ol) {
       @apply pl-12;
     }
-    article > :global(p):has(> img) {
+    article > :global(p:has(> img)) {
       @apply px-0;
     }
     article :global(img) {
@@ -51,13 +51,13 @@ const { title, date, className } = Astro.props;
     article > :global(table) {
       @apply overflow-clip sm:rounded-xl;
     }
-    article > :global(table) > ::global(thead) > ::global(tr) > ::global(th),
-    article > :global(table) > ::global(tbody) > ::global(tr) > ::global(td),
-    article > :global(table) > ::global(tbody) > ::global(tr) > ::global(th) {
+    article > :global(table > thead > tr > th),
+    article > :global(table > tbody > tr > td),
+    article > :global(table > tbody > tr > th) {
       @apply p-4 align-top;
     }
-    article > :global(table) > ::global(thead) > ::global(tr),
-    article > :global(table) > ::global(tbody) > ::global(tr) {
+    article > :global(table > thead > tr),
+    article > :global(table > tbody > tr) {
       @apply border-transparent sm:rounded-xl sm:hover:bg-stone-500/20;
     }
     article > :global(pre) {
@@ -72,13 +72,19 @@ const { title, date, className } = Astro.props;
     article > :global(lite-youtube.lyt-activated) {
       @apply !bg-none;
     }
+    article :global(a) {
+      @apply underline decoration-stone-500/50 hover:decoration-black;
+    }
+    :global(.dark) article :global(a) {
+      @apply hover:decoration-white;
+    }
     article :global(a::after) {
-      @apply -mr-3 ml-px inline-block h-3 w-3 whitespace-pre bg-stone-500 align-text-top hover:bg-black;
+      @apply -mr-3 inline-block h-3 w-3 whitespace-pre bg-black align-text-top opacity-50 hover:opacity-100;
       -webkit-mask-repeat: no-repeat;
       mask-repeat: no-repeat;
     }
     :global(.dark) article :global(a::after) {
-      @apply hover:bg-white;
+      @apply bg-white;
     }
     article :global(a[rel="nofollow"]),
     article :global(a[href$=".pdf"]),
