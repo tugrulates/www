@@ -74,11 +74,12 @@ const favicon = await getFavicon(180);
     {
       date !== undefined && (
         <>
+          <meta property="og:type" content="article" />
+          <meta property="article:author" content={AUTHOR.name} />
           <meta
             property="article:published_time"
             content={date.toISOString()}
           />
-          <meta property="article:author" content={AUTHOR.name} />
           {keywords?.map((keyword) => (
             <meta property="article:tag" content={keyword} />
           ))}
