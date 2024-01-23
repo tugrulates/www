@@ -60,6 +60,10 @@ const favicon = await getFavicon(180);
     <meta property="og:title" content={title} />
     <meta property="og:site_name" content={SITE.domain} />
     <meta property="og:description" content={description} />
+    <meta property="og:locale" content="en" />
+    <meta property="og:url" content={`${SITE.url}${Astro.url.pathname}`} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
     {
       ogImage !== undefined && (
         <>
@@ -77,6 +81,8 @@ const favicon = await getFavicon(180);
             content={`image/${ogImage.options.format}`}
           />
           <meta property="og:image:alt" content={imageDescription} />
+          <meta name="twitter:image" content={ogImage.src} />
+          <meta name="twitter:image:alt" content={imageDescription} />
           <meta name="twitter:card" content="summary_large_image" />
         </>
       )
