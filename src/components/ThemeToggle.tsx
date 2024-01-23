@@ -40,7 +40,7 @@ export default function ThemeToggle({
 
   return (
     <Switch.Group>
-      <Switch.Label className="hidden">Switch theme</Switch.Label>
+      <Switch.Label className="hidden">Theme</Switch.Label>
       <Switch
         checked={theme.dark}
         onChange={() => {
