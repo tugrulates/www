@@ -13,6 +13,7 @@ const photos = await getPhotos();
         <Photo
           link={`./photography/${photo.id}`}
           image={photo.data.square}
+          title={photo.data.title}
           description={photo.data.description}
         />
       ))

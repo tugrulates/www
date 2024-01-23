@@ -29,6 +29,7 @@ export default function PhotoViewer(props: Props): JSX.Element {
     </Dialog>
   ) : (
     <button
+      aria-label="Expand image"
       onClick={() => {
         setIsOpen(true);
       }}

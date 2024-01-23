@@ -1,5 +1,5 @@
 ---
-import { formatDate } from "@/date";
+import { formatDate, formatDateIso } from "@/date";
 
 interface Props {
   title: string;
@@ -20,14 +20,10 @@ const { title, date, class: className } = Astro.props;
     {
       date !== undefined && (
         <time
-          datetime={formatDate(date)}
+          datetime={formatDateIso(date)}
           class="text-md self-end whitespace-nowrap font-bold italic"
         >
-          {date.toLocaleDateString("en-US", {
-            month: "long",
-            day: "numeric",
-            year: "numeric",
-          })}
+          {formatDate(date)}
         </time>
       )
     }

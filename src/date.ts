@@ -8,3 +8,7 @@ export function formatDate(date?: Date): string | undefined {
     year: "numeric",
   });
 }
+
+export function formatDateIso(date?: Date): string | undefined {
+  return date?.toISOString().split("T")[0];
+}
