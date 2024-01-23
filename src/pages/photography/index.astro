@@ -7,16 +7,18 @@ const photos = await getPhotos();
 ---
 
 <BaseLayout tab="photos" title="Photography" description="My photography.">
-  <div class="flex flex-row flex-wrap justify-between gap-4">
+  <ul role="list" class="flex flex-row flex-wrap justify-between gap-4">
     {
       photos.map((photo) => (
-        <Photo
-          link={`./photography/${photo.id}`}
-          image={photo.data.square}
-          title={photo.data.title}
-          description={photo.data.description}
-        />
+        <li>
+          <Photo
+            link={`./photography/${photo.id}`}
+            image={photo.data.square}
+            title={photo.data.title}
+            description={photo.data.description}
+          />
+        </li>
       ))
     }
-  </div>
+  </ul>
 </BaseLayout>

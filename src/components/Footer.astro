@@ -3,7 +3,10 @@ import Social from "@/components/Social.astro";
 import { AUTHOR } from "@/consts";
 ---
 
-<div class="flex w-full flex-row justify-center py-8 sm:gap-4 sm:py-8 lg:py-16">
+<nav
+  aria-label="Social profiles"
+  class="flex w-full flex-row justify-center py-8 sm:gap-4 sm:py-8 lg:py-16"
+>
   {
     AUTHOR.social.map((item) => (
       <Social
@@ -14,4 +17,4 @@ import { AUTHOR } from "@/consts";
       />
     ))
   }
-</div>
+</nav>

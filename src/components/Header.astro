@@ -38,7 +38,10 @@ const { tab } = Astro.props;
 </script>
 
 <div class="flex flex-col gap-4 sm:pt-8 lg:pt-16">
-  <navigation class="items-begin flex flex-row gap-1 sm:-mb-4">
+  <nav
+    aria-label="Primary navigation"
+    class="items-begin flex flex-row gap-1 sm:-mb-4"
+  >
     <Tab text="Posts" href="/" selected={tab === "blog"}>
       <Icon name="heroicons:chat-bubble-bottom-center-text" size={24} />
     </Tab>
@@ -61,5 +64,5 @@ const { tab } = Astro.props;
       <Icon slot="lightIcon" name="heroicons:sun-solid" size={32} />
       <Icon slot="darkIcon" name="heroicons:moon-solid" size={32} />
     </ThemeToggle>
-  </navigation>
+  </nav>
 </div>
