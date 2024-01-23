@@ -99,24 +99,28 @@ const favicon = await getFavicon(180);
   </head>
 
   <body
-    class="relative mx-auto flex min-h-screen max-w-screen-md flex-col items-center gap-0 bg-stone-300 text-black dark:bg-stone-700 dark:text-white"
+    class="relative flex flex-row gap-0 bg-stone-300 text-black dark:bg-stone-700 dark:text-white"
   >
-    <header class="w-full text-left">
-      <Header tab={tab} />
-    </header>
-    <main
-      class:list={[
-        "z-10 w-full flex-1 bg-stone-200 pb-2 text-left shadow-lg shadow-stone-900/20 dark:bg-stone-800 sm:rounded-b-3xl sm:rounded-t-xl sm:p-4",
-        className,
-      ]}
-    >
-      <slot />
-    </main>
-    <footer
-      class="flex w-full flex-row justify-center gap-0 text-left"
-      transition:persist
-    >
-      <Footer />
-    </footer>
+    <div class="flex-1"></div>
+    <div class="flex min-h-screen max-w-screen-md flex-col items-center">
+      <header class="w-full text-left">
+        <Header tab={tab} />
+      </header>
+      <main
+        class:list={[
+          "z-10 w-full flex-1 bg-stone-200 pb-2 text-left shadow-lg shadow-stone-900/20 dark:bg-stone-800 sm:rounded-b-3xl sm:rounded-t-xl sm:p-4",
+          className,
+        ]}
+      >
+        <slot />
+      </main>
+      <footer
+        class="flex w-full flex-row justify-center gap-0 text-left"
+        transition:persist
+      >
+        <Footer />
+      </footer>
+    </div>
+    <div class="flex-1"></div>
   </body>
 </html>
