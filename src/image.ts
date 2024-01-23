@@ -5,7 +5,7 @@ import sharp from "sharp";
 import ico from "sharp-ico";
 import avatar from "@/images/me.png";
 
-export async function getOgImage(
+export async function getOpenGraphImage(
   image: ImageMetadata,
 ): Promise<GetImageResult> {
   return await getImage({

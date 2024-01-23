@@ -5,7 +5,7 @@ import { ViewTransitions } from "astro:transitions";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import { AUTHOR, SITE } from "@/consts";
-import { getFavicon, getOgImage } from "@/image";
+import { getFavicon, getOpenGraphImage } from "@/image";
 
 interface Props {
   tab: string;
@@ -33,7 +33,8 @@ if (image !== undefined && imageDescription === undefined) {
   throw new Error("Image description is required when image is provided");
 }
 
-const ogImage = image !== undefined ? await getOgImage(image) : undefined;
+const ogImage =
+  image !== undefined ? await getOpenGraphImage(image) : undefined;
 const appleTouchIcon = await getFavicon(180);
 const favicon = await getFavicon(180);
 ---
