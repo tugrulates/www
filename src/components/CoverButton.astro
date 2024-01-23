@@ -1,7 +1,7 @@
 ---
-import Icon from "@/components/Icon.astro";
+import { Icon } from "astro-icon/components";
 
-const { alt, icon, className } = Astro.props;
+const { icon, class: className } = Astro.props;
 ---
 
 <div
@@ -10,5 +10,5 @@ const { alt, icon, className } = Astro.props;
     className,
   ]}
 >
-  <Icon src={icon} alt={alt} />
+  <Icon name={icon} size={32} />
 </div>

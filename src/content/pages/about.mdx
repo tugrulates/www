@@ -9,12 +9,7 @@ cover:
 ---
 
 import { Image } from "astro:assets";
-import Icon from "../../components/Icon.astro";
-import logoMetu from "./images/logo-metu.svg";
-import logoTubitak from "./images/logo-tubitak.svg";
-import logoGoogle from "./images/logo-google.svg";
-import logoMeta from "./images/logo-meta.svg";
-import logoRoka from "./images/logo-roka.svg";
+import { Icon } from "astro-icon/components";
 import c64 from "./images/c64.webp";
 
 Hello! I am Tugrul Ates and I love technology, art, and everything in between. This website is my digital canvas, where I share my thoughts, creations, and experiences with the world.
@@ -35,10 +30,10 @@ I enjoy connecting with people who share similar interests, even if they are dog
   />
 </p>
 
-|                             Where?                             | What?                                                                                                                                                                                                                                                                                                                      |       When? |
-| :------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------: |
-|    <Icon src={logoMetu} alt="METU logo" className="w-24" />    | Master's degree from [**METU**](https://en.wikipedia.org/wiki/Middle_East_Technical_University) on electronics engineering, with research and publications in recommendation systems, image processing, and computer vision.                                                                                               | _2003‑2010_ |
-| <Icon src={logoTubitak} alt="TUBITAK logo" className="w-24" /> | Researcher at [**TÜBİTAK**](https://en.wikipedia.org/wiki/Scientific_and_Technological_Research_Council_of_Turkey), a governmental scientific agency of Turkey, where I developed AI systems for national-scale TV broadcast monitoring.                                                                                   | _2006‑2011_ |
-|  <Icon src={logoGoogle} alt="Google logo" className="w-24" />  | Software engineer at [**Google**](https://en.wikipedia.org/wiki/Google), optimizing costs for [Ads](https://en.wikipedia.org/wiki/Google_Ads), making [Play](https://en.wikipedia.org/wiki/Google_Play) more efficient and engaging, and building early versions of [Stadia](https://en.wikipedia.org/wiki/Google_Stadia). | _2011‑2017_ |
-|    <Icon src={logoMeta} alt="Meta logo" className="w-24" />    | Engineering manager at [**Meta**](https://en.wikipedia.org/wiki/Meta_Platforms), leading a team that significantly improved engagement, organization, and performance of the [Facebook](https://en.wikipedia.org/wiki/Facebook) app.                                                                                       | _2017‑2021_ |
-|    <Icon src={logoRoka} alt="Roka logo" className="w-24" />    | Founder of **Roka Software** in Amsterdam, creating products that I would personally enjoy using.                                                                                                                                                                                                                          |  _2023‑now_ |
+|                 Where?                 | What?                                                                                                                                                                                                                                                                                                                      |       When? |
+| :------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------: |
+|  <Icon name="logo-metu" size={48} />   | Master's degree from [**METU**](https://en.wikipedia.org/wiki/Middle_East_Technical_University) on electronics engineering, with research and publications in recommendation systems, image processing, and computer vision.                                                                                               | _2003‑2010_ |
+| <Icon name="logo-tubitak" size={48} /> | Researcher at [**TÜBİTAK**](https://en.wikipedia.org/wiki/Scientific_and_Technological_Research_Council_of_Turkey), a governmental scientific agency of Turkey, where I developed AI systems for national-scale TV broadcast monitoring.                                                                                   | _2006‑2011_ |
+|  <Icon name="bi:google" size={48} />   | Software engineer at [**Google**](https://en.wikipedia.org/wiki/Google), optimizing costs for [Ads](https://en.wikipedia.org/wiki/Google_Ads), making [Play](https://en.wikipedia.org/wiki/Google_Play) more efficient and engaging, and building early versions of [Stadia](https://en.wikipedia.org/wiki/Google_Stadia). | _2011‑2017_ |
+|   <Icon name="bi:meta" size={48} />    | Engineering manager at [**Meta**](https://en.wikipedia.org/wiki/Meta_Platforms), leading a team that significantly improved engagement, organization, and performance of the [Facebook](https://en.wikipedia.org/wiki/Facebook) app.                                                                                       | _2017‑2021_ |
+|  <Icon name="logo-roka" size={48} />   | Founder of **Roka Software** in Amsterdam, creating products that I would personally enjoy using.                                                                                                                                                                                                                          |  _2023‑now_ |

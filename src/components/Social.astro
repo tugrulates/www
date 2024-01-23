@@ -1,7 +1,7 @@
 ---
-import Icon from "@/components/Icon.astro";
+import { Icon } from "astro-icon/components";
 
-const { name, href, alt, icon } = Astro.props;
+const { name, alt, href, icon } = Astro.props;
 const external = Boolean(href.startsWith("http"));
 ---
 
@@ -14,6 +14,6 @@ const external = Boolean(href.startsWith("http"));
     >
       {name}
     </span>
-    <Icon src={icon} alt={alt} class="" />
+    <Icon name={icon} size={32} />
   </div>
 </a>

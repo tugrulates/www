@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import Icon from "@/components/Icon.astro";
+import { Icon } from "astro-icon/components";
 ---
 
 <BaseLayout
@@ -11,7 +11,7 @@ import Icon from "@/components/Icon.astro";
 >
   <div class="flex flex-1 flex-col items-center justify-center gap-8">
     <h1 class="text-5xl">404</h1>
-    <Icon src="/icons/404.svg" alt="Sad browser face." size={200} />
+    <Icon name="404" size={200} />
     <p class="text-center">
       I could not find the page you are looking for, but I hope you will find
       it.

@@ -1,12 +1,8 @@
 ---
+import { formatDate } from "@/date";
 import { Image } from "astro:assets";
 
 const { link, image, title, description, date } = Astro.props;
-const formattedDate = date.toLocaleDateString("en-US", {
-  month: "short",
-  day: "numeric",
-  year: "numeric",
-});
 ---
 
 <a
@@ -26,7 +22,7 @@ const formattedDate = date.toLocaleDateString("en-US", {
     />
   </div>
   <div class="flex-0 group flex flex-1 flex-col px-2 py-2 sm:py-1">
-    <time datetime={date} class="text-stone-500">{formattedDate}</time>
+    <time datetime={date} class="text-stone-500">{formatDate(date)}</time>
     <p class="grow text-xl font-bold">{title}</p>
     <p class="line-clamp-4 font-thin text-stone-600 dark:text-stone-400">
       {description}

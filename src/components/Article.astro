@@ -1,5 +1,12 @@
 ---
-const { title, date, className } = Astro.props;
+import { formatDate } from "@/date";
+
+interface Props {
+  title: string;
+  date?: Date;
+  class?: string;
+}
+const { title, date, class: className } = Astro.props;
 ---
 
 <article
@@ -13,7 +20,7 @@ const { title, date, className } = Astro.props;
     {
       date !== undefined && (
         <time
-          datetime={date}
+          datetime={formatDate(date)}
           class="text-md self-end whitespace-nowrap font-bold italic"
         >
           {date.toLocaleDateString("en-US", {
@@ -73,23 +80,13 @@ const { title, date, className } = Astro.props;
       @apply !bg-none;
     }
     article :global(a) {
-      @apply underline decoration-stone-500/50 hover:decoration-black;
-    }
-    :global(.dark) article :global(a) {
-      @apply hover:decoration-white;
+      @apply underline decoration-stone-500/50 hover:decoration-current;
     }
     article :global(a::after) {
-      @apply -mr-3 inline-block h-3 w-3 whitespace-pre bg-black align-text-top opacity-50 hover:opacity-100;
+      @apply inline-block h-3 w-0 bg-current pl-0.5 pr-3 align-text-top opacity-50 hover:opacity-100;
       -webkit-mask-repeat: no-repeat;
       mask-repeat: no-repeat;
-    }
-    :global(.dark) article :global(a::after) {
-      @apply bg-white;
-    }
-    article :global(a[rel="nofollow"]),
-    article :global(a[href$=".pdf"]),
-    article :global(a[href$=".zip"]) {
-      @apply inline-block pr-3;
+      mask-size: 100% 100%;
     }
     article :global(a[rel="nofollow"]::after) {
       content: "";
@@ -100,7 +97,7 @@ const { title, date, className } = Astro.props;
     {
       content: "";
       -webkit-mask-image: url("/icons/link-wikipedia.svg");
-      mask-image: url("/icons/link-wikipedia.svg");
+      mask-image: url("/icons/logo-wikipedia.svg");
     }
     article :global(a[href$=".pdf"]::after) {
       content: "";
@@ -116,13 +113,13 @@ const { title, date, className } = Astro.props;
     {
       content: "";
       -webkit-mask-image: url("/icons/social-linkedin.svg");
-      mask-image: url("/icons/social-linkedin.svg");
+      mask-image: url("/icons/logo-linkedin.svg");
     }
     article :global(a[href^="https://twitter.com/"]::after)
     {
       content: "";
       -webkit-mask-image: url("/icons/social-twitter.svg");
-      mask-image: url("/icons/social-twitter.svg");
+      mask-image: url("/icons/logo-twitter.svg");
     }
   </style>
 </article>

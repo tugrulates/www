@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import { Switch } from "@headlessui/react";
 
+interface Props {
+  lightIcon?: any;
+  darkIcon?: any;
+}
+
 interface State {
   dark: boolean;
 }
@@ -11,7 +16,10 @@ function toggleTheme(theme: State, setTheme: any): void {
   localStorage.setItem("theme", JSON.stringify(newTheme));
 }
 
-export default function ThemeToggle(): JSX.Element {
+export default function ThemeToggle({
+  lightIcon,
+  darkIcon,
+}: Props): JSX.Element {
   const [theme, setTheme] = useState({ dark: true });
   const [isMounted, setIsMounted] = useState(false);
 
@@ -44,20 +52,10 @@ export default function ThemeToggle(): JSX.Element {
           theme.dark ? "rotate-180" : "rotate-0",
         ].join(" ")}
       >
-        <img
-          src="/icons/theme-light.svg"
-          alt="day"
-          width={32}
-          height={32}
-          className="p-l-12 absolute right-0 top-0 brightness-0 dark:brightness-100"
-        />
-        <img
-          src="/icons/theme-dark.svg"
-          alt="night"
-          width={32}
-          height={32}
-          className="absolute bottom-0 left-0 rotate-180 brightness-0 dark:brightness-100"
-        />
+        <div className="p-l-12 absolute right-0 top-0 h-8 w-8">{lightIcon}</div>
+        <div className="absolute bottom-0 left-0 h-8 w-8 rotate-180">
+          {darkIcon}
+        </div>
       </div>
     </Switch>
   );

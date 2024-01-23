@@ -5,9 +5,9 @@ import type { CoverData } from "@/components/Cover.astro";
 
 interface Props {
   cover: CoverData;
-  className?: string;
+  class?: string;
 }
-const { cover: image, className } = Astro.props;
+const { cover: image, class: className } = Astro.props;
 
 const [wide, square] = await Promise.all([
   await Promise.all(

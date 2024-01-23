@@ -62,7 +62,7 @@ const cover = await getCover(page);
       actionHref={cover.id !== undefined
         ? `/photography/${cover.id}`
         : undefined}
-      actionIcon="/icons/link-image.svg"
+      actionIcon="heroicons:photo-solid"
       actionAlt="Image details"
     />
     <Article title={page.data.title} date={page.data.date}>

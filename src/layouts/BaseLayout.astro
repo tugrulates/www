@@ -5,7 +5,7 @@ import { ViewTransitions } from "astro:transitions";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import { AUTHOR, SITE } from "@/consts";
-import { getFavicon, getOgImage } from "@/images";
+import { getFavicon, getOgImage } from "@/image";
 
 interface Props {
   tab: string;
@@ -119,4 +119,5 @@ const favicon = await getFavicon(180);
       <Footer />
     </footer>
   </body>
+  @/image
 </html>

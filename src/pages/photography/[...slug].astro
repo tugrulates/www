@@ -6,6 +6,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import Cover from "@/components/Cover.astro";
 import { AUTHOR, SITE } from "@/consts";
 import { getPhotos } from "@/content";
+import { formatDate } from "@/date";
 
 export const getStaticPaths = (async () => {
   const photos = await getCollection("photos");
@@ -20,11 +21,6 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const { photo } = Astro.props;
 const photos = await getPhotos();
 const index = photos.findIndex((other) => other.id === photo.id);
-const formattedDate = photo.data.date.toLocaleDateString("en-US", {
-  month: "long",
-  day: "numeric",
-  year: "numeric",
-});
 ---
 
 <BaseLayout
@@ -44,13 +40,13 @@ const formattedDate = photo.data.date.toLocaleDateString("en-US", {
         : undefined}
       actionHref={photo.data.wide.src}
       actionDownload={`${photo.id}.jpg`}
-      actionIcon="/icons/link-download.svg"
+      actionIcon="heroicons:archive-box-arrow-down-solid"
       actionAlt="Download photo in full size"
     />
-    <Article title={photo.data.title} className="">
+    <Article title={photo.data.title}>
       <table>
         <tr><th>Description</th><td>{photo.data.description}</td></tr>
-        <tr><th>Date</th><td>{formattedDate}</td></tr>
+        <tr><th>Date</th><td>{formatDate(photo.data.date)}</td></tr>
         <tr><th>Location</th><td>{photo.data.location}</td></tr>
         <tr><th>City</th><td>{photo.data.city}</td></tr>
         <tr><th>State/Region</th><td>{photo.data.state}</td></tr>

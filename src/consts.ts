@@ -10,27 +10,27 @@ export const AUTHOR = {
   social: [
     {
       name: "LinkedIn",
-      icon: "/icons/social-linkedin.svg",
+      icon: "bi:linkedin",
       url: "https://www.linkedin.com/in/tugrulates/",
     },
     {
       name: "GitHub",
-      icon: "/icons/social-github.svg",
+      icon: "bi:github",
       url: "https://github.com/tugrulates",
     },
     {
       name: "Stack Overflow",
-      icon: "/icons/social-stackoverflow.svg",
+      icon: "bi:stack-overflow",
       url: "https://stackoverflow.com/users/634336/tugrul-ates",
     },
     {
       name: "YouTube",
-      icon: "/icons/social-youtube.svg",
+      icon: "bi:youtube",
       url: "https://www.youtube.com/@tugrulates.demoscene",
     },
     {
       name: "Instagram",
-      icon: "/icons/social-instagram.svg",
+      icon: "bi:instagram",
       url: "https://www.instagram.com/turulier/",
     },
   ],

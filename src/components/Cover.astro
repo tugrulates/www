@@ -41,7 +41,7 @@ const {
     <div transition:animate={fade({ duration: "0.1s" })} class="h-full w-full">
       <CoverImage
         cover={image}
-        className="object-cover max-sm:w-screen sm:rounded-2xl"
+        class="object-cover max-sm:w-screen sm:rounded-2xl"
       />
       <div
         class="absolute inset-2 flex flex-row gap-2 max-sm:items-end sm:items-center"
@@ -49,7 +49,7 @@ const {
         {
           previous !== undefined && (
             <a aria-label="Previous" href={previous}>
-              <CoverButton alt="Previous" icon="/icons/link-previous.svg" />
+              <CoverButton icon="heroicons:chevron-left-solid" />
             </a>
           )
         }
@@ -58,8 +58,7 @@ const {
           <PhotoViewer client:only>
             <CoverButton
               slot="button"
-              alt="Expand image"
-              icon="/icons/link-expand.svg"
+              icon="heroicons:arrows-pointing-out-solid"
             />
             <Image
               slot="image"
@@ -74,7 +73,7 @@ const {
           {
             next !== undefined && (
               <a aria-label="Next" href={next}>
-                <CoverButton alt="Next" icon="/icons/link-next.svg" />
+                <CoverButton icon="heroicons:chevron-right-solid" />
               </a>
             )
           }
@@ -85,7 +84,7 @@ const {
                 href={actionHref}
                 download={actionDownload}
               >
-                <CoverButton alt={actionAlt} icon={actionIcon} />
+                <CoverButton icon={actionIcon} />
               </a>
             )
           }
