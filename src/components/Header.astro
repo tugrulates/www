@@ -38,7 +38,7 @@ const { tab } = Astro.props;
 </script>
 
 <div class="flex flex-col gap-4 sm:pt-8 lg:pt-16">
-  <navigation class="items-begin flex flex-row gap-1">
+  <navigation class="items-begin flex flex-row gap-1 sm:-mb-4">
     <Tab text="Posts" href="/" selected={tab === "blog"}>
       <Icon src="/icons/tab-blog.svg" alt="My essays" size={24} />
     </Tab>

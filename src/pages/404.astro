@@ -1,0 +1,24 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Photo from "@/components/Photo.astro";
+import { getPhotos } from "@/content";
+import Icon from "@/components/Icon.astro";
+
+const photos = await getPhotos();
+---
+
+<BaseLayout
+  tab="404"
+  title="Not found"
+  description="Requested page not found."
+  class="flex flex-col"
+>
+  <div class="flex flex-1 flex-col items-center justify-center gap-8">
+    <h1 class="text-5xl">404</h1>
+    <Icon src="/icons/404.svg" alt="Sad browser face." size={200} />
+    <p class="text-center">
+      I could not find the page you are looking for, but I hope you will find
+      it.
+    </p>
+  </div>
+</BaseLayout>
