@@ -9,12 +9,7 @@ import { AUTHOR } from "@/consts";
 >
   {
     AUTHOR.social.map((item) => (
-      <Social
-        name={item.name}
-        href={item.url}
-        alt={`Link to my ${item.name} profile.`}
-        icon={item.icon}
-      />
+      <Social name={item.name} href={item.url} icon={item.icon} />
     ))
   }
 </nav>

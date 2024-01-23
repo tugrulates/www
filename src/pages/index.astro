@@ -25,20 +25,18 @@ const frontmatters = Object.fromEntries(
 ---
 
 <BaseLayout tab="blog" title="Posts" description={SITE.description}>
-  <ul role="list" class="flex flex-col gap-4">
+  <div role="feed" class="flex flex-col gap-4">
     {
       posts.map((post) => (
-        <li>
-          <Post
-            link={post.slug}
-            image={covers[post.slug].data.square}
-            imageDescription={covers[post.slug].data.description}
-            title={post.data.title}
-            description={frontmatters[post.slug].description}
-            date={post.data.date}
-          />
-        </li>
+        <Post
+          link={post.slug}
+          image={covers[post.slug].data.square}
+          imageDescription={covers[post.slug].data.description}
+          title={post.data.title}
+          description={frontmatters[post.slug].description}
+          date={post.data.date}
+        />
       ))
     }
-  </ul>
+  </div>
 </BaseLayout>

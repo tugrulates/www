@@ -1,19 +1,20 @@
 ---
 import { Icon } from "astro-icon/components";
 
-const { name, alt, href, icon } = Astro.props;
+const { name, href, icon } = Astro.props;
 const external = Boolean(href.startsWith("http"));
 ---
 
-<a aria-label={alt} href={href} rel={external ? "nofollow" : undefined}>
+<a aria-label={name} href={href} rel={external ? "nofollow" : undefined}>
   <div
-    class="justify-left transition-color group relative flex h-full flex-col items-center justify-end gap-2 p-2 transition-transform hover:opacity-100 sm:opacity-50 sm:hover:scale-110"
+    class="justify-left transition-color group relative flex h-full flex-col items-center justify-end gap-2 p-2 transition-transform hover:opacity-100 sm:opacity-75 sm:hover:scale-110"
   >
     <span
+      aria-hidden
       class="absolute min-w-24 scale-50 text-center align-text-bottom text-xs font-thin opacity-0 transition-all group-hover:-translate-y-10 group-hover:scale-100 group-hover:opacity-100 max-sm:hidden"
     >
       {name}
     </span>
-    <Icon name={icon} size={32} />
+    <Icon aria-hidden name={icon} size={32} />
   </div>
 </a>
