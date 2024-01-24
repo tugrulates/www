@@ -1,12 +1,17 @@
 ---
-import BaseLayout from "@/layouts/BaseLayout.astro";
+import FeedLayout from "@/layouts/FeedLayout.astro";
 import Photo from "@/components/Photo.astro";
 import { getPhotos } from "@/content";
 
 const photos = await getPhotos();
 ---
 
-<BaseLayout tab="photos" title="Photography" description="My photography.">
+<FeedLayout
+  tab="photos"
+  title="Photography"
+  description="I enjoy playing around with light and images. It's just a hobby, but it brings me happiness, especially when I capture unique moments and artifacts."
+  license="CC BY 4.0 🅭 🅯"
+>
   <ul role="list" class="flex flex-row flex-wrap justify-between gap-4">
     {
       photos.map((photo) => (
@@ -21,4 +26,4 @@ const photos = await getPhotos();
       ))
     }
   </ul>
-</BaseLayout>
+</FeedLayout>

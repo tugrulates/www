@@ -7,8 +7,8 @@ export default {
   darkMode: "class",
   theme: {
     fontFamily: {
-      sans: ["Fira Sans", ...defaultTheme.fontFamily.sans],
-      mono: ["Fira Code", ...defaultTheme.fontFamily.mono],
+      sans: ["Fira Sans", ...defaultTheme.fontFamily.sans, "CCSymbols"],
+      mono: ["Fira Code", ...defaultTheme.fontFamily.mono, "CCSymbols"],
     },
   },
   plugins: [typography],

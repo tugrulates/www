@@ -28,15 +28,15 @@ export default defineConfig({
     icon({
       include: {
         bi: [
-          "linkedin",
           "github",
           "google",
+          "linkedin",
           "instagram",
           "meta",
           "stack-overflow",
           "twitter",
-          "youtube",
           "wikipedia",
+          "youtube",
         ],
         heroicons: ["*"],
       },

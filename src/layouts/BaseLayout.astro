@@ -17,6 +17,7 @@ interface Props {
   image?: ImageMetadata;
   imageDescription?: string;
   date?: Date;
+  license?: string;
   class?: string;
 }
 
@@ -28,6 +29,7 @@ const {
   image,
   imageDescription,
   date,
+  license,
   class: className,
 } = Astro.props;
 
@@ -111,10 +113,9 @@ const favicon = await getFavicon(180);
         <slot />
       </main>
       <footer
-        class="flex w-full flex-row justify-center gap-0 text-left"
-        transition:persist
+        class="align-center flex w-full flex-col justify-center gap-4 py-8 sm:gap-4 sm:py-8 lg:py-16"
       >
-        <Footer />
+        <Footer license={license ?? "CC0 1.0 🅭 🄍"} />
       </footer>
     </div>
     <div class="flex-1"></div>

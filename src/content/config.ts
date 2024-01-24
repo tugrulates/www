@@ -23,7 +23,7 @@ const pages = defineCollection({
 const posts = defineCollection({
   type: "content",
   schema: z.object({
-    tab: z.string().default("blog"),
+    tab: z.string().default("posts"),
     title: z.string(),
     draft: z.boolean().default(true),
     date: z.date(),

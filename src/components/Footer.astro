@@ -1,11 +1,17 @@
 ---
 import Social from "@/components/Social.astro";
 import { AUTHOR } from "@/consts";
+
+interface Props {
+  license: string;
+}
+const { license } = Astro.props;
 ---
 
 <nav
   aria-label="Social profiles"
-  class="flex w-full flex-row justify-center py-8 sm:gap-4 sm:py-8 lg:py-16"
+  class="flex w-full flex-row justify-center"
+  transition:persist
 >
   {
     AUTHOR.social.map((item) => (
@@ -13,3 +19,19 @@ import { AUTHOR } from "@/consts";
     ))
   }
 </nav>
+<p
+  class="w-full text-center text-sm font-thin text-stone-600 dark:text-stone-400"
+>
+  {license}
+  {AUTHOR.name}
+</p>
+
+<style is:global>
+  @font-face {
+    font-family: "CCSymbols";
+    src: url("/fonts/CCSymbols.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+</style>

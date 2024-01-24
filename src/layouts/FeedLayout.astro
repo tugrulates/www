@@ -1,0 +1,37 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  tab: string;
+  title: string;
+  description: string;
+  license?: string;
+}
+
+const { tab, title, description, license } = Astro.props;
+---
+
+<BaseLayout
+  tab={tab}
+  title={title}
+  description={description}
+  license={license}
+  class="flex flex-col gap-8"
+>
+  <header>
+    <div class="items-between flex flex-row justify-between gap-8">
+      <p class="text-lg font-thin italic text-stone-700 dark:text-stone-300">
+        {description}
+      </p>
+      <a
+        aria-label="RSS feed"
+        href=`${Astro.url.toString()}/feed`
+        class="transition-transform hover:opacity-100 sm:opacity-75 sm:hover:scale-110"
+      >
+        <Icon name="heroicons:rss-solid" size={24} />
+      </a>
+    </div>
+  </header>
+  <slot />
+</BaseLayout>

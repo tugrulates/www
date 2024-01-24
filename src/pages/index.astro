@@ -1,7 +1,6 @@
 ---
 import { getEntry } from "astro:content";
-import { SITE } from "@/consts";
-import BaseLayout from "@/layouts/BaseLayout.astro";
+import FeedLayout from "@/layouts/FeedLayout.astro";
 import Post from "@/components/Post.astro";
 import { getPosts } from "@/content";
 
@@ -24,7 +23,11 @@ const frontmatters = Object.fromEntries(
 );
 ---
 
-<BaseLayout tab="blog" title="Posts" description={SITE.description}>
+<FeedLayout
+  tab="posts"
+  title="Posts"
+  description="Welcome to my garden. I write about software development and digital arts."
+>
   <div role="feed" class="flex flex-col gap-4">
     {
       posts.map((post) => (
@@ -39,4 +42,4 @@ const frontmatters = Object.fromEntries(
       ))
     }
   </div>
-</BaseLayout>
+</FeedLayout>
