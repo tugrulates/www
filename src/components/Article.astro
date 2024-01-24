@@ -117,5 +117,8 @@ const { title, date, class: className } = Astro.props;
       -webkit-mask-image: url("/icons/social-twitter-x.svg");
       mask-image: url("/icons/logo-twitter-x.svg");
     }
+    article :global(hr) {
+      @apply border-stone-500;
+    }
   </style>
 </article>
