@@ -7,6 +7,7 @@ export const SITE = {
 
 export const AUTHOR = {
   name: "Tugrul Ates",
+  twitter: "@turulier",
   social: [
     {
       name: "LinkedIn",
@@ -17,6 +18,11 @@ export const AUTHOR = {
       name: "GitHub",
       icon: "bi:github",
       url: "https://github.com/tugrulates",
+    },
+    {
+      name: "Twitter",
+      icon: "bi:twitter",
+      url: "https://twitter.com/turulier",
     },
     {
       name: "Stack Overflow",
