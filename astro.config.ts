@@ -32,7 +32,7 @@ export default defineConfig({
           "instagram",
           "meta",
           "stack-overflow",
-          "twitter",
+          "twitter-x",
           "wikipedia",
           "youtube",
         ],

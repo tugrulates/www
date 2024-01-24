@@ -21,7 +21,7 @@ export const AUTHOR = {
     },
     {
       name: "Twitter",
-      icon: "bi:twitter",
+      icon: "bi:twitter-x",
       url: "https://twitter.com/turulier",
     },
     {
