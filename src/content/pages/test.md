@@ -1,6 +1,7 @@
 ---
 tab: test
 title: Test Page
+description: Test page for formatting and build.
 cover: london-figaro
 tags: [test]
 ---

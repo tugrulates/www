@@ -12,7 +12,7 @@ export async function GET(): Promise<Response> {
       link: `/${post.slug}`,
       title: post.data.title,
       pubDate: post.data.date,
-      //   description: post.data.description,
+      description: post.data.description,
       categories: post.data.tags,
       author: AUTHOR.name,
     })),

@@ -6,6 +6,7 @@ const pages = defineCollection({
     z.object({
       tab: z.string(),
       title: z.string(),
+      description: z.string(),
       date: z.date().optional(),
       cover: reference("photos").or(
         z.object({
@@ -25,6 +26,7 @@ const posts = defineCollection({
   schema: z.object({
     tab: z.string().default("posts"),
     title: z.string(),
+    description: z.string(),
     draft: z.boolean().default(true),
     date: z.date(),
     cover: reference("photos"),

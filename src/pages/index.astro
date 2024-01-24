@@ -13,14 +13,6 @@ const covers = Object.fromEntries(
     }),
   ),
 );
-const frontmatters = Object.fromEntries(
-  await Promise.all(
-    posts.map(async (post) => {
-      const { remarkPluginFrontmatter: frontmatter } = await post.render();
-      return [post.slug, frontmatter];
-    }),
-  ),
-);
 ---
 
 <FeedLayout
@@ -36,7 +28,7 @@ const frontmatters = Object.fromEntries(
           image={covers[post.slug].data.square}
           imageDescription={covers[post.slug].data.description}
           title={post.data.title}
-          description={frontmatters[post.slug].description}
+          description={post.data.description}
           date={post.data.date}
         />
       ))

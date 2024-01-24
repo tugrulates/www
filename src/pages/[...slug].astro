@@ -40,14 +40,14 @@ export async function getCover(
 const { page } = Astro.props;
 const posts = await getPosts();
 const index = posts.findIndex((other) => other.id === page.id);
-const { Content, remarkPluginFrontmatter } = await page.render();
+const { Content } = await page.render();
 const cover = await getCover(page);
 ---
 
 <BaseLayout
   tab={page.data.tab ?? "posts"}
   title={page.data.title}
-  description={remarkPluginFrontmatter.description}
+  description={page.data.description}
   keywords={page.data.tags}
   image={cover.data.wide}
   imageDescription={cover.data.description}

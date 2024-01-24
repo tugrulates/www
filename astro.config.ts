@@ -4,7 +4,6 @@ import mdx from "@astrojs/mdx";
 import react from "@astrojs/react";
 import rehypeExternalLinks from "rehype-external-links";
 import icon from "astro-icon";
-import remarkDescription from "astro-remark-description";
 import robotsTxt from "astro-robots-txt";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
@@ -21,7 +20,6 @@ export default defineConfig({
         },
       ],
     ],
-    remarkPlugins: [[remarkDescription, {}]],
   },
   prefetch: true,
   integrations: [
