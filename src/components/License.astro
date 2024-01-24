@@ -3,9 +3,9 @@ const { icons } = Astro.props;
 ---
 
 <hr class="!mb-4" />
-<div role="note" class="flex flex-row items-center gap-4">
+<div role="note" class="flex flex-row items-start gap-4">
   <p class="!my-0 whitespace-nowrap text-4xl">{icons}</p>
-  <p class="text-xs">
+  <p class="!my-0 text-xs">
     <slot />
   </p>
 </div>
