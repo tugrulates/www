@@ -14,7 +14,7 @@ const photos = await getPhotos();
   <ul role="list" class="flex flex-row flex-wrap justify-between gap-4">
     {
       photos.map((photo) => (
-        <li>
+        <li class="grow">
           <Photo
             link={`./photography/${photo.id}`}
             image={photo.data.square}
