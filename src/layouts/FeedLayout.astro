@@ -6,17 +6,15 @@ interface Props {
   tab: string;
   title: string;
   description: string;
-  license?: string;
 }
 
-const { tab, title, description, license } = Astro.props;
+const { tab, title, description } = Astro.props;
 ---
 
 <BaseLayout
   tab={tab}
   title={title}
   description={description}
-  license={license}
   class="flex flex-col gap-8"
 >
   <header>

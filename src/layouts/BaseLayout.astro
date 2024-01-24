@@ -17,7 +17,6 @@ interface Props {
   image?: ImageMetadata;
   imageDescription?: string;
   date?: Date;
-  license?: string;
   class?: string;
 }
 
@@ -29,7 +28,6 @@ const {
   image,
   imageDescription,
   date,
-  license,
   class: className,
 } = Astro.props;
 
@@ -99,6 +97,15 @@ const favicon = await getFavicon(180);
   <body
     class="relative flex flex-row gap-0 bg-stone-300 text-black dark:bg-stone-700 dark:text-white"
   >
+    <style>
+      @font-face {
+        font-family: "CCSymbols";
+        src: url("/fonts/CCSymbols.woff") format("woff");
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+      }
+    </style>
     <div class="flex-1"></div>
     <div class="flex min-h-screen max-w-screen-md flex-col items-center">
       <header class="w-full text-left">
@@ -115,7 +122,7 @@ const favicon = await getFavicon(180);
       <footer
         class="align-center flex w-full flex-col justify-center gap-4 py-8 sm:gap-4 sm:py-8 lg:py-16"
       >
-        <Footer license={license ?? "CC0 1.0 🅭 🄍"} />
+        <Footer />
       </footer>
     </div>
     <div class="flex-1"></div>

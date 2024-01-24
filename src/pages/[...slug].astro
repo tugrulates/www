@@ -4,6 +4,7 @@ import { getEntry, type CollectionEntry } from "astro:content";
 import Article from "@/components/Article.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Cover, { type CoverData } from "@/components/Cover.astro";
+import License from "@/components/License.astro";
 import { getPages, getPosts } from "@/content";
 
 export const getStaticPaths = (async () => {
@@ -67,6 +68,14 @@ const cover = await getCover(page);
     />
     <Article title={page.data.title} date={page.data.date}>
       <Content />
+      <License icons="🅭 🄍">
+        This article is dedicated to the public domain under the <a
+          rel="license"
+          href="https://creativecommons.org/publicdomain/zero/1.0/"
+          >Creative Commons CC0 1.0 Universal (CC0 1.0)</a
+        > license. You can copy, modify, distribute and perform the work, even for
+        commercial purposes, all without asking permission.
+      </License>
     </Article>
   </div>
 </BaseLayout>
