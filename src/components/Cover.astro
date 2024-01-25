@@ -34,7 +34,7 @@ const {
 } = Astro.props;
 ---
 
-<div class="group relative z-50 w-full max-sm:-mx-4 lg:pt-12">
+<div class="group/cover relative z-50 w-full max-sm:-mx-4 lg:pt-12">
   <div
     class="aspect-video w-full bg-stone-200/20 shadow shadow-stone-800/20 max-sm:aspect-square sm:rounded-2xl lg:scale-125 lg:shadow-lg"
   >
@@ -44,51 +44,52 @@ const {
         class="object-cover max-sm:w-screen sm:rounded-2xl"
       />
       <div
-        class="absolute inset-2 flex flex-row gap-2 max-sm:items-end sm:items-center"
+        class="absolute inset-2 flex flex-col items-end justify-between max-sm:items-end"
       >
-        {
-          previous !== undefined && (
-            <a aria-label="Previous item" href={previous}>
-              <CoverButton icon="heroicons:chevron-left-solid" />
-            </a>
-          )
-        }
-        <div class="grow"></div>
-        <div class="flex h-full flex-col justify-between">
-          <PhotoViewer client:only>
-            <CoverButton
-              slot="button"
-              icon="heroicons:arrows-pointing-out-solid"
-            />
-            <Image
-              slot="image"
-              src={image.data.wide}
-              alt={image.data.description}
-              width={image.data.wide.width}
-              height={image.data.wide.height}
-              format="jpg"
-              class="touch-auto"
-            />
-          </PhotoViewer>
+        <PhotoViewer client:only>
+          <CoverButton
+            slot="button"
+            icon="heroicons:arrows-pointing-out-solid"
+          />
+          <Image
+            slot="image"
+            src={image.data.wide}
+            alt={image.data.description}
+            width={image.data.wide.width}
+            height={image.data.wide.height}
+            format="jpg"
+            class="touch-auto"
+          />
+        </PhotoViewer>
+        <div class="flex w-full flex-row justify-between">
+          {
+            previous !== undefined && (
+              <a aria-label="Previous item" href={previous} class="group">
+                <CoverButton icon="heroicons:chevron-left-solid" />
+              </a>
+            )
+          }
+          <div class="grow"></div>
           {
             next !== undefined && (
-              <a aria-label="Next item" href={next}>
+              <a aria-label="Next item" href={next} class="group">
                 <CoverButton icon="heroicons:chevron-right-solid" />
               </a>
             )
           }
-          {
-            actionHref !== undefined && (
-              <a
-                aria-label={actionAlt}
-                href={actionHref}
-                download={actionDownload}
-              >
-                <CoverButton icon={actionIcon} />
-              </a>
-            )
-          }
         </div>
+        {
+          actionHref !== undefined && (
+            <a
+              aria-label={actionAlt}
+              href={actionHref}
+              download={actionDownload}
+              class="group"
+            >
+              <CoverButton icon={actionIcon} />
+            </a>
+          )
+        }
       </div>
     </div>
   </div>

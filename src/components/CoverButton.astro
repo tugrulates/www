@@ -6,7 +6,7 @@ const { icon, class: className } = Astro.props;
 
 <div
   class:list={[
-    "flex h-12 w-12 flex-row items-center gap-2 rounded-xl bg-stone-200/50 p-2 opacity-0 ring-inset ring-stone-500/50 transition transition-all hover:scale-110 hover:bg-stone-200 hover:ring-1 group-hover:opacity-80 group-has-[*:focus]:opacity-80 dark:bg-stone-800/50 dark:hover:bg-stone-800",
+    "flex h-12 w-12 flex-row items-center gap-2 rounded-xl bg-stone-200/50 p-2 opacity-0 ring-inset ring-stone-500/50 transition transition-all hover:scale-110 hover:bg-stone-200 hover:ring-1 group-hover/cover:opacity-80 group-focus:bg-stone-200 group-has-[*:focus]/cover:opacity-80 dark:bg-stone-800/50 dark:hover:bg-stone-800 dark:group-focus:bg-stone-800",
     className,
   ]}
 >

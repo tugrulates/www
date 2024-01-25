@@ -33,6 +33,7 @@ export default function PhotoViewer(props: Props): JSX.Element {
       onClick={() => {
         setIsOpen(true);
       }}
+      className="group"
     >
       {props.button}
     </button>
