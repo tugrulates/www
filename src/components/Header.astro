@@ -35,7 +35,10 @@ import Tab from "@/components/Tab.astro";
   });
 </script>
 
-<div class="flex flex-col gap-4 sm:pt-8 lg:pt-16">
+<header
+  class="flex w-full flex-col gap-4 text-left sm:pt-8 lg:pt-16"
+  transition:persist
+>
   <nav
     aria-label="Primary navigation"
     class="items-begin flex flex-row gap-1 sm:-mb-4"
@@ -68,4 +71,4 @@ import Tab from "@/components/Tab.astro";
       <Icon aria-hidden slot="darkIcon" name="heroicons:moon-solid" size={32} />
     </ThemeToggle>
   </nav>
-</div>
+</header>

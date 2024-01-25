@@ -3,10 +3,15 @@ import Social from "@/components/Social.astro";
 import { AUTHOR } from "@/consts";
 ---
 
-<nav aria-label="Social profiles" class="flex w-full flex-row justify-center">
-  {
-    AUTHOR.social.map((item) => (
-      <Social name={item.name} href={item.url} icon={item.icon} />
-    ))
-  }
-</nav>
+<footer
+  class="align-center flex w-full flex-col justify-center gap-4 py-8 sm:gap-4 sm:py-8 lg:py-16"
+  transition:persist
+>
+  <nav aria-label="Social profiles" class="flex w-full flex-row justify-center">
+    {
+      AUTHOR.social.map((item) => (
+        <Social name={item.name} href={item.url} icon={item.icon} />
+      ))
+    }
+  </nav>
+</footer>
