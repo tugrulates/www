@@ -8,37 +8,35 @@ const { tab, text, href } = Astro.props;
 ---
 
 <a
-  id=`tab-${tab}`
   href={href}
-  class="group z-10 h-full grow bg-stone-300 shadow-lg shadow-stone-900/20 ring-inset ring-stone-500/50 hover:ring-1 dark:bg-stone-700 sm:rounded-t-3xl"
+  id=`tab-${tab}`
+  class="tab group relative z-10 -mb-4 flex h-fit grow flex-col
+  overflow-hidden pb-4 shadow-lg shadow-stone-900/20 ring-inset
+  ring-stone-500/50 hover:ring-1 sm:rounded-t-3xl"
 >
   <div
-    class="h-full px-4 pt-2 group-hover:opacity-100 max-sm:pb-2 sm:-mb-10 sm:rounded-t-3xl sm:pb-16"
+    class="sm:justify-begin flex h-12 w-fit flex-row items-center gap-1 px-4 text-sm font-thin max-sm:mx-auto"
   >
-    <div
-      class="sm:justify-begin flex h-8 w-fit flex-row items-center gap-1 text-sm font-thin max-sm:mx-auto"
-    >
-      <slot />
-      <span class="hidden pt-0.5 sm:inline">{text}</span>
-    </div>
+    <slot />
+    <span class="hidden sm:inline">{text}</span>
   </div>
 </a>
 
 <style>
-  a > div {
-    @apply bg-stone-200/50 sm:opacity-75;
+  .tab {
+    @apply bg-stone-400;
   }
-  a > div {
-    @apply dark:bg-stone-800/50;
+  :global(.dark) .tab {
+    @apply bg-stone-600;
   }
-  :global([data-tab="posts"]) #tab-posts > div,
-  :global([data-tab="photos"]) #tab-photos > div,
-  :global([data-tab="about"]) #tab-about > div {
-    @apply bg-stone-200 opacity-100;
+  :global([data-tab="posts"]) #tab-posts,
+  :global([data-tab="photos"]) #tab-photos,
+  :global([data-tab="about"]) #tab-about {
+    @apply bg-stone-200;
   }
-  :global(.dark) :global([data-tab="posts"]) #tab-posts > div,
-  :global(.dark) :global([data-tab="photos"]) #tab-photos > div,
-  :global(.dark) :global([data-tab="about"]) #tab-about > div {
+  :global(.dark) :global([data-tab="posts"]) #tab-posts,
+  :global(.dark) :global([data-tab="photos"]) #tab-photos,
+  :global(.dark) :global([data-tab="about"]) #tab-about {
     @apply bg-stone-800;
   }
 </style>

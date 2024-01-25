@@ -46,18 +46,18 @@ export default function ThemeToggle({
         onChange={() => {
           toggleTheme(theme, setTheme);
         }}
-        className="group h-12 w-12 transition-transform hover:scale-110"
+        className="group h-12 w-12 transition-transform "
       >
         <div
           className={[
-            "relative z-0 h-24 w-24 -translate-x-14 translate-y-2 transition-transform duration-1000",
+            "relative z-0 flex h-24 w-24 -translate-x-12 flex-col  transition-transform duration-1000",
             theme.dark ? "rotate-180" : "rotate-0",
           ].join(" ")}
         >
-          <div className="p-l-12 absolute right-0 top-0 h-8 w-8">
+          <div className=" h-12 w-12 self-end p-2 group-hover:scale-110">
             {lightIcon}
           </div>
-          <div className="absolute bottom-0 left-0 h-8 w-8 rotate-180">
+          <div className="h-12 w-12 rotate-180 p-2 group-hover:scale-110">
             {darkIcon}
           </div>
         </div>
