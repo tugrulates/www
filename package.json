@@ -16,6 +16,7 @@
     "build-photos": "tsx src/scripts/build-photos.ts",
     "prebuild": "npm run fetch && npm run build-blog && npm run build-photos",
     "lint": "npx eslint .",
+    "format": "npx prettier . -cw",
     "dev": "DRAFTS=true astro dev",
     "build": "npm run lint && astro check --minimumFailingSeverity=warning && astro build",
     "preview": "astro preview",
@@ -72,13 +73,5 @@
     "prettier-plugin-astro": "^0.12.2",
     "prettier-plugin-tailwindcss": "^0.5.7",
     "typescript": "^5.3.3"
-  },
-  "prettier": {
-    "plugins": [
-      "@prettier/plugin-xml",
-      "prettier-plugin-astro",
-      "prettier-plugin-tailwindcss"
-    ],
-    "xmlWhitespaceSensitivity": "ignore"
   }
 }
