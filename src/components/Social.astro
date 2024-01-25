@@ -5,14 +5,19 @@ const { name, href, icon } = Astro.props;
 const external = Boolean(href.startsWith("http"));
 ---
 
-<a aria-label={name} href={href} rel={external ? "nofollow" : undefined}>
+<a
+  aria-label={name}
+  href={href}
+  rel={external ? "nofollow" : undefined}
+  class="group"
+>
   <div
-    class="justify-left transition-color group relative flex h-full flex-col items-center justify-end gap-2 p-2 transition-transform hover:opacity-100 sm:opacity-75 sm:hover:scale-110"
+    class="justify-left transition-color relative flex h-full flex-col items-center justify-end gap-2 p-2 transition-transform hover:opacity-100 sm:opacity-75 sm:hover:scale-110"
   >
     <span
       role="tooltip"
       aria-hidden="true"
-      class="collapse absolute min-w-24 scale-50 text-center align-text-bottom text-xs font-thin opacity-0 transition-all group-hover:visible group-hover:-translate-y-10 group-hover:scale-100 group-hover:opacity-100 max-sm:hidden"
+      class="collapse absolute min-w-24 scale-50 text-center align-text-bottom text-xs font-thin opacity-0 transition-all group-hover:visible group-hover:-translate-y-10 group-hover:scale-100 group-hover:opacity-100 group-focus:visible group-focus:-translate-y-10 group-focus:scale-100 group-focus:opacity-100 max-sm:hidden"
     >
       {name}
     </span>
