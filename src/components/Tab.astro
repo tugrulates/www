@@ -1,26 +1,19 @@
 ---
 interface Props {
+  tab: string;
   href: string;
   text: string;
-  selected: boolean;
 }
-const { text, href, selected } = Astro.props;
+const { tab, text, href } = Astro.props;
 ---
 
 <a
+  id=`tab-${tab}`
   href={href}
   class="group z-10 h-full grow bg-stone-300 shadow-lg shadow-stone-900/20 ring-inset ring-stone-500/50 hover:ring-1 dark:bg-stone-700 sm:rounded-t-3xl"
-  transition:persist
-  transition:name={`tab-${href}-${selected ? "selected" : "unselected"}}`}
-  transition:animate="none"
 >
   <div
-    class:list={[
-      "h-full px-4 pt-2 group-hover:opacity-100 max-sm:pb-2 sm:-mb-10 sm:rounded-t-3xl sm:pb-16",
-      selected
-        ? "bg-stone-200 opacity-100 dark:bg-stone-800"
-        : "bg-stone-200/50 dark:bg-stone-800/50 sm:opacity-75",
-    ]}
+    class="h-full px-4 pt-2 group-hover:opacity-100 max-sm:pb-2 sm:-mb-10 sm:rounded-t-3xl sm:pb-16"
   >
     <div
       class="sm:justify-begin flex h-8 w-fit flex-row items-center gap-1 text-sm font-thin max-sm:mx-auto"
@@ -30,3 +23,22 @@ const { text, href, selected } = Astro.props;
     </div>
   </div>
 </a>
+
+<style>
+  a > div {
+    @apply bg-stone-200/50 sm:opacity-75;
+  }
+  a > div {
+    @apply dark:bg-stone-800/50;
+  }
+  :global([data-tab="posts"]) #tab-posts > div,
+  :global([data-tab="photos"]) #tab-photos > div,
+  :global([data-tab="about"]) #tab-about > div {
+    @apply bg-stone-200 opacity-100;
+  }
+  :global(.dark) :global([data-tab="posts"]) #tab-posts > div,
+  :global(.dark) :global([data-tab="photos"]) #tab-photos > div,
+  :global(.dark) :global([data-tab="about"]) #tab-about > div {
+    @apply bg-stone-800;
+  }
+</style>

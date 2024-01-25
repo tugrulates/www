@@ -4,8 +4,6 @@ import { Icon } from "astro-icon/components";
 import avatar from "@/images/me.png";
 import ThemeToggle from "@/components/ThemeToggle";
 import Tab from "@/components/Tab.astro";
-
-const { tab } = Astro.props;
 ---
 
 <script is:inline>
@@ -42,17 +40,17 @@ const { tab } = Astro.props;
     aria-label="Primary navigation"
     class="items-begin flex flex-row gap-1 sm:-mb-4"
   >
-    <Tab text="Posts" href="/" selected={tab === "posts"}>
+    <Tab tab="posts" text="Posts" href="/">
       <Icon
         aria-hidden
         name="heroicons:chat-bubble-bottom-center-text"
         size={24}
       />
     </Tab>
-    <Tab text="Photography" href="/photography" selected={tab === "photos"}>
+    <Tab tab="photos" text="Photography" href="/photography">
       <Icon aria-hidden name="heroicons:camera" size={24} />
     </Tab>
-    <Tab text="About" href="/about" selected={tab === "about"}>
+    <Tab tab="about" text="About" href="/about">
       <div class="row flex h-6 w-6 items-center justify-center">
         <Image
           aria-hidden

@@ -98,6 +98,7 @@ const favicon = await getFavicon(180);
   </head>
   <body
     class="relative flex flex-row gap-0 bg-stone-300 text-black dark:bg-stone-700 dark:text-white"
+    data-tab={tab}
   >
     <style>
       @font-face {
@@ -110,8 +111,8 @@ const favicon = await getFavicon(180);
     </style>
     <div class="flex-1"></div>
     <div class="flex min-h-screen max-w-screen-md flex-col items-center">
-      <header class="w-full text-left">
-        <Header tab={tab} />
+      <header class="w-full text-left" transition:persist>
+        <Header />
       </header>
       <main
         class:list={[
@@ -123,6 +124,7 @@ const favicon = await getFavicon(180);
       </main>
       <footer
         class="align-center flex w-full flex-col justify-center gap-4 py-8 sm:gap-4 sm:py-8 lg:py-16"
+        transition:persist
       >
         <Footer />
       </footer>

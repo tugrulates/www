@@ -3,11 +3,7 @@ import Social from "@/components/Social.astro";
 import { AUTHOR } from "@/consts";
 ---
 
-<nav
-  aria-label="Social profiles"
-  class="flex w-full flex-row justify-center"
-  transition:persist
->
+<nav aria-label="Social profiles" class="flex w-full flex-row justify-center">
   {
     AUTHOR.social.map((item) => (
       <Social name={item.name} href={item.url} icon={item.icon} />
