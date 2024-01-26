@@ -50,22 +50,25 @@ const {
       <div
         class="absolute inset-2 flex flex-col items-end justify-between max-sm:items-end"
       >
-        <PhotoViewer client:only>
-          <Image
-            slot="image"
-            src={image.data.wide}
-            alt={image.data.description}
-            width={image.data.wide.width}
-            height={image.data.wide.height}
-            format="jpg"
-            class="touch-auto"
-          />
-          <CoverButton
-            slot="openButton"
-            icon="heroicons:arrows-pointing-out-solid"
-          />
-          <CoverButton slot="closeButton" icon="heroicons:x-mark-solid" />
-        </PhotoViewer>
+        <div class="flex flex-row">
+          <div class="h-12 w-12 grow"></div>
+          <PhotoViewer client:only>
+            <Image
+              slot="image"
+              src={image.data.wide}
+              alt={image.data.description}
+              width={image.data.wide.width}
+              height={image.data.wide.height}
+              format="jpg"
+              class="touch-auto"
+            />
+            <CoverButton
+              slot="openButton"
+              icon="heroicons:arrows-pointing-out-solid"
+            />
+            <CoverButton slot="closeButton" icon="heroicons:x-mark-solid" />
+          </PhotoViewer>
+        </div>
         <div class="flex w-full flex-row justify-between">
           {
             previous !== undefined && (

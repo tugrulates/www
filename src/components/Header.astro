@@ -63,7 +63,7 @@ import Tab from "@/components/Tab.astro";
         />
       </div>
     </Tab>
-    <ThemeToggle client:load transition:persist>
+    <ThemeToggle client:only transition:persist>
       <Icon aria-hidden slot="lightIcon" name="heroicons:sun-solid" size={32} />
       <Icon aria-hidden slot="darkIcon" name="heroicons:moon-solid" size={32} />
     </ThemeToggle>
