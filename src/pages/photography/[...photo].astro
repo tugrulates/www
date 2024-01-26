@@ -12,7 +12,7 @@ import { formatDate } from "@/date";
 export const getStaticPaths = (async () => {
   const photos = await getCollection("photos");
   return photos.map((photo) => ({
-    params: { slug: photo.id },
+    params: { photo: photo.id },
     props: { photo },
   }));
 }) satisfies GetStaticPaths;

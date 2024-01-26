@@ -11,7 +11,7 @@ export const getStaticPaths = (async () => {
   const pages = await getPages();
   const posts = await getPosts();
   return [...pages, ...posts].map((page) => ({
-    params: { slug: page.slug },
+    params: { post: page.slug },
     props: { page },
   }));
 }) satisfies GetStaticPaths;
