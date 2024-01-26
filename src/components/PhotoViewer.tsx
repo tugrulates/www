@@ -24,20 +24,18 @@ export default function PhotoViewer(props: Props): JSX.Element {
         onClick={() => {
           setIsOpen(false);
         }}
-        className="fixed inset-0 flex h-screen w-screen transform items-center justify-center overflow-hidden overflow-y-auto bg-gradient-to-b from-stone-400 to-stone-300 align-middle dark:from-stone-600 dark:to-stone-700 "
+        className="group/cover fixed  inset-0 flex h-screen w-screen transform items-center justify-center overflow-hidden overflow-y-auto bg-gradient-to-b from-stone-400 to-stone-300 align-middle dark:from-stone-600 dark:to-stone-700 "
       >
-        <div className="group/cover h-fit w-fit bg-stone-200/20">
-          {props.image}
-          <button
-            aria-label="Close image"
-            onClick={() => {
-              setIsOpen(true);
-            }}
-            className="group absolute right-2 top-2"
-          >
-            {props.closeButton}
-          </button>
-        </div>
+        <div className="h-fit w-fit bg-stone-200/20">{props.image}</div>
+        <button
+          aria-label="Close image"
+          onClick={() => {
+            setIsOpen(true);
+          }}
+          className="group absolute right-2 top-2"
+        >
+          {props.closeButton}
+        </button>
       </Dialog.Panel>
     </Dialog>
   ) : (
