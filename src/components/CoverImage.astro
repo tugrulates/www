@@ -1,0 +1,61 @@
+---
+import { getImage } from "astro:assets";
+import { DIMENSIONS } from "@/consts";
+import type { CoverData } from "@/components/Cover.astro";
+
+interface Props {
+  cover: CoverData;
+  class?: string;
+}
+const { cover: image, class: className } = Astro.props;
+
+const [wide, square] = await Promise.all([
+  await Promise.all(
+    [1, 2, 3, 4].map(
+      async (scale) =>
+        await getImage({
+          src: image.data.wide,
+          format: "webp",
+          width: DIMENSIONS.desktop_cover_width * scale,
+          height: DIMENSIONS.desktop_cover_height * scale,
+        }),
+    ),
+  ),
+  await Promise.all(
+    [1, 2, 3, 4].map(
+      async (scale) =>
+        await getImage({
+          src: image.data.square,
+          format: "webp",
+          width: DIMENSIONS.mobile_cover_size * scale,
+          height: DIMENSIONS.mobile_cover_size * scale,
+        }),
+    ),
+  ),
+]);
+---
+
+<picture class="object-contain">
+  <source
+    media="(orientation: landscape)"
+    srcset={`${wide[0].src} 1x, ${wide[1].src} 2x, ${wide[2].src} 3x, ${wide[3].src} 4x`}
+  />
+  <source
+    media={`(max-width: ${DIMENSIONS.mobile_cover_size - 1}px)`}
+    srcset={`${square[0].src} 1x, ${square[1].src} 2x, ${square[2].src} 3x, ${square[3].src} 4x`}
+  />
+  <source
+    media={`(min-width: ${DIMENSIONS.mobile_cover_size}px)`}
+    srcset={`${wide[0].src} 1x, ${wide[1].src} 2x, ${wide[2].src} 3x, ${wide[3].src} 4x`}
+  />
+  <img
+    class:list={[
+      "h-full w-full max-sm:aspect-square sm:aspect-video",
+      className,
+    ]}
+    src={image.data.wide.src}
+    alt={image.data.description}
+    width={DIMENSIONS.desktop_cover_width}
+    height={DIMENSIONS.desktop_cover_height}
+  />
+</picture>

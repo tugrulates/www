@@ -1,0 +1,102 @@
+---
+import { formatDate, formatDateIso } from "@/date";
+
+interface Props {
+  title: string;
+  date?: Date;
+  class?: string;
+}
+const { title, date, class: className } = Astro.props;
+---
+
+<article
+  class:list={[
+    "prose prose-stone w-full max-w-none px-2 dark:prose-invert md:prose-lg",
+    "prose-a:underline prose-a:decoration-stone-500/50 hover:prose-a:decoration-current",
+    "prose-img:m-0 prose-img:rounded-xl [&_p:has(img)]:!px-0",
+    "prose-ol:!pl-12 prose-ul:!pl-12",
+    "prose-pre:!bg-stone-900 prose-pre:px-4 prose-pre:py-2 prose-pre:shadow prose-pre:shadow-black",
+    "prose-table:overflow-clip sm:prose-table:rounded-xl ",
+    "prose-tr:border-transparent sm:prose-tr:rounded-xl sm:hover:prose-tr:bg-stone-500/20",
+    "prose-th:p-4 prose-th:align-top prose-td:p-4 prose-td:align-top",
+    "prose-hr:border-stone-500",
+    "print:!text-black print:prose-headings:!text-black print:prose-a:!text-black print:prose-strong:!text-black print:prose-code:!text-black",
+    className,
+  ]}
+>
+  <header class="flex flex-col">
+    <h1>{title}</h1>
+    {
+      date !== undefined && (
+        <time
+          datetime={formatDateIso(date)}
+          class="text-md self-end whitespace-nowrap font-bold italic"
+        >
+          {formatDate(date)}
+        </time>
+      )
+    }
+  </header>
+  <slot />
+  <style>
+    article > :global(p),
+    article > :global(ul),
+    article > :global(ol),
+    article > :global(pre),
+    article > :global(lite-youtube),
+    article :global(blockquote) {
+      @apply -mx-2 px-2 outline-none outline-offset-0 transition-all max-sm:rounded-none sm:rounded-xl;
+      @apply sm:hover:bg-stone-500/20 sm:hover:outline-8 sm:hover:outline-stone-500/20;
+      @apply print:hover:bg-transparent print:hover:outline-transparent;
+      @apply print:!text-black;
+    }
+    article > :global(lite-youtube) {
+      @apply aspect-video;
+    }
+    article > :global(lite-youtube::before) {
+      @apply bg-none;
+    }
+    article > :global(lite-youtube.lyt-activated) {
+      @apply !bg-none;
+    }
+    article :global(a::after) {
+      @apply inline-block h-3 w-0 bg-current pl-0.5 pr-3 align-text-top opacity-75 hover:opacity-100 print:hidden;
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      mask-size: 100% 100%;
+    }
+    article :global(a[rel="nofollow"]::after) {
+      content: "";
+      -webkit-mask-image: url("/icons/link-external.svg");
+      mask-image: url("/icons/link-external.svg");
+    }
+    article :global(a[href^="https://en.wikipedia.org/"]::after)
+    {
+      content: "";
+      -webkit-mask-image: url("/icons/logo-wikipedia.svg");
+      mask-image: url("/icons/logo-wikipedia.svg");
+    }
+    article :global(a[href$=".pdf"]::after) {
+      content: "";
+      -webkit-mask-image: url("/icons/link-document.svg");
+      mask-image: url("/icons/link-document.svg");
+    }
+    article :global(a[href$=".zip"]::after) {
+      content: "";
+      -webkit-mask-image: url("/icons/link-download.svg");
+      mask-image: url("/icons/link-download.svg");
+    }
+    article :global(a[href^="https://www.linkedin.com/"]::after)
+    {
+      content: "";
+      -webkit-mask-image: url("/icons/logo-linkedin.svg");
+      mask-image: url("/icons/logo-linkedin.svg");
+    }
+    article :global(a[href^="https://twitter.com/"]::after)
+    {
+      content: "";
+      -webkit-mask-image: url("/icons/logo-twitter-x.svg");
+      mask-image: url("/icons/logo-twitter-x.svg");
+    }
+  </style>
+</article>

@@ -1,0 +1,25 @@
+---
+import Social from "@/components/Social.astro";
+import { AUTHOR } from "@/consts";
+
+const { class: className } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<footer
+  class:list={[
+    "align-center flex w-full flex-col items-center justify-center",
+    "gap-4 pb-6 pt-8 lg:pb-12 lg:pt-16",
+    className,
+  ]}
+  transition:persist
+>
+  <nav aria-label="Social profiles" class="flex w-full flex-row justify-center">
+    {
+      AUTHOR.social.map((item) => (
+        <Social name={item.name} href={item.url} icon={item.icon} />
+      ))
+    }
+  </nav>
+  <p>Copyright © {year}, Tugrul Ates</p>
+</footer>

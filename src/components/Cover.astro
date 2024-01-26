@@ -1,0 +1,104 @@
+---
+import { Image } from "astro:assets";
+import { fade } from "astro:transitions";
+import CoverImage from "@/components/CoverImage.astro";
+import CoverButton from "@/components/CoverButton.astro";
+import PhotoViewer from "@/components/PhotoViewer.tsx";
+
+export interface CoverData {
+  id?: string;
+  data: {
+    wide: ImageMetadata;
+    square: ImageMetadata;
+    description: string;
+  };
+}
+
+interface Props {
+  image: CoverData;
+  previous?: string;
+  next?: string;
+  actionHref?: string;
+  actionDownload?: string;
+  actionIcon?: string;
+  actionAlt?: string;
+}
+const {
+  image,
+  previous,
+  next,
+  actionHref,
+  actionDownload,
+  actionIcon,
+  actionAlt,
+} = Astro.props;
+---
+
+<div class="group/cover relative z-50 w-full max-sm:-mx-4 lg:pt-12 print:pt-0">
+  <div
+    class:list={[
+      "aspect-video w-full max-sm:aspect-square",
+      "bg-stone-200/20 shadow shadow-stone-800/20 sm:rounded-2xl",
+      "lg:scale-125 lg:shadow-lg print:scale-100 print:shadow-none",
+    ]}
+  >
+    <div transition:animate={fade({ duration: "0.1s" })} class="h-full w-full">
+      <CoverImage
+        cover={image}
+        class="object-cover max-sm:w-screen sm:rounded-2xl"
+      />
+      <div
+        class="absolute inset-2 flex flex-col items-end justify-between max-sm:items-end"
+      >
+        <div class="flex flex-row">
+          <div class="h-12 w-12 grow"></div>
+          <PhotoViewer client:only>
+            <Image
+              slot="image"
+              src={image.data.wide}
+              alt={image.data.description}
+              width={image.data.wide.width}
+              height={image.data.wide.height}
+              format="jpg"
+              class="touch-auto"
+            />
+            <CoverButton
+              slot="openButton"
+              icon="heroicons:arrows-pointing-out-solid"
+            />
+            <CoverButton slot="closeButton" icon="heroicons:x-mark-solid" />
+          </PhotoViewer>
+        </div>
+        <div class="flex w-full flex-row justify-between">
+          {
+            previous !== undefined && (
+              <a aria-label="Previous item" href={previous} class="group">
+                <CoverButton icon="heroicons:chevron-left-solid" />
+              </a>
+            )
+          }
+          <div class="grow"></div>
+          {
+            next !== undefined && (
+              <a aria-label="Next item" href={next} class="group">
+                <CoverButton icon="heroicons:chevron-right-solid" />
+              </a>
+            )
+          }
+        </div>
+        {
+          actionHref !== undefined && (
+            <a
+              aria-label={actionAlt}
+              href={actionHref}
+              download={actionDownload}
+              class="group"
+            >
+              <CoverButton icon={actionIcon} />
+            </a>
+          )
+        }
+      </div>
+    </div>
+  </div>
+</div>

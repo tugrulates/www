@@ -1,0 +1,30 @@
+---
+import { Image } from "astro:assets";
+
+const { link, image, title, description, class: className } = Astro.props;
+---
+
+<a
+  aria-label={title}
+  href={link}
+  class:list={[
+    "align-center group transition hover:bg-stone-500/10 hover:opacity-100 sm:rounded-xl print:block",
+    className,
+  ]}
+>
+  <div
+    class:list={[
+      "flex aspect-square h-auto overflow-hidden transition-all sm:group-hover:scale-110",
+      "bg-stone-200/20 shadow shadow-stone-900 sm:rounded-2xl",
+    ]}
+  >
+    <Image
+      src={image}
+      alt={description}
+      width={230}
+      height={230}
+      densities={[1, 2, 3, 4]}
+      class="transform-all min-w-full object-cover object-center"
+    />
+  </div>
+</a>

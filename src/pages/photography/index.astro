@@ -1,0 +1,31 @@
+---
+import FeedLayout from "@/layouts/FeedLayout.astro";
+import Photo from "@/components/Photo.astro";
+import { getPhotos } from "@/content";
+
+const photos = await getPhotos();
+---
+
+<FeedLayout
+  tab="photos"
+  title="Photography"
+  description=`
+      I enjoy playing around with light and images.
+      It's just a hobby, but it brings me happiness,
+      especially when I capture unique moments and artifacts.`
+>
+  <ul role="list" class="flex flex-row flex-wrap justify-between gap-4">
+    {
+      photos.map((photo) => (
+        <li class="grow">
+          <Photo
+            link={`./photography/${photo.id}`}
+            image={photo.data.square}
+            title={photo.data.title}
+            description={photo.data.description}
+          />
+        </li>
+      ))
+    }
+  </ul>
+</FeedLayout>

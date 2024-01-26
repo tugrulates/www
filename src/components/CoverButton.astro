@@ -1,0 +1,19 @@
+---
+import { Icon } from "astro-icon/components";
+
+const { icon, class: className } = Astro.props;
+---
+
+<div
+  class:list={[
+    "flex h-12 w-12 flex-row items-center gap-2 rounded-xl p-2",
+    "ring-inset ring-stone-500/50 transition transition-all hover:scale-110 hover:ring-1",
+    "opacity-0 group-hover/cover:opacity-80 group-has-[*:focus]/cover:opacity-80",
+    "bg-stone-200/50 hover:bg-stone-200 group-focus:bg-stone-200",
+    "dark:bg-stone-800/50 dark:hover:bg-stone-800 dark:group-focus:bg-stone-800",
+    "print:hidden",
+    className,
+  ]}
+>
+  <Icon aria-hidden name={icon} size={32} />
+</div>

@@ -1,0 +1,134 @@
+---
+import "@fontsource/fira-sans";
+import "@fontsource/fira-code";
+import { ViewTransitions } from "astro:transitions";
+import { SEO } from "astro-seo";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import { AUTHOR, SITE } from "@/consts";
+import { getFavicon, getOpenGraphImage } from "@/image";
+import { formatDateIso } from "@/date";
+
+interface Props {
+  tab: string;
+  title: string;
+  description: string;
+  keywords?: string[];
+  image?: ImageMetadata;
+  imageDescription?: string;
+  date?: Date;
+  class?: string;
+}
+
+const {
+  tab,
+  title,
+  description,
+  keywords,
+  image,
+  imageDescription,
+  date,
+  class: className,
+} = Astro.props;
+
+if (image !== undefined && imageDescription === undefined) {
+  throw new Error("Image description is required when image is provided");
+}
+
+const ogImage =
+  image !== undefined ? await getOpenGraphImage(image) : undefined;
+const appleTouchIcon = await getFavicon(180);
+const favicon = await getFavicon(180);
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>{title}</title>
+    <meta name="author" content={AUTHOR.name} />
+    <meta name="description" content={description} />
+    <meta name="keywords" content={(keywords ?? []).join(", ")} />
+    <SEO
+      openGraph={{
+        basic: {
+          title,
+          type: date !== undefined ? "article" : "website",
+          image: ogImage !== undefined ? ogImage.src : "",
+          url: `${SITE.url}${Astro.url.pathname}`,
+        },
+        optional: {
+          description,
+          locale: "en",
+          siteName: SITE.domain,
+        },
+        article: {
+          publishedTime: date !== undefined ? formatDateIso(date) : "",
+          authors: [AUTHOR.name],
+          tags: keywords ?? [],
+        },
+        image: {
+          type: ogImage !== undefined ? `image/${ogImage.options.format}` : "",
+          width: ogImage !== undefined ? ogImage.attributes.width : "",
+          height: ogImage !== undefined ? ogImage.attributes.height : "",
+          alt: imageDescription ?? "",
+        },
+      }}
+      twitter={{
+        creator: AUTHOR.twitter,
+        site: AUTHOR.twitter,
+        card: "summary_large_image",
+        title,
+        description,
+        image: ogImage !== undefined ? ogImage.src : "",
+        imageAlt: imageDescription ?? "",
+      }}
+    />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link
+      rel="icon"
+      href={favicon.src}
+      type={`image/${favicon.options.format}`}
+    />
+    <link rel="apple-touch-icon" href={appleTouchIcon.src} />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="viewport" content="width=device-width" />
+    <ViewTransitions />
+  </head>
+  <body
+    class:list={[
+      "relative flex flex-row gap-0",
+      "bg-gradient-to-b from-stone-400 to-stone-300 dark:from-stone-600 dark:to-stone-700",
+      "text-black dark:text-white print:!text-black",
+    ]}
+    data-tab={tab}
+  >
+    <style>
+      @font-face {
+        font-family: "CCSymbols";
+        src: url("/fonts/CCSymbols.woff") format("woff");
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+      }
+    </style>
+    <div class="flex-1"></div>
+    <div class="flex min-h-screen max-w-screen-md flex-col items-center">
+      <Header class="print:hidden" />
+      <main
+        class:list={[
+          "z-10 w-full flex-1 pb-2 text-left sm:p-4",
+          "sm:rounded-b-3xl sm:rounded-t-xl print:rounded-none",
+          "shadow-lg shadow-stone-900/20 print:shadow-none",
+          "bg-stone-200 dark:bg-stone-800 print:!bg-white",
+          className,
+        ]}
+      >
+        <slot />
+      </main>
+      <Footer class="print:hidden" />
+    </div>
+    <div class="flex-1"></div>
+  </body>
+</html>

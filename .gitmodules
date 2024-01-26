@@ -1,3 +1,6 @@
-[submodule "docs"]
-	path = docs
-	url = https://github.com/tugrulates/blog-docs.git
+[submodule "src/blog"]
+	path = src/blog
+	url = https://github.com/tugrulates/blog
+[submodule "src/photos"]
+	path = src/photos
+	url = https://github.com/tugrulates/photos

@@ -1,0 +1,76 @@
+---
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+import avatar from "@/images/me.png";
+import ThemeToggle from "@/components/ThemeToggle";
+import Tab from "@/components/Tab.astro";
+
+const { class: className } = Astro.props;
+---
+
+<script is:inline>
+  function getDark() {
+    if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+      try {
+        const theme = JSON.parse(localStorage.getItem("theme") ?? "");
+        const { dark } = theme;
+        return dark;
+      } catch (e) {}
+    }
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      return true;
+    }
+    return false;
+  }
+
+  function setTheme(document) {
+    if (getDark()) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }
+
+  setTheme(document);
+  document.addEventListener("astro:before-swap", (event) => {
+    setTheme(event.newDocument);
+  });
+</script>
+
+<header
+  class:list={[
+    "flex w-full flex-col gap-4 text-left sm:pt-8 lg:pt-16",
+    className,
+  ]}
+  transition:persist
+>
+  <nav aria-label="Primary navigation" class="items-begin flex flex-row gap-1">
+    <Tab tab="posts" text="Posts" href="/">
+      <Icon
+        aria-hidden
+        name="heroicons:chat-bubble-bottom-center-text"
+        size={24}
+      />
+    </Tab>
+    <Tab tab="photos" text="Photography" href="/photography">
+      <Icon aria-hidden name="heroicons:camera" size={24} />
+    </Tab>
+    <Tab tab="about" text="About" href="/about">
+      <div class="row flex h-6 w-6 items-center justify-center">
+        <Image
+          aria-hidden
+          alt=""
+          src={avatar}
+          width="22"
+          height="22"
+          densities={[1, 2, 3, 4]}
+          class="rounded-full border border-black dark:border-white"
+        />
+      </div>
+    </Tab>
+    <ThemeToggle client:only transition:persist>
+      <Icon aria-hidden slot="lightIcon" name="heroicons:sun-solid" size={32} />
+      <Icon aria-hidden slot="darkIcon" name="heroicons:moon-solid" size={32} />
+    </ThemeToggle>
+  </nav>
+</header>

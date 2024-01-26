@@ -1,4 +1,10 @@
 {
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "githubPullRequests.defaultMergeMethod": "squash"
+  "eslint.validate": ["astro", "typescript", "typescriptreact"],
+  "files.associations": {
+    "*.mdx": "markdown"
+  },
+  "[astro]": {
+    "editor.defaultFormatter": "astro-build.astro-vscode"
+  }
 }

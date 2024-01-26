@@ -1,3 +1,5 @@
-**/third_party
-public
-templates
+.github
+.vite
+dist
+node_modules
+package-lock.json
