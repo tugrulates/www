@@ -47,10 +47,6 @@ const {
         class="absolute inset-2 flex flex-col items-end justify-between max-sm:items-end"
       >
         <PhotoViewer client:only>
-          <CoverButton
-            slot="button"
-            icon="heroicons:arrows-pointing-out-solid"
-          />
           <Image
             slot="image"
             src={image.data.wide}
@@ -60,6 +56,11 @@ const {
             format="jpg"
             class="touch-auto"
           />
+          <CoverButton
+            slot="openButton"
+            icon="heroicons:arrows-pointing-out-solid"
+          />
+          <CoverButton slot="closeButton" icon="heroicons:x-mark-solid" />
         </PhotoViewer>
         <div class="flex w-full flex-row justify-between">
           {
