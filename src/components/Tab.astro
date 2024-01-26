@@ -10,7 +10,11 @@ const { tab, text, href } = Astro.props;
 <a
   href={href}
   id=`tab-${tab}`
-  class="tab group relative z-10 -mb-4 flex h-fit grow flex-col overflow-hidden bg-stone-300 pb-4 shadow-lg shadow-stone-900/20 ring-inset ring-stone-500/50 hover:bg-stone-200/50 hover:ring-1 dark:bg-stone-700 dark:hover:bg-stone-800/50 sm:rounded-t-3xl"
+  class:list={[
+    "tab group relative z-10 -mb-4 flex h-fit grow flex-col overflow-hidden pb-4 sm:rounded-t-3xl",
+    "shadow-lg shadow-stone-900/20 ring-inset ring-stone-500/50 hover:ring-1",
+    "bg-stone-300 hover:bg-stone-200/50 dark:bg-stone-700 dark:hover:bg-stone-800/50",
+  ]}
 >
   <div
     class="sm:justify-begin flex h-12 w-fit flex-row items-center gap-1 px-4 text-sm font-thin max-sm:mx-auto"

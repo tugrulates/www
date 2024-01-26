@@ -97,7 +97,11 @@ const favicon = await getFavicon(180);
     <ViewTransitions />
   </head>
   <body
-    class="relative flex flex-row gap-0 bg-gradient-to-b from-stone-400 to-stone-300 text-black dark:from-stone-600 dark:to-stone-700 dark:text-white"
+    class:list={[
+      "relative flex flex-row gap-0 bg-gradient-to-b",
+      "from-stone-400 to-stone-300 text-black",
+      "dark:from-stone-600 dark:to-stone-700 dark:text-white",
+    ]}
     data-tab={tab}
   >
     <style>
@@ -114,7 +118,8 @@ const favicon = await getFavicon(180);
       <Header />
       <main
         class:list={[
-          "z-10 w-full flex-1 bg-stone-200 pb-2 text-left shadow-lg shadow-stone-900/20 dark:bg-stone-800 sm:rounded-b-3xl sm:rounded-t-xl sm:p-4",
+          "z-10 w-full flex-1 pb-2 text-left sm:rounded-b-3xl sm:rounded-t-xl sm:p-4",
+          "bg-stone-200 shadow-lg shadow-stone-900/20 dark:bg-stone-800 ",
           className,
         ]}
       >

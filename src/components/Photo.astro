@@ -13,7 +13,10 @@ const { link, image, title, description, class: className } = Astro.props;
   ]}
 >
   <div
-    class="flex aspect-square h-auto overflow-hidden bg-stone-200/20 shadow shadow-stone-900 transition-all sm:rounded-2xl sm:group-hover:scale-110"
+    class:list={[
+      "flex aspect-square h-auto overflow-hidden transition-all sm:group-hover:scale-110",
+      "bg-stone-200/20 shadow shadow-stone-900 sm:rounded-2xl",
+    ]}
   >
     <Image
       src={image}

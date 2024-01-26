@@ -12,6 +12,14 @@ const { title, date, class: className } = Astro.props;
 <article
   class:list={[
     "prose prose-stone w-full max-w-none px-2 dark:prose-invert md:prose-lg",
+    "prose-a:underline prose-a:decoration-stone-500/50 hover:prose-a:decoration-current",
+    "prose-img:m-0 prose-img:rounded-xl [&_p:has(img)]:!px-0",
+    "prose-ol:!pl-12 prose-ul:!pl-12",
+    "prose-pre:!bg-stone-900 prose-pre:px-4 prose-pre:py-2 prose-pre:shadow prose-pre:shadow-black",
+    "prose-table:overflow-clip sm:prose-table:rounded-xl ",
+    "prose-tr:border-transparent sm:prose-tr:rounded-xl sm:hover:prose-tr:bg-stone-500/20",
+    "prose-th:p-4 prose-th:align-top prose-td:p-4 prose-td:align-top",
+    "prose-hr:border-stone-500",
     className,
   ]}
 >
@@ -36,35 +44,8 @@ const { title, date, class: className } = Astro.props;
     article > :global(pre),
     article > :global(lite-youtube),
     article :global(blockquote) {
-      @apply -mx-2 px-2 outline-none outline-offset-0 transition-all max-sm:rounded-none sm:rounded-xl sm:hover:bg-stone-500/20 sm:hover:outline-8 sm:hover:outline-stone-500/20;
-    }
-    article > :global(ul),
-    article > :global(ol) {
-      @apply pl-12;
-    }
-    article > :global(p:has(> img)) {
-      @apply px-0;
-    }
-    article :global(img) {
-      @apply m-0;
-    }
-    article > :global(p) > :global(img) {
-      @apply rounded-xl;
-    }
-    article > :global(table) {
-      @apply overflow-clip sm:rounded-xl;
-    }
-    article > :global(table > thead > tr > th),
-    article > :global(table > tbody > tr > td),
-    article > :global(table > tbody > tr > th) {
-      @apply p-4 align-top;
-    }
-    article > :global(table > thead > tr),
-    article > :global(table > tbody > tr) {
-      @apply border-transparent sm:rounded-xl sm:hover:bg-stone-500/20;
-    }
-    article > :global(pre) {
-      @apply !bg-stone-900 px-4 py-2 shadow shadow-black;
+      @apply -mx-2 px-2 outline-none outline-offset-0 transition-all max-sm:rounded-none sm:rounded-xl;
+      @apply sm:hover:bg-stone-500/20 sm:hover:outline-8 sm:hover:outline-stone-500/20;
     }
     article > :global(lite-youtube) {
       @apply aspect-video;
@@ -74,9 +55,6 @@ const { title, date, class: className } = Astro.props;
     }
     article > :global(lite-youtube.lyt-activated) {
       @apply !bg-none;
-    }
-    article :global(a) {
-      @apply underline decoration-stone-500/50 hover:decoration-current;
     }
     article :global(a::after) {
       @apply inline-block h-3 w-0 bg-current pl-0.5 pr-3 align-text-top opacity-75 hover:opacity-100;
@@ -116,9 +94,6 @@ const { title, date, class: className } = Astro.props;
       content: "";
       -webkit-mask-image: url("/icons/social-twitter-x.svg");
       mask-image: url("/icons/logo-twitter-x.svg");
-    }
-    article :global(hr) {
-      @apply border-stone-500;
     }
   </style>
 </article>
