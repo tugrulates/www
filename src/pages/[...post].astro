@@ -10,13 +10,17 @@ import { getPages, getPosts } from "@/content";
 export const getStaticPaths = (async () => {
   const pages = await getPages();
   const posts = await getPosts();
-  return [...pages, ...posts].map((page) => ({
-    params: { post: page.slug },
-    props: { page },
-  }));
+  return [
+    ...pages.map((page) => ({
+      params: { post: page.slug },
+      props: { page, license: false },
+    })),
+    ...posts.map((page) => ({
+      params: { post: page.slug },
+      props: { page, license: true },
+    })),
+  ];
 }) satisfies GetStaticPaths;
-
-type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 export async function getCover(
   page: CollectionEntry<"pages"> | CollectionEntry<"posts">,
@@ -37,7 +41,8 @@ export async function getCover(
   throw new Error(`Invalid page: ${page.id}`);
 }
 
-const { page } = Astro.props;
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+const { page, license } = Astro.props;
 const posts = await getPosts();
 const index = posts.findIndex((other) => other.id === page.id);
 const { Content } = await page.render();
@@ -68,14 +73,21 @@ const cover = await getCover(page);
     />
     <Article title={page.data.title} date={page.data.date}>
       <Content />
-      <License icons="🅭🄍">
-        This article is dedicated to the public domain under the <a
-          rel="license"
-          href="https://creativecommons.org/publicdomain/zero/1.0/"
-          >Creative Commons CC0 1.0 Universal (CC0 1.0)</a
-        > license. You can copy, modify, distribute and perform the work, even for
-        commercial purposes, all without asking permission.
-      </License>
+      {
+        license ? (
+          <License icons="🅭🄍">
+            This article is dedicated to the public domain under the{" "}
+            <a
+              rel="license"
+              href="https://creativecommons.org/publicdomain/zero/1.0/"
+            >
+              Creative Commons CC0 1.0 Universal (CC0 1.0)
+            </a>{" "}
+            license. You can copy, modify, distribute and perform the work, even
+            for commercial purposes, all without asking permission.
+          </License>
+        ) : null
+      }
     </Article>
   </div>
 </BaseLayout>

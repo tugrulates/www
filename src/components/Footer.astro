@@ -1,10 +1,14 @@
 ---
 import Social from "@/components/Social.astro";
 import { AUTHOR } from "@/consts";
+const year = new Date().getFullYear();
 ---
 
 <footer
-  class="align-center flex w-full flex-col justify-center gap-4 py-8 sm:gap-4 sm:py-8 lg:py-16"
+  class:list={[
+    "align-center flex w-full flex-col items-center justify-center gap-4",
+    "pb-6 pt-8 lg:pb-12 lg:pt-16",
+  ]}
   transition:persist
 >
   <nav aria-label="Social profiles" class="flex w-full flex-row justify-center">
@@ -14,4 +18,5 @@ import { AUTHOR } from "@/consts";
       ))
     }
   </nav>
+  <p>Copyright © {year}, Tugrul Ates</p>
 </footer>

@@ -18,7 +18,6 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
-
 const { photo } = Astro.props;
 const photos = await getPhotos();
 const index = photos.findIndex((other) => other.id === photo.id);
