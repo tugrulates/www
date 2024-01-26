@@ -1,5 +1,5 @@
 import { Dialog } from "@headlessui/react";
-import { useState } from "react";
+import { createRef, useRef, useState } from "react";
 
 interface Props {
   image?: JSX.Element;
@@ -9,44 +9,48 @@ interface Props {
 
 export default function PhotoViewer(props: Props): JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
-
-  return isOpen ? (
-    <Dialog
-      open={isOpen}
-      as="div"
-      className="relative z-50"
-      onClose={() => {
-        setIsOpen(false);
-      }}
-    >
-      <Dialog.Title className="sr-only">Viewing image</Dialog.Title>
-      <Dialog.Panel
+  const openButtonRef = createRef<HTMLButtonElement>();
+  return (
+    <div>
+      <button
+        ref={openButtonRef}
+        aria-label="Expand image"
         onClick={() => {
+          setIsOpen(true);
+        }}
+        className="group"
+      >
+        {props.openButton}
+      </button>
+      <Dialog
+        open={isOpen}
+        onClose={() => {
           setIsOpen(false);
         }}
-        className="group/cover fixed  inset-0 flex h-screen w-screen transform items-center justify-center overflow-hidden overflow-y-auto bg-gradient-to-b from-stone-400 to-stone-300 align-middle dark:from-stone-600 dark:to-stone-700 "
       >
-        <div className="h-fit w-fit bg-stone-200/20">{props.image}</div>
-        <button
-          aria-label="Close image"
-          onClick={() => {
-            setIsOpen(true);
-          }}
-          className="group absolute right-2 top-2"
-        >
-          {props.closeButton}
-        </button>
-      </Dialog.Panel>
-    </Dialog>
-  ) : (
-    <button
-      aria-label="Expand image"
-      onClick={() => {
-        setIsOpen(true);
-      }}
-      className="group"
-    >
-      {props.openButton}
-    </button>
+        <div className="fixed inset-0 z-50 bg-gradient-to-b from-stone-400 to-stone-300 align-middle dark:from-stone-600 dark:to-stone-700" />
+        <div className="group/cover fixed inset-0 z-50 flex w-screen items-center justify-center">
+          <Dialog.Panel
+            onClick={() => {
+              setIsOpen(false);
+              openButtonRef.current?.focus();
+            }}
+            className=""
+          >
+            <Dialog.Title className="sr-only">Viewing image</Dialog.Title>
+            {props.image}
+            <button
+              aria-label="Close image"
+              onClick={() => {
+                setIsOpen(true);
+              }}
+              className="group absolute right-2 top-2"
+            >
+              {props.closeButton}
+            </button>
+          </Dialog.Panel>
+        </div>
+      </Dialog>
+    </div>
   );
 }
