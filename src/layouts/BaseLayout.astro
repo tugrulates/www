@@ -98,9 +98,9 @@ const favicon = await getFavicon(180);
   </head>
   <body
     class:list={[
-      "relative flex flex-row gap-0 bg-gradient-to-b",
-      "from-stone-400 to-stone-300 text-black",
-      "dark:from-stone-600 dark:to-stone-700 dark:text-white",
+      "relative flex flex-row gap-0",
+      "bg-gradient-to-b from-stone-400 to-stone-300 dark:from-stone-600 dark:to-stone-700",
+      "text-black dark:text-white print:!text-black",
     ]}
     data-tab={tab}
   >
@@ -115,17 +115,19 @@ const favicon = await getFavicon(180);
     </style>
     <div class="flex-1"></div>
     <div class="flex min-h-screen max-w-screen-md flex-col items-center">
-      <Header />
+      <Header class="print:hidden" />
       <main
         class:list={[
-          "z-10 w-full flex-1 pb-2 text-left sm:rounded-b-3xl sm:rounded-t-xl sm:p-4",
-          "bg-stone-200 shadow-lg shadow-stone-900/20 dark:bg-stone-800 ",
+          "z-10 w-full flex-1 pb-2 text-left sm:p-4",
+          "sm:rounded-b-3xl sm:rounded-t-xl print:rounded-none",
+          "shadow-lg shadow-stone-900/20 print:shadow-none",
+          "bg-stone-200 dark:bg-stone-800 print:!bg-white",
           className,
         ]}
       >
         <slot />
       </main>
-      <Footer />
+      <Footer class="print:hidden" />
     </div>
     <div class="flex-1"></div>
   </body>

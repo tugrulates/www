@@ -15,7 +15,11 @@ const { link, image, imageDescription, title, description, date } = Astro.props;
   ]}
 >
   <div
-    class="flex flex-row overflow-hidden shadow shadow-stone-900 transition-all sm:rounded-2xl sm:group-hover:scale-110"
+    class:list={[
+      "flex flex-row overflow-hidden shadow shadow-stone-900",
+      "transition-all sm:rounded-2xl sm:group-hover:scale-110",
+      "print:block",
+    ]}
   >
     <Image
       src={image}
@@ -27,11 +31,15 @@ const { link, image, imageDescription, title, description, date } = Astro.props;
     />
   </div>
   <div class="flex-0 group flex flex-1 flex-col px-2 py-2 sm:py-1">
-    <time datetime={date} class="text-stone-700 dark:text-stone-300"
+    <time
+      datetime={date}
+      class="text-stone-700 dark:text-stone-300 print:!text-black"
       >{formatDate(date)}</time
     >
     <h1 class="mb-2 grow text-xl font-bold">{title}</h1>
-    <p class="line-clamp-4 font-thin text-stone-600 dark:text-stone-400">
+    <p
+      class="line-clamp-4 font-thin text-stone-600 dark:text-stone-400 print:!text-black"
+    >
       {description}
     </p>
   </div>

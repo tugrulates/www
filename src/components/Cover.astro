@@ -34,12 +34,12 @@ const {
 } = Astro.props;
 ---
 
-<div class="group/cover relative z-50 w-full max-sm:-mx-4 lg:pt-12">
+<div class="group/cover relative z-50 w-full max-sm:-mx-4 lg:pt-12 print:pt-0">
   <div
     class:list={[
       "aspect-video w-full max-sm:aspect-square",
       "bg-stone-200/20 shadow shadow-stone-800/20 sm:rounded-2xl",
-      "lg:scale-125 lg:shadow-lg",
+      "lg:scale-125 lg:shadow-lg print:scale-100 print:shadow-none",
     ]}
   >
     <div transition:animate={fade({ duration: "0.1s" })} class="h-full w-full">

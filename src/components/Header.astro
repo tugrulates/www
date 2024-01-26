@@ -4,6 +4,8 @@ import { Icon } from "astro-icon/components";
 import avatar from "@/images/me.png";
 import ThemeToggle from "@/components/ThemeToggle";
 import Tab from "@/components/Tab.astro";
+
+const { class: className } = Astro.props;
 ---
 
 <script is:inline>
@@ -36,7 +38,10 @@ import Tab from "@/components/Tab.astro";
 </script>
 
 <header
-  class="flex w-full flex-col gap-4 text-left sm:pt-8 lg:pt-16"
+  class:list={[
+    "flex w-full flex-col gap-4 text-left sm:pt-8 lg:pt-16",
+    className,
+  ]}
   transition:persist
 >
   <nav aria-label="Primary navigation" class="items-begin flex flex-row gap-1">

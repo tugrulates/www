@@ -1,13 +1,16 @@
 ---
 import Social from "@/components/Social.astro";
 import { AUTHOR } from "@/consts";
+
+const { class: className } = Astro.props;
 const year = new Date().getFullYear();
 ---
 
 <footer
   class:list={[
-    "align-center flex w-full flex-col items-center justify-center gap-4",
-    "pb-6 pt-8 lg:pb-12 lg:pt-16",
+    "align-center flex w-full flex-col items-center justify-center",
+    "gap-4 pb-6 pt-8 lg:pb-12 lg:pt-16",
+    className,
   ]}
   transition:persist
 >

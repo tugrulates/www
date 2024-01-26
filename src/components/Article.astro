@@ -20,6 +20,7 @@ const { title, date, class: className } = Astro.props;
     "prose-tr:border-transparent sm:prose-tr:rounded-xl sm:hover:prose-tr:bg-stone-500/20",
     "prose-th:p-4 prose-th:align-top prose-td:p-4 prose-td:align-top",
     "prose-hr:border-stone-500",
+    "print:!text-black print:prose-headings:!text-black print:prose-a:!text-black print:prose-strong:!text-black print:prose-code:!text-black",
     className,
   ]}
 >
@@ -46,6 +47,8 @@ const { title, date, class: className } = Astro.props;
     article :global(blockquote) {
       @apply -mx-2 px-2 outline-none outline-offset-0 transition-all max-sm:rounded-none sm:rounded-xl;
       @apply sm:hover:bg-stone-500/20 sm:hover:outline-8 sm:hover:outline-stone-500/20;
+      @apply print:hover:bg-transparent print:hover:outline-transparent;
+      @apply print:!text-black;
     }
     article > :global(lite-youtube) {
       @apply aspect-video;
@@ -57,7 +60,7 @@ const { title, date, class: className } = Astro.props;
       @apply !bg-none;
     }
     article :global(a::after) {
-      @apply inline-block h-3 w-0 bg-current pl-0.5 pr-3 align-text-top opacity-75 hover:opacity-100;
+      @apply inline-block h-3 w-0 bg-current pl-0.5 pr-3 align-text-top opacity-75 hover:opacity-100 print:hidden;
       -webkit-mask-repeat: no-repeat;
       mask-repeat: no-repeat;
       mask-size: 100% 100%;
