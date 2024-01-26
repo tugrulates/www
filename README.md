@@ -1,4 +1,31 @@
-This repository contains the code for https://tugrul.blog
+<p align="center" style="font-size: 1000%;">
+  <b>🧑🏻‍💻</b>
+</p>
+<p align="center" style="font-size: 200%;">
+  <a href="https://www.tugruates.com">www.tugruates.com</a>
+</p>
 
-[![Publish](https://github.com/tugrulates/blog-code/actions/workflows/publish.yml/badge.svg?branch=main)](https://github.com/tugrulates/blog-code/actions/workflows/publish.yml)
-[![Deploy](https://api.netlify.com/api/v1/badges/e33b83dc-e8cc-48ce-991c-a1f2c22e03ca/deploy-status)](https://app.netlify.com/sites/tugrul/deploys)
+---
+
+# 🎀 Features
+
+- Serverless static website
+- Accessible
+- Responsive design
+- Optimized images
+- Full page transitions
+- Dark and light themes
+- Works without JavaScript
+
+# ⚙️ Uses
+
+- Code: **[TypeScript](https://www.typescriptlang.org)**
+- Framework: **[Astro](https://astro.build)** and **[React](https://reactjs.org)**
+- UI: **[Tailwind CSS](https://tailwindcss.com)** and **[Headless UI](https://headlessui.dev)**
+- Fonts: **[Fontsource](https://fontsource.org)**
+- Icons: **[Iconify](https://iconify.design)**
+- Hosting: **[Vercel](https://vercel.com)**
+
+# 📜 License
+
+- MIT License
