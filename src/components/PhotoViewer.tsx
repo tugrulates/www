@@ -1,5 +1,5 @@
 import { Dialog } from "@headlessui/react";
-import { createRef, useRef, useState } from "react";
+import { createRef, useState } from "react";
 
 interface Props {
   image?: JSX.Element;
