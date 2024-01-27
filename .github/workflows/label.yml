@@ -1,5 +1,5 @@
 name: Labeler
-on: [pull_request_target]
+on: [pull_request_target, workflow_dispatch]
 
 jobs:
   label:
@@ -9,7 +9,4 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-        with:
-          sparse-checkout: |
-            .github
       - uses: actions/labeler@v5
