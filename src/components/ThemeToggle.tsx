@@ -50,7 +50,7 @@ export default function ThemeToggle({
       >
         <div
           className={[
-            "relative z-0 flex h-24 w-24 -translate-x-12 flex-col  transition-transform duration-1000",
+            "relative z-0 flex h-24 w-24 -translate-x-12 flex-col overflow-hidden  transition-transform duration-1000",
             theme.dark ? "rotate-180" : "rotate-0",
           ].join(" ")}
         >
