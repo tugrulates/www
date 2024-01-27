@@ -10,8 +10,7 @@
 ## 🎀 Features
 
 - Serverless static website
-- Accessible
-- Responsive design
+- Accessible and responsive
 - Optimized images
 - Full page transitions
 - Dark and light themes
@@ -19,7 +18,7 @@
 
 ## ⚙️ Uses
 
-- Code: **[TypeScript](https://www.typescriptlang.org)**
+- Language: **[TypeScript](https://www.typescriptlang.org)**
 - Framework: **[Astro](https://astro.build)** with **[React](https://reactjs.org)**
 - UI: **[Tailwind CSS](https://tailwindcss.com)** and **[Headless UI](https://headlessui.dev)**
 - Fonts: **[Fontsource](https://fontsource.org)** with **[Fira Sans](https://fonts.google.com/specimen/Fira+Sans)**
