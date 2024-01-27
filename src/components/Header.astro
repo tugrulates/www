@@ -49,20 +49,20 @@ const { class: className } = Astro.props;
       <Icon
         aria-hidden
         name="heroicons:chat-bubble-bottom-center-text"
-        size={24}
+        size={32}
       />
     </Tab>
     <Tab tab="photos" text="Photography" href="/photography">
-      <Icon aria-hidden name="heroicons:camera" size={24} />
+      <Icon aria-hidden name="heroicons:camera" size={32} />
     </Tab>
     <Tab tab="about" text="About" href="/about">
-      <div class="row flex h-6 w-6 items-center justify-center">
+      <div class="row flex h-8 w-8 items-center justify-center">
         <Image
           aria-hidden
           alt=""
           src={avatar}
-          width="22"
-          height="22"
+          width="32"
+          height="32"
           densities={[1, 2, 3, 4]}
           class="rounded-full border border-black dark:border-white"
         />
