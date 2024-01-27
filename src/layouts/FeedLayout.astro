@@ -28,7 +28,7 @@ const feedUrl = new URL("./feed", Astro.url);
       <a
         aria-label="RSS feed"
         href={feedUrl.pathname}
-        class="h-fit transition-transform hover:opacity-100 sm:opacity-75 sm:hover:scale-110 print:hidden"
+        class="h-fit transition-transform hover:scale-110 hover:opacity-100 sm:opacity-75 print:hidden"
       >
         <Icon name="heroicons:rss-solid" size={24} />
       </a>
