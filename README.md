@@ -9,7 +9,7 @@
 
 ## 🎀 Features
 
-- Serverless static website
+- Static website
 - Accessible and responsive
 - Optimized images
 - Full page transitions
