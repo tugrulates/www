@@ -18,21 +18,19 @@ const feedUrl = new URL("./feed", Astro.url);
   description={description}
   class="flex flex-col sm:gap-12"
 >
-  <header class="max-sm:p-4">
-    <div class="items-between flex flex-row justify-between gap-8">
-      <p
-        class="text-lg font-thin italic text-stone-700 dark:text-stone-300 print:!text-black"
-      >
-        {description}
-      </p>
-      <a
-        aria-label="RSS feed"
-        href={feedUrl.pathname}
-        class="h-fit transition-transform hover:scale-110 hover:opacity-100 sm:opacity-75 print:hidden"
-      >
-        <Icon name="heroicons:rss-solid" size={24} />
-      </a>
-    </div>
-  </header>
+  <div class="items-between flex flex-row justify-between gap-8 max-sm:p-4">
+    <p
+      class="text-lg font-thin italic text-stone-700 dark:text-stone-300 print:!text-black"
+    >
+      {description}
+    </p>
+    <a
+      aria-label="RSS feed"
+      href={feedUrl.pathname}
+      class="h-fit transition-transform hover:scale-110 hover:opacity-100 sm:opacity-75 print:hidden"
+    >
+      <Icon name="heroicons:rss-solid" size={24} />
+    </a>
+  </div>
   <slot />
 </BaseLayout>
