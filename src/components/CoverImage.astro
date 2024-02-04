@@ -33,7 +33,6 @@ const breakpoints = [
     width: 320,
     height: 320,
     src: image.data.square,
-    quality: "mid",
   },
 ];
 const images = await Promise.all(
@@ -46,7 +45,6 @@ const images = await Promise.all(
             src: breakpoint.src,
             width: breakpoint.width * scale,
             height: breakpoint.height * scale,
-            quality: breakpoint.quality,
           }),
       ),
     );
