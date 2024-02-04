@@ -14,10 +14,10 @@ export default defineConfig({
   site: SITE.url,
   output: "static",
   adapter: vercel({
-    speedInsights: {
+    webAnalytics: {
       enabled: true,
     },
-    webAnalytics: {
+    speedInsights: {
       enabled: true,
     },
   }),
