@@ -8,6 +8,7 @@ const { tab, text, href } = Astro.props;
 ---
 
 <a
+  aria-label={text}
   href={href}
   id=`tab-${tab}`
   class:list={[
