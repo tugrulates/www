@@ -13,6 +13,6 @@ updates:
     schedule:
       interval: "weekly"
     groups:
-      dependencies:
+      actions:
         patterns:
           - "*"
