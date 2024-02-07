@@ -19,7 +19,7 @@ const photos = await getPhotos();
       photos.map((photo) => (
         <li class="grow">
           <Photo
-            link={`./photography/${photo.id}`}
+            link={photo.id}
             image={photo.data.square}
             title={photo.data.title}
             description={photo.data.description}

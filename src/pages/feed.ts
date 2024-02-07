@@ -8,8 +8,9 @@ export async function GET(): Promise<Response> {
     title: "Tugrul Ates — Posts",
     description: "Posts by Tugrul Ates",
     site: SITE.url,
+    trailingSlash: false,
     items: posts.map((post) => ({
-      link: `/${post.slug}`,
+      link: post.slug,
       title: post.data.title,
       pubDate: post.data.date,
       description: post.data.description,

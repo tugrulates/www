@@ -8,8 +8,9 @@ export async function GET(): Promise<Response> {
     title: "Tugrul Ates — Photography",
     description: "Photography by Tugrul Ates",
     site: SITE.url,
+    trailingSlash: false,
     items: photos.map((photo) => ({
-      link: `photography/${photo.id}`,
+      link: photo.id,
       title: photo.data.title,
       pubDate: photo.data.date,
       description: photo.data.description,
