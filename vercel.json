@@ -1,6 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "trailingSlash": true,
+  "trailingSlash": false,
   "cleanUrls": true,
   "headers": [
     {

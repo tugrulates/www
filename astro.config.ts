@@ -29,7 +29,7 @@ export default defineConfig({
     ],
   },
   prefetch: true,
-  trailingSlash: "always",
+  trailingSlash: "never",
   integrations: [
     icon({
       include: {
