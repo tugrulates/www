@@ -117,7 +117,7 @@ const favicon = await getFavicon(180);
       }
     </style>
     <div class="flex-1"></div>
-    <div class="flex min-h-screen max-w-screen-md flex-col items-center">
+    <div class="flex min-h-screen w-full max-w-screen-md flex-col items-center">
       <Header class="print:hidden" />
       <main
         class:list={[
@@ -130,7 +130,7 @@ const favicon = await getFavicon(180);
       >
         <slot />
       </main>
-      <Footer class="print:hidden" />
+      <Footer class="w-full print:hidden" />
     </div>
     <div class="flex-1"></div>
   </body>
