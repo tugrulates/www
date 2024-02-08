@@ -1,11 +1,11 @@
 ---
 import { type InferGetStaticPropsType, type GetStaticPaths } from "astro";
-import { getEntry, type CollectionEntry } from "astro:content";
 import Article from "@/components/Article.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import Cover, { type CoverData } from "@/components/Cover.astro";
+import Cover from "@/components/Cover.astro";
 import License from "@/components/License.astro";
 import { getPages, getPosts } from "@/content";
+import { getPageCover } from "@/image";
 
 export const getStaticPaths = (async () => {
   const pages = await getPages();
@@ -22,31 +22,12 @@ export const getStaticPaths = (async () => {
   ];
 }) satisfies GetStaticPaths;
 
-export async function getCover(
-  page: CollectionEntry<"pages"> | CollectionEntry<"posts">,
-): Promise<CoverData> {
-  if (
-    "collection" in page.data.cover &&
-    page.data.cover.collection === "photos"
-  ) {
-    const entry = await getEntry(page.data.cover);
-    return entry;
-  }
-  if ("data" in page.data.cover) {
-    return {
-      id: undefined,
-      data: page.data.cover.data,
-    };
-  }
-  throw new Error(`Invalid page: ${page.id}`);
-}
-
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const { page, license } = Astro.props;
 const posts = await getPosts();
 const index = posts.findIndex((other) => other.id === page.id);
 const { Content } = await page.render();
-const cover = await getCover(page);
+const cover = await getPageCover(page);
 ---
 
 <BaseLayout
