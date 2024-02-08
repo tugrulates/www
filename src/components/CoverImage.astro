@@ -1,10 +1,10 @@
 ---
 import { getImage } from "astro:assets";
 import { DIMENSIONS } from "@/consts";
-import type { CoverData } from "@/components/Cover.astro";
+import type { CoverMeta } from "@/components/Cover.astro";
 
 interface Props {
-  cover: CoverData;
+  cover: CoverMeta;
   class?: string;
 }
 const { cover: image, class: className } = Astro.props;

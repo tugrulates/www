@@ -10,11 +10,9 @@ const pages = defineCollection({
       date: z.date().optional(),
       cover: reference("photos").or(
         z.object({
-          data: z.object({
-            wide: image(),
-            square: image(),
-            description: z.string(),
-          }),
+          wide: image(),
+          square: image(),
+          description: z.string(),
         }),
       ),
       tags: z.array(z.string()).optional(),
@@ -23,15 +21,22 @@ const pages = defineCollection({
 
 const posts = defineCollection({
   type: "content",
-  schema: z.object({
-    tab: z.string().default("posts"),
-    title: z.string(),
-    description: z.string(),
-    draft: z.boolean().default(true),
-    date: z.date(),
-    cover: reference("photos"),
-    tags: z.array(z.string()),
-  }),
+  schema: ({ image }) =>
+    z.object({
+      tab: z.string().default("posts"),
+      title: z.string(),
+      description: z.string(),
+      draft: z.boolean().default(true),
+      date: z.date(),
+      cover: reference("photos").or(
+        z.object({
+          wide: image(),
+          square: image(),
+          description: z.string(),
+        }),
+      ),
+      tags: z.array(z.string()),
+    }),
 });
 
 const photos = defineCollection({

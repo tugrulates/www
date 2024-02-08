@@ -2,10 +2,10 @@
 import { type InferGetStaticPropsType, type GetStaticPaths } from "astro";
 import Article from "@/components/Article.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import Cover from "@/components/Cover.astro";
+import Cover, { type CoverType } from "@/components/Cover.astro";
 import License from "@/components/License.astro";
 import { getPages, getPosts } from "@/content";
-import { getPageCover } from "@/image";
+import { getCoverData } from "@/image";
 
 export const getStaticPaths = (async () => {
   const pages = await getPages();
@@ -27,7 +27,7 @@ const { page, license } = Astro.props;
 const posts = await getPosts();
 const index = posts.findIndex((other) => other.id === page.id);
 const { Content } = await page.render();
-const cover = await getPageCover(page);
+const cover = await getCoverData(page.data.cover as CoverType);
 ---
 
 <BaseLayout

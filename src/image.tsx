@@ -1,72 +1,109 @@
 import type { GetImageResult } from "astro";
 import { getImage } from "astro:assets";
-import { getEntry, type CollectionEntry } from "astro:content";
-import type { CoverData } from "@/components/Cover.astro";
+import { getEntry } from "astro:content";
+import type { CoverMeta, CoverType } from "@/components/Cover.astro";
 import { ImageResponse } from "@vercel/og";
+import fs from "fs/promises";
 import path from "node:path";
 import sharp from "sharp";
 import ico from "sharp-ico";
 import avatar from "@/images/me.png";
-import OpenGraphImage from "./components/OpenGraphImage.astro";
+import { SITE } from "@/consts";
 
-export async function getPageCover(
-  page: CollectionEntry<"pages"> | CollectionEntry<"posts">,
-): Promise<CoverData> {
-  if (
-    "collection" in page.data.cover &&
-    page.data.cover.collection === "photos"
-  ) {
-    const entry = await getEntry(page.data.cover);
+export async function getCoverData(cover: CoverType): Promise<CoverMeta> {
+  if ("collection" in cover && cover.collection === "photos") {
+    const entry = await getEntry("photos", cover.id);
     return entry;
   }
-  if ("data" in page.data.cover) {
+  if ("wide" in cover) {
     return {
       id: undefined,
-      data: page.data.cover.data,
+      data: cover,
     };
   }
-  throw new Error(`Invalid page: ${page.id}`);
+  throw new Error(`Invalid cover: ${cover}`);
 }
 
+interface OpenGraphImageProps {
+  image: Buffer;
+  format: string;
+  title: string;
+  description: string;
+  cta: string;
+}
+
+/* eslint-disable react/no-unknown-property */
+const OpenGraphImage = ({
+  image,
+  format,
+  title,
+  description,
+  cta,
+}: OpenGraphImageProps): JSX.Element => {
+  return (
+    <div
+      tw="text-2xl relative flex flex-col w-full h-full px-32 py-16 gap-4 items-center justify-between bg-black text-white"
+      style={{ fontFamily: "Fira Sans" }}
+    >
+      <div tw="absolute inset-0 flex object-cover opacity-25">
+        <img
+          src={`data:image/${format.replace("jpg", "jpeg")};base64,${image.toString("base64")}`}
+        />
+      </div>
+      <div tw="px-4 py-2 rounded-full text-black bg-stone-200 shadow-lg shadow-stone-200/25 ">
+        {SITE.domain}
+      </div>
+      <h1 style={{ fontFamily: "Fira Sans Bold" }}>{title}</h1>
+      <p>{description}</p>
+      <div tw="px-8 py-4 rounded-2xl bg-indigo-800 shadow-lg shadow-indigo-900/25">
+        {cta}
+      </div>
+    </div>
+  );
+};
+
 export async function getOpenGraphImage(
+  title: string,
+  description: string,
   image: ImageMetadata,
+  cta: string,
 ): Promise<ImageResponse> {
-  // const buffer = await fs.readFile(
-  //   process.env.NODE_ENV === "development"
-  //     ? path.resolve(image.src.replace(/\?.*/, "").replace("/@fs", ""))
-  //     : path.resolve(image.src.replace("/", "dist/")),
-  // );
+  const imageBuffer = await fs.readFile(
+    process.env.NODE_ENV === "development"
+      ? path.resolve(image.src.replace(/\?.*/, "").replace("/@fs", ""))
+      : path.resolve(image.src.replace("/", "dist/")),
+  );
+  const normalFontBuffer = await fs.readFile(
+    "node_modules/@fontsource/fira-sans/files/fira-sans-latin-500-normal.woff",
+  );
+  const boldFontBuffer = await fs.readFile(
+    "node_modules/@fontsource/fira-sans/files/fira-sans-latin-900-normal.woff",
+  );
   return new ImageResponse(
     (
-      <div
-        style={{
-          height: "100%",
-          width: "100%",
-          display: "flex",
-          backgroundColor: "white",
-          backgroundImage: `url(${image.src})`,
-          backgroundSize: "100px 100px",
-          fontFamily: "Fira Sans",
-        }}
-      >
-        <div>test</div>
-      </div>
+      <OpenGraphImage
+        image={imageBuffer}
+        format={image.format}
+        title={title}
+        description={description}
+        cta={cta}
+      />
     ),
     {
       width: 1200,
       height: 600,
-      // fonts: [
-      //   {
-      //     name: "DM Sans Bold",
-      //     data: DmSansBold.buffer,
-      //     style: "normal",
-      //   },
-      //   {
-      //     name: "DM Sans Regular",
-      //     data: DmSansReqular.buffer,
-      //     style: "normal",
-      //   },
-      // ],
+      fonts: [
+        {
+          name: "Fira Sans",
+          data: normalFontBuffer.buffer,
+          style: "normal",
+        },
+        {
+          name: "Fira Sans Bold",
+          data: boldFontBuffer.buffer,
+          style: "normal",
+        },
+      ],
     },
   );
 }
