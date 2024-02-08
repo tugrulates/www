@@ -34,9 +34,9 @@ const index = photos.findIndex((other) => other.id === photo.id);
   <div class="flex flex-col items-center gap-12 lg:gap-24">
     <Cover
       image={photo}
-      previous={index > 0 ? `./${photos[index - 1].id}` : undefined}
+      previous={index > 0 ? photos[index - 1].id : undefined}
       next={index >= 0 && index < photos.length - 1
-        ? `./${photos[index + 1].id}`
+        ? photos[index + 1].id
         : undefined}
       actionHref={photo.data.wide.src}
       actionDownload={`${photo.id}.jpg`}

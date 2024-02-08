@@ -9,7 +9,7 @@ interface Props {
 }
 
 const { tab, title, description } = Astro.props;
-const feedUrl = new URL("./feed", Astro.url);
+const feedUrl = `${Astro.url.pathname.replace(/\/$/, "")}/feed`;
 ---
 
 <BaseLayout
@@ -26,7 +26,7 @@ const feedUrl = new URL("./feed", Astro.url);
     </p>
     <a
       aria-label="RSS feed"
-      href={feedUrl.pathname}
+      href={feedUrl}
       class="h-fit transition-transform hover:scale-110 hover:opacity-100 sm:opacity-75 print:hidden"
     >
       <Icon name="heroicons:rss-solid" size={24} />

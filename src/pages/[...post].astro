@@ -61,9 +61,9 @@ const cover = await getCover(page);
   <div class="flex flex-col items-center gap-4 sm:gap-12 lg:gap-24">
     <Cover
       image={cover}
-      previous={index > 0 ? `./${posts[index - 1].slug}` : undefined}
+      previous={index > 0 ? posts[index - 1].slug : undefined}
       next={index >= 0 && index < posts.length - 1
-        ? `./${posts[index + 1].slug}`
+        ? posts[index + 1].slug
         : undefined}
       actionHref={cover.id !== undefined
         ? `/photography/${cover.id}`
