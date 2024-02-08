@@ -6,9 +6,11 @@ interface Props {
   tab: string;
   title: string;
   description: string;
+  image?: ImageMetadata;
+  imageDescription?: string;
 }
 
-const { tab, title, description } = Astro.props;
+const { tab, title, description, image, imageDescription } = Astro.props;
 const feedUrl = `${Astro.url.pathname.replace(/\/$/, "")}/feed`;
 ---
 
@@ -16,6 +18,8 @@ const feedUrl = `${Astro.url.pathname.replace(/\/$/, "")}/feed`;
   tab={tab}
   title={title}
   description={description}
+  image={image}
+  imageDescription={imageDescription}
   class="flex flex-col sm:gap-12"
 >
   <div class="items-between flex flex-row justify-between gap-8 max-sm:p-4">
