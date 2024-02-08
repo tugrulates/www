@@ -3,6 +3,7 @@ import { getEntry } from "astro:content";
 import FeedLayout from "@/layouts/FeedLayout.astro";
 import Post from "@/components/Post.astro";
 import { getPosts } from "@/content";
+import socialCover from "@/content/pages/images/rijksmuseum-wide.jpg";
 
 const posts = await getPosts();
 const covers = Object.fromEntries(
@@ -21,6 +22,8 @@ const covers = Object.fromEntries(
   description=`
       Welcome to my garden.
       I write about software development and digital arts.`
+  image={socialCover}
+  imageDescription="Me at Rijksmuseum library in Amsterdam."
 >
   <div role="feed" class="flex flex-col gap-4">
     {
