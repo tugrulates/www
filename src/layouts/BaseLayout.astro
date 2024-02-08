@@ -52,7 +52,7 @@ const favicon = await getFavicon(180);
     <SEO
       openGraph={{
         basic: {
-          title: `${title} | ${AUTHOR.name}`,
+          title: `${title} – ${AUTHOR.name}`,
           type: date !== undefined ? "article" : "website",
           image: ogImage !== undefined ? ogImage.src : "",
           url: `${SITE.url}${Astro.url.pathname}`,
