@@ -24,20 +24,24 @@ const { title, date, class: className } = Astro.props;
     className,
   ]}
 >
-  <header class="flex flex-col">
-    <h1>{title}</h1>
-    {
-      date !== undefined && (
-        <time
-          datetime={formatDateIso(date)}
-          class="text-md self-end whitespace-nowrap font-bold italic"
-        >
-          {formatDate(date)}
-        </time>
-      )
-    }
-  </header>
-  <slot />
+  <div class="flex flex-col gap-12 lg:gap-24">
+    <slot name="cover" />
+    <header class="flex flex-col">
+      <h1>{title}</h1>
+      {
+        date !== undefined && (
+          <time
+            datetime={formatDateIso(date)}
+            class="text-md self-end whitespace-nowrap font-bold italic"
+          >
+            {formatDate(date)}
+          </time>
+        )
+      }
+    </header>
+  </div>
+  <slot name="content" />
+  <slot name="license" />
   <style>
     article > :global(p),
     article > :global(ul),

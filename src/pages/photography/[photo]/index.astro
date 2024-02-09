@@ -28,8 +28,9 @@ const index = photos.findIndex((other) => other.id === photo.id);
   description={photo.data.description}
   keywords={photo.data.keywords}
 >
-  <div class="flex flex-col items-center gap-12 lg:gap-24">
+  <Article title={photo.data.title}>
     <Cover
+      slot="cover"
       image={photo}
       previous={index > 0 ? photos[index - 1].id : undefined}
       next={index >= 0 && index < photos.length - 1
@@ -40,7 +41,7 @@ const index = photos.findIndex((other) => other.id === photo.id);
       actionIcon="heroicons:archive-box-arrow-down-solid"
       actionAlt="Download photo in full size"
     />
-    <Article title={photo.data.title}>
+    <Fragment slot="content">
       <table>
         <tr><th>Description</th><td>{photo.data.description}</td></tr>
         <tr><th>Date</th><td>{formatDate(photo.data.date)}</td></tr>
@@ -52,17 +53,18 @@ const index = photos.findIndex((other) => other.id === photo.id);
         <tr><th>Lens</th><td>{photo.data.lens}</td></tr>
         <tr><th>Editing</th><td>{photo.data.editing}</td></tr>
       </table>
-      <License icons="🅭🅯">
-        This photograph is provided under a <a
-          rel="license"
-          href={photo.data.license}
-          >Creative Commons Attribution 4.0 International License (CC BY 4.0)</a
-        >. You are free to share, copy, distribute, and transmit the work or
-        adapt and make commercial use of it, provided that you attribute the
-        work to {AUTHOR.name} and this website
-        <a href={SITE.url}>{SITE.domain}</a>. For any reuse or distribution, you
-        must make clear to others the license terms of this work.
-      </License>
-    </Article>
-  </div>
+    </Fragment>
+    <License slot="license" icons="🅭🅯">
+      This photograph is provided under a <a
+        rel="license"
+        href={photo.data.license}
+        >Creative Commons Attribution 4.0 International License (CC BY 4.0)</a
+      >. You are free to share, copy, distribute, and transmit the work or adapt
+      and make commercial use of it, provided that you attribute the work to {
+        AUTHOR.name
+      } and this website
+      <a href={SITE.url}>{SITE.domain}</a>. For any reuse or distribution, you
+      must make clear to others the license terms of this work.
+    </License>
+  </Article>
 </BaseLayout>

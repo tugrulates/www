@@ -38,8 +38,9 @@ const cover = await getCoverData(post.data.cover as CoverType);
   keywords={post.data.tags}
   date={post.data.date}
 >
-  <div class="flex flex-col items-center gap-4 sm:gap-12 lg:gap-24">
+  <Article title={post.data.title} date={post.data.date}>
     <Cover
+      slot="cover"
       image={cover}
       previous={index > 0 ? posts[index - 1].slug : undefined}
       next={index >= 0 && index < posts.length - 1
@@ -51,23 +52,21 @@ const cover = await getCoverData(post.data.cover as CoverType);
       actionIcon="heroicons:photo-solid"
       actionAlt="Image details"
     />
-    <Article title={post.data.title} date={post.data.date}>
-      <Content />
-      {
-        license ? (
-          <License icons="🅭🄍">
-            This article is dedicated to the public domain under the{" "}
-            <a
-              rel="license"
-              href="https://creativecommons.org/publicdomain/zero/1.0/"
-            >
-              Creative Commons CC0 1.0 Universal (CC0 1.0)
-            </a>{" "}
-            license. You can copy, modify, distribute and perform the work, even
-            for commercial purposes, all without asking permission.
-          </License>
-        ) : undefined
-      }
-    </Article>
-  </div>
+    <Content slot="content" />
+    {
+      license ? (
+        <License slot="license" icons="🅭🄍">
+          This article is dedicated to the public domain under the{" "}
+          <a
+            rel="license"
+            href="https://creativecommons.org/publicdomain/zero/1.0/"
+          >
+            Creative Commons CC0 1.0 Universal (CC0 1.0)
+          </a>{" "}
+          license. You can copy, modify, distribute and perform the work, even
+          for commercial purposes, all without asking permission.
+        </License>
+      ) : undefined
+    }
+  </Article>
 </BaseLayout>
