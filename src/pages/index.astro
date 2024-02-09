@@ -1,15 +1,15 @@
 ---
-import { getEntry } from "astro:content";
 import FeedLayout from "@/layouts/FeedLayout.astro";
 import Post from "@/components/Post.astro";
+import type { CoverType } from "@/components/Cover.astro";
 import { getPosts } from "@/content";
-import socialCover from "@/content/pages/images/rijksmuseum-wide.jpg";
+import { getCoverData } from "@/image";
 
 const posts = await getPosts();
 const covers = Object.fromEntries(
   await Promise.all(
     posts.map(async (post) => {
-      const cover = await getEntry(post.data.cover);
+      const cover = await getCoverData(post.data.cover as CoverType);
       return [post.slug, cover];
     }),
   ),
@@ -20,8 +20,6 @@ const covers = Object.fromEntries(
   tab="posts"
   title="Posts"
   description=`Welcome to my garden. I write about software development and digital arts.`
-  image={socialCover}
-  imageDescription="Me at Rijksmuseum library in Amsterdam."
 >
   <div role="feed" class="flex flex-col gap-4">
     {

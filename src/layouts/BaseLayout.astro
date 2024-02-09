@@ -6,18 +6,18 @@ import { SEO } from "astro-seo";
 import SpeedInsights from "@vercel/speed-insights/astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
-import { AUTHOR, SITE } from "@/consts";
-import { getFavicon, getOpenGraphImage } from "@/image";
+import { AUTHOR, SITE, DIMENSIONS } from "@/consts";
+import { getFavicon } from "@/image";
 import { formatDateIso } from "@/date";
+import { getCanonicalChildUrl } from "@/url";
 
 interface Props {
   tab: string;
   title: string;
   description: string;
-  keywords?: string[];
-  image?: ImageMetadata;
-  imageDescription?: string;
   date?: Date;
+  seo?: boolean;
+  keywords?: string[];
   class?: string;
 }
 
@@ -25,19 +25,13 @@ const {
   tab,
   title,
   description,
-  keywords,
-  image,
-  imageDescription,
   date,
+  seo = true,
+  keywords,
   class: className,
 } = Astro.props;
 
-if (image !== undefined && imageDescription === undefined) {
-  throw new Error("Image description is required when image is provided");
-}
-
-const ogImage =
-  image !== undefined ? await getOpenGraphImage(image) : undefined;
+const ogImage = getCanonicalChildUrl(Astro.url, "og.jpg");
 const appleTouchIcon = await getFavicon(180);
 const favicon = await getFavicon(180);
 ---
@@ -49,41 +43,45 @@ const favicon = await getFavicon(180);
     <meta name="author" content={AUTHOR.name} />
     <meta name="description" content={description} />
     <meta name="keywords" content={(keywords ?? []).join(", ")} />
-    <SEO
-      openGraph={{
-        basic: {
-          title: `${title} – ${AUTHOR.name}`,
-          type: date !== undefined ? "article" : "website",
-          image: ogImage !== undefined ? ogImage.src : "",
-          url: `${SITE.url}${Astro.url.pathname}`,
-        },
-        optional: {
-          description,
-          locale: "en",
-          siteName: SITE.domain,
-        },
-        article: {
-          publishedTime: date !== undefined ? formatDateIso(date) : "",
-          authors: [AUTHOR.name],
-          tags: keywords ?? [],
-        },
-        image: {
-          type: ogImage !== undefined ? `image/${ogImage.options.format}` : "",
-          width: ogImage !== undefined ? ogImage.attributes.width : "",
-          height: ogImage !== undefined ? ogImage.attributes.height : "",
-          alt: imageDescription ?? "",
-        },
-      }}
-      twitter={{
-        creator: AUTHOR.twitter,
-        site: AUTHOR.twitter,
-        card: "summary_large_image",
-        title,
-        description,
-        image: ogImage !== undefined ? ogImage.src : "",
-        imageAlt: imageDescription ?? "",
-      }}
-    />
+    {
+      seo ? (
+        <>
+          <SEO
+            openGraph={{
+              basic: {
+                title: `${title} — ${AUTHOR.name}`,
+                type: date !== undefined ? "article" : "website",
+                image: ogImage,
+                url: `${SITE.url}${Astro.url.pathname}`,
+              },
+              optional: {
+                description,
+                locale: "en",
+                siteName: SITE.domain,
+              },
+              article: {
+                publishedTime: date !== undefined ? formatDateIso(date) : "",
+                authors: [AUTHOR.name],
+                tags: keywords ?? [],
+              },
+              image: {
+                type: `image/jpeg`,
+                width: DIMENSIONS.opengraph_width,
+                height: DIMENSIONS.opengraph_height,
+              },
+            }}
+            twitter={{
+              creator: AUTHOR.twitter,
+              site: AUTHOR.twitter,
+              card: "summary_large_image",
+              title,
+              description,
+              image: ogImage,
+            }}
+          />
+        </>
+      ) : undefined
+    }
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <link rel="sitemap" href="/sitemap-index.xml" />

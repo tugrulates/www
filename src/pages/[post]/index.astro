@@ -1,11 +1,11 @@
 ---
 import { type InferGetStaticPropsType, type GetStaticPaths } from "astro";
-import { getEntry, type CollectionEntry } from "astro:content";
 import Article from "@/components/Article.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import Cover, { type CoverData } from "@/components/Cover.astro";
+import Cover, { type CoverType } from "@/components/Cover.astro";
 import License from "@/components/License.astro";
 import { getPages, getPosts } from "@/content";
+import { getCoverData } from "@/image";
 
 export const getStaticPaths = (async () => {
   const pages = await getPages();
@@ -13,50 +13,30 @@ export const getStaticPaths = (async () => {
   return [
     ...pages.map((page) => ({
       params: { post: page.slug },
-      props: { page, license: false },
+      props: { post: page, license: false },
     })),
-    ...posts.map((page) => ({
-      params: { post: page.slug },
-      props: { page, license: true },
+    ...posts.map((post) => ({
+      params: { post: post.slug },
+      props: { post, license: true },
     })),
   ];
 }) satisfies GetStaticPaths;
 
-export async function getCover(
-  page: CollectionEntry<"pages"> | CollectionEntry<"posts">,
-): Promise<CoverData> {
-  if (
-    "collection" in page.data.cover &&
-    page.data.cover.collection === "photos"
-  ) {
-    const entry = await getEntry(page.data.cover);
-    return entry;
-  }
-  if ("data" in page.data.cover) {
-    return {
-      id: undefined,
-      data: page.data.cover.data,
-    };
-  }
-  throw new Error(`Invalid page: ${page.id}`);
-}
-
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
-const { page, license } = Astro.props;
+
+const { post, license }: Props = Astro.props;
 const posts = await getPosts();
-const index = posts.findIndex((other) => other.id === page.id);
-const { Content } = await page.render();
-const cover = await getCover(page);
+const index = posts.findIndex((other) => other.id === post.id);
+const { Content } = await post.render();
+const cover = await getCoverData(post.data.cover as CoverType);
 ---
 
 <BaseLayout
-  tab={page.data.tab ?? "posts"}
-  title={page.data.title}
-  description={page.data.description}
-  keywords={page.data.tags}
-  image={cover.data.wide}
-  imageDescription={cover.data.description}
-  date={page.data.date}
+  tab={post.data.tab ?? "posts"}
+  title={post.data.title}
+  description={post.data.description}
+  keywords={post.data.tags}
+  date={post.data.date}
 >
   <div class="flex flex-col items-center gap-4 sm:gap-12 lg:gap-24">
     <Cover
@@ -71,7 +51,7 @@ const cover = await getCover(page);
       actionIcon="heroicons:photo-solid"
       actionAlt="Image details"
     />
-    <Article title={page.data.title} date={page.data.date}>
+    <Article title={post.data.title} date={post.data.date}>
       <Content />
       {
         license ? (
@@ -86,7 +66,7 @@ const cover = await getCover(page);
             license. You can copy, modify, distribute and perform the work, even
             for commercial purposes, all without asking permission.
           </License>
-        ) : null
+        ) : undefined
       }
     </Article>
   </div>

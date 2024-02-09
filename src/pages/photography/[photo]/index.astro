@@ -1,6 +1,5 @@
 ---
 import { type InferGetStaticPropsType, type GetStaticPaths } from "astro";
-import { getCollection } from "astro:content";
 import Article from "@/components/Article.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Cover from "@/components/Cover.astro";
@@ -10,7 +9,7 @@ import { getPhotos } from "@/content";
 import { formatDate } from "@/date";
 
 export const getStaticPaths = (async () => {
-  const photos = await getCollection("photos");
+  const photos = await getPhotos();
   return photos.map((photo) => ({
     params: { photo: photo.id },
     props: { photo },
@@ -28,8 +27,6 @@ const index = photos.findIndex((other) => other.id === photo.id);
   title={photo.data.title}
   description={photo.data.description}
   keywords={photo.data.keywords}
-  image={photo.data.wide}
-  imageDescription={photo.data.description}
 >
   <div class="flex flex-col items-center gap-12 lg:gap-24">
     <Cover

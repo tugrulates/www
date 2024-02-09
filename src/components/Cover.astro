@@ -4,18 +4,23 @@ import { fade } from "astro:transitions";
 import CoverImage from "@/components/CoverImage.astro";
 import CoverButton from "@/components/CoverButton.astro";
 import PhotoViewer from "@/components/PhotoViewer.tsx";
+import type { CollectionEntry } from "astro:content";
 
 export interface CoverData {
-  id?: string;
-  data: {
-    wide: ImageMetadata;
-    square: ImageMetadata;
-    description: string;
-  };
+  wide: ImageMetadata;
+  square: ImageMetadata;
+  description: string;
 }
 
+export interface CoverMeta {
+  id?: string;
+  data: CoverData;
+}
+
+export type CoverType = CollectionEntry<"photos"> | CoverData;
+
 interface Props {
-  image: CoverData;
+  image: CoverMeta;
   previous?: string;
   next?: string;
   actionHref?: string;
