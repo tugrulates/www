@@ -10,6 +10,7 @@ import { ImageResponse } from "@vercel/og";
 import fs from "fs/promises";
 import path from "node:path";
 import avatar from "@/images/me.png";
+import { DIMENSIONS } from "./consts";
 
 export async function getCoverData(cover: CoverType): Promise<CoverMeta> {
   if ("collection" in cover && cover.collection === "photos") {
@@ -43,7 +44,7 @@ export async function getOpenGraphImage({
 }: OpenGraphImageData): Promise<ImageResponse> {
   const [avatarBuffer, imageBuffer, regularFontBuffer, boldFontBuffer] =
     await Promise.all([
-      fs.readFile(path.resolve("src/images/me.png")),
+      fs.readFile(path.resolve("src/images/me-small.png")),
       fs.readFile(
         process.env.NODE_ENV === "development"
           ? path.resolve(image.src.replace(/\?.*/, "").replace("/@fs", ""))
@@ -63,8 +64,14 @@ export async function getOpenGraphImage({
       ? OpenGraphImageWide({ avatar, background, title, cta, description })
       : OpenGraphImageSquare({ avatar, background, title, cta }),
     {
-      width: size === "wide" ? 1200 : 400,
-      height: size === "wide" ? 600 : 400,
+      width:
+        size === "wide"
+          ? DIMENSIONS.opengraph_wide_width
+          : DIMENSIONS.opengraph_square_size,
+      height:
+        size === "wide"
+          ? DIMENSIONS.opengraph_wide_height
+          : DIMENSIONS.opengraph_square_size,
       fonts: [
         {
           name: "Regular",

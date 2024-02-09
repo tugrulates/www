@@ -11,9 +11,9 @@ const { cover: image, class: className } = Astro.props;
 
 const breakpoints = [
   {
-    min_width: DIMENSIONS.mobile_cover_size,
-    width: DIMENSIONS.desktop_cover_width,
-    height: DIMENSIONS.desktop_cover_height,
+    min_width: DIMENSIONS.cover_square_size,
+    width: DIMENSIONS.cover_wide_width,
+    height: DIMENSIONS.cover_wide_height,
     src: image.data.wide,
   },
   {
@@ -69,7 +69,7 @@ const images = await Promise.all(
     ]}
     src={image.data.wide.src}
     alt={image.data.description}
-    width={DIMENSIONS.desktop_cover_width}
-    height={DIMENSIONS.desktop_cover_height}
+    width={DIMENSIONS.cover_wide_width}
+    height={DIMENSIONS.cover_wide_height}
   />
 </picture>

@@ -43,7 +43,10 @@ export const AUTHOR = {
 };
 
 export const DIMENSIONS = {
-  desktop_cover_width: 736,
-  desktop_cover_height: 414,
-  mobile_cover_size: 640,
+  cover_wide_width: 736,
+  cover_wide_height: 414,
+  cover_square_size: 640,
+  opengraph_wide_width: 1200,
+  opengraph_wide_height: 675,
+  opengraph_square_size: 400,
 };
