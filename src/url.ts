@@ -5,5 +5,5 @@ export function getChildUrl(url: URL, path: string): string {
 }
 
 export function getFullChildUrl(url: URL, path: string): string {
-  return `${SITE.url}/${path}`.replace(/[^:]\/\//, "/");
+  return `${SITE.url}${getChildUrl(url, path)}`;
 }

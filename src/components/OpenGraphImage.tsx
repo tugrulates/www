@@ -18,6 +18,10 @@ export default function OpenGraphImage(props: Props): JSX.Element {
       <div tw="absolute inset-0 flex object-cover opacity-25">
         <img src={props.background} />
       </div>
+      <div
+        tw="absolute bg-red-500"
+        style={{ width: "1200px", height: "400px", top: "45px" }}
+      ></div>
       <div tw="p-1 rounded-full text-black bg-stone-200 shadow-lg shadow-stone-200/25 flex items-center">
         <img
           src={props.avatar}
