@@ -38,8 +38,8 @@ export function OpenGraphImage({
         <h1 tw="m-0 text-center" style={{ fontFamily: "Bold" }}>
           {title}
         </h1>
-        <div tw="text-center">{description}</div>
-        <div tw="text-black px-16 py-8 rounded-2xl bg-indigo-200 shadow-lg shadow-indigo-900/80">
+        <div tw="text-stone-300 text-center">{description}</div>
+        <div tw="px-16 py-8 rounded-2xl bg-indigo-500 shadow-lg shadow-indigo-900/80">
           {cta}
         </div>
       </div>
