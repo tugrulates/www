@@ -28,22 +28,25 @@ export async function getOpenGraphImage(
   image: ImageMetadata,
   cta: string,
 ): Promise<ImageResponse> {
-  const [imageBuffer, regularFontBuffer, boldFontBuffer] = await Promise.all([
-    fs.readFile(
-      process.env.NODE_ENV === "development"
-        ? path.resolve(image.src.replace(/\?.*/, "").replace("/@fs", ""))
-        : path.resolve(image.src.replace("/", ".vercel/output/static/")),
-    ),
-    fs.readFile(
-      "node_modules/@fontsource/fira-sans/files/fira-sans-latin-500-normal.woff",
-    ),
-    fs.readFile(
-      "node_modules/@fontsource/fira-sans/files/fira-sans-latin-900-normal.woff",
-    ),
-  ]);
+  const [avatarBuffer, imageBuffer, regularFontBuffer, boldFontBuffer] =
+    await Promise.all([
+      fs.readFile(path.resolve("src/images/me.png")),
+      fs.readFile(
+        process.env.NODE_ENV === "development"
+          ? path.resolve(image.src.replace(/\?.*/, "").replace("/@fs", ""))
+          : path.resolve(image.src.replace("/", ".vercel/output/static/")),
+      ),
+      fs.readFile(
+        "node_modules/@fontsource/fira-sans/files/fira-sans-latin-500-normal.woff",
+      ),
+      fs.readFile(
+        "node_modules/@fontsource/fira-sans/files/fira-sans-latin-900-normal.woff",
+      ),
+    ]);
+  const avatar = `data:image/png;base64,${avatarBuffer.toString("base64")}`;
   const background = `data:image/${image.format.replace("jpg", "jpeg")};base64,${imageBuffer.toString("base64")}`;
   return new ImageResponse(
-    OpenGraphImage({ background, title, description, cta }),
+    OpenGraphImage({ avatar, background, title, description, cta }),
     {
       width: 1200,
       height: 600,
