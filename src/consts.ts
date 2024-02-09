@@ -49,5 +49,5 @@ export const DIMENSIONS = {
   opengraph_source_width: 2400,
   opengraph_source_height: 1350,
   opengraph_width: 1200,
-  opengraph_height: 675,
+  opengraph_height: 630,
 };
