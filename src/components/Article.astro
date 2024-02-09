@@ -11,7 +11,7 @@ const { title, date, class: className } = Astro.props;
 
 <article
   class:list={[
-    "prose prose-stone w-full max-w-none px-2 dark:prose-invert md:prose-lg max-sm:pb-4 sm:pt-2",
+    "prose prose-stone w-full max-w-none px-2 dark:prose-invert md:prose-lg max-sm:pb-4",
     "prose-a:underline prose-a:decoration-stone-500/50 hover:prose-a:decoration-current",
     "prose-img:m-0 sm:prose-img:rounded-xl sm:[&_p:has(img)]:!p-2",
     "prose-ol:!pl-12 prose-ul:!pl-12",
@@ -44,7 +44,7 @@ const { title, date, class: className } = Astro.props;
   <slot name="license" />
   <style>
     article > :global(header picture) {
-      @apply m-0;
+      @apply !m-0;
     }
     article > :global(p),
     article > :global(ul),

@@ -39,7 +39,7 @@ const {
 } = Astro.props;
 ---
 
-<div class="group/cover relative z-50 w-full max-sm:-mx-4 lg:pt-12 print:pt-0">
+<div class="group/cover relative z-50 -mx-2 lg:pt-12 print:pt-0">
   <div
     class:list={[
       "aspect-video w-full max-sm:aspect-square",
@@ -47,7 +47,7 @@ const {
       "lg:scale-125 lg:shadow-lg print:scale-100 print:shadow-none",
     ]}
   >
-    <div transition:animate={fade({ duration: "0.1s" })} class="w-full">
+    <div transition:animate={fade({ duration: "0.1s" })}>
       <CoverImage
         cover={image}
         class="object-cover max-sm:w-screen sm:rounded-2xl"
