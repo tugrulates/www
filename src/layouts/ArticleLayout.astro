@@ -1,0 +1,30 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Article from "@/components/Article.astro";
+
+interface Props {
+  tab: string;
+  title: string;
+  description: string;
+  date?: Date;
+  keywords?: string[];
+}
+
+const { tab, title, description, date, keywords } = Astro.props;
+---
+
+<BaseLayout
+  tab={tab}
+  title={title}
+  description={description}
+  keywords={keywords}
+  date={date}
+>
+  <div class="flex flex-col gap-12 lg:gap-24">
+    <slot name="cover" />
+    <Article title={title} date={date}>
+      <slot name="content" />
+      <slot name="license" />
+    </Article>
+  </div>
+</BaseLayout>
