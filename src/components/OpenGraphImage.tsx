@@ -31,7 +31,7 @@ export function OpenGraphImage({
           style={{ objectFit: "cover", filter: "blur(40px) brightness(40%)" }}
         />
       </div>
-      <div tw="flex flex-1 flex-col pr-16 items-center justify-between text-5xl text-white">
+      <div tw="flex flex-1 flex-col pl-16 pr-32 py-16 items-center justify-between text-5xl text-white">
         <div tw="p-2 rounded-full text-black bg-stone-200 shadow-lg shadow-stone-900/80 flex items-center">
           <img src={avatar} tw={"w-24 h-24 rounded-full border border-black"} />
           <span tw="px-8">{SITE.domain}</span>
