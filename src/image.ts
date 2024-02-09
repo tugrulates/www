@@ -2,7 +2,10 @@ import type { GetImageResult } from "astro";
 import { getImage } from "astro:assets";
 import { getEntry } from "astro:content";
 import type { CoverMeta, CoverType } from "@/components/Cover.astro";
-import OpenGraphImage from "@/components/OpenGraphImage";
+import {
+  OpenGraphImageSquare,
+  OpenGraphImageWide,
+} from "@/components/OpenGraphImage";
 import { ImageResponse } from "@vercel/og";
 import fs from "fs/promises";
 import path from "node:path";
@@ -22,12 +25,22 @@ export async function getCoverData(cover: CoverType): Promise<CoverMeta> {
   throw new Error(`Invalid cover: ${cover}`);
 }
 
-export async function getOpenGraphImage(
-  title: string,
-  description: string,
-  image: ImageMetadata,
-  cta: string,
-): Promise<ImageResponse> {
+export type OpenGraphImageSize = "wide" | "square";
+export interface OpenGraphImageData {
+  size: OpenGraphImageSize;
+  title: string;
+  image: ImageMetadata;
+  cta: string;
+  description?: string;
+}
+
+export async function getOpenGraphImage({
+  size,
+  title,
+  image,
+  cta,
+  description,
+}: OpenGraphImageData): Promise<ImageResponse> {
   const [avatarBuffer, imageBuffer, regularFontBuffer, boldFontBuffer] =
     await Promise.all([
       fs.readFile(path.resolve("src/images/me.png")),
@@ -46,10 +59,12 @@ export async function getOpenGraphImage(
   const avatar = `data:image/png;base64,${avatarBuffer.toString("base64")}`;
   const background = `data:image/${image.format.replace("jpg", "jpeg")};base64,${imageBuffer.toString("base64")}`;
   return new ImageResponse(
-    OpenGraphImage({ avatar, background, title, description, cta }),
+    size === "wide"
+      ? OpenGraphImageWide({ avatar, background, title, cta, description })
+      : OpenGraphImageSquare({ avatar, background, title, cta }),
     {
-      width: 1200,
-      height: 600,
+      width: size === "wide" ? 1200 : 400,
+      height: size === "wide" ? 600 : 400,
       fonts: [
         {
           name: "Regular",

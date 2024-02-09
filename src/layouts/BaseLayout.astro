@@ -31,7 +31,8 @@ const {
   class: className,
 } = Astro.props;
 
-const ogImage = getCanonicalChildUrl(Astro.url, "og.png");
+const ogImageWide = getCanonicalChildUrl(Astro.url, "og-wide.png");
+const ogImageSquare = getCanonicalChildUrl(Astro.url, "og-square.png");
 const appleTouchIcon = await getFavicon(180);
 const favicon = await getFavicon(180);
 ---
@@ -45,40 +46,46 @@ const favicon = await getFavicon(180);
     <meta name="keywords" content={(keywords ?? []).join(", ")} />
     {
       seo ? (
-        <SEO
-          openGraph={{
-            basic: {
-              title: `${title} — ${AUTHOR.name}`,
-              type: date !== undefined ? "article" : "website",
-              image: ogImage,
-              url: `${SITE.url}${Astro.url.pathname}`,
-            },
-            optional: {
+        <>
+          <SEO
+            openGraph={{
+              basic: {
+                title: `${title} — ${AUTHOR.name}`,
+                type: date !== undefined ? "article" : "website",
+                image: ogImageWide,
+                url: `${SITE.url}${Astro.url.pathname}`,
+              },
+              optional: {
+                description,
+                locale: "en",
+                siteName: SITE.domain,
+              },
+              article: {
+                publishedTime: date !== undefined ? formatDateIso(date) : "",
+                authors: [AUTHOR.name],
+                tags: keywords ?? [],
+              },
+              image: {
+                type: `image/png`,
+                width: 1200,
+                height: 600,
+              },
+            }}
+            twitter={{
+              creator: AUTHOR.twitter,
+              site: AUTHOR.twitter,
+              card: "summary_large_image",
+              title,
               description,
-              locale: "en",
-              siteName: SITE.domain,
-            },
-            article: {
-              publishedTime: date !== undefined ? formatDateIso(date) : "",
-              authors: [AUTHOR.name],
-              tags: keywords ?? [],
-            },
-            image: {
-              type: `image/png`,
-              width: 1200,
-              height: 600,
-            },
-          }}
-          twitter={{
-            creator: AUTHOR.twitter,
-            site: AUTHOR.twitter,
-            card: "summary_large_image",
-            title,
-            description,
-            image: ogImage,
-          }}
-        />
-      ) : null
+              image: ogImageWide,
+            }}
+          />
+          <meta property="og:image" content={ogImageSquare} />
+          <meta property="og:image:type" content="image/png" />
+          <meta property="og:image:width" content="400" />
+          <meta property="og:image:height" content="400" />
+        </>
+      ) : undefined
     }
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
