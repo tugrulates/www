@@ -1,15 +1,13 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { Icon } from "astro-icon/components";
-import socialCover from "@/content/pages/images/rijksmuseum-wide.jpg";
 ---
 
 <BaseLayout
   tab="404"
   title="Not found"
   description="Requested page not found."
-  image={socialCover}
-  imageDescription="Me at Rijksmuseum library in Amsterdam."
+  seo={false}
   class="flex flex-col"
 >
   <div class="flex flex-1 flex-col items-center justify-center gap-8">

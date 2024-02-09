@@ -6,8 +6,8 @@ export const GET = async (): Promise<ImageResponse> => {
   const photos = await getPhotos();
   return await getOpenGraphImage(
     "Photography by Tugrul Ates",
-    "I enjoy playing around with light and images. It's just a hobby, but it brings me happiness, especially when I capture unique moments and artifacts.",
+    "Enjoy my photography from around the world. You are free to use all the images for any purpose. When sharing, please credit me as the photographer. Thank you! 📸",
     photos[0].data.wide,
-    "Visit",
+    "View photos",
   );
 };

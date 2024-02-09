@@ -9,15 +9,15 @@ import Footer from "@/components/Footer.astro";
 import { AUTHOR, SITE } from "@/consts";
 import { getFavicon } from "@/image";
 import { formatDateIso } from "@/date";
+import { getChildUrl } from "@/url";
 
 interface Props {
   tab: string;
   title: string;
   description: string;
-  image: ImageMetadata;
-  imageDescription: string;
-  keywords?: string[];
   date?: Date;
+  seo?: boolean;
+  keywords?: string[];
   class?: string;
 }
 
@@ -25,13 +25,13 @@ const {
   tab,
   title,
   description,
-  imageDescription,
-  keywords,
   date,
+  seo = true,
+  keywords,
   class: className,
 } = Astro.props;
 
-const ogImage = `${Astro.url.pathname.replace(/\/$/, "")}/og.png`;
+const ogImage = getChildUrl(Astro.url, "og.png");
 const appleTouchIcon = await getFavicon(180);
 const favicon = await getFavicon(180);
 ---
@@ -43,41 +43,43 @@ const favicon = await getFavicon(180);
     <meta name="author" content={AUTHOR.name} />
     <meta name="description" content={description} />
     <meta name="keywords" content={(keywords ?? []).join(", ")} />
-    <SEO
-      openGraph={{
-        basic: {
-          title: `${title} — ${AUTHOR.name}`,
-          type: date !== undefined ? "article" : "website",
-          image: ogImage,
-          url: `${SITE.url}${Astro.url.pathname}`,
-        },
-        optional: {
-          description,
-          locale: "en",
-          siteName: SITE.domain,
-        },
-        article: {
-          publishedTime: date !== undefined ? formatDateIso(date) : "",
-          authors: [AUTHOR.name],
-          tags: keywords ?? [],
-        },
-        image: {
-          type: `image/png`,
-          width: 1200,
-          height: 600,
-          alt: imageDescription ?? "",
-        },
-      }}
-      twitter={{
-        creator: AUTHOR.twitter,
-        site: AUTHOR.twitter,
-        card: "summary_large_image",
-        title,
-        description,
-        image: ogImage,
-        imageAlt: imageDescription ?? "",
-      }}
-    />
+    {
+      seo ? (
+        <SEO
+          openGraph={{
+            basic: {
+              title: `${title} — ${AUTHOR.name}`,
+              type: date !== undefined ? "article" : "website",
+              image: ogImage,
+              url: `${SITE.url}${Astro.url.pathname}`,
+            },
+            optional: {
+              description,
+              locale: "en",
+              siteName: SITE.domain,
+            },
+            article: {
+              publishedTime: date !== undefined ? formatDateIso(date) : "",
+              authors: [AUTHOR.name],
+              tags: keywords ?? [],
+            },
+            image: {
+              type: `image/png`,
+              width: 1200,
+              height: 600,
+            },
+          }}
+          twitter={{
+            creator: AUTHOR.twitter,
+            site: AUTHOR.twitter,
+            card: "summary_large_image",
+            title,
+            description,
+            image: ogImage,
+          }}
+        />
+      ) : null
+    }
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <link rel="sitemap" href="/sitemap-index.xml" />
@@ -112,7 +114,6 @@ const favicon = await getFavicon(180);
     </style>
     <div class="flex-1"></div>
     <div class="flex min-h-screen w-full max-w-screen-md flex-col items-center">
-      <img src={ogImage} alt={imageDescription} />
       <Header class="print:hidden" />
       <main
         class:list={[
