@@ -1,11 +1,11 @@
 import type { GetImageResult } from "astro";
 import { getImage } from "astro:assets";
 import { getEntry } from "astro:content";
+import { ImageResponse } from "@vercel/og";
 import type { CoverMeta, CoverType } from "@/components/Cover.astro";
 import { OpenGraphImage } from "@/components/OpenGraphImage";
 import fs from "fs/promises";
 import path from "node:path";
-import satori from "satori";
 import sharp from "sharp";
 import avatar from "@/images/me.png";
 import { DIMENSIONS } from "./consts";
@@ -54,7 +54,7 @@ export async function getOpenGraphImage({
     ]);
   const avatar = `data:image/png;base64,${avatarBuffer.toString("base64")}`;
   const background = `data:image/${image.format.replace("jpg", "jpeg")};base64,${imageBuffer.toString("base64")}`;
-  const svg = await satori(
+  const og = new ImageResponse(
     OpenGraphImage({ avatar, background, title, description, cta }),
     {
       width: DIMENSIONS.opengraph_wide_width,
@@ -73,7 +73,8 @@ export async function getOpenGraphImage({
       ],
     },
   );
-  const jpeg = await sharp(Buffer.from(svg)).jpeg().toBuffer();
+  const png = await og.arrayBuffer();
+  const jpeg = await sharp(png).jpeg().toBuffer();
   return new Response(jpeg, {
     headers: { "Content-Type": "image/jpeg" },
   });
