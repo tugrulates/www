@@ -1,7 +1,11 @@
 import { type GetStaticPaths } from "astro";
 import type { ImageResponse } from "@vercel/og";
 import { getPhotos } from "@/content";
-import { getOpenGraphImage, type OpenGraphImageData } from "@/image";
+import {
+  getOpenGraphImage,
+  type OpenGraphImageData,
+  type OpenGraphImageSize,
+} from "@/image";
 import { formatDate } from "@/date";
 
 export const getStaticPaths = (async () => {
@@ -30,7 +34,7 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 interface Props {
-  params: { photo: string };
+  params: { size: OpenGraphImageSize; photo: string };
   props: OpenGraphImageData;
 }
 
