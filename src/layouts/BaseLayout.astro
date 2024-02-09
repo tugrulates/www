@@ -47,6 +47,16 @@ const favicon = await getFavicon(180);
     {
       seo ? (
         <>
+          <meta property="og:image" itemprop="image" content={ogImageSquare} />
+          <meta property="og:image:type" content="image/png" />
+          <meta
+            property="og:image:width"
+            content={DIMENSIONS.opengraph_square_size.toString()}
+          />
+          <meta
+            property="og:image:height"
+            content={DIMENSIONS.opengraph_square_size.toString()}
+          />
           <SEO
             openGraph={{
               basic: {
@@ -79,16 +89,6 @@ const favicon = await getFavicon(180);
               description,
               image: ogImageWide,
             }}
-          />
-          <meta property="og:image" itemprop="image" content={ogImageSquare} />
-          <meta property="og:image:type" content="image/png" />
-          <meta
-            property="og:image:width"
-            content={DIMENSIONS.opengraph_square_size.toString()}
-          />
-          <meta
-            property="og:image:height"
-            content={DIMENSIONS.opengraph_square_size.toString()}
           />
         </>
       ) : undefined

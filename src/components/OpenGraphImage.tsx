@@ -21,9 +21,9 @@ function OpenGraphImageContainer({
 
 function OpenGraphImagePill({ avatar }: { avatar: string }): JSX.Element {
   return (
-    <div tw="p-1 rounded-full text-black bg-stone-200 shadow-lg shadow-stone-200/50 flex items-center">
-      <img src={avatar} tw="w-12 h-12 rounded-full border border-black" />
-      <span tw="px-2">{SITE.domain}</span>
+    <div tw="p-2 rounded-full text-black bg-stone-200 shadow-xl shadow-stone-200/50 flex items-center">
+      <img src={avatar} tw="w-24 h-24 rounded-full border border-black" />
+      <span tw="px-4">{SITE.domain}</span>
     </div>
   );
 }
@@ -59,7 +59,7 @@ function OpenGraphImageBackground({
 
 function OpenGraphCtaPill({ cta }: { cta: string }): JSX.Element {
   return (
-    <div tw="px-8 py-4 rounded-2xl bg-indigo-800 shadow-lg shadow-indigo-900/50">
+    <div tw="px-16 py-8 rounded-3xl bg-indigo-800 shadow-xl shadow-indigo-900/50">
       {cta}
     </div>
   );
@@ -81,7 +81,7 @@ export function OpenGraphImageWide({
   description,
 }: Props): JSX.Element {
   return (
-    <OpenGraphImageContainer tw="text-2xl px-32 py-16">
+    <OpenGraphImageContainer tw="text-6xl px-64 py-32">
       <OpenGraphImageBackground
         background={background}
         width={DIMENSIONS.opengraph_wide_width}
@@ -102,7 +102,7 @@ export function OpenGraphImageSquare({
   cta,
 }: Props): JSX.Element {
   return (
-    <OpenGraphImageContainer tw="p-8">
+    <OpenGraphImageContainer tw="text-4xl p-16">
       <OpenGraphImageBackground
         background={background}
         width={DIMENSIONS.opengraph_square_size}

@@ -30,17 +30,17 @@ export type OpenGraphImageSize = "wide" | "square";
 export interface OpenGraphImageData {
   size: OpenGraphImageSize;
   title: string;
+  description: string;
   image: ImageMetadata;
   cta: string;
-  description?: string;
 }
 
 export async function getOpenGraphImage({
   size,
   title,
+  description,
   image,
   cta,
-  description,
 }: OpenGraphImageData): Promise<ImageResponse> {
   const [avatarBuffer, imageBuffer, regularFontBuffer, boldFontBuffer] =
     await Promise.all([
