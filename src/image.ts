@@ -28,18 +28,20 @@ export async function getOpenGraphImage(
   image: ImageMetadata,
   cta: string,
 ): Promise<ImageResponse> {
-  const imageBuffer = await fs.readFile(
-    process.env.NODE_ENV === "development"
-      ? path.resolve(image.src.replace(/\?.*/, "").replace("/@fs", ""))
-      : path.resolve(image.src.replace("/", ".vercel/output/static/")),
-  );
+  const [imageBuffer, regularFontBuffer, boldFontBuffer] = await Promise.all([
+    fs.readFile(
+      process.env.NODE_ENV === "development"
+        ? path.resolve(image.src.replace(/\?.*/, "").replace("/@fs", ""))
+        : path.resolve(image.src.replace("/", ".vercel/output/static/")),
+    ),
+    fs.readFile(
+      "node_modules/@fontsource/fira-sans/files/fira-sans-latin-500-normal.woff",
+    ),
+    fs.readFile(
+      "node_modules/@fontsource/fira-sans/files/fira-sans-latin-900-normal.woff",
+    ),
+  ]);
   const background = `data:image/${image.format.replace("jpg", "jpeg")};base64,${imageBuffer.toString("base64")}`;
-  const normalFontBuffer = await fs.readFile(
-    "node_modules/@fontsource/fira-sans/files/fira-sans-latin-500-normal.woff",
-  );
-  const boldFontBuffer = await fs.readFile(
-    "node_modules/@fontsource/fira-sans/files/fira-sans-latin-900-normal.woff",
-  );
   return new ImageResponse(
     OpenGraphImage({ background, title, description, cta }),
     {
@@ -47,12 +49,12 @@ export async function getOpenGraphImage(
       height: 600,
       fonts: [
         {
-          name: "Fira Sans",
-          data: normalFontBuffer.buffer,
+          name: "Regular",
+          data: regularFontBuffer.buffer,
           style: "normal",
         },
         {
-          name: "Fira Sans Bold",
+          name: "Bold",
           data: boldFontBuffer.buffer,
           style: "normal",
         },

@@ -12,7 +12,7 @@ export default function OpenGraphImage(props: Props): JSX.Element {
   return (
     <div
       tw="text-2xl relative flex flex-col w-full h-full px-32 py-16 gap-16 items-center justify-between bg-black text-white"
-      style={{ fontFamily: "Fira Sans" }}
+      style={{ fontFamily: "Regular" }}
     >
       <div tw="absolute inset-0 flex object-cover opacity-25">
         <img src={props.background} />
@@ -20,7 +20,7 @@ export default function OpenGraphImage(props: Props): JSX.Element {
       <div tw="px-4 py-2 rounded-full text-black bg-stone-200 shadow-lg shadow-stone-200/25 ">
         {SITE.domain}
       </div>
-      <h1 tw="m-0" style={{ fontFamily: "Fira Sans Bold" }}>
+      <h1 tw="m-0" style={{ fontFamily: "Bold" }}>
         {props.title}
       </h1>
       <div>{props.description}</div>
