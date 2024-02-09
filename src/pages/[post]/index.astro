@@ -13,31 +13,32 @@ export const getStaticPaths = (async () => {
   return [
     ...pages.map((page) => ({
       params: { post: page.slug },
-      props: { page, license: false },
+      props: { post: page, license: false },
     })),
-    ...posts.map((page) => ({
-      params: { post: page.slug },
-      props: { page, license: true },
+    ...posts.map((post) => ({
+      params: { post: post.slug },
+      props: { post, license: true },
     })),
   ];
 }) satisfies GetStaticPaths;
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
-const { page, license } = Astro.props;
+
+const { post, license }: Props = Astro.props;
 const posts = await getPosts();
-const index = posts.findIndex((other) => other.id === page.id);
-const { Content } = await page.render();
-const cover = await getCoverData(page.data.cover as CoverType);
+const index = posts.findIndex((other) => other.id === post.id);
+const { Content } = await post.render();
+const cover = await getCoverData(post.data.cover as CoverType);
 ---
 
 <BaseLayout
-  tab={page.data.tab ?? "posts"}
-  title={page.data.title}
-  description={page.data.description}
-  keywords={page.data.tags}
+  tab={post.data.tab ?? "posts"}
+  title={post.data.title}
+  description={post.data.description}
+  keywords={post.data.tags}
   image={cover.data.wide}
   imageDescription={cover.data.description}
-  date={page.data.date}
+  date={post.data.date}
 >
   <div class="flex flex-col items-center gap-4 sm:gap-12 lg:gap-24">
     <Cover
@@ -52,7 +53,7 @@ const cover = await getCoverData(page.data.cover as CoverType);
       actionIcon="heroicons:photo-solid"
       actionAlt="Image details"
     />
-    <Article title={page.data.title} date={page.data.date}>
+    <Article title={post.data.title} date={post.data.date}>
       <Content />
       {
         license ? (

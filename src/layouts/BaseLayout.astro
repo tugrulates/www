@@ -31,7 +31,7 @@ const {
   class: className,
 } = Astro.props;
 
-const ogImage = `/og/about.png`;
+const ogImage = `${Astro.url.pathname.replace(/\/$/, "")}/og.png`;
 const appleTouchIcon = await getFavicon(180);
 const favicon = await getFavicon(180);
 ---
@@ -46,7 +46,7 @@ const favicon = await getFavicon(180);
     <SEO
       openGraph={{
         basic: {
-          title: `${title} – ${AUTHOR.name}`,
+          title: `${title} — ${AUTHOR.name}`,
           type: date !== undefined ? "article" : "website",
           image: ogImage,
           url: `${SITE.url}${Astro.url.pathname}`,

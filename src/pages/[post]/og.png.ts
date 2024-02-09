@@ -1,17 +1,15 @@
 import { type GetStaticPaths } from "astro";
 import type { ImageResponse } from "@vercel/og";
-import "@fontsource/fira-sans";
-import { getPages, getPosts, getPhotos } from "@/content";
+import { getPages, getPosts } from "@/content";
 import { getOpenGraphImage, getCoverData } from "@/image";
 import type { CoverType } from "@/components/Cover.astro";
 
 export const getStaticPaths = (async () => {
   const pages = await getPages();
   const posts = await getPosts();
-  const photos = await getPhotos();
   return [
     ...pages.map((page) => ({
-      params: { path: page.slug },
+      params: { post: page.slug },
       props: {
         title: page.data.title,
         description: page.data.description,
@@ -20,7 +18,7 @@ export const getStaticPaths = (async () => {
       },
     })),
     ...posts.map((post) => ({
-      params: { path: post.slug },
+      params: { post: post.slug },
       props: {
         title: post.data.title,
         description: post.data.description,
@@ -28,20 +26,11 @@ export const getStaticPaths = (async () => {
         cta: "Read more",
       },
     })),
-    ...photos.map((photo) => ({
-      params: { path: `photography/${photo.id}` },
-      props: {
-        title: photo.data.title,
-        description: photo.data.description,
-        cover: photo,
-        cta: "View photo",
-      },
-    })),
   ];
 }) satisfies GetStaticPaths;
 
 interface Props {
-  params: { slug: string };
+  params: { post: string };
   props: {
     title: string;
     description: string;
