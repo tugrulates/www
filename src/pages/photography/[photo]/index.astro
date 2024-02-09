@@ -1,7 +1,6 @@
 ---
 import { type InferGetStaticPropsType, type GetStaticPaths } from "astro";
-import Article from "@/components/Article.astro";
-import BaseLayout from "@/layouts/BaseLayout.astro";
+import ArticleLayout from "@/layouts/ArticleLayout.astro";
 import Cover from "@/components/Cover.astro";
 import License from "@/components/License.astro";
 import { AUTHOR, SITE } from "@/consts";
@@ -22,47 +21,47 @@ const photos = await getPhotos();
 const index = photos.findIndex((other) => other.id === photo.id);
 ---
 
-<BaseLayout
+<ArticleLayout
   tab="photos"
   title={photo.data.title}
   description={photo.data.description}
   keywords={photo.data.keywords}
 >
-  <div class="flex flex-col items-center gap-12 lg:gap-24">
-    <Cover
-      image={photo}
-      previous={index > 0 ? photos[index - 1].id : undefined}
-      next={index >= 0 && index < photos.length - 1
-        ? photos[index + 1].id
-        : undefined}
-      actionHref={photo.data.wide.src}
-      actionDownload={`${photo.id}.jpg`}
-      actionIcon="heroicons:archive-box-arrow-down-solid"
-      actionAlt="Download photo in full size"
-    />
-    <Article title={photo.data.title}>
-      <table>
-        <tr><th>Description</th><td>{photo.data.description}</td></tr>
-        <tr><th>Date</th><td>{formatDate(photo.data.date)}</td></tr>
-        <tr><th>Location</th><td>{photo.data.location}</td></tr>
-        <tr><th>City</th><td>{photo.data.city}</td></tr>
-        <tr><th>State/Region</th><td>{photo.data.state}</td></tr>
-        <tr><th>Country</th><td>{photo.data.country}</td></tr>
-        <tr><th>Camera</th><td>{photo.data.camera}</td></tr>
-        <tr><th>Lens</th><td>{photo.data.lens}</td></tr>
-        <tr><th>Editing</th><td>{photo.data.editing}</td></tr>
-      </table>
-      <License icons="🅭🅯">
-        This photograph is provided under a <a
-          rel="license"
-          href={photo.data.license}
-          >Creative Commons Attribution 4.0 International License (CC BY 4.0)</a
-        >. You are free to share, copy, distribute, and transmit the work or
-        adapt and make commercial use of it, provided that you attribute the
-        work to {AUTHOR.name} and this website
-        <a href={SITE.url}>{SITE.domain}</a>. For any reuse or distribution, you
-        must make clear to others the license terms of this work.
-      </License>
-    </Article>
-  </div>
-</BaseLayout>
+  <Cover
+    slot="cover"
+    image={photo}
+    previous={index > 0 ? photos[index - 1].id : undefined}
+    next={index >= 0 && index < photos.length - 1
+      ? photos[index + 1].id
+      : undefined}
+    actionHref={photo.data.wide.src}
+    actionDownload={`${photo.id}.jpg`}
+    actionIcon="heroicons:archive-box-arrow-down-solid"
+    actionAlt="Download photo in full size"
+  />
+  <Fragment slot="content">
+    <table>
+      <tr><th>Description</th><td>{photo.data.description}</td></tr>
+      <tr><th>Date</th><td>{formatDate(photo.data.date)}</td></tr>
+      <tr><th>Location</th><td>{photo.data.location}</td></tr>
+      <tr><th>City</th><td>{photo.data.city}</td></tr>
+      <tr><th>State/Region</th><td>{photo.data.state}</td></tr>
+      <tr><th>Country</th><td>{photo.data.country}</td></tr>
+      <tr><th>Camera</th><td>{photo.data.camera}</td></tr>
+      <tr><th>Lens</th><td>{photo.data.lens}</td></tr>
+      <tr><th>Editing</th><td>{photo.data.editing}</td></tr>
+    </table>
+  </Fragment>
+  <License slot="license" icons="🅭🅯">
+    This photograph is provided under a <a
+      rel="license"
+      href={photo.data.license}
+      >Creative Commons Attribution 4.0 International License (CC BY 4.0)</a
+    >. You are free to share, copy, distribute, and transmit the work or adapt
+    and make commercial use of it, provided that you attribute the work to {
+      AUTHOR.name
+    } and this website
+    <a href={SITE.url}>{SITE.domain}</a>. For any reuse or distribution, you
+    must make clear to others the license terms of this work.
+  </License>
+</ArticleLayout>
