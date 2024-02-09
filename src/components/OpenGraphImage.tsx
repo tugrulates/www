@@ -22,8 +22,8 @@ export function OpenGraphImage({
       <div tw="absolute inset-0 flex">
         <img
           src={background}
-          width={DIMENSIONS.opengraph_wide_width}
-          height={DIMENSIONS.opengraph_wide_height}
+          width={DIMENSIONS.opengraph_source_width}
+          height={DIMENSIONS.opengraph_source_height}
           style={{ objectFit: "cover", filter: "blur(20px) brightness(40%)" }}
         />
       </div>
@@ -31,7 +31,7 @@ export function OpenGraphImage({
         tw="flex-1 text-5xl px-16 py-24 flex flex-col items-center justify-between text-white"
         style={{ fontFamily: "Regular" }}
       >
-        <div tw="p-2 rounded-full text-black bg-stone-200 shadow-lg shadow-stone-200/50 flex items-center">
+        <div tw="p-2 rounded-full text-black bg-stone-200 shadow-lg shadow-stone-200/30 flex items-center">
           <img src={avatar} tw={"w-24 h-24 rounded-full border border-black"} />
           <span tw="px-8">{SITE.domain}</span>
         </div>
@@ -39,14 +39,14 @@ export function OpenGraphImage({
           {title}
         </h1>
         <div tw="text-center">{description}</div>
-        <div tw="text-black px-16 py-8 rounded-2xl bg-indigo-200 shadow-lg shadow-indigo-900/50">
+        <div tw="text-black px-16 py-8 rounded-2xl bg-indigo-200 shadow-lg shadow-indigo-200/30">
           {cta}
         </div>
       </div>
       <img
         src={background}
-        width={DIMENSIONS.opengraph_wide_height}
-        height={DIMENSIONS.opengraph_wide_height}
+        width={DIMENSIONS.opengraph_source_height}
+        height={DIMENSIONS.opengraph_source_height}
         style={{ objectFit: "cover" }}
       />
     </div>

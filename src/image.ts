@@ -57,8 +57,8 @@ export async function getOpenGraphImage({
   const og = new ImageResponse(
     OpenGraphImage({ avatar, background, title, description, cta }),
     {
-      width: DIMENSIONS.opengraph_wide_width,
-      height: DIMENSIONS.opengraph_wide_height,
+      width: DIMENSIONS.opengraph_source_width,
+      height: DIMENSIONS.opengraph_source_height,
       fonts: [
         {
           name: "Regular",
@@ -74,7 +74,10 @@ export async function getOpenGraphImage({
     },
   );
   const png = await og.arrayBuffer();
-  const jpeg = await sharp(png).jpeg().toBuffer();
+  const jpeg = await sharp(png)
+    .resize(DIMENSIONS.opengraph_width, DIMENSIONS.opengraph_height)
+    .jpeg()
+    .toBuffer();
   return new Response(jpeg, {
     headers: { "Content-Type": "image/jpeg" },
   });

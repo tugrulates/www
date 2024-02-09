@@ -7,7 +7,7 @@ import { formatDate } from "@/date";
 export const getStaticPaths = (async () => {
   const photos = await getPhotos();
   return photos.map((photo) => ({
-    params: { sphoto: photo.id },
+    params: { photo: photo.id },
     props: {
       title: photo.data.title,
       description: `${formatDate(photo.data.date)} — ${photo.data.location}`,
