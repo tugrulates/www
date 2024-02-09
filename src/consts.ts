@@ -48,5 +48,4 @@ export const DIMENSIONS = {
   cover_square_size: 640,
   opengraph_wide_width: 2400,
   opengraph_wide_height: 1350,
-  opengraph_square_size: 400,
 };

@@ -2,13 +2,11 @@ import type { GetImageResult } from "astro";
 import { getImage } from "astro:assets";
 import { getEntry } from "astro:content";
 import type { CoverMeta, CoverType } from "@/components/Cover.astro";
-import {
-  OpenGraphImageSquare,
-  OpenGraphImageWide,
-} from "@/components/OpenGraphImage";
-import { ImageResponse } from "@vercel/og";
+import { OpenGraphImage } from "@/components/OpenGraphImage";
 import fs from "fs/promises";
 import path from "node:path";
+import satori from "satori";
+import sharp from "sharp";
 import avatar from "@/images/me.png";
 import { DIMENSIONS } from "./consts";
 
@@ -26,21 +24,18 @@ export async function getCoverData(cover: CoverType): Promise<CoverMeta> {
   throw new Error(`Invalid cover: ${cover}`);
 }
 
-export type OpenGraphImageSize = "wide" | "square";
 export interface OpenGraphImageData {
-  size: OpenGraphImageSize;
   title: string;
+  description: string;
   image: ImageMetadata;
   cta: string;
-  description?: string;
 }
 
 export async function getOpenGraphImage({
-  size,
   title,
+  description,
   image,
   cta,
-  description,
 }: OpenGraphImageData): Promise<ImageResponse> {
   const [avatarBuffer, imageBuffer, regularFontBuffer, boldFontBuffer] =
     await Promise.all([
@@ -59,19 +54,11 @@ export async function getOpenGraphImage({
     ]);
   const avatar = `data:image/png;base64,${avatarBuffer.toString("base64")}`;
   const background = `data:image/${image.format.replace("jpg", "jpeg")};base64,${imageBuffer.toString("base64")}`;
-  return new ImageResponse(
-    size === "wide"
-      ? OpenGraphImageWide({ avatar, background, title, cta, description })
-      : OpenGraphImageSquare({ avatar, background, title, cta }),
+  const svg = await satori(
+    OpenGraphImage({ avatar, background, title, description, cta }),
     {
-      width:
-        size === "wide"
-          ? DIMENSIONS.opengraph_wide_width
-          : DIMENSIONS.opengraph_square_size,
-      height:
-        size === "wide"
-          ? DIMENSIONS.opengraph_wide_height
-          : DIMENSIONS.opengraph_square_size,
+      width: DIMENSIONS.opengraph_wide_width,
+      height: DIMENSIONS.opengraph_wide_height,
       fonts: [
         {
           name: "Regular",
@@ -86,6 +73,10 @@ export async function getOpenGraphImage({
       ],
     },
   );
+  const jpeg = await sharp(Buffer.from(svg)).jpeg().toBuffer();
+  return new Response(jpeg, {
+    headers: { "Content-Type": "image/jpeg" },
+  });
 }
 
 export async function getFavicon(size?: number): Promise<GetImageResult> {

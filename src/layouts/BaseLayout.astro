@@ -31,8 +31,7 @@ const {
   class: className,
 } = Astro.props;
 
-const ogImageWide = getCanonicalChildUrl(Astro.url, "og-wide.png");
-const ogImageSquare = getCanonicalChildUrl(Astro.url, "og-square.png");
+const ogImage = getCanonicalChildUrl(Astro.url, "og.jpg");
 const appleTouchIcon = await getFavicon(180);
 const favicon = await getFavicon(180);
 ---
@@ -52,7 +51,7 @@ const favicon = await getFavicon(180);
               basic: {
                 title: `${title} — ${AUTHOR.name}`,
                 type: date !== undefined ? "article" : "website",
-                image: ogImageWide,
+                image: ogImage,
                 url: `${SITE.url}${Astro.url.pathname}`,
               },
               optional: {
@@ -66,7 +65,7 @@ const favicon = await getFavicon(180);
                 tags: keywords ?? [],
               },
               image: {
-                type: `image/png`,
+                type: `image/jpeg`,
                 width: DIMENSIONS.opengraph_wide_width,
                 height: DIMENSIONS.opengraph_wide_height,
               },
@@ -77,18 +76,8 @@ const favicon = await getFavicon(180);
               card: "summary_large_image",
               title,
               description,
-              image: ogImageWide,
+              image: ogImage,
             }}
-          />
-          <meta property="og:image" itemprop="image" content={ogImageSquare} />
-          <meta property="og:image:type" content="image/png" />
-          <meta
-            property="og:image:width"
-            content={DIMENSIONS.opengraph_square_size.toString()}
-          />
-          <meta
-            property="og:image:height"
-            content={DIMENSIONS.opengraph_square_size.toString()}
           />
         </>
       ) : undefined
