@@ -38,69 +38,65 @@ const { title, date, class: className } = Astro.props;
     }
   </header>
   <slot />
+  <style>
+    article > :global(p),
+    article > :global(ul),
+    article > :global(ol),
+    article > :global(pre),
+    article > :global(lite-youtube),
+    article :global(blockquote) {
+      @apply -mx-2 px-2 outline-none outline-offset-0 transition-all max-sm:rounded-none sm:rounded-xl;
+      @apply hover:bg-stone-500/20 hover:outline-8 hover:outline-stone-500/20;
+      @apply print:hover:bg-transparent print:hover:outline-transparent;
+      @apply print:!text-black;
+    }
+    article > :global(lite-youtube) {
+      @apply aspect-video;
+    }
+    article > :global(lite-youtube::before) {
+      @apply bg-none;
+    }
+    article > :global(lite-youtube.lyt-activated) {
+      @apply !bg-none;
+    }
+    article :global(a::after) {
+      @apply inline-block h-3 w-0 bg-current pl-0.5 pr-3 align-text-top opacity-75 hover:opacity-100 print:hidden;
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      mask-size: 100% 100%;
+    }
+    article :global(a[rel="nofollow"]::after) {
+      content: "";
+      -webkit-mask-image: url("/icons/link-external.svg");
+      mask-image: url("/icons/link-external.svg");
+    }
+    article :global(a[href^="https://en.wikipedia.org/"]::after)
+    {
+      content: "";
+      -webkit-mask-image: url("/icons/logo-wikipedia.svg");
+      mask-image: url("/icons/logo-wikipedia.svg");
+    }
+    article :global(a[href$=".pdf"]::after) {
+      content: "";
+      -webkit-mask-image: url("/icons/link-document.svg");
+      mask-image: url("/icons/link-document.svg");
+    }
+    article :global(a[href$=".zip"]::after) {
+      content: "";
+      -webkit-mask-image: url("/icons/link-download.svg");
+      mask-image: url("/icons/link-download.svg");
+    }
+    article :global(a[href^="https://www.linkedin.com/"]::after)
+    {
+      content: "";
+      -webkit-mask-image: url("/icons/logo-linkedin.svg");
+      mask-image: url("/icons/logo-linkedin.svg");
+    }
+    article :global(a[href^="https://twitter.com/"]::after)
+    {
+      content: "";
+      -webkit-mask-image: url("/icons/logo-twitter-x.svg");
+      mask-image: url("/icons/logo-twitter-x.svg");
+    }
+  </style>
 </article>
-
-<style>
-  article > :global(header picture) {
-    @apply !m-0;
-  }
-  article > :global(p),
-  article > :global(ul),
-  article > :global(ol),
-  article > :global(pre),
-  article > :global(lite-youtube),
-  article :global(blockquote) {
-    @apply -mx-2 px-2 outline-none outline-offset-0 transition-all max-sm:rounded-none sm:rounded-xl;
-    @apply hover:bg-stone-500/20 hover:outline-8 hover:outline-stone-500/20;
-    @apply print:hover:bg-transparent print:hover:outline-transparent;
-    @apply print:!text-black;
-  }
-  article > :global(lite-youtube) {
-    @apply aspect-video;
-  }
-  article > :global(lite-youtube::before) {
-    @apply bg-none;
-  }
-  article > :global(lite-youtube.lyt-activated) {
-    @apply !bg-none;
-  }
-  article :global(a::after) {
-    @apply inline-block h-3 w-0 bg-current pl-0.5 pr-3 align-text-top opacity-75 hover:opacity-100 print:hidden;
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    mask-size: 100% 100%;
-  }
-  article :global(a[rel="nofollow"]::after) {
-    content: "";
-    -webkit-mask-image: url("/icons/link-external.svg");
-    mask-image: url("/icons/link-external.svg");
-  }
-  article :global(a[href^="https://en.wikipedia.org/"]::after)
-  {
-    content: "";
-    -webkit-mask-image: url("/icons/logo-wikipedia.svg");
-    mask-image: url("/icons/logo-wikipedia.svg");
-  }
-  article :global(a[href$=".pdf"]::after) {
-    content: "";
-    -webkit-mask-image: url("/icons/link-document.svg");
-    mask-image: url("/icons/link-document.svg");
-  }
-  article :global(a[href$=".zip"]::after) {
-    content: "";
-    -webkit-mask-image: url("/icons/link-download.svg");
-    mask-image: url("/icons/link-download.svg");
-  }
-  article :global(a[href^="https://www.linkedin.com/"]::after)
-  {
-    content: "";
-    -webkit-mask-image: url("/icons/logo-linkedin.svg");
-    mask-image: url("/icons/logo-linkedin.svg");
-  }
-  article :global(a[href^="https://twitter.com/"]::after)
-  {
-    content: "";
-    -webkit-mask-image: url("/icons/logo-twitter-x.svg");
-    mask-image: url("/icons/logo-twitter-x.svg");
-  }
-</style>
