@@ -1,11 +1,5 @@
-<p align="center">
-  <img src="https://raw.githubusercontent.com/tugrulates/www/main/src/images/me.png" width="160" height="160" />
-</p>
-<p align="center">
-  <b><a href="https://www.tugrulates.com">www.tugrulates.com</a></b>
-</p>
 
----
+<a href="https://www.tugrulates.com/"><img src="https://www.tugrulates.com/og.jpg" /></a>
 
 ## 🎀 Features
 
