@@ -9,7 +9,7 @@ import Footer from "@/components/Footer.astro";
 import { AUTHOR, SITE } from "@/consts";
 import { getFavicon } from "@/image";
 import { formatDateIso } from "@/date";
-import { getChildUrl } from "@/url";
+import { getFullChildUrl } from "@/url";
 
 interface Props {
   tab: string;
@@ -31,7 +31,7 @@ const {
   class: className,
 } = Astro.props;
 
-const ogImage = getChildUrl(Astro.url, "og.png");
+const ogImage = getFullChildUrl(Astro.url, "og.png");
 const appleTouchIcon = await getFavicon(180);
 const favicon = await getFavicon(180);
 ---
