@@ -26,6 +26,7 @@ export async function getCoverData(cover: CoverType): Promise<CoverMeta> {
 
 export interface OpenGraphImageData {
   title: string;
+  subtitle?: string;
   description: string;
   image: ImageMetadata;
   cta: string;
@@ -33,6 +34,7 @@ export interface OpenGraphImageData {
 
 export async function getOpenGraphImage({
   title,
+  subtitle,
   description,
   image,
   cta,
@@ -55,7 +57,7 @@ export async function getOpenGraphImage({
   const avatar = `data:image/png;base64,${avatarBuffer.toString("base64")}`;
   const background = `data:image/${image.format.replace("jpg", "jpeg")};base64,${imageBuffer.toString("base64")}`;
   const og = new ImageResponse(
-    OpenGraphImage({ avatar, background, title, description, cta }),
+    OpenGraphImage({ avatar, background, title, subtitle, description, cta }),
     {
       width: DIMENSIONS.opengraph_source_width,
       height: DIMENSIONS.opengraph_source_height,
@@ -76,7 +78,7 @@ export async function getOpenGraphImage({
   const png = await og.arrayBuffer();
   const jpeg = await sharp(png)
     .resize(DIMENSIONS.opengraph_width, DIMENSIONS.opengraph_height)
-    .jpeg()
+    .jpeg({ quality: 95 })
     .toBuffer();
   return new Response(jpeg, {
     headers: { "Content-Type": "image/jpeg" },

@@ -11,7 +11,7 @@ export const getStaticPaths = (async () => {
     props: {
       title: photo.data.title,
       description: `${formatDate(photo.data.date)} — ${photo.data.location}`,
-      image: photo.data.square,
+      image: photo.data.wide,
       cta: "View photo",
     },
   }));
