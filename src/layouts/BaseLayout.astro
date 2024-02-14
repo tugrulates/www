@@ -1,6 +1,7 @@
 ---
 import "@fontsource/fira-sans";
 import "@fontsource/fira-code";
+import { getImage } from "astro:assets";
 import { ViewTransitions } from "astro:transitions";
 import { SEO } from "astro-seo";
 import SpeedInsights from "@vercel/speed-insights/astro";
@@ -17,6 +18,7 @@ interface Props {
   description: string;
   date?: Date;
   seo?: boolean;
+  ogImage?: ImageMetadata;
   keywords?: string[];
   class?: string;
 }
@@ -27,11 +29,21 @@ const {
   description,
   date,
   seo = true,
+  ogImage,
   keywords,
   class: className,
 } = Astro.props;
 
-const ogImage = getCanonicalChildUrl(Astro.url, "og.jpg");
+const ogImageWide = getCanonicalChildUrl(Astro.url, "og.jpg");
+const ogImageSquare =
+  ogImage !== undefined
+    ? await getImage({
+        src: ogImage,
+        format: "jpeg",
+        width: DIMENSIONS.opengraph_square_size,
+        height: DIMENSIONS.opengraph_square_size,
+      })
+    : undefined;
 const appleTouchIcon = await getFavicon(180);
 const favicon = await getFavicon(180);
 ---
@@ -51,7 +63,7 @@ const favicon = await getFavicon(180);
               basic: {
                 title: `${title} — ${AUTHOR.name}`,
                 type: date !== undefined ? "article" : "website",
-                image: ogImage,
+                image: ogImageWide,
                 url: `${SITE.url}${Astro.url.pathname}`,
               },
               optional: {
@@ -76,8 +88,27 @@ const favicon = await getFavicon(180);
               card: "summary_large_image",
               title,
               description,
-              image: ogImage,
+              image: ogImageWide,
             }}
+          />
+        </>
+      ) : undefined
+    }
+    {
+      ogImageSquare !== undefined ? (
+        <>
+          <meta
+            property="og:image"
+            content={getCanonicalChildUrl(Astro.url, ogImageSquare.src)}
+          />
+          <meta property="og:image:type" content="image/jpeg" />
+          <meta
+            property="og:image:width"
+            content={DIMENSIONS.opengraph_square_size.toString()}
+          />
+          <meta
+            property="og:image:height"
+            content={DIMENSIONS.opengraph_square_size.toString()}
           />
         </>
       ) : undefined

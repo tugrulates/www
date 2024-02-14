@@ -4,6 +4,7 @@ import Post from "@/components/Post.astro";
 import type { CoverType } from "@/components/Cover.astro";
 import { getPosts } from "@/content";
 import { getCoverData } from "@/image";
+import image from "@/content/pages/images/rijksmuseum-square.jpg";
 
 const posts = await getPosts();
 const covers = Object.fromEntries(
@@ -20,6 +21,7 @@ const covers = Object.fromEntries(
   tab="posts"
   title="Posts"
   description=`Welcome to my garden. I write about software development and digital arts.`
+  ogImage={image}
 >
   <div role="feed" class="flex flex-col gap-4">
     {

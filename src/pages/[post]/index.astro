@@ -36,6 +36,7 @@ const cover = await getCoverData(post.data.cover as CoverType);
   description={post.data.description}
   keywords={post.data.tags}
   date={post.data.date}
+  ogImage={cover.data.square}
 >
   <Cover
     slot="cover"

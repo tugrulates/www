@@ -10,6 +10,7 @@ const photos = await getPhotos();
   tab="photos"
   title="Photography"
   description=`I enjoy playing around with light and images. It's just a hobby, but it brings me happiness, especially when I capture unique moments and artifacts.`
+  ogImage={photos[0].data.square}
 >
   <ul role="list" class="flex flex-row flex-wrap justify-between gap-4">
     {

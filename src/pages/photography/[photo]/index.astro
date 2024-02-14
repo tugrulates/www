@@ -26,6 +26,7 @@ const index = photos.findIndex((other) => other.id === photo.id);
   title={photo.data.title}
   description={photo.data.description}
   keywords={photo.data.keywords}
+  ogImage={photo.data.square}
 >
   <Cover
     slot="cover"

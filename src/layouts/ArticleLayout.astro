@@ -8,9 +8,17 @@ interface Props {
   description: string;
   date?: Date;
   keywords?: string[];
+  ogImage?: ImageMetadata;
 }
 
-const { tab, title, description, date, keywords } = Astro.props;
+const {
+  tab,
+  title,
+  description,
+  date,
+  keywords,
+  ogImage: ogImageSquare,
+} = Astro.props;
 ---
 
 <BaseLayout
@@ -19,6 +27,7 @@ const { tab, title, description, date, keywords } = Astro.props;
   description={description}
   keywords={keywords}
   date={date}
+  ogImage={ogImageSquare}
 >
   <div class="flex flex-col gap-12 lg:gap-24">
     <slot name="cover" />
