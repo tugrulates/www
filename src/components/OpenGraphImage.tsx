@@ -27,11 +27,11 @@ export function OpenGraphImage({
           src={background}
           width={DIMENSIONS.opengraph_source_width}
           height={DIMENSIONS.opengraph_source_height}
-          style={{ objectFit: "cover" }}
+          style={{ objectFit: "cover", objectPosition: "center" }}
         />
       </div>
       <div
-        tw="relative flex flex-1 flex-col pl-16 pr-32 py-16 items-center justify-between text-5xl text-white"
+        tw="relative flex flex-1 flex-col p-16 items-center justify-between text-5xl text-white"
         style={{ maxWidth: DIMENSIONS.opengraph_source_height - 128 }}
       >
         <div
