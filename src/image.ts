@@ -76,7 +76,7 @@ export async function getOpenGraphImage({
   const png = await og.arrayBuffer();
   const jpeg = await sharp(png)
     .resize(DIMENSIONS.opengraph_width, DIMENSIONS.opengraph_height)
-    .jpeg()
+    .jpeg({ quality: 95 })
     .toBuffer();
   return new Response(jpeg, {
     headers: { "Content-Type": "image/jpeg" },

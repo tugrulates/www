@@ -31,6 +31,6 @@ export const GET = async ({
   props: { title, cover, cta, description },
 }: Props): Promise<ImageResponse> => {
   const coverData = await getCoverData(cover);
-  const image = coverData.data.square;
+  const image = coverData.data.wide;
   return await getOpenGraphImage({ title, description, image, cta });
 };

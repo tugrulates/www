@@ -17,10 +17,9 @@ export function OpenGraphImage({
   cta,
   description,
 }: Props): JSX.Element {
-  const imageSize = DIMENSIONS.opengraph_source_height - 128;
   return (
     <div
-      tw="relative flex flex-row p-16 w-full h-full bg-black"
+      tw="relative flex flex-row p-16 w-full h-full bg-black justify-center"
       style={{ fontFamily: "Regular" }}
     >
       <div tw="absolute inset-0 flex">
@@ -28,10 +27,17 @@ export function OpenGraphImage({
           src={background}
           width={DIMENSIONS.opengraph_source_width}
           height={DIMENSIONS.opengraph_source_height}
-          style={{ objectFit: "cover", filter: "blur(40px) brightness(40%)" }}
+          style={{ objectFit: "cover" }}
         />
       </div>
-      <div tw="flex flex-1 flex-col pl-16 pr-32 py-16 items-center justify-between text-5xl text-white">
+      <div
+        tw="relative flex flex-1 flex-col pl-16 pr-32 py-16 items-center justify-between text-5xl text-white"
+        style={{ maxWidth: DIMENSIONS.opengraph_source_height - 128 }}
+      >
+        <div
+          tw="absolute inset-0 shadow-lg shadow-stone-900/80 bg-stone-800/90"
+          style={{ borderRadius: "5%" }}
+        />
         <div tw="p-2 rounded-full text-black bg-stone-200 shadow-lg shadow-stone-900/80 flex items-center">
           <img src={avatar} tw={"w-24 h-24 rounded-full border border-black"} />
           <span tw="px-8">{SITE.domain}</span>
@@ -44,13 +50,6 @@ export function OpenGraphImage({
           {cta}
         </div>
       </div>
-      <img
-        tw="shadow-lg shadow-stone-900/80"
-        src={background}
-        width={imageSize}
-        height={imageSize}
-        style={{ borderRadius: "5%" }}
-      />
     </div>
   );
 }
