@@ -19,9 +19,10 @@ export function OpenGraphImage({
   cta,
   description,
 }: Props): JSX.Element {
+  const cardSize = DIMENSIONS.opengraph_source_height - 200;
   return (
     <div
-      tw="relative flex flex-row p-16 w-full h-full bg-black justify-center"
+      tw="relative flex flex-row w-full h-full bg-black justify-center items-center"
       style={{ fontFamily: "Regular" }}
     >
       <div tw="absolute inset-0 flex">
@@ -34,7 +35,7 @@ export function OpenGraphImage({
       </div>
       <div
         tw="relative flex flex-1 flex-col p-16 items-center justify-between text-5xl text-white"
-        style={{ maxWidth: DIMENSIONS.opengraph_source_height - 128 }}
+        style={{ height: cardSize, maxWidth: cardSize }}
       >
         <div
           tw="absolute inset-0 shadow-lg shadow-stone-900/80 bg-stone-800/90"
