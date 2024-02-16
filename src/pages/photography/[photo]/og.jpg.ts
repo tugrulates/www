@@ -1,8 +1,8 @@
-import { type GetStaticPaths } from "astro";
 import type { ImageResponse } from "@vercel/og";
-import { getPhotos } from "@/content";
-import { getOpenGraphImage, type OpenGraphImageData } from "@/image";
-import { formatDate } from "@/date";
+import type { GetStaticPaths } from "astro";
+import { getPhotos } from "~/content";
+import { formatDate } from "~/date";
+import { getOpenGraphImage, type OpenGraphImageData } from "~/image";
 
 export const getStaticPaths = (async () => {
   const photos = await getPhotos();

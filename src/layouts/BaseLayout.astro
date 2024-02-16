@@ -1,15 +1,15 @@
 ---
-import "@fontsource/fira-sans";
 import "@fontsource/fira-code";
-import { ViewTransitions } from "astro:transitions";
-import { SEO } from "astro-seo";
+import "@fontsource/fira-sans";
 import SpeedInsights from "@vercel/speed-insights/astro";
-import Header from "@/components/Header.astro";
-import Footer from "@/components/Footer.astro";
-import { AUTHOR, SITE, DIMENSIONS } from "@/consts";
-import { getFavicon } from "@/image";
-import { formatDateIso } from "@/date";
-import { getCanonicalChildUrl } from "@/url";
+import { SEO } from "astro-seo";
+import { ViewTransitions } from "astro:transitions";
+import Footer from "~/components/Footer.astro";
+import Header from "~/components/Header.astro";
+import { AUTHOR, DIMENSIONS, SITE } from "~/config";
+import { formatDateIso } from "~/date";
+import { getFavicon } from "~/image";
+import { getCanonicalChildUrl } from "~/url";
 
 interface Props {
   tab: string;

@@ -1,13 +1,13 @@
-import { SITE } from "./src/consts";
-import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import react from "@astrojs/react";
-import rehypeExternalLinks from "rehype-external-links";
-import icon from "astro-icon";
-import robotsTxt from "astro-robots-txt";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 import vercel from "@astrojs/vercel/static";
+import icon from "astro-icon";
+import robotsTxt from "astro-robots-txt";
+import { defineConfig } from "astro/config";
+import rehypeExternalLinks from "rehype-external-links";
+import { SITE } from "./src/config";
 
 // https://astro.build/config
 export default defineConfig({

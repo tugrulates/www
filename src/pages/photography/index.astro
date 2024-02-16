@@ -1,7 +1,7 @@
 ---
-import FeedLayout from "@/layouts/FeedLayout.astro";
-import Photo from "@/components/Photo.astro";
-import { getPhotos } from "@/content";
+import Photo from "~/components/Photo.astro";
+import { getPhotos } from "~/content";
+import FeedLayout from "~/layouts/FeedLayout.astro";
 
 const photos = await getPhotos();
 ---

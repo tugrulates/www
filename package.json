@@ -12,22 +12,18 @@
     "fetch:blog": "git submodule update --init --remote src/blog",
     "fetch:photos": "git submodule update --init --remote src/photos",
     "fetch": "npm run fetch:blog && npm run fetch:photos",
+    "dev": "DRAFTS=true astro dev",
     "build:blog": "tsx src/scripts/build-blog.ts",
     "build:photos": "tsx src/scripts/build-photos.ts",
-    "prebuild": "npm run fetch && npm run build:blog && npm run build:photos",
-    "lint": "npx eslint . && npx prettier -c .",
-    "format": "npx prettier -cw .",
-    "dev": "DRAFTS=true astro dev",
-    "build": "npm run lint && astro check --minimumFailingSeverity=warning && astro build",
-    "preview": "astro preview",
-    "astro": "astro",
-    "tsx": "tsx"
+    "build": "npm run fetch && npm run build:blog && npm run build:photos && npm run lint && astro check --minimumFailingSeverity=warning && astro build",
+    "lint": "eslint .",
+    "format": "prettier -cw .",
+    "preview": "astro preview"
   },
   "dependencies": {
     "@astro-community/astro-embed-youtube": "^0.4.3",
     "@astrojs/check": "^0.4.1",
     "@astrojs/mdx": "^2.1.1",
-    "@astrojs/preact": "^3.1.0",
     "@astrojs/react": "^3.0.9",
     "@astrojs/rss": "^4.0.4",
     "@astrojs/sitemap": "^3.0.5",
@@ -39,8 +35,6 @@
     "@iconify-json/bi": "^1.1.23",
     "@iconify-json/heroicons": "^1.1.19",
     "@tailwindcss/typography": "^0.5.10",
-    "@types/react": "^18.2.54",
-    "@types/react-dom": "^18.2.15",
     "@vercel/analytics": "^1.1.3",
     "@vercel/og": "^0.6.2",
     "@vercel/speed-insights": "^1.0.9",
@@ -60,8 +54,9 @@
     "tsx": "^4.6.2"
   },
   "devDependencies": {
-    "@prettier/plugin-xml": "^3.2.2",
     "@types/exif": "^0.6.5",
+    "@types/react": "^18.2.54",
+    "@types/react-dom": "^18.2.15",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
     "eslint": "^8.56.0",
@@ -75,6 +70,7 @@
     "eslint-plugin-react": "^7.33.2",
     "prettier": "^3.2.5",
     "prettier-plugin-astro": "^0.13.0",
+    "prettier-plugin-organize-imports": "^3.2.4",
     "prettier-plugin-tailwindcss": "^0.5.7",
     "typescript": "^5.3.3"
   }

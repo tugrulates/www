@@ -7,9 +7,6 @@ public/files/
 dist/
 .vercel/
 
-# generated types
-.astro/
-
 # dependencies
 node_modules/
 

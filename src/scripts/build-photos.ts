@@ -1,7 +1,7 @@
-import path from "path";
+import { ExifDateTime, exiftool, type Tags } from "exiftool-vendored";
 import fs from "fs/promises";
 import { glob } from "glob";
-import { ExifDateTime, exiftool, type Tags } from "exiftool-vendored";
+import path from "path";
 
 const IMAGES_DIR = "src/photos";
 const CONTENT_DIR = "src/content/photos";
