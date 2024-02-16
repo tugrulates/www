@@ -2,6 +2,14 @@
 import { formatDate } from "@/date";
 import { Image } from "astro:assets";
 
+interface Props {
+  link: string;
+  image: ImageMetadata;
+  imageDescription: string;
+  title: string;
+  description: string;
+  date: Date;
+}
 const { link, image, imageDescription, title, description, date } = Astro.props;
 ---
 
@@ -32,7 +40,7 @@ const { link, image, imageDescription, title, description, date } = Astro.props;
     </div>
     <div class="flex-0 group flex flex-1 flex-col px-2 py-2 sm:py-1">
       <time
-        datetime={date}
+        datetime={date.toISOString()}
         class="text-stone-700 dark:text-stone-300 print:!text-black"
         >{formatDate(date)}</time
       >
