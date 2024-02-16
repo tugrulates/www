@@ -17,7 +17,7 @@
     "build:photos": "tsx src/scripts/build-photos.ts",
     "build": "npm run fetch && npm run build:blog && npm run build:photos && npm run lint && astro check --minimumFailingSeverity=warning && astro build",
     "lint": "eslint . && prettier -c .",
-    "format": "prettier -cw .",
+    "format": "organize-imports-cli tsconfig.json && prettier -w .",
     "preview": "astro preview"
   },
   "dependencies": {
@@ -68,6 +68,7 @@
     "eslint-plugin-n": "^16.6.2",
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-react": "^7.33.2",
+    "organize-imports-cli": "^0.10.0",
     "prettier": "^3.2.5",
     "prettier-plugin-astro": "^0.13.0",
     "prettier-plugin-tailwindcss": "^0.5.7",

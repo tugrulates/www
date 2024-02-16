@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
 import { Switch } from "@headlessui/react";
+import { useEffect, useState } from "react";
 
 interface Props {
   lightIcon?: any;

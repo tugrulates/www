@@ -1,6 +1,6 @@
-import type { ImageResponse } from "@vercel/og";
-import { getOpenGraphImage } from "@/image";
 import image from "@/content/pages/images/rijksmuseum-wide.jpg";
+import { getOpenGraphImage } from "@/image";
+import type { ImageResponse } from "@vercel/og";
 
 export const GET = async (): Promise<ImageResponse> => {
   return await getOpenGraphImage({

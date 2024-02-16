@@ -1,6 +1,6 @@
-import rss from "@astrojs/rss";
 import { AUTHOR, SITE } from "@/config";
 import { getPhotos } from "@/content";
+import rss from "@astrojs/rss";
 
 export async function GET(): Promise<Response> {
   const photos = await getPhotos();
