@@ -1,5 +1,5 @@
 import rss from "@astrojs/rss";
-import { AUTHOR, SITE } from "@/consts";
+import { AUTHOR, SITE } from "@/config";
 import { getPhotos } from "@/content";
 
 export async function GET(): Promise<Response> {

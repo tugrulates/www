@@ -1,4 +1,4 @@
-import { SITE } from "./src/consts";
+import { SITE } from "./src/config";
 import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import react from "@astrojs/react";

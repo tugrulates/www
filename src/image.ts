@@ -8,7 +8,7 @@ import fs from "fs/promises";
 import path from "node:path";
 import sharp from "sharp";
 import avatar from "@/images/me.png";
-import { DIMENSIONS } from "./consts";
+import { DIMENSIONS } from "@/config";
 
 export async function getCoverData(cover: CoverType): Promise<CoverMeta> {
   if ("collection" in cover && cover.collection === "photos") {
