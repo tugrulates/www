@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unknown-property */
 
-import { DIMENSIONS, SITE } from "@/config";
+import { DIMENSIONS, SITE } from "~/config";
 
 interface Props {
   avatar: string;

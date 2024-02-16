@@ -1,10 +1,10 @@
 ---
-import { type InferGetStaticPropsType, type GetStaticPaths } from "astro";
-import ArticleLayout from "@/layouts/ArticleLayout.astro";
-import Cover, { type CoverType } from "@/components/Cover.astro";
-import License from "@/components/License.astro";
-import { getPages, getPosts } from "@/content";
-import { getCoverData } from "@/image";
+import { type GetStaticPaths, type InferGetStaticPropsType } from "astro";
+import Cover, { type CoverType } from "~/components/Cover.astro";
+import License from "~/components/License.astro";
+import { getPages, getPosts } from "~/content";
+import { getCoverData } from "~/image";
+import ArticleLayout from "~/layouts/ArticleLayout.astro";
 
 export const getStaticPaths = (async () => {
   const pages = await getPages();

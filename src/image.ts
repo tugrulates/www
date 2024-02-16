@@ -1,7 +1,3 @@
-import type { CoverMeta, CoverType } from "@/components/Cover.astro";
-import { OpenGraphImage } from "@/components/OpenGraphImage";
-import { DIMENSIONS } from "@/config";
-import avatar from "@/images/me.png";
 import { ImageResponse } from "@vercel/og";
 import type { GetImageResult } from "astro";
 import { getImage } from "astro:assets";
@@ -9,6 +5,10 @@ import { getEntry } from "astro:content";
 import fs from "fs/promises";
 import path from "node:path";
 import sharp from "sharp";
+import type { CoverMeta, CoverType } from "~/components/Cover.astro";
+import { OpenGraphImage } from "~/components/OpenGraphImage";
+import { DIMENSIONS } from "~/config";
+import avatar from "~/images/me.png";
 
 export async function getCoverData(cover: CoverType): Promise<CoverMeta> {
   if ("collection" in cover && cover.collection === "photos") {

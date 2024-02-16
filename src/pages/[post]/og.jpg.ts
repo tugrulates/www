@@ -1,7 +1,8 @@
-import type { CoverType } from "@/components/Cover.astro";
-import { getPages, getPosts } from "@/content";
-import { getCoverData, getOpenGraphImage } from "@/image";
 import type { ImageResponse } from "@vercel/og";
+import type { GetStaticPaths } from "astro";
+import type { CoverType } from "~/components/Cover.astro";
+import { getPages, getPosts } from "~/content";
+import { getCoverData, getOpenGraphImage } from "~/image";
 
 export const getStaticPaths = (async () => {
   const [pages, posts] = await Promise.all([getPages(), getPosts()]);

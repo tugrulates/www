@@ -1,9 +1,9 @@
 ---
-import FeedLayout from "@/layouts/FeedLayout.astro";
-import Post from "@/components/Post.astro";
-import type { CoverType } from "@/components/Cover.astro";
-import { getPosts } from "@/content";
-import { getCoverData } from "@/image";
+import type { CoverType } from "~/components/Cover.astro";
+import Post from "~/components/Post.astro";
+import { getPosts } from "~/content";
+import { getCoverData } from "~/image";
+import FeedLayout from "~/layouts/FeedLayout.astro";
 
 const posts = await getPosts();
 const covers = Object.fromEntries(
