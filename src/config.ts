@@ -33,7 +33,7 @@ export const AUTHOR = {
     {
       name: "YouTube",
       icon: "bi:youtube",
-      url: "https://www.youtube.com/@turulier",
+      url: "https://www.youtube.com/@tugrulates",
     },
     {
       name: "Instagram",
