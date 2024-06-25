@@ -12,7 +12,7 @@
     "fetch:blog": "git submodule update --init --remote src/blog",
     "fetch:photos": "git submodule update --init --remote src/photos",
     "fetch": "npm run fetch:blog && npm run fetch:photos",
-    "dev": "DRAFTS=true astro dev",
+    "dev": "DRAFTS=true astro dev --host",
     "build:blog": "tsx src/scripts/build-blog.ts",
     "build:photos": "tsx src/scripts/build-photos.ts",
     "build": "npm run fetch && npm run build:blog && npm run build:photos && npm run lint && astro build",
