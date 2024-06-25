@@ -39,6 +39,39 @@ export async function getOpenGraphImage({
   image,
   cta,
 }: OpenGraphImageData): Promise<ImageResponse> {
+  if (import.meta.env.SITE_GENERATE_RICH_OPENGRAPH_IMAGES) {
+    return await getRichOpenGraphImage({
+      title,
+      subtitle,
+      description,
+      image,
+      cta,
+    });
+  } else {
+    return await getSimpleOpenGraphImage(image);
+  }
+}
+
+export async function getSimpleOpenGraphImage(
+  image: ImageMetadata,
+): Promise<ImageResponse> {
+  const imageBuffer = await fs.readFile(
+    process.env.NODE_ENV === "development"
+      ? path.resolve(image.src.replace(/\?.*/, "").replace("/@fs", ""))
+      : path.resolve(image.src.replace("/", ".vercel/output/static/")),
+  );
+  return new Response(imageBuffer, {
+    headers: { "Content-Type": "image/jpeg" },
+  });
+}
+
+export async function getRichOpenGraphImage({
+  title,
+  subtitle,
+  description,
+  image,
+  cta,
+}: OpenGraphImageData): Promise<ImageResponse> {
   const [avatarBuffer, imageBuffer, regularFontBuffer, boldFontBuffer] =
     await Promise.all([
       fs.readFile(path.resolve("src/images/me-small.png")),
