@@ -39,7 +39,7 @@ export async function getOpenGraphImage({
   image,
   cta,
 }: OpenGraphImageData): Promise<ImageResponse> {
-  if (import.meta.env.SITE_GENERATE_RICH_OPENGRAPH_IMAGES) {
+  if (import.meta.env.RICH_OPENGRAPH_IMAGES) {
     return await getRichOpenGraphImage({
       title,
       subtitle,
