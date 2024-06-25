@@ -15,8 +15,8 @@
     "dev": "DRAFTS=true astro dev",
     "build:blog": "tsx src/scripts/build-blog.ts",
     "build:photos": "tsx src/scripts/build-photos.ts",
-    "build": "npm run fetch && npm run build:blog && npm run build:photos && npm run lint && astro check --minimumFailingSeverity=warning && astro build",
-    "lint": "eslint .",
+    "build": "npm run fetch && npm run build:blog && npm run build:photos && npm run lint && astro build",
+    "lint": "astro check --minimumFailingSeverity=warning && eslint .",
     "format": "prettier -cw .",
     "preview": "astro preview"
   },
