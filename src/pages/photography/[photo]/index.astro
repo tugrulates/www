@@ -17,6 +17,7 @@ export const getStaticPaths = (async () => {
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const { photo } = Astro.props;
+const date: Date = photo.data.date;
 const photos = await getPhotos();
 const index = photos.findIndex((other) => other.id === photo.id);
 ---
@@ -42,7 +43,7 @@ const index = photos.findIndex((other) => other.id === photo.id);
   <Fragment slot="content">
     <table>
       <tr><th>Description</th><td>{photo.data.description}</td></tr>
-      <tr><th>Date</th><td>{formatDate(photo.data.date)}</td></tr>
+      <tr><th>Date</th><td>{formatDate(date)}</td></tr>
       <tr><th>Location</th><td>{photo.data.location}</td></tr>
       <tr><th>City</th><td>{photo.data.city}</td></tr>
       <tr><th>State/Region</th><td>{photo.data.state}</td></tr>

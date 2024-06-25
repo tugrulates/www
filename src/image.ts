@@ -1,5 +1,5 @@
 import { ImageResponse } from "@vercel/og";
-import type { GetImageResult } from "astro";
+import type { GetImageResult, ImageMetadata } from "astro";
 import { getImage } from "astro:assets";
 import { getEntry } from "astro:content";
 import fs from "fs/promises";
@@ -119,7 +119,7 @@ export async function getRichOpenGraphImage({
 }
 
 export async function getFavicon(size?: number): Promise<GetImageResult> {
-  return await getImage({
+  return getImage({
     src: avatar,
     width: size,
     height: size,
