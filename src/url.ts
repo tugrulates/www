@@ -5,5 +5,5 @@ export function getChildUrl(url: URL, path: string): string {
 }
 
 export function getCanonicalChildUrl(url: URL, path: string): string {
-  return `${SITE.url}${getChildUrl(url, path)}`;
+  return `${SITE.url}${getChildUrl(url, path)}`.replace("//", "/");
 }
