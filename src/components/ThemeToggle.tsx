@@ -39,14 +39,13 @@ export default function ThemeToggle({
   if (!isMounted) return <div className="h-12 w-12"></div>;
 
   return (
-    <Field>
+    <Field className="group h-12 w-12 transition-transform ">
       <Label className="sr-only">Switch theme</Label>
       <Switch
         checked={theme.dark}
         onChange={() => {
           toggleTheme(theme, setTheme);
         }}
-        className="group h-12 w-12 transition-transform "
       >
         <div
           className={[
