@@ -38,18 +38,17 @@ const breakpoints = [
 const images = await Promise.all(
   breakpoints.map(async (breakpoint) => {
     const images = await Promise.all(
-      [1, 2, 3, 4].map(
-        async (scale) =>
-          await getImage({
-            format: "webp",
-            src: breakpoint.src,
-            width: breakpoint.width * scale,
-            height: breakpoint.height * scale,
-          }),
-      ),
+      [1, 2, 3, 4].map(async (scale) =>
+        getImage({
+          format: "webp",
+          src: breakpoint.src,
+          width: breakpoint.width * scale,
+          height: breakpoint.height * scale,
+        })
+      )
     );
     return { breakpoint, images };
-  }),
+  })
 );
 ---
 

@@ -1,5 +1,5 @@
 import { ImageResponse } from "@vercel/og";
-import type { GetImageResult } from "astro";
+import type { GetImageResult, ImageMetadata } from "astro";
 import { getImage } from "astro:assets";
 import { getEntry } from "astro:content";
 import fs from "fs/promises";
@@ -33,6 +33,39 @@ export interface OpenGraphImageData {
 }
 
 export async function getOpenGraphImage({
+  title,
+  subtitle,
+  description,
+  image,
+  cta,
+}: OpenGraphImageData): Promise<ImageResponse> {
+  if (import.meta.env.RICH_OPENGRAPH_IMAGES) {
+    return await getRichOpenGraphImage({
+      title,
+      subtitle,
+      description,
+      image,
+      cta,
+    });
+  } else {
+    return await getSimpleOpenGraphImage(image);
+  }
+}
+
+export async function getSimpleOpenGraphImage(
+  image: ImageMetadata,
+): Promise<ImageResponse> {
+  const imageBuffer = await fs.readFile(
+    process.env.NODE_ENV === "development"
+      ? path.resolve(image.src.replace(/\?.*/, "").replace("/@fs", ""))
+      : path.resolve(image.src.replace("/", ".vercel/output/static/")),
+  );
+  return new Response(imageBuffer, {
+    headers: { "Content-Type": "image/jpeg" },
+  });
+}
+
+export async function getRichOpenGraphImage({
   title,
   subtitle,
   description,
@@ -86,7 +119,7 @@ export async function getOpenGraphImage({
 }
 
 export async function getFavicon(size?: number): Promise<GetImageResult> {
-  return await getImage({
+  return getImage({
     src: avatar,
     width: size,
     height: size,
