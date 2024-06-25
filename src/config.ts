@@ -21,19 +21,9 @@ export const AUTHOR = {
       url: "https://github.com/tugrulates",
     },
     {
-      name: "Twitter",
-      icon: "bi:twitter-x",
-      url: "https://twitter.com/turulier",
-    },
-    {
       name: "Stack Overflow",
       icon: "bi:stack-overflow",
       url: "https://stackoverflow.com/users/634336/tugrul-ates",
-    },
-    {
-      name: "YouTube",
-      icon: "bi:youtube",
-      url: "https://www.youtube.com/@tugrulates",
     },
     {
       name: "Instagram",
