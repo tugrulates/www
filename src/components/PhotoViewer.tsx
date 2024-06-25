@@ -1,4 +1,4 @@
-import { Dialog } from "@headlessui/react";
+import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import { createRef, useState } from "react";
 
 interface Props {
@@ -30,14 +30,14 @@ export default function PhotoViewer(props: Props): JSX.Element {
       >
         <div className="fixed inset-0 z-50 bg-gradient-to-b from-stone-400 to-stone-300 align-middle dark:from-stone-600 dark:to-stone-700" />
         <div className="group/cover fixed inset-0 z-50 flex w-screen items-center justify-center">
-          <Dialog.Panel
+          <DialogPanel
             onClick={() => {
               setIsOpen(false);
               openButtonRef.current?.focus();
             }}
             className=""
           >
-            <Dialog.Title className="sr-only">Viewing image</Dialog.Title>
+            <DialogTitle className="sr-only">Viewing image</DialogTitle>
             {props.image}
             <button
               aria-label="Close image"
@@ -48,7 +48,7 @@ export default function PhotoViewer(props: Props): JSX.Element {
             >
               {props.closeButton}
             </button>
-          </Dialog.Panel>
+          </DialogPanel>
         </div>
       </Dialog>
     </div>
