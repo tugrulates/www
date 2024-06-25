@@ -1,4 +1,4 @@
-import { Switch } from "@headlessui/react";
+import { Field, Label, Switch } from "@headlessui/react";
 import { useEffect, useState } from "react";
 
 interface Props {
@@ -39,14 +39,13 @@ export default function ThemeToggle({
   if (!isMounted) return <div className="h-12 w-12"></div>;
 
   return (
-    <Switch.Group>
-      <Switch.Label className="sr-only">Switch theme</Switch.Label>
+    <Field className="group h-12 w-12 transition-transform ">
+      <Label className="sr-only">Switch theme</Label>
       <Switch
         checked={theme.dark}
         onChange={() => {
           toggleTheme(theme, setTheme);
         }}
-        className="group h-12 w-12 transition-transform "
       >
         <div
           className={[
@@ -62,6 +61,6 @@ export default function ThemeToggle({
           </div>
         </div>
       </Switch>
-    </Switch.Group>
+    </Field>
   );
 }
