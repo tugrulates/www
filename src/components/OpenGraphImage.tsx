@@ -1,5 +1,3 @@
-/* eslint-disable react/no-unknown-property */
-
 import { DIMENSIONS, SITE } from "~/config";
 
 interface Props {
@@ -27,6 +25,7 @@ export function OpenGraphImage({
     >
       <div tw="absolute inset-0 flex">
         <img
+          alt="Discarded JSX element"
           src={background}
           width={DIMENSIONS.opengraph_source_width}
           height={DIMENSIONS.opengraph_source_height}
@@ -42,7 +41,11 @@ export function OpenGraphImage({
           style={{ borderRadius: "5%" }}
         />
         <div tw="p-2 rounded-full text-black bg-stone-200 shadow-lg shadow-stone-900/80 flex items-center">
-          <img src={avatar} tw={"w-24 h-24 rounded-full border border-black"} />
+          <img
+            alt="Discarded JSX element"
+            src={avatar}
+            tw={"w-24 h-24 rounded-full border border-black"}
+          />
           <span tw="px-8">{SITE.domain}</span>
         </div>
         <div tw="flex flex-col items-center">
