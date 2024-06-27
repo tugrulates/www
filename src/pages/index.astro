@@ -11,8 +11,8 @@ const covers = Object.fromEntries(
     posts.map(async (post) => {
       const cover = await getCoverData(post.data.cover as CoverType);
       return [post.slug, cover];
-    }),
-  ),
+    })
+  )
 );
 ---
 

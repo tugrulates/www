@@ -11,7 +11,7 @@ const photos = await getPhotos();
   title="Photography"
   description=`I enjoy playing around with light and images. It's just a hobby, but it brings me happiness, especially when I capture unique moments and artifacts.`
 >
-  <ul role="list" class="flex flex-row flex-wrap justify-between gap-4">
+  <ul class="flex flex-row flex-wrap justify-between gap-4">
     {
       photos.map((photo) => (
         <li class="grow">

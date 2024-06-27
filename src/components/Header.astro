@@ -15,7 +15,9 @@ const { class: className } = Astro.props;
         const theme = JSON.parse(localStorage.getItem("theme") ?? "");
         const { dark } = theme;
         return dark;
-      } catch (e) {}
+      } catch (e) {
+        /* ignore missing or broken storage */
+      }
     }
     if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
       return true;
@@ -68,7 +70,7 @@ const { class: className } = Astro.props;
         />
       </div>
     </Tab>
-    <ThemeToggle client:only transition:persist>
+    <ThemeToggle client:only="react" transition:persist>
       <Icon aria-hidden slot="lightIcon" name="heroicons:sun-solid" size={32} />
       <Icon aria-hidden slot="darkIcon" name="heroicons:moon-solid" size={32} />
     </ThemeToggle>

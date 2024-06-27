@@ -12,7 +12,7 @@
     "fetch:blog": "git submodule update --init --remote src/blog",
     "fetch:photos": "git submodule update --init --remote src/photos",
     "fetch": "npm run fetch:blog && npm run fetch:photos",
-    "dev": "DRAFTS=true astro dev --host",
+    "dev": "DRAFTS=1 astro dev --host",
     "build:blog": "tsx src/scripts/build-blog.ts",
     "build:photos": "tsx src/scripts/build-photos.ts",
     "build": "npm run fetch && npm run build:blog && npm run build:photos && npm run lint && astro build",
@@ -45,6 +45,7 @@
     "exif": "^0.6.0",
     "exiftool-vendored": "^24.4.0",
     "glob": "^10.4.2",
+    "globals": "^15.6.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "rehype-external-links": "^3.0.0",
@@ -54,24 +55,18 @@
     "tsx": "^4.15.7"
   },
   "devDependencies": {
+    "@eslint/js": "^9.5.0",
+    "@types/eslint__js": "^8.42.3",
     "@types/exif": "^0.6.5",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
-    "@typescript-eslint/eslint-plugin": "^6.21.0",
-    "@typescript-eslint/parser": "^6.21.0",
-    "eslint": "^8.56.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-config-standard-with-typescript": "^43.0.1",
-    "eslint-plugin-astro": "^0.31.4",
-    "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-jsx-a11y": "^6.9.0",
-    "eslint-plugin-n": "^16.6.2",
-    "eslint-plugin-promise": "^6.2.0",
-    "eslint-plugin-react": "^7.34.3",
+    "eslint": "^8.57.0",
+    "eslint-plugin-astro": "^1.2.2",
     "prettier": "^3.3.2",
     "prettier-plugin-astro": "^0.14.0",
     "prettier-plugin-organize-imports": "^3.2.4",
     "prettier-plugin-tailwindcss": "^0.6.5",
-    "typescript": "^5.5.2"
+    "typescript": "^5.5.2",
+    "typescript-eslint": "^7.14.1"
   }
 }
