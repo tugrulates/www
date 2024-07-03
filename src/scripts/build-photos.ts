@@ -7,6 +7,7 @@ const IMAGES_DIR = "src/photos";
 const CONTENT_DIR = "src/content/photos";
 
 export interface PhotoTags extends Tags {
+  State?: string;
   License?: string;
 }
 

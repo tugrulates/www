@@ -9,6 +9,7 @@
     "url": "https://github.com/tugrulates/www/issues"
   },
   "scripts": {
+    "clean": "rm -rf dist .astro .vercel src/content/posts src/content/photos public/files",
     "fetch:blog": "git submodule update --init --remote src/blog",
     "fetch:photos": "git submodule update --init --remote src/photos",
     "fetch": "npm run fetch:blog && npm run fetch:photos",
