@@ -9,6 +9,7 @@
     "url": "https://github.com/tugrulates/www/issues"
   },
   "scripts": {
+    "clean": "rm -rf dist .astro .vercel src/content/posts src/content/photos public/files",
     "fetch:blog": "git submodule update --init --remote src/blog",
     "fetch:photos": "git submodule update --init --remote src/photos",
     "fetch": "npm run fetch:blog && npm run fetch:photos",
@@ -43,7 +44,7 @@
     "astro-robots-txt": "^1.0.0",
     "astro-seo": "^0.8.4",
     "exif": "^0.6.0",
-    "exiftool-vendored": "^24.4.0",
+    "exiftool-vendored": "^27.0.0",
     "glob": "^10.4.2",
     "globals": "^15.7.0",
     "react": "^18.3.1",
