@@ -49,7 +49,10 @@ async function extractMetadata(photo: string): Promise<void> {
       country: tags.Country ?? "",
       camera: `${tags.Make ?? ""} ${tags.Model ?? ""}`.replace(/\s+/g, " "),
       lens: tags.LensModel ?? tags.Lens ?? "",
-      editing: "Affinity Photo 2",
+      editing: Array.isArray(tags.History)
+        ? tags.History.filter((item) => item.Action === "produced")[0]
+            .SoftwareAgent ?? ""
+        : "",
       license: tags.License ?? "",
     };
     const json = JSON.stringify(data, null, 2);
