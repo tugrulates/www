@@ -45,7 +45,7 @@
     "astro-seo": "^0.8.4",
     "exif": "^0.6.0",
     "exiftool-vendored": "^27.0.0",
-    "glob": "^10.4.2",
+    "glob": "^11.0.0",
     "globals": "^15.8.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
