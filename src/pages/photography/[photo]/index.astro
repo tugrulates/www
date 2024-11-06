@@ -42,15 +42,15 @@ const index = photos.findIndex((other) => other.id === photo.id);
   />
   <Fragment slot="content">
     <table>
-      <tr><th>Description</th><td>{photo.data.description}</td></tr>
+      {photo.data.description && <tr><th>Description</th><td>{photo.data.description}</td></tr>}
       <tr><th>Date</th><td>{formatDate(date)}</td></tr>
-      <tr><th>Location</th><td>{photo.data.location}</td></tr>
-      <tr><th>City</th><td>{photo.data.city}</td></tr>
-      <tr><th>State/Region</th><td>{photo.data.state}</td></tr>
-      <tr><th>Country</th><td>{photo.data.country}</td></tr>
-      <tr><th>Camera</th><td>{photo.data.camera}</td></tr>
-      <tr><th>Lens</th><td>{photo.data.lens}</td></tr>
-      <tr><th>Editing</th><td>{photo.data.editing}</td></tr>
+      {photo.data.location && <tr><th>Location</th><td>{photo.data.location}</td></tr>}
+      {photo.data.city && <tr><th>City</th><td>{photo.data.city}</td></tr>}
+      {photo.data.state && <tr><th>State/Region</th><td>{photo.data.state}</td></tr>}
+      {photo.data.country && <tr><th>Country</th><td>{photo.data.country}</td></tr>}
+      {photo.data.camera && <tr><th>Camera</th><td>{photo.data.camera}</td></tr>}
+      {photo.data.lens && <tr><th>Lens</th><td>{photo.data.lens}</td></tr>}
+      {photo.data.editing && <tr><th>Editing</th><td>{photo.data.editing}</td></tr>}
     </table>
   </Fragment>
   <License slot="license" icons="🅭🅯">
