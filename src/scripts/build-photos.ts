@@ -40,9 +40,9 @@ async function extractMetadata(photo: string): Promise<void> {
         ? tags.Keywords
         : [tags.Keywords ?? ""],
       date:
-        (tags.CreateDate instanceof ExifDateTime
-          ? tags.CreateDate.toDate().toISOString()
-          : tags.CreateDate) ?? "",
+        (tags.DateTimeOriginal instanceof ExifDateTime
+          ? tags.DateTimeOriginal.toDate().toISOString()
+          : tags.DateTimeOriginal) ?? "",
       location: tags.Location ?? "",
       city: tags.City ?? "",
       state: tags.State ?? "",
