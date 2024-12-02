@@ -33,14 +33,14 @@ export default defineConfig({
   integrations: [
     icon({
       include: {
-        bi: [
+        simple_icons: [
+          "bluesky",
           "github",
           "google",
           "linkedin",
           "instagram",
           "meta",
           "stack-overflow",
-          "twitter-x",
           "wikipedia",
           "youtube",
         ],
