@@ -12,22 +12,32 @@ export const AUTHOR = {
   social: [
     {
       name: "LinkedIn",
-      icon: "bi:linkedin",
+      icon: "simple-icons:linkedin",
       url: "https://www.linkedin.com/in/tugrulates/",
     },
     {
       name: "GitHub",
-      icon: "bi:github",
+      icon: "simple-icons:github",
       url: "https://github.com/tugrulates",
     },
     {
       name: "Stack Overflow",
-      icon: "bi:stack-overflow",
+      icon: "simple-icons:stackoverflow",
       url: "https://stackoverflow.com/users/634336/tugrul-ates",
     },
     {
+      name: "Bluesky",
+      icon: "simple-icons:bluesky",
+      url: "https://bsky.app/profile/turul.bsky.social",
+    },
+    {
+      name: "500px",
+      icon: "logo-500px",
+      url: "https://500px.com/p/tugrulates",
+    },
+    {
       name: "Instagram",
-      icon: "bi:instagram",
+      icon: "simple-icons:instagram",
       url: "https://www.instagram.com/turulier/",
     },
   ],
