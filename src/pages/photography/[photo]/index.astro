@@ -23,22 +23,12 @@ const index = photos.findIndex((other) => other.id === photo.id);
 ---
 
 <ArticleLayout
-  tab="photos"
-  title={photo.data.title}
-  description={photo.data.description}
-  keywords={photo.data.keywords}
+  description={photo.data.description}   keywords={photo.data.keywords}   tab="photos"   title={photo.data.title}
 >
   <Cover
-    slot="cover"
-    image={photo}
-    previous={index > 0 ? photos[index - 1].id : undefined}
-    next={index >= 0 && index < photos.length - 1
+    actionAlt="Download photo in full size"     actionDownload={`${photo.id}.jpg`}     actionHref={photo.data.wide.src}     actionIcon="heroicons:archive-box-arrow-down-solid"     image={photo}     next={index >= 0 && index < photos.length - 1
       ? photos[index + 1].id
-      : undefined}
-    actionHref={photo.data.wide.src}
-    actionDownload={`${photo.id}.jpg`}
-    actionIcon="heroicons:archive-box-arrow-down-solid"
-    actionAlt="Download photo in full size"
+      : undefined}     previous={index > 0 ? photos[index - 1].id : undefined}     slot="cover"
   />
   <Fragment slot="content">
     <table>
@@ -53,10 +43,9 @@ const index = photos.findIndex((other) => other.id === photo.id);
       {photo.data.editing && <tr><th>Editing</th><td>{photo.data.editing}</td></tr>}
     </table>
   </Fragment>
-  <License slot="license" icons="🅭🅯">
+  <License icons="🅭🅯" slot="license">
     This photograph is provided under a <a
-      rel="license"
-      href={photo.data.license}
+      href={photo.data.license}       rel="license"
       >Creative Commons Attribution 4.0 International License (CC BY 4.0)</a
     >. You are free to share, copy, distribute, and transmit the work or adapt
     and make commercial use of it, provided that you attribute the work to {

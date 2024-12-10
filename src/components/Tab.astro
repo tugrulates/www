@@ -9,13 +9,13 @@ const { tab, text, href } = Astro.props;
 
 <a
   aria-label={text}
-  href={href}
-  id=`tab-${tab}`
   class:list={[
     "tab group relative z-10 -mb-4 flex h-fit grow flex-col overflow-hidden pb-4 sm:rounded-t-3xl",
     "shadow-lg shadow-stone-900/20 ring-inset ring-stone-500/50 hover:ring-1",
     "bg-stone-300 hover:bg-stone-200/50 dark:bg-stone-700 dark:hover:bg-stone-800/50",
   ]}
+  href={href}
+  id=`tab-${tab}`
 >
   <div
     class="sm:justify-begin text-md flex h-12 w-fit flex-row items-center gap-2 px-4 font-thin max-sm:mx-auto"

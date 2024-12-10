@@ -31,31 +31,20 @@ const cover = await getCoverData(post.data.cover as CoverType);
 ---
 
 <ArticleLayout
-  tab={post.data.tab ?? "posts"}
-  title={post.data.title}
-  description={post.data.description}
-  keywords={post.data.tags}
-  date={post.data.date}
+  date={post.data.date}   description={post.data.description}   keywords={post.data.tags}   tab={post.data.tab ?? "posts"}   title={post.data.title}
 >
   <Cover
-    slot="cover"
-    image={cover}
-    previous={index > 0 ? posts[index - 1].slug : undefined}
-    next={index >= 0 && index < posts.length - 1
+    actionAlt="Image details"     actionHref={cover.id !== undefined ? `/photography/${cover.id}` : undefined}     actionIcon="heroicons:photo-solid"     image={cover}     next={index >= 0 && index < posts.length - 1
       ? posts[index + 1].slug
-      : undefined}
-    actionHref={cover.id !== undefined ? `/photography/${cover.id}` : undefined}
-    actionIcon="heroicons:photo-solid"
-    actionAlt="Image details"
+      : undefined}     previous={index > 0 ? posts[index - 1].slug : undefined}     slot="cover"
   />
   <Content slot="content" />
   {
     license ? (
-      <License slot="license" icons="🅭🄍">
+      <License icons="🅭🄍" slot="license">
         This article is dedicated to the public domain under the{" "}
         <a
-          rel="license"
-          href="https://creativecommons.org/publicdomain/zero/1.0/"
+          href="https://creativecommons.org/publicdomain/zero/1.0/"           rel="license"
         >
           Creative Commons CC0 1.0 Universal (CC0 1.0)
         </a>{" "}

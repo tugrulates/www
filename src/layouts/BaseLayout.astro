@@ -40,9 +40,9 @@ const favicon = await getFavicon(180);
   <head>
     <meta charset="utf-8" />
     <title>{title}</title>
-    <meta name="author" content={AUTHOR.name} />
-    <meta name="description" content={description} />
-    <meta name="keywords" content={(keywords ?? []).join(", ")} />
+    <meta content={AUTHOR.name} name="author" />
+    <meta content={description} name="description" />
+    <meta content={(keywords ?? []).join(", ")} name="keywords" />
     {
       seo ? (
         <>
@@ -80,17 +80,16 @@ const favicon = await getFavicon(180);
         </>
       ) : undefined
     }
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="generator" content={Astro.generator} />
-    <link rel="sitemap" href="/sitemap-index.xml" />
-    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content={Astro.generator} name="generator" />
+    <link href="/sitemap-index.xml" rel="sitemap" />
+    <link href="/favicon.ico" rel="icon" sizes="32x32" />
     <link
-      rel="icon"
-      href={favicon.src}
+      href={favicon.src}       rel="icon"
       type={`image/${favicon.options.format}`}
     />
-    <link rel="apple-touch-icon" href={appleTouchIcon.src} />
-    <link rel="manifest" href="/manifest.json" />
+    <link href={appleTouchIcon.src} rel="apple-touch-icon" />
+    <link href="/manifest.json" rel="manifest" />
     <ViewTransitions />
     <SpeedInsights />
   </head>

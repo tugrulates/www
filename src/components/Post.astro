@@ -17,11 +17,11 @@ const { link, image, imageDescription, title, description, date } = Astro.props;
 <article>
   <a
     aria-label={title}
-    href={link}
     class:list={[
       "align-center group flex flex-row items-start gap-2 transition",
       "ring-inset ring-stone-500/50 hover:bg-stone-500/10 hover:ring-1 sm:rounded-xl",
     ]}
+    href={link}
   >
     <div
       class:list={[
@@ -31,19 +31,18 @@ const { link, image, imageDescription, title, description, date } = Astro.props;
       ]}
     >
       <Image
-        src={image}
         alt={imageDescription}
-        width={160}
-        height={160}
-        densities={[1, 2, 3, 4]}
         class="transform-all aspect-1 object-cover object-center max-sm:hidden"
+        densities={[1, 2, 3, 4]}
+        height={160}
+        src={image}
+        width={160}
       />
     </div>
     <div class="flex-0 group flex flex-1 flex-col px-2 py-2 sm:py-1">
       <time
-        datetime={date.toISOString()}
         class="text-stone-700 dark:text-stone-300 print:!text-black"
-        >{formatDate(date)}</time
+        datetime={date.toISOString()}>{formatDate(date)}</time
       >
       <h1 class="mb-2 grow text-xl font-bold">{title}</h1>
       <p

@@ -50,8 +50,8 @@ const {
   >
     <div transition:animate={fade({ duration: "0.1s" })}>
       <CoverImage
-        cover={image}
         class="object-cover max-sm:w-screen sm:rounded-2xl"
+        cover={image}
       />
       <div
         class="absolute inset-2 flex flex-col items-end justify-between max-sm:items-end"
@@ -60,25 +60,25 @@ const {
           <div class="h-12 w-12 grow"></div>
           <PhotoViewer client:only="react">
             <Image
+              alt={image.data.description}
+              class="touch-auto"
+              format="jpg"
+              height={image.data.wide.height}
               slot="image"
               src={image.data.wide}
-              alt={image.data.description}
               width={image.data.wide.width}
-              height={image.data.wide.height}
-              format="jpg"
-              class="touch-auto"
             />
             <CoverButton
-              slot="openButton"
               icon="heroicons:arrows-pointing-out-solid"
+              slot="openButton"
             />
-            <CoverButton slot="closeButton" icon="heroicons:x-mark-solid" />
+            <CoverButton icon="heroicons:x-mark-solid" slot="closeButton" />
           </PhotoViewer>
         </div>
         <div class="flex w-full flex-row justify-between">
           {
             previous !== undefined && (
-              <a aria-label="Previous item" href={previous} class="group">
+              <a aria-label="Previous item" class="group" href={previous}>
                 <CoverButton icon="heroicons:chevron-left-solid" />
               </a>
             )
@@ -86,7 +86,7 @@ const {
           <div class="grow"></div>
           {
             next !== undefined && (
-              <a aria-label="Next item" href={next} class="group">
+              <a aria-label="Next item" class="group" href={next}>
                 <CoverButton icon="heroicons:chevron-right-solid" />
               </a>
             )
@@ -96,9 +96,9 @@ const {
           actionHref !== undefined && (
             <a
               aria-label={actionAlt}
-              href={actionHref}
-              download={actionDownload}
               class="group"
+              download={actionDownload}
+              href={actionHref}
             >
               <CoverButton icon={actionIcon} />
             </a>

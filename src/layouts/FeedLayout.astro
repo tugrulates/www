@@ -14,10 +14,7 @@ const feedUrl = getChildPath(Astro.url, "feed");
 ---
 
 <BaseLayout
-  tab={tab}
-  title={title}
-  description={description}
-  class="flex flex-col sm:gap-12"
+  class="flex flex-col sm:gap-12"   description={description}   tab={tab}   title={title}
 >
   <div class="items-between flex flex-row justify-between gap-8 max-sm:p-4">
     <p
@@ -27,8 +24,7 @@ const feedUrl = getChildPath(Astro.url, "feed");
     </p>
     <a
       aria-label="RSS feed"
-      href={feedUrl}
-      class="h-fit transition-transform hover:scale-110 hover:opacity-100 sm:opacity-75 print:hidden"
+      class="h-fit transition-transform hover:scale-110 hover:opacity-100 sm:opacity-75 print:hidden"       href={feedUrl}
     >
       <Icon name="heroicons:rss-solid" size={24} />
     </a>
