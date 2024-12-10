@@ -2,13 +2,12 @@ export const SITE = {
   title: "Tugrul Ates",
   description: "Personal website.",
   domain: "www.tugrulates.com",
-  url: "https://www.tugrulates.com/",
+  url: "https://www.tugrulates.com",
   trailingSlashes: false,
 };
 
 export const AUTHOR = {
   name: "Tugrul Ates",
-  twitter: "@turulier",
   social: [
     {
       name: "LinkedIn",
