@@ -14,15 +14,11 @@ const { tab, title, description, date, keywords } = Astro.props;
 ---
 
 <BaseLayout
-  tab={tab}
-  title={title}
-  description={description}
-  keywords={keywords}
-  date={date}
+  date={date}   description={description}   keywords={keywords}   tab={tab}   title={title}
 >
   <div class="flex flex-col gap-12 lg:gap-24">
     <slot name="cover" />
-    <Article title={title} date={date}>
+    <Article date={date} title={title}>
       <slot name="content" />
       <slot name="license" />
     </Article>

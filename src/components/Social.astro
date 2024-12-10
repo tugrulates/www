@@ -7,9 +7,9 @@ const external = Boolean(href.startsWith("http"));
 
 <a
   aria-label={name}
+  class="group"
   href={href}
   rel={external ? "nofollow" : undefined}
-  class="group"
 >
   <div
     class:list={[
@@ -18,13 +18,13 @@ const external = Boolean(href.startsWith("http"));
     ]}
   >
     <span
-      role="tooltip"
       aria-hidden="true"
       class:list={[
         "collapse absolute min-w-24 scale-50 text-center align-text-bottom text-xs font-thin opacity-0 transition-all",
         "group-hover:visible group-hover:-translate-y-10 group-hover:scale-100 group-hover:opacity-100",
         "group-focus:visible group-focus:-translate-y-10 group-focus:scale-100 group-focus:opacity-100",
       ]}
+      role="tooltip"
     >
       {name}
     </span>

@@ -17,7 +17,7 @@ const year = new Date().getFullYear();
   <nav aria-label="Social profiles" class="flex w-full flex-row justify-center">
     {
       AUTHOR.social.map((item) => (
-        <Social name={item.name} href={item.url} icon={item.icon} />
+        <Social href={item.url} icon={item.icon} name={item.name} />
       ))
     }
   </nav>

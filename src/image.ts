@@ -97,12 +97,12 @@ export async function getRichOpenGraphImage({
       fonts: [
         {
           name: "Regular",
-          data: regularFontBuffer.buffer,
+          data: regularFontBuffer,
           style: "normal",
         },
         {
           name: "Bold",
-          data: boldFontBuffer.buffer,
+          data: boldFontBuffer,
           style: "normal",
         },
       ],

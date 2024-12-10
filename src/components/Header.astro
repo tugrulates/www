@@ -47,32 +47,32 @@ const { class: className } = Astro.props;
   transition:persist
 >
   <nav aria-label="Primary navigation" class="items-begin flex flex-row gap-1">
-    <Tab tab="posts" text="Posts" href="/">
+    <Tab href="/" tab="posts" text="Posts">
       <Icon
         aria-hidden
         name="heroicons:chat-bubble-bottom-center-text"
         size={32}
       />
     </Tab>
-    <Tab tab="photos" text="Photography" href="/photography">
+    <Tab href="/photography" tab="photos" text="Photography">
       <Icon aria-hidden name="heroicons:camera" size={32} />
     </Tab>
-    <Tab tab="about" text="About" href="/about">
+    <Tab href="/about" tab="about" text="About">
       <div class="row flex h-8 w-8 items-center justify-center">
         <Image
-          aria-hidden
           alt=""
+          aria-hidden
+          class="rounded-full border border-black dark:border-white"
+          densities={[1, 2, 3, 4]}
+          height="32"
           src={avatar}
           width="32"
-          height="32"
-          densities={[1, 2, 3, 4]}
-          class="rounded-full border border-black dark:border-white"
         />
       </div>
     </Tab>
     <ThemeToggle client:only="react" transition:persist>
-      <Icon aria-hidden slot="lightIcon" name="heroicons:sun-solid" size={32} />
-      <Icon aria-hidden slot="darkIcon" name="heroicons:moon-solid" size={32} />
+      <Icon aria-hidden name="heroicons:sun-solid" size={32} slot="lightIcon" />
+      <Icon aria-hidden name="heroicons:moon-solid" size={32} slot="darkIcon" />
     </ThemeToggle>
   </nav>
 </header>

@@ -29,8 +29,8 @@ const { title, date, class: className } = Astro.props;
     {
       date !== undefined && (
         <time
-          datetime={formatDateIso(date)}
           class="text-md self-end whitespace-nowrap font-bold italic"
+          datetime={formatDateIso(date)}
         >
           {formatDate(date)}
         </time>

@@ -17,20 +17,13 @@ const covers = Object.fromEntries(
 ---
 
 <FeedLayout
-  tab="posts"
-  title="Posts"
-  description=`Welcome to my garden. I write about software development and digital arts.`
+  description=`Welcome to my garden. I write about software development and digital arts.`   tab="posts"   title="Posts"
 >
-  <div role="feed" class="flex flex-col gap-4">
+  <div class="flex flex-col gap-4" role="feed">
     {
       posts.map((post) => (
         <Post
-          link={post.slug}
-          image={covers[post.slug].data.square}
-          imageDescription={covers[post.slug].data.description}
-          title={post.data.title}
-          description={post.data.description}
-          date={post.data.date}
+          date={post.data.date}           description={post.data.description}           image={covers[post.slug].data.square}           imageDescription={covers[post.slug].data.description}           link={post.slug}           title={post.data.title}
         />
       ))
     }
