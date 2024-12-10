@@ -1,7 +1,7 @@
 ---
 import { Icon } from "astro-icon/components";
 import BaseLayout from "~/layouts/BaseLayout.astro";
-import { getChildUrl } from "~/url";
+import { getChildPath } from "~/url";
 
 interface Props {
   tab: string;
@@ -10,7 +10,7 @@ interface Props {
 }
 
 const { tab, title, description } = Astro.props;
-const feedUrl = getChildUrl(Astro.url, "feed");
+const feedUrl = getChildPath(Astro.url, "feed");
 ---
 
 <BaseLayout

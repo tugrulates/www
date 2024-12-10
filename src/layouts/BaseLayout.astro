@@ -9,7 +9,7 @@ import Header from "~/components/Header.astro";
 import { AUTHOR, DIMENSIONS, SITE } from "~/config";
 import { formatDateIso } from "~/date";
 import { getFavicon } from "~/image";
-import { getCanonicalChildUrl } from "~/url";
+import { getCanonicalChildPath } from "~/url";
 
 interface Props {
   tab: string;
@@ -31,7 +31,7 @@ const {
   class: className,
 } = Astro.props;
 
-const ogImage = getCanonicalChildUrl(Astro.url, "og.jpg");
+const ogImage = getCanonicalChildPath(Astro.url, "og.jpg");
 const appleTouchIcon = await getFavicon(180);
 const favicon = await getFavicon(180);
 ---
