@@ -6,11 +6,6 @@ export async function getPages(): Promise<CollectionEntry<"pages">[]> {
 }
 
 export async function getPosts(): Promise<CollectionEntry<"posts">[]> {
-  console.log(
-    (await getCollection("posts", ({ data }) => !data.draft || DRAFTS)).map(
-      (post) => post.id,
-    ),
-  );
   return (
     await getCollection("posts", ({ data }) => !data.draft || DRAFTS)
   ).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());

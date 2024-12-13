@@ -57,12 +57,7 @@ export async function getOpenGraphImage({
 export async function getSimpleOpenGraphImage(
   image: ImageMetadata,
 ): Promise<ImageResponse> {
-  const imageBuffer = await fs.readFile(
-    path.join("dist", image.src),
-    // process.env.NODE_ENV === "development"
-    //   ? path.resolve(image.src.replace(/\?.*/, "").replace("/@fs", ""))
-    //   : path.resolve(image.src.replace("/", ".vercel/output/static/")),
-  );
+  const imageBuffer = await fs.readFile(path.join("dist", image.src));
   return new Response(imageBuffer, {
     headers: { "Content-Type": "image/jpeg" },
   });
@@ -78,12 +73,7 @@ export async function getRichOpenGraphImage({
   const [avatarBuffer, imageBuffer, regularFontBuffer, boldFontBuffer] =
     await Promise.all([
       fs.readFile(path.resolve("src/images/me-small.png")),
-      fs.readFile(
-        path.join("dist", image.src),
-        // process.env.NODE_ENV === "development"
-        //   ? path.resolve(image.src.replace(/\?.*/, "").replace("/@fs", ""))
-        //   : path.resolve(image.src.replace("/", ".vercel/output/static/")),
-      ),
+      fs.readFile(path.join("dist", image.src)),
       fs.readFile(
         "node_modules/@fontsource/fira-sans/files/fira-sans-latin-500-normal.woff",
       ),
