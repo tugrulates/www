@@ -2,6 +2,7 @@ import { ImageResponse } from "@vercel/og";
 import type { GetImageResult, ImageMetadata } from "astro";
 import { getImage } from "astro:assets";
 import { getEntry } from "astro:content";
+import { RICH_OPENGRAPH_IMAGES } from "astro:env/client";
 import fs from "fs/promises";
 import path from "node:path";
 import sharp from "sharp";
@@ -13,6 +14,7 @@ import avatar from "~/images/me.png";
 export async function getCoverData(cover: CoverType): Promise<CoverMeta> {
   if ("collection" in cover && cover.collection === "photos") {
     const entry = await getEntry("photos", cover.id);
+    if (!entry) throw new Error(`Photo not found: ${cover.id}`);
     return entry;
   }
   if ("wide" in cover) {
@@ -39,7 +41,7 @@ export async function getOpenGraphImage({
   image,
   cta,
 }: OpenGraphImageData): Promise<ImageResponse> {
-  if (import.meta.env.RICH_OPENGRAPH_IMAGES) {
+  if (RICH_OPENGRAPH_IMAGES) {
     return await getRichOpenGraphImage({
       title,
       subtitle,
@@ -55,11 +57,7 @@ export async function getOpenGraphImage({
 export async function getSimpleOpenGraphImage(
   image: ImageMetadata,
 ): Promise<ImageResponse> {
-  const imageBuffer = await fs.readFile(
-    process.env.NODE_ENV === "development"
-      ? path.resolve(image.src.replace(/\?.*/, "").replace("/@fs", ""))
-      : path.resolve(image.src.replace("/", ".vercel/output/static/")),
-  );
+  const imageBuffer = await fs.readFile(path.join("dist", image.src));
   return new Response(imageBuffer, {
     headers: { "Content-Type": "image/jpeg" },
   });
@@ -75,11 +73,7 @@ export async function getRichOpenGraphImage({
   const [avatarBuffer, imageBuffer, regularFontBuffer, boldFontBuffer] =
     await Promise.all([
       fs.readFile(path.resolve("src/images/me-small.png")),
-      fs.readFile(
-        process.env.NODE_ENV === "development"
-          ? path.resolve(image.src.replace(/\?.*/, "").replace("/@fs", ""))
-          : path.resolve(image.src.replace("/", ".vercel/output/static/")),
-      ),
+      fs.readFile(path.join("dist", image.src)),
       fs.readFile(
         "node_modules/@fontsource/fira-sans/files/fira-sans-latin-500-normal.woff",
       ),

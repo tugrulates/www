@@ -10,7 +10,7 @@ export async function GET(): Promise<Response> {
     site: SITE.url,
     trailingSlash: false,
     items: posts.map((post) => ({
-      link: post.slug,
+      link: post.id,
       title: post.data.title,
       pubDate: post.data.date,
       description: post.data.description,

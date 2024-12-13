@@ -3,7 +3,7 @@ import "@fontsource/fira-code";
 import "@fontsource/fira-sans";
 import SpeedInsights from "@vercel/speed-insights/astro";
 import { SEO } from "astro-seo";
-import { ViewTransitions } from "astro:transitions";
+import { ClientRouter } from "astro:transitions";
 import Footer from "~/components/Footer.astro";
 import Header from "~/components/Header.astro";
 import { AUTHOR, DIMENSIONS, SITE } from "~/config";
@@ -85,12 +85,13 @@ const favicon = await getFavicon(180);
     <link href="/sitemap-index.xml" rel="sitemap" />
     <link href="/favicon.ico" rel="icon" sizes="32x32" />
     <link
-      href={favicon.src}       rel="icon"
+      href={favicon.src}
+      rel="icon"
       type={`image/${favicon.options.format}`}
     />
     <link href={appleTouchIcon.src} rel="apple-touch-icon" />
     <link href="/manifest.json" rel="manifest" />
-    <ViewTransitions />
+    <ClientRouter />
     <SpeedInsights />
   </head>
   <body

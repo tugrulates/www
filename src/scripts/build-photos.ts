@@ -50,8 +50,8 @@ async function extractMetadata(photo: string): Promise<void> {
       camera: `${tags.Make ?? ""} ${tags.Model ?? ""}`.replace(/\s+/g, " "),
       lens: tags.LensModel ?? tags.Lens ?? "",
       editing: Array.isArray(tags.History)
-        ? tags.History.filter((item) => item.Action === "produced")[0]
-            .SoftwareAgent ?? ""
+        ? (tags.History.filter((item) => item.Action === "produced")[0]
+            .SoftwareAgent ?? "")
         : "",
       license: tags.License ?? "",
     };
