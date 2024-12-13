@@ -7,7 +7,7 @@ import { getCoverData, getOpenGraphImage } from "~/image";
 export const getStaticPaths = (async () => {
   const [pages, posts] = await Promise.all([getPages(), getPosts()]);
   return [...pages, ...posts].map((post) => ({
-    params: { post: post.slug },
+    params: { post: post.id.replace(/^posts\//, "") },
     props: {
       title: post.data.title,
       cover: post.data.cover,

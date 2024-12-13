@@ -14,6 +14,7 @@ import avatar from "~/images/me.png";
 export async function getCoverData(cover: CoverType): Promise<CoverMeta> {
   if ("collection" in cover && cover.collection === "photos") {
     const entry = await getEntry("photos", cover.id);
+    if (!entry) throw new Error(`Photo not found: ${cover.id}`);
     return entry;
   }
   if ("wide" in cover) {
@@ -57,9 +58,10 @@ export async function getSimpleOpenGraphImage(
   image: ImageMetadata,
 ): Promise<ImageResponse> {
   const imageBuffer = await fs.readFile(
-    process.env.NODE_ENV === "development"
-      ? path.resolve(image.src.replace(/\?.*/, "").replace("/@fs", ""))
-      : path.resolve(image.src.replace("/", ".vercel/output/static/")),
+    path.join("dist", image.src),
+    // process.env.NODE_ENV === "development"
+    //   ? path.resolve(image.src.replace(/\?.*/, "").replace("/@fs", ""))
+    //   : path.resolve(image.src.replace("/", ".vercel/output/static/")),
   );
   return new Response(imageBuffer, {
     headers: { "Content-Type": "image/jpeg" },
@@ -77,9 +79,10 @@ export async function getRichOpenGraphImage({
     await Promise.all([
       fs.readFile(path.resolve("src/images/me-small.png")),
       fs.readFile(
-        process.env.NODE_ENV === "development"
-          ? path.resolve(image.src.replace(/\?.*/, "").replace("/@fs", ""))
-          : path.resolve(image.src.replace("/", ".vercel/output/static/")),
+        path.join("dist", image.src),
+        // process.env.NODE_ENV === "development"
+        //   ? path.resolve(image.src.replace(/\?.*/, "").replace("/@fs", ""))
+        //   : path.resolve(image.src.replace("/", ".vercel/output/static/")),
       ),
       fs.readFile(
         "node_modules/@fontsource/fira-sans/files/fira-sans-latin-500-normal.woff",

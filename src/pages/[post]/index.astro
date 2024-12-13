@@ -1,5 +1,6 @@
 ---
 import { type GetStaticPaths, type InferGetStaticPropsType } from "astro";
+import { render } from "astro:content";
 import Cover, { type CoverType } from "~/components/Cover.astro";
 import License from "~/components/License.astro";
 import { getPages, getPosts } from "~/content";
@@ -11,11 +12,11 @@ export const getStaticPaths = (async () => {
   const posts = await getPosts();
   return [
     ...pages.map((page) => ({
-      params: { post: page.slug },
+      params: { post: page.id },
       props: { post: page, license: false },
     })),
     ...posts.map((post) => ({
-      params: { post: post.slug },
+      params: { post: post.id.replace(/^posts\//, "") },
       props: { post, license: true },
     })),
   ];
@@ -26,17 +27,27 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const { post, license }: Props = Astro.props;
 const posts = await getPosts();
 const index = posts.findIndex((other) => other.id === post.id);
-const { Content } = await post.render();
+const { Content } = await render(post);
 const cover = await getCoverData(post.data.cover as CoverType);
 ---
 
 <ArticleLayout
-  date={post.data.date}   description={post.data.description}   keywords={post.data.tags}   tab={post.data.tab ?? "posts"}   title={post.data.title}
+  date={post.data.date}
+  description={post.data.description}
+  keywords={post.data.tags}
+  tab={post.data.tab ?? "posts"}
+  title={post.data.title}
 >
   <Cover
-    actionAlt="Image details"     actionHref={cover.id !== undefined ? `/photography/${cover.id}` : undefined}     actionIcon="heroicons:photo-solid"     image={cover}     next={index >= 0 && index < posts.length - 1
-      ? posts[index + 1].slug
-      : undefined}     previous={index > 0 ? posts[index - 1].slug : undefined}     slot="cover"
+    actionAlt="Image details"
+    actionHref={cover.id !== undefined ? `/photography/${cover.id}` : undefined}
+    actionIcon="heroicons:photo-solid"
+    image={cover}
+    next={index >= 0 && index < posts.length - 1
+      ? posts[index + 1].id
+      : undefined}
+    previous={index > 0 ? posts[index - 1].id : undefined}
+    slot="cover"
   />
   <Content slot="content" />
   {
@@ -44,7 +55,8 @@ const cover = await getCoverData(post.data.cover as CoverType);
       <License icons="🅭🄍" slot="license">
         This article is dedicated to the public domain under the{" "}
         <a
-          href="https://creativecommons.org/publicdomain/zero/1.0/"           rel="license"
+          href="https://creativecommons.org/publicdomain/zero/1.0/"
+          rel="license"
         >
           Creative Commons CC0 1.0 Universal (CC0 1.0)
         </a>{" "}

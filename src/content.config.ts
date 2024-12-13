@@ -1,7 +1,11 @@
+import { glob } from "astro/loaders";
 import { defineCollection, reference, z } from "astro:content";
 
 const pages = defineCollection({
-  type: "content",
+  loader: glob({
+    pattern: "**/*.md",
+    base: "./src/content/pages",
+  }),
   schema: ({ image }) =>
     z.object({
       tab: z.string(),
@@ -19,8 +23,17 @@ const pages = defineCollection({
     }),
 });
 
+/**
+ * Posts collection.
+ *
+ * @todo `generateId` is not working as expected.
+ */
 const posts = defineCollection({
-  type: "content",
+  loader: glob({
+    pattern: "**/*.{md,mdx}",
+    base: "./src/blog/posts",
+    generateId: ({ entry }) => entry.replace(/^posts\//, ""),
+  }),
   schema: ({ image }) =>
     z.object({
       tab: z.string().default("posts"),
@@ -40,7 +53,7 @@ const posts = defineCollection({
 });
 
 const photos = defineCollection({
-  type: "data",
+  loader: glob({ pattern: "*.json", base: "./src/content/photos" }),
   schema: ({ image }) =>
     z.object({
       wide: image(),

@@ -10,20 +10,27 @@ const covers = Object.fromEntries(
   await Promise.all(
     posts.map(async (post) => {
       const cover = await getCoverData(post.data.cover as CoverType);
-      return [post.slug, cover];
+      return [post.id, cover];
     })
   )
 );
 ---
 
 <FeedLayout
-  description=`Welcome to my garden. I write about software development and digital arts.`   tab="posts"   title="Posts"
+  description=`Welcome to my garden. I write about software development and digital arts.`
+  tab="posts"
+  title="Posts"
 >
   <div class="flex flex-col gap-4" role="feed">
     {
       posts.map((post) => (
         <Post
-          date={post.data.date}           description={post.data.description}           image={covers[post.slug].data.square}           imageDescription={covers[post.slug].data.description}           link={post.slug}           title={post.data.title}
+          date={post.data.date}
+          description={post.data.description}
+          image={covers[post.id].data.square}
+          imageDescription={covers[post.id].data.description}
+          link={post.id}
+          title={post.data.title}
         />
       ))
     }

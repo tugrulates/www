@@ -23,29 +23,96 @@ const index = photos.findIndex((other) => other.id === photo.id);
 ---
 
 <ArticleLayout
-  description={photo.data.description}   keywords={photo.data.keywords}   tab="photos"   title={photo.data.title}
+  description={photo.data.description}
+  keywords={photo.data.keywords}
+  tab="photos"
+  title={photo.data.title}
 >
   <Cover
-    actionAlt="Download photo in full size"     actionDownload={`${photo.id}.jpg`}     actionHref={photo.data.wide.src}     actionIcon="heroicons:archive-box-arrow-down-solid"     image={photo}     next={index >= 0 && index < photos.length - 1
+    actionAlt="Download photo in full size"
+    actionDownload={`${photo.id}.jpg`}
+    actionHref={photo.data.wide.src}
+    actionIcon="heroicons:archive-box-arrow-down-solid"
+    image={photo}
+    next={index >= 0 && index < photos.length - 1
       ? photos[index + 1].id
-      : undefined}     previous={index > 0 ? photos[index - 1].id : undefined}     slot="cover"
+      : undefined}
+    previous={index > 0 ? photos[index - 1].id : undefined}
+    slot="cover"
   />
   <Fragment slot="content">
     <table>
-      {photo.data.description && <tr><th>Description</th><td>{photo.data.description}</td></tr>}
+      {
+        photo.data.description && (
+          <tr>
+            <th>Description</th>
+            <td>{photo.data.description}</td>
+          </tr>
+        )
+      }
       <tr><th>Date</th><td>{formatDate(date)}</td></tr>
-      {photo.data.location && <tr><th>Location</th><td>{photo.data.location}</td></tr>}
-      {photo.data.city && <tr><th>City</th><td>{photo.data.city}</td></tr>}
-      {photo.data.state && <tr><th>State/Region</th><td>{photo.data.state}</td></tr>}
-      {photo.data.country && <tr><th>Country</th><td>{photo.data.country}</td></tr>}
-      {photo.data.camera && <tr><th>Camera</th><td>{photo.data.camera}</td></tr>}
-      {photo.data.lens && <tr><th>Lens</th><td>{photo.data.lens}</td></tr>}
-      {photo.data.editing && <tr><th>Editing</th><td>{photo.data.editing}</td></tr>}
+      {
+        photo.data.location && (
+          <tr>
+            <th>Location</th>
+            <td>{photo.data.location}</td>
+          </tr>
+        )
+      }
+      {
+        photo.data.city && (
+          <tr>
+            <th>City</th>
+            <td>{photo.data.city}</td>
+          </tr>
+        )
+      }
+      {
+        photo.data.state && (
+          <tr>
+            <th>State/Region</th>
+            <td>{photo.data.state}</td>
+          </tr>
+        )
+      }
+      {
+        photo.data.country && (
+          <tr>
+            <th>Country</th>
+            <td>{photo.data.country}</td>
+          </tr>
+        )
+      }
+      {
+        photo.data.camera && (
+          <tr>
+            <th>Camera</th>
+            <td>{photo.data.camera}</td>
+          </tr>
+        )
+      }
+      {
+        photo.data.lens && (
+          <tr>
+            <th>Lens</th>
+            <td>{photo.data.lens}</td>
+          </tr>
+        )
+      }
+      {
+        photo.data.editing && (
+          <tr>
+            <th>Editing</th>
+            <td>{photo.data.editing}</td>
+          </tr>
+        )
+      }
     </table>
   </Fragment>
   <License icons="🅭🅯" slot="license">
     This photograph is provided under a <a
-      href={photo.data.license}       rel="license"
+      href={photo.data.license}
+      rel="license"
       >Creative Commons Attribution 4.0 International License (CC BY 4.0)</a
     >. You are free to share, copy, distribute, and transmit the work or adapt
     and make commercial use of it, provided that you attribute the work to {
