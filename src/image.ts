@@ -2,6 +2,7 @@ import { ImageResponse } from "@vercel/og";
 import type { GetImageResult, ImageMetadata } from "astro";
 import { getImage } from "astro:assets";
 import { getEntry } from "astro:content";
+import { RICH_OPENGRAPH_IMAGES } from "astro:env/client";
 import fs from "fs/promises";
 import path from "node:path";
 import sharp from "sharp";
@@ -39,7 +40,7 @@ export async function getOpenGraphImage({
   image,
   cta,
 }: OpenGraphImageData): Promise<ImageResponse> {
-  if (import.meta.env.RICH_OPENGRAPH_IMAGES) {
+  if (RICH_OPENGRAPH_IMAGES) {
     return await getRichOpenGraphImage({
       title,
       subtitle,
