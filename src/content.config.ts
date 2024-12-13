@@ -1,6 +1,11 @@
 import { glob } from "astro/loaders";
 import { defineCollection, reference, z } from "astro:content";
 
+/**
+ * Pages collection.
+ *
+ * Pages are static, and part of the www repo.
+ */
 const pages = defineCollection({
   loader: glob({
     pattern: "**/*.md",
@@ -26,13 +31,16 @@ const pages = defineCollection({
 /**
  * Posts collection.
  *
+ * Posts are fetched from the submodule to the blog repo.
+ *
  * @todo `generateId` is not working as expected.
  */
 const posts = defineCollection({
   loader: glob({
     pattern: "**/*.{md,mdx}",
     base: "./src/blog/posts",
-    generateId: ({ entry }) => entry.replace(/^posts\//, ""),
+    generateId: ({ entry }) =>
+      entry.replace(/^posts\//, "").replace(/\.[^.]+$/, ""),
   }),
   schema: ({ image }) =>
     z.object({
@@ -52,6 +60,12 @@ const posts = defineCollection({
     }),
 });
 
+/**
+ * Photos collection.
+ *
+ * Photos are fetched from the submodule to the photos repo. Their metadata is
+ * extracted into JSON files, which are the actual collection.
+ */
 const photos = defineCollection({
   loader: glob({ pattern: "*.json", base: "./src/content/photos" }),
   schema: ({ image }) =>
