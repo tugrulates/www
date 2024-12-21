@@ -40,13 +40,11 @@ const cover = await getCoverData(post.data.cover as CoverType);
 >
   <Cover
     actionAlt="Image details"
-    actionHref={cover.id !== undefined ? `/photography/${cover.id}` : undefined}
+    actionHref={cover.id && `/photography/${cover.id}`}
     actionIcon="heroicons:photo-solid"
     image={cover}
-    next={index >= 0 && index < posts.length - 1
-      ? posts[index + 1].id
-      : undefined}
-    previous={index > 0 ? posts[index - 1].id : undefined}
+    next={posts[index + 1]?.id}
+    previous={posts[index - 1]?.id}
     slot="cover"
   />
   <Content slot="content" />

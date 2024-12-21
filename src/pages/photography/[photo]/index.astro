@@ -34,10 +34,8 @@ const index = photos.findIndex((other) => other.id === photo.id);
     actionHref={photo.data.wide.src}
     actionIcon="heroicons:archive-box-arrow-down-solid"
     image={photo}
-    next={index >= 0 && index < photos.length - 1
-      ? photos[index + 1].id
-      : undefined}
-    previous={index > 0 ? photos[index - 1].id : undefined}
+    next={photos[index + 1]?.id}
+    previous={photos[index - 1]?.id}
     slot="cover"
   />
   <Fragment slot="content">

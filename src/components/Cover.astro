@@ -77,7 +77,7 @@ const {
         </div>
         <div class="flex w-full flex-row justify-between">
           {
-            previous !== undefined && (
+            previous && (
               <a aria-label="Previous item" class="group" href={previous}>
                 <CoverButton icon="heroicons:chevron-left-solid" />
               </a>
@@ -85,7 +85,7 @@ const {
           }
           <div class="grow"></div>
           {
-            next !== undefined && (
+            next && (
               <a aria-label="Next item" class="group" href={next}>
                 <CoverButton icon="heroicons:chevron-right-solid" />
               </a>
@@ -93,7 +93,7 @@ const {
           }
         </div>
         {
-          actionHref !== undefined && (
+          actionHref && (
             <a
               aria-label={actionAlt}
               class="group"

@@ -57,7 +57,7 @@ const images = await Promise.all(
     images.map(({ breakpoint, images }) => (
       <source
         media={`(min-width: ${breakpoint.min_width}px)`}
-        srcset={`${images[0].src} 1x, ${images[1].src} 2x, ${images[2].src} 3x, ${images[3].src} 4x`}
+        srcset={`${images[0]?.src} 1x, ${images[1]?.src} 2x, ${images[2]?.src} 3x, ${images[3]?.src} 4x`}
       />
     ))
   }

@@ -23,17 +23,13 @@ export async function getSimpleOpenGraphImage(
   });
 }
 
-export async function getRichOpenGraphImage({
-  title,
-  subtitle,
-  description,
-  image,
-  cta,
-}: OpenGraphImageData): Promise<ImageResponse> {
+export async function getRichOpenGraphImage(
+  data: OpenGraphImageData,
+): Promise<ImageResponse> {
   const [avatarBuffer, imageBuffer, regularFontBuffer, boldFontBuffer] =
     await Promise.all([
       Deno.readFile(path.resolve("src/images/me-small.png")),
-      Deno.readFile(path.join("dist", image.src)),
+      Deno.readFile(path.join("dist", data.image.src)),
       Deno.readFile(
         "node_modules/@fontsource/fira-sans/files/fira-sans-latin-500-normal.woff",
       ),
@@ -43,13 +39,13 @@ export async function getRichOpenGraphImage({
     ]);
   const avatar = `data:image/png;base64,${encodeBase64(avatarBuffer)}`;
   const background = `data:image/${
-    image.format.replace(
+    data.image.format.replace(
       "jpg",
       "jpeg",
     )
   };base64,${encodeBase64(imageBuffer)}`;
   const og = new ImageResponse(
-    OpenGraphImage({ avatar, background, title, subtitle, description, cta }),
+    OpenGraphImage({ avatar, background, ...data }),
     {
       width: DIMENSIONS.opengraph_source_width,
       height: DIMENSIONS.opengraph_source_height,
