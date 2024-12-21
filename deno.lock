@@ -6,7 +6,6 @@
     "jsr:@std/path@*": "1.0.8",
     "jsr:@std/path@^1.0.8": "1.0.8",
     "npm:@astro-community/astro-embed-youtube@~0.5.6": "0.5.6_astro@5.1.1__typescript@5.7.2__@types+node@22.5.4__vite@6.0.5___@types+node@22.5.4__zod@3.24.1_typescript@5.7.2_@types+node@22.5.4",
-    "npm:@astrojs/check@~0.9.4": "0.9.4_typescript@5.7.2",
     "npm:@astrojs/mdx@^4.0.2": "4.0.3_astro@5.1.1__typescript@5.7.2__@types+node@22.5.4__vite@6.0.5___@types+node@22.5.4__zod@3.24.1_typescript@5.7.2_@types+node@22.5.4_acorn@8.14.0",
     "npm:@astrojs/react@^4.1.1": "4.1.2_@types+react@18.3.18_@types+react-dom@18.3.5__@types+react@18.3.18_react@19.0.0_react-dom@19.0.0__react@19.0.0_vite@6.0.5__@types+node@22.5.4_@types+node@22.5.4",
     "npm:@astrojs/rss@^4.0.10": "4.0.10",
@@ -96,18 +95,8 @@
       "integrity": "sha512-vliHXM9cu/viGeKiksUM4mXfO816ohWtawTl2ADPgTsd4nUMjFiyAl7xFZhF34yy4hq4qf7jvK1F2PlR3b5I5w==",
       "dependencies": [
         "@astrojs/language-server",
-        "chokidar@3.6.0",
+        "chokidar",
         "fast-glob",
-        "kleur@4.1.5",
-        "typescript",
-        "yargs"
-      ]
-    },
-    "@astrojs/check@0.9.4_typescript@5.7.2": {
-      "integrity": "sha512-IOheHwCtpUfvogHHsvu0AbeRZEnjJg3MopdLddkJE70mULItS/Vh37BHcI00mcOJcH1vhD3odbpvWokpxam7xA==",
-      "dependencies": [
-        "@astrojs/language-server",
-        "chokidar@4.0.3",
         "kleur@4.1.5",
         "typescript",
         "yargs"
@@ -1516,7 +1505,7 @@
     "astro-seo@0.8.4": {
       "integrity": "sha512-Ou1vzQSXAxa0K8rtNtXNvSpYqOGEgMhh0immMxJeXmbVZac3UKCNWAoXWyOQDFYsZvBugCRSg0N1phBqPMVgCw==",
       "dependencies": [
-        "@astrojs/check@0.5.10_typescript@5.7.2"
+        "@astrojs/check"
       ]
     },
     "astro@5.1.1_typescript@5.7.2_@types+node@22.5.4_vite@6.0.5__@types+node@22.5.4_zod@3.24.1": {
@@ -1751,13 +1740,7 @@
         "is-binary-path",
         "is-glob",
         "normalize-path",
-        "readdirp@3.6.0"
-      ]
-    },
-    "chokidar@4.0.3": {
-      "integrity": "sha512-Qgzu8kfBvo+cA4962jnP1KkS6Dop5NS6g7R5LFYJr4b8Ub94PPQXUksCw9PvXoeXPRRddRNC5C1JQUR2SMGtnA==",
-      "dependencies": [
-        "readdirp@4.0.2"
+        "readdirp"
       ]
     },
     "chownr@2.0.0": {
@@ -3995,9 +3978,6 @@
         "picomatch@2.3.1"
       ]
     },
-    "readdirp@4.0.2": {
-      "integrity": "sha512-yDMz9g+VaZkqBYS/ozoBJwaBhTbZo3UNYQHNRw1D3UFQB8oHB4uS/tAODO+ZLjGWmUbKnIlOWO+aaIiAxrUWHA=="
-    },
     "recma-build-jsx@1.0.0": {
       "integrity": "sha512-8GtdyqaBcDfva+GUKDr3nev3VpKAhup1+RvkMvUxURHpW7QyIvk9F5wz7Vzo06CEMSilw6uArgRqhpiUcWp8ew==",
       "dependencies": [
@@ -4502,7 +4482,7 @@
       "dependencies": [
         "@alloc/quick-lru",
         "arg",
-        "chokidar@3.6.0",
+        "chokidar",
         "didyoumean",
         "dlv",
         "fast-glob",
@@ -4726,7 +4706,7 @@
       "integrity": "sha512-0MBKpoVhNLL/Ixvue9lIsrHkwwWW9/f3TRftsYu1R7nZJJyHSdgPMBDjny2op07nirnS3OX6H3u+YDFGld+1Bg==",
       "dependencies": [
         "anymatch",
-        "chokidar@3.6.0",
+        "chokidar",
         "citty",
         "destr",
         "h3",
@@ -5110,7 +5090,6 @@
     "packageJson": {
       "dependencies": [
         "npm:@astro-community/astro-embed-youtube@~0.5.6",
-        "npm:@astrojs/check@~0.9.4",
         "npm:@astrojs/mdx@^4.0.2",
         "npm:@astrojs/react@^4.1.1",
         "npm:@astrojs/rss@^4.0.10",
