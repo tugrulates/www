@@ -1,0 +1,58 @@
+---
+import { ImageResponse } from "@vercel/og";
+import type { GetImageResult } from "astro";
+import { getImage } from "astro:assets";
+import { getEntry } from "astro:content";
+import { RICH_OPENGRAPH_IMAGES } from "astro:env/client";
+import type { CoverMeta, CoverType } from "~/components/Cover.astro";
+import avatar from "~/images/me.png";
+import {
+  getRichOpenGraphImage,
+  getSimpleOpenGraphImage,
+  type OpenGraphImageData,
+} from "./og.ts";
+
+export async function getCoverData(cover: CoverType): Promise<CoverMeta> {
+  if ("collection" in cover && cover.collection === "photos") {
+    const entry = await getEntry("photos", cover.id);
+    if (!entry) throw new Error(`Photo not found: ${cover.id}`);
+    return entry;
+  }
+  if ("wide" in cover) {
+    return {
+      id: undefined,
+      data: cover,
+    };
+  }
+  throw new Error(`Invalid cover: ${cover}`);
+}
+
+export async function getOpenGraphImage({
+  title,
+  subtitle,
+  description,
+  image,
+  cta,
+}: OpenGraphImageData): Promise<ImageResponse> {
+  if (RICH_OPENGRAPH_IMAGES) {
+    return await getRichOpenGraphImage({
+      title,
+      subtitle,
+      description,
+      image,
+      cta,
+    });
+  } else {
+    return await getSimpleOpenGraphImage(image);
+  }
+}
+
+export async function getFavicon(size?: number): Promise<GetImageResult> {
+  return await getImage({
+    src: avatar,
+    width: size,
+    height: size,
+    format: "png",
+  });
+}
+---

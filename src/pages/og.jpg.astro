@@ -1,6 +1,7 @@
+---
 import type { ImageResponse } from "@vercel/og";
 import image from "~/content/pages/images/rijksmuseum-wide.jpg";
-import { getOpenGraphImage } from "~/image.ts";
+import { getOpenGraphImage } from "~/image.astro";
 
 export const GET = async (): Promise<ImageResponse> => {
   return await getOpenGraphImage({
@@ -12,3 +13,4 @@ export const GET = async (): Promise<ImageResponse> => {
     cta: "Visit",
   });
 };
+---

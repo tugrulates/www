@@ -1,5 +1,5 @@
 {
-  "nodeModulesDir": "auto",
+  "nodeModulesDir": "manual",
   "tasks": {
     "astro": "ASTRO_TELEMETRY_DISABLED=1 deno -A npm:astro",
     "clean": "rm -rf dist .astro .vercel src/content/photos public/files",
@@ -20,7 +20,9 @@
     "dev": "DRAFTS=true astro dev --host",
     "lint": "deno task astro check --minimumFailingSeverity=warning && deno lint"
   },
-  "imports": { "~/": "./src/" },
+  "imports": {
+    "~/": "./src/"
+  },
   "compilerOptions": {
     "lib": ["deno.ns", "dom"],
     "jsx": "react-jsx",

@@ -1,29 +1,10 @@
 import { ImageResponse } from "@vercel/og";
-import type { GetImageResult, ImageMetadata } from "astro";
-import { getImage } from "astro:assets";
-import { getEntry } from "astro:content";
-import { RICH_OPENGRAPH_IMAGES } from "astro:env/client";
+import { ImageMetadata } from "astro";
+import { encodeBase64 } from "jsr:@std/encoding";
 import path from "node:path";
 import sharp from "sharp";
-import type { CoverMeta, CoverType } from "~/components/Cover.astro";
 import { OpenGraphImage } from "~/components/OpenGraphImage.tsx";
 import { DIMENSIONS } from "~/config.ts";
-import avatar from "~/images/me.png";
-
-export async function getCoverData(cover: CoverType): Promise<CoverMeta> {
-  if ("collection" in cover && cover.collection === "photos") {
-    const entry = await getEntry("photos", cover.id);
-    if (!entry) throw new Error(`Photo not found: ${cover.id}`);
-    return entry;
-  }
-  if ("wide" in cover) {
-    return {
-      id: undefined,
-      data: cover,
-    };
-  }
-  throw new Error(`Invalid cover: ${cover}`);
-}
 
 export interface OpenGraphImageData {
   title: string;
@@ -31,26 +12,6 @@ export interface OpenGraphImageData {
   description: string;
   image: ImageMetadata;
   cta: string;
-}
-
-export async function getOpenGraphImage({
-  title,
-  subtitle,
-  description,
-  image,
-  cta,
-}: OpenGraphImageData): Promise<ImageResponse> {
-  if (RICH_OPENGRAPH_IMAGES) {
-    return await getRichOpenGraphImage({
-      title,
-      subtitle,
-      description,
-      image,
-      cta,
-    });
-  } else {
-    return await getSimpleOpenGraphImage(image);
-  }
 }
 
 export async function getSimpleOpenGraphImage(
@@ -71,19 +32,22 @@ export async function getRichOpenGraphImage({
 }: OpenGraphImageData): Promise<ImageResponse> {
   const [avatarBuffer, imageBuffer, regularFontBuffer, boldFontBuffer] =
     await Promise.all([
-      fs.readFile(path.resolve("src/images/me-small.png")),
-      fs.readFile(path.join("dist", image.src)),
-      fs.readFile(
+      Deno.readFile(path.resolve("src/images/me-small.png")),
+      Deno.readFile(path.join("dist", image.src)),
+      Deno.readFile(
         "node_modules/@fontsource/fira-sans/files/fira-sans-latin-500-normal.woff",
       ),
-      fs.readFile(
+      Deno.readFile(
         "node_modules/@fontsource/fira-sans/files/fira-sans-latin-900-normal.woff",
       ),
     ]);
-  const avatar = `data:image/png;base64,${avatarBuffer.toString("base64")}`;
+  const avatar = `data:image/png;base64,${encodeBase64(avatarBuffer)}`;
   const background = `data:image/${
-    image.format.replace("jpg", "jpeg")
-  };base64,${imageBuffer.toString("base64")}`;
+    image.format.replace(
+      "jpg",
+      "jpeg",
+    )
+  };base64,${encodeBase64(imageBuffer)}`;
   const og = new ImageResponse(
     OpenGraphImage({ avatar, background, title, subtitle, description, cta }),
     {
@@ -110,14 +74,5 @@ export async function getRichOpenGraphImage({
     .toBuffer();
   return new Response(jpeg, {
     headers: { "Content-Type": "image/jpeg" },
-  });
-}
-
-export async function getFavicon(size?: number): Promise<GetImageResult> {
-  return getImage({
-    src: avatar,
-    width: size,
-    height: size,
-    format: "png",
   });
 }
