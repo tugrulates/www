@@ -1,6 +1,6 @@
 import rss from "@astrojs/rss";
 import { AUTHOR, SITE } from "~/config.ts";
-import { getPosts } from "~/content.ts";
+import { getPosts } from "~/content.astro";
 
 export async function GET(): Promise<Response> {
   const posts = await getPosts();

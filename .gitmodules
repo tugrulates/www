@@ -1,6 +1,6 @@
 [submodule "src/blog"]
-	path = src/blog
+	path = content/blog
 	url = https://github.com/tugrulates/blog
 [submodule "src/photos"]
-	path = src/photos
+	path = content/photos
 	url = https://github.com/tugrulates/photos

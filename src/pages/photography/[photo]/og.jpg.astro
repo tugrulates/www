@@ -1,7 +1,7 @@
 ---
 import type { ImageResponse } from "@vercel/og";
 import type { GetStaticPaths } from "astro";
-import { getPhotos } from "~/content.ts";
+import { getPhotos } from "~/content.astro";
 import { formatDate } from "~/date.ts";
 import { getOpenGraphImage } from "~/image.astro";
 import { type OpenGraphImageData } from "~/og.ts";

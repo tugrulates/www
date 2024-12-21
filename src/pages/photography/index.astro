@@ -1,20 +1,25 @@
 ---
 import Photo from "~/components/Photo.astro";
-import { getPhotos } from "~/content";
+import { getPhotos } from "~/content.astro";
 import FeedLayout from "~/layouts/FeedLayout.astro";
 
 const photos = await getPhotos();
 ---
 
 <FeedLayout
-  description=`I enjoy playing with light and images, capturing unique moments and details with my phone.`   tab="photos"   title="Photography"
+  description=`I enjoy playing with light and images, capturing unique moments and details with my phone.`
+  tab="photos"
+  title="Photography"
 >
   <ul class="flex flex-row flex-wrap justify-between gap-4">
     {
       photos.map((photo) => (
         <li class="grow">
           <Photo
-            description={photo.data.description}             image={photo.data.square}             link={`./photography/${photo.id}`}             title={photo.data.title}
+            description={photo.data.description}
+            image={photo.data.square}
+            link={`./photography/${photo.id}`}
+            title={photo.data.title}
           />
         </li>
       ))

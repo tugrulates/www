@@ -2,8 +2,7 @@ import { expandGlob } from "jsr:@std/fs";
 import { dirname } from "jsr:@std/path";
 import { ExifDateTime, exiftool, type Tags } from "npm:exiftool-vendored";
 
-const IMAGES_DIR = "src/photos";
-const CONTENT_DIR = "src/content/photos";
+const PHOTOS_DIR = "content/photos";
 
 export interface PhotoTags extends Tags {
   State?: string;
@@ -28,20 +27,19 @@ interface PhotoData {
 }
 
 async function extractMetadata(photo: string): Promise<void> {
-  const cover = `${IMAGES_DIR}/${photo}/wide.jpg`;
+  const cover = `${PHOTOS_DIR}/${photo}/wide.jpg`;
   await exiftool.read<PhotoTags>(cover).then(async (tags) => {
     const data: PhotoData = {
-      wide: `../../photos/${photo}/wide.jpg`,
-      square: `../../photos/${photo}/square.jpg`,
+      wide: `content/photos/${photo}/wide.jpg`,
+      square: `content/photos/${photo}/square.jpg`,
       title: tags.Headline ?? "",
       description: tags.ImageDescription ?? "",
       keywords: Array.isArray(tags.Keywords)
         ? tags.Keywords
         : [tags.Keywords ?? ""],
-      date:
-        (tags.DateTimeOriginal instanceof ExifDateTime
-          ? tags.DateTimeOriginal.toDate().toISOString()
-          : tags.DateTimeOriginal) ?? "",
+      date: (tags.DateTimeOriginal instanceof ExifDateTime
+        ? tags.DateTimeOriginal.toDate().toISOString()
+        : tags.DateTimeOriginal) ?? "",
       location: tags.Location ?? "",
       city: tags.City ?? "",
       state: tags.State ?? "",
@@ -49,19 +47,20 @@ async function extractMetadata(photo: string): Promise<void> {
       camera: `${tags.Make ?? ""} ${tags.Model ?? ""}`.replace(/\s+/g, " "),
       lens: tags.LensModel ?? tags.Lens ?? "",
       editing: Array.isArray(tags.History)
-        ? (tags.History.filter((item) => item.Action === "produced")[0]
-            .SoftwareAgent ?? "")
+        ? (tags.History.filter((item) =>
+          item.Action === "produced"
+        )[0]
+          .SoftwareAgent ?? "")
         : "",
       license: tags.License ?? "",
     };
     const json = JSON.stringify(data, null, 2);
-    await Deno.writeTextFile(`${CONTENT_DIR}/${photo}.json`, json);
+    await Deno.writeTextFile(`${PHOTOS_DIR}/${photo}.json`, json);
   });
 }
 
 try {
-  Deno.mkdir(CONTENT_DIR, { recursive: true });
-  for await (const cover of expandGlob(`${IMAGES_DIR}/*/wide.jpg`)) {
+  for await (const cover of expandGlob(`${PHOTOS_DIR}/*/wide.jpg`)) {
     const photo = dirname(cover.path).split("/").pop();
     if (!photo) throw new Error("Could not get photo name");
     await extractMetadata(photo);

@@ -6,7 +6,9 @@ cover: london-figaro
 tags: [test]
 ---
 
-Testing build and formatting with this post. The paragraph is intentionally kept longer than seemingly necessary. This is needed to show how the summaries would look like.
+Testing build and formatting with this post. The paragraph is intentionally kept
+longer than seemingly necessary. This is needed to show how the summaries would
+look like.
 
 ## Example formatting
 
@@ -26,11 +28,12 @@ This is a link to another site: [GitHub](https://github.com/)
 
 > This is a nested blockquote.
 >
-> > This is the inner part.
+>> This is the inner part.
 
 ### Footnote
 
-This is a comment with a footnote. [^1] This sentence has another footnote whose definition is at the end of the document. [^2]
+This is a comment with a footnote. [^1] This sentence has another footnote whose
+definition is at the end of the document. [^2]
 
 This is yet another one. [^3]
 
@@ -88,7 +91,9 @@ I have $500, but I need $200 more.
 
 I can still escape the \\$ sign.
 
-This is two dollars sign $$ and I like it $$.
+This is two dollars sign $$ and I like it $$
+
+.
 
 ### Graph
 

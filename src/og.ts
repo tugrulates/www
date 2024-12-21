@@ -1,5 +1,5 @@
 import { ImageResponse } from "@vercel/og";
-import { ImageMetadata } from "astro";
+import type { ImageMetadata } from "astro";
 import { encodeBase64 } from "jsr:@std/encoding";
 import path from "node:path";
 import sharp from "sharp";

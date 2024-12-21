@@ -6,10 +6,10 @@ import { SEO } from "astro-seo";
 import { ClientRouter } from "astro:transitions";
 import Footer from "~/components/Footer.astro";
 import Header from "~/components/Header.astro";
-import { AUTHOR, DIMENSIONS, SITE } from "~/config";
-import { formatDateIso } from "~/date";
+import { AUTHOR, DIMENSIONS, SITE } from "~/config.ts";
+import { formatDateIso } from "~/date.ts";
 import { getFavicon } from "~/image.astro";
-import { getCanonicalChildPath } from "~/url";
+import { getCanonicalChildPath } from "~/url.ts";
 
 interface Props {
   tab: string;

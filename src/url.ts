@@ -1,4 +1,4 @@
-import { SITE } from "~/config";
+import { SITE } from "~/config.ts";
 
 export function getChildPath(url: URL, path: string): string {
   return new URL(`${url}/${path}`).pathname;
