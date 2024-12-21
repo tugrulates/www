@@ -15,9 +15,9 @@
     },
     "build": {
       "dependencies": ["build:files", "build:photos"],
-      "command": "deno task astro build"
+      "command": "astro build"
     },
-    "dev": "DRAFTS=true ASTRO_TELEMETRY_DISABLED=1 deno task astro dev"
+    "dev": "astro dev"
   },
   "imports": {
     "~/": "./src/",
