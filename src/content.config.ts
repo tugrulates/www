@@ -8,7 +8,7 @@ import { defineCollection, reference, z } from "astro:content";
  */
 const pages = defineCollection({
   loader: glob({
-    pattern: "**/*.md",
+    pattern: "**/*.{md,mdx}",
     base: "./src/content/pages",
   }),
   schema: ({ image }) =>
