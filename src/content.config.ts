@@ -67,7 +67,7 @@ const posts = defineCollection({
  * extracted into JSON files, which are the actual collection.
  */
 const photos = defineCollection({
-  loader: glob({ pattern: "*.json", base: "./content/photos" }),
+  loader: glob({ pattern: "**/index.json", base: "./content/photos" }),
   schema: ({ image }) =>
     z.object({
       wide: image(),

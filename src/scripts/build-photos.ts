@@ -55,7 +55,7 @@ async function extractMetadata(photo: string): Promise<void> {
       license: tags.License ?? "",
     };
     const json = JSON.stringify(data, null, 2);
-    await Deno.writeTextFile(`${PHOTOS_DIR}/${photo}.json`, json);
+    await Deno.writeTextFile(`${PHOTOS_DIR}/${photo}/index.json`, json);
   });
 }
 
