@@ -1,0 +1,29 @@
+{
+  "nodeModulesDir": "auto",
+  "tasks": {
+    "astro": "ASTRO_TELEMETRY_DISABLED=1 deno -A npm:astro",
+    "clean": "rm -rf dist .astro .vercel src/content/photos public/files",
+    "fetch:blog": "git submodule update --init --remote src/blog",
+    "fetch:photos": "git submodule update --init --remote src/photos",
+    "build:files": {
+      "dependencies": ["fetch:blog"],
+      "command": "cp -R src/blog/files/* public/files"
+    },
+    "build:photos": {
+      "dependencies": ["fetch:photos"],
+      "command": "deno run -A src/scripts/build-photos.ts"
+    },
+    "build": {
+      "dependencies": ["build:files", "build:photos"],
+      "command": "deno task astro build"
+    },
+    "dev": "DRAFTS=true astro dev --host",
+    "lint": "deno task astro check --minimumFailingSeverity=warning && deno lint"
+  },
+  "imports": { "~/": "./src/" },
+  "compilerOptions": {
+    "lib": ["deno.ns", "dom"],
+    "jsx": "react-jsx",
+    "jsxImportSource": "react"
+  }
+}

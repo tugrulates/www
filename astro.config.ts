@@ -7,7 +7,7 @@ import icon from "astro-icon";
 import robotsTxt from "astro-robots-txt";
 import { defineConfig, envField } from "astro/config";
 import rehypeExternalLinks from "rehype-external-links";
-import { SITE } from "./src/config";
+import { SITE } from "./src/config.ts";
 
 // https://astro.build/config
 export default defineConfig({
@@ -27,21 +27,8 @@ export default defineConfig({
       }),
     },
   },
-  adapter: vercel({
-    webAnalytics: {
-      enabled: true,
-    },
-  }),
-  markdown: {
-    rehypePlugins: [
-      [
-        rehypeExternalLinks,
-        {
-          rel: ["nofollow"],
-        },
-      ],
-    ],
-  },
+  adapter: vercel({ webAnalytics: { enabled: true } }),
+  markdown: { rehypePlugins: [[rehypeExternalLinks, { rel: ["nofollow"] }]] },
   prefetch: true,
   trailingSlash: "never",
   integrations: [
@@ -64,18 +51,8 @@ export default defineConfig({
     }),
     mdx(),
     react(),
-    robotsTxt({
-      policy: [
-        {
-          userAgent: "*",
-          allow: "/",
-          disallow: "/test/",
-        },
-      ],
-    }),
-    sitemap({
-      filter: (page) => page !== `${SITE.url}/test/`,
-    }),
+    robotsTxt({ policy: [{ userAgent: "*", allow: "/", disallow: "/test/" }] }),
+    sitemap({ filter: (page) => page !== `${SITE.url}/test/` }),
     tailwind(),
   ],
 });

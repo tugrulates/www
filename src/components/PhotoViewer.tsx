@@ -1,4 +1,5 @@
 import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
+import type { JSX } from "react";
 import { createRef, useState } from "react";
 
 interface Props {

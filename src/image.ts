@@ -3,12 +3,11 @@ import type { GetImageResult, ImageMetadata } from "astro";
 import { getImage } from "astro:assets";
 import { getEntry } from "astro:content";
 import { RICH_OPENGRAPH_IMAGES } from "astro:env/client";
-import fs from "fs/promises";
 import path from "node:path";
 import sharp from "sharp";
 import type { CoverMeta, CoverType } from "~/components/Cover.astro";
-import { OpenGraphImage } from "~/components/OpenGraphImage";
-import { DIMENSIONS } from "~/config";
+import { OpenGraphImage } from "~/components/OpenGraphImage.tsx";
+import { DIMENSIONS } from "~/config.ts";
 import avatar from "~/images/me.png";
 
 export async function getCoverData(cover: CoverType): Promise<CoverMeta> {
@@ -57,8 +56,8 @@ export async function getOpenGraphImage({
 export async function getSimpleOpenGraphImage(
   image: ImageMetadata,
 ): Promise<ImageResponse> {
-  const imageBuffer = await fs.readFile(path.join("dist", image.src));
-  return new Response(imageBuffer, {
+  const buffer = await Deno.readFile(path.join("dist", image.src));
+  return new Response(buffer, {
     headers: { "Content-Type": "image/jpeg" },
   });
 }
@@ -82,7 +81,9 @@ export async function getRichOpenGraphImage({
       ),
     ]);
   const avatar = `data:image/png;base64,${avatarBuffer.toString("base64")}`;
-  const background = `data:image/${image.format.replace("jpg", "jpeg")};base64,${imageBuffer.toString("base64")}`;
+  const background = `data:image/${
+    image.format.replace("jpg", "jpeg")
+  };base64,${imageBuffer.toString("base64")}`;
   const og = new ImageResponse(
     OpenGraphImage({ avatar, background, title, subtitle, description, cta }),
     {

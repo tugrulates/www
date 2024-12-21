@@ -1,5 +1,6 @@
 import { Field, Label, Switch } from "@headlessui/react";
-import { useEffect, useState, type Dispatch, type SetStateAction } from "react";
+import type { JSX } from "react";
+import { type Dispatch, type SetStateAction, useEffect, useState } from "react";
 
 interface Props {
   lightIcon?: JSX.Element;
