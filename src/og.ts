@@ -1,6 +1,6 @@
+import { encodeBase64 } from "@jsr/std__encoding";
 import { ImageResponse } from "@vercel/og";
 import type { ImageMetadata } from "astro";
-import { encodeBase64 } from "jsr:@std/encoding";
 import path from "node:path";
 import sharp from "sharp";
 import { OpenGraphImage } from "~/components/OpenGraphImage.tsx";

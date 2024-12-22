@@ -3,7 +3,6 @@ import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 import vercel from "@astrojs/vercel";
-import deno from "@deno/vite-plugin";
 import icon from "astro-icon";
 import robotsTxt from "astro-robots-txt";
 import { defineConfig, envField } from "astro/config";
@@ -56,5 +55,4 @@ export default defineConfig({
     sitemap({ filter: (page) => page !== `${SITE.url}/test/` }),
     tailwind(),
   ],
-  vite: { plugins: [deno()] },
 });
