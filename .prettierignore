@@ -1,6 +1,0 @@
-.astro
-.vite
-dist
-node_modules
-package-lock.json
-vercel.json

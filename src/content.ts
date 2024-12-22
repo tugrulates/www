@@ -1,5 +1,4 @@
-import { getCollection, type CollectionEntry } from "astro:content";
-import { DRAFTS } from "astro:env/client";
+import { type CollectionEntry, DRAFTS, getCollection } from "~/site.astro";
 
 export async function getPages(): Promise<CollectionEntry<"pages">[]> {
   return await getCollection("pages");

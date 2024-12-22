@@ -1,10 +1,8 @@
-import { ExifDateTime, exiftool, type Tags } from "exiftool-vendored";
-import fs from "fs/promises";
-import { glob } from "glob";
-import path from "path";
+import { expandGlob } from "jsr:@std/fs";
+import { dirname } from "jsr:@std/path";
+import { ExifDateTime, exiftool, type Tags } from "npm:exiftool-vendored";
 
-const IMAGES_DIR = "src/photos";
-const CONTENT_DIR = "src/content/photos";
+const PHOTOS_DIR = "content/photos";
 
 export interface PhotoTags extends Tags {
   State?: string;
@@ -29,20 +27,19 @@ interface PhotoData {
 }
 
 async function extractMetadata(photo: string): Promise<void> {
-  const cover = `${IMAGES_DIR}/${photo}/wide.jpg`;
+  const cover = `${PHOTOS_DIR}/${photo}/wide.jpg`;
   await exiftool.read<PhotoTags>(cover).then(async (tags) => {
     const data: PhotoData = {
-      wide: `../../photos/${photo}/wide.jpg`,
-      square: `../../photos/${photo}/square.jpg`,
+      wide: `content/photos/${photo}/wide.jpg`,
+      square: `content/photos/${photo}/square.jpg`,
       title: tags.Headline ?? "",
       description: tags.ImageDescription ?? "",
       keywords: Array.isArray(tags.Keywords)
         ? tags.Keywords
         : [tags.Keywords ?? ""],
-      date:
-        (tags.DateTimeOriginal instanceof ExifDateTime
-          ? tags.DateTimeOriginal.toDate().toISOString()
-          : tags.DateTimeOriginal) ?? "",
+      date: (tags.DateTimeOriginal instanceof ExifDateTime
+        ? tags.DateTimeOriginal.toDate().toISOString()
+        : tags.DateTimeOriginal) ?? "",
       location: tags.Location ?? "",
       city: tags.City ?? "",
       state: tags.State ?? "",
@@ -50,42 +47,24 @@ async function extractMetadata(photo: string): Promise<void> {
       camera: `${tags.Make ?? ""} ${tags.Model ?? ""}`.replace(/\s+/g, " "),
       lens: tags.LensModel ?? tags.Lens ?? "",
       editing: Array.isArray(tags.History)
-        ? (tags.History.filter((item) => item.Action === "produced")[0]
-            .SoftwareAgent ?? "")
+        ? (tags.History.filter((item) =>
+          item.Action === "produced"
+        )[0]
+          .SoftwareAgent ?? "")
         : "",
       license: tags.License ?? "",
     };
     const json = JSON.stringify(data, null, 2);
-    await fs.writeFile(`${CONTENT_DIR}/${photo}.json`, json);
+    await Deno.writeTextFile(`${PHOTOS_DIR}/${photo}/index.json`, json);
   });
 }
 
-const covers = glob.sync(`${IMAGES_DIR}/*/wide.jpg`);
-const photos = covers.map((cover) => {
-  const photo = path.dirname(cover).split("/").pop();
-  if (photo == null) {
-    throw new Error("Could not get photo name");
+try {
+  for await (const cover of expandGlob(`${PHOTOS_DIR}/*/wide.jpg`)) {
+    const photo = dirname(cover.path).split("/").pop();
+    if (!photo) throw new Error("Could not get photo name");
+    await extractMetadata(photo);
   }
-  return photo;
-});
-
-await fs
-  .stat(CONTENT_DIR)
-  .catch(async (error) => {
-    if (error.code === "ENOENT") {
-      await fs.mkdir(CONTENT_DIR);
-      return;
-    }
-    throw error;
-  })
-  .then(
-    async () =>
-      await Promise.all(
-        photos.map(async (photo) => {
-          await extractMetadata(photo);
-        }),
-      ),
-  )
-  .then(async () => {
-    await exiftool.end();
-  });
+} finally {
+  await exiftool.end();
+}

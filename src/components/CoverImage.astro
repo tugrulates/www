@@ -1,7 +1,7 @@
 ---
 import { getImage } from "astro:assets";
 import type { CoverMeta } from "~/components/Cover.astro";
-import { DIMENSIONS } from "~/config";
+import { DIMENSIONS } from "~/config.ts";
 
 interface Props {
   cover: CoverMeta;
@@ -11,29 +11,13 @@ const { cover: image, class: className } = Astro.props;
 
 const breakpoints = [
   {
-    min_width: DIMENSIONS.cover_square_size,
-    width: DIMENSIONS.cover_wide_width,
-    height: DIMENSIONS.cover_wide_height,
+    min_width: DIMENSIONS.cover.square.width,
+    ...DIMENSIONS.cover.wide,
     src: image.data.wide,
   },
-  {
-    min_width: 600,
-    width: 600,
-    height: 600,
-    src: image.data.square,
-  },
-  {
-    min_width: 425,
-    width: 425,
-    height: 425,
-    src: image.data.square,
-  },
-  {
-    min_width: 0,
-    width: 320,
-    height: 320,
-    src: image.data.square,
-  },
+  { min_width: 600, width: 600, height: 600, src: image.data.square },
+  { min_width: 425, width: 425, height: 425, src: image.data.square },
+  { min_width: 0, width: 320, height: 320, src: image.data.square },
 ];
 const images = await Promise.all(
   breakpoints.map(async (breakpoint) => {
@@ -57,7 +41,7 @@ const images = await Promise.all(
     images.map(({ breakpoint, images }) => (
       <source
         media={`(min-width: ${breakpoint.min_width}px)`}
-        srcset={`${images[0].src} 1x, ${images[1].src} 2x, ${images[2].src} 3x, ${images[3].src} 4x`}
+        srcset={`${images[0]?.src} 1x, ${images[1]?.src} 2x, ${images[2]?.src} 3x, ${images[3]?.src} 4x`}
       />
     ))
   }
@@ -67,8 +51,8 @@ const images = await Promise.all(
       "h-full w-full max-sm:aspect-square sm:aspect-video",
       className,
     ]}
-    height={DIMENSIONS.cover_wide_height}
+    height={DIMENSIONS.cover.wide.height}
     src={image.data.wide.src}
-    width={DIMENSIONS.cover_wide_width}
+    width={DIMENSIONS.cover.wide.width}
   />
 </picture>

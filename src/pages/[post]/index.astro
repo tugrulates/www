@@ -3,8 +3,8 @@ import { type GetStaticPaths, type InferGetStaticPropsType } from "astro";
 import { render } from "astro:content";
 import Cover, { type CoverType } from "~/components/Cover.astro";
 import License from "~/components/License.astro";
-import { getPages, getPosts } from "~/content";
-import { getCoverData } from "~/image";
+import { getPages, getPosts } from "~/content.ts";
+import { getCoverData } from "~/image.ts";
 import ArticleLayout from "~/layouts/ArticleLayout.astro";
 
 export const getStaticPaths = (async () => {
@@ -40,13 +40,11 @@ const cover = await getCoverData(post.data.cover as CoverType);
 >
   <Cover
     actionAlt="Image details"
-    actionHref={cover.id !== undefined ? `/photography/${cover.id}` : undefined}
+    actionHref={cover.id && `/photography/${cover.id}`}
     actionIcon="heroicons:photo-solid"
     image={cover}
-    next={index >= 0 && index < posts.length - 1
-      ? posts[index + 1].id
-      : undefined}
-    previous={index > 0 ? posts[index - 1].id : undefined}
+    next={posts[index + 1]?.id}
+    previous={posts[index - 1]?.id}
     slot="cover"
   />
   <Content slot="content" />

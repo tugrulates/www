@@ -1,6 +1,11 @@
 ---
 import { Icon } from "astro-icon/components";
 
+interface Props {
+  name: string;
+  href: string;
+  icon: string;
+}
 const { name, href, icon } = Astro.props;
 const external = Boolean(href.startsWith("http"));
 ---
