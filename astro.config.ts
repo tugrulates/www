@@ -13,7 +13,7 @@ import { SITE } from "./src/config.ts";
 // https://astro.build/config
 export default defineConfig({
   site: SITE.url,
-  output: "static",
+  output: "server",
   env: {
     schema: {
       DRAFTS: envField.boolean({
@@ -28,7 +28,7 @@ export default defineConfig({
       }),
     },
   },
-  adapter: vercel(),
+  adapter: vercel({ webAnalytics: { enabled: true } }),
   markdown: { rehypePlugins: [[rehypeExternalLinks, { rel: ["nofollow"] }]] },
   prefetch: true,
   trailingSlash: "never",
