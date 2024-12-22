@@ -1,6 +1,9 @@
 {
   "version": "4",
   "specifiers": {
+    "jsr:@std/fs@*": "1.0.6",
+    "jsr:@std/path@*": "1.0.8",
+    "jsr:@std/path@^1.0.8": "1.0.8",
     "npm:@astro-community/astro-embed-youtube@~0.5.6": "0.5.6_astro@5.1.1__vite@6.0.5__zod@3.24.1",
     "npm:@astrojs/mdx@^4.0.2": "4.0.3_astro@5.1.1__vite@6.0.5__zod@3.24.1_acorn@8.14.0",
     "npm:@astrojs/react@^4.1.1": "4.1.2_@types+react@19.0.2_@types+react-dom@19.0.2__@types+react@19.0.2_react@19.0.0_react-dom@19.0.0__react@19.0.0_vite@6.0.5",
@@ -25,8 +28,9 @@
     "npm:astro-icon@^1.1.4": "1.1.4",
     "npm:astro-robots-txt@1": "1.0.0",
     "npm:astro-seo@~0.8.4": "0.8.4",
-    "npm:astro@*": "5.1.1_vite@6.0.5_zod@3.24.1",
-    "npm:astro@^5.1.1": "5.1.1_vite@6.0.5_zod@3.24.1",
+    "npm:astro@*": "5.1.1_@types+node@22.5.4_vite@6.0.5__@types+node@22.5.4_zod@3.24.1",
+    "npm:astro@5.1.1": "5.1.1_@types+node@22.5.4_vite@6.0.5__@types+node@22.5.4_zod@3.24.1",
+    "npm:astro@^5.1.1": "5.1.1_@types+node@22.5.4_vite@6.0.5__@types+node@22.5.4_zod@3.24.1",
     "npm:exiftool-vendored@*": "29.0.0",
     "npm:globals@^15.13.0": "15.14.0",
     "npm:react-compiler-runtime@^19.0.0-beta-201e55d-20241215": "19.0.0-beta-201e55d-20241215_react@19.0.0",
@@ -36,6 +40,17 @@
     "npm:sharp-ico@~0.1.5": "0.1.5",
     "npm:sharp@~0.33.5": "0.33.5",
     "npm:tailwindcss@^3.4.16": "3.4.17_postcss@8.4.49"
+  },
+  "jsr": {
+    "@std/fs@1.0.6": {
+      "integrity": "42b56e1e41b75583a21d5a37f6a6a27de9f510bcd36c0c85791d685ca0b85fa2",
+      "dependencies": [
+        "jsr:@std/path@^1.0.8"
+      ]
+    },
+    "@std/path@1.0.8": {
+      "integrity": "548fa456bb6a04d3c1a1e7477986b6cffbce95102d0bb447c67c4ee70e0364be"
+    }
   },
   "npm": {
     "@alloc/quick-lru@5.2.0": {
@@ -61,7 +76,7 @@
     "@astro-community/astro-embed-youtube@0.5.6_astro@5.1.1__vite@6.0.5__zod@3.24.1": {
       "integrity": "sha512-/mRfCl/eTBUz0kmjD1psOy0qoDDBorVp0QumUacjFcIkBullYtbeFQ2ZGZ+3N/tA6cR/OIyzr2QA4dQXlY6USg==",
       "dependencies": [
-        "astro",
+        "astro@5.1.1_vite@6.0.5_zod@3.24.1",
         "lite-youtube-embed"
       ]
     },
@@ -135,7 +150,7 @@
         "@astrojs/markdown-remark",
         "@mdx-js/mdx",
         "acorn",
-        "astro",
+        "astro@5.1.1_vite@6.0.5_zod@3.24.1",
         "es-module-lexer",
         "estree-util-visit",
         "hast-util-to-html",
@@ -163,7 +178,7 @@
         "react",
         "react-dom",
         "ultrahtml",
-        "vite"
+        "vite@6.0.5"
       ]
     },
     "@astrojs/rss@4.0.10": {
@@ -184,7 +199,7 @@
     "@astrojs/tailwind@5.1.4_astro@5.1.1__vite@6.0.5__zod@3.24.1_tailwindcss@3.4.17__postcss@8.4.49_postcss@8.4.49": {
       "integrity": "sha512-EJ3uoTZZr0RYwTrVS2HgYN0+VbXvg7h87AtwpD5OzqS3GyMwRmzfOwHfORTxoWGQRrY9k/Fi+Awk60kwpvRL5Q==",
       "dependencies": [
-        "astro",
+        "astro@5.1.1_vite@6.0.5_zod@3.24.1",
         "autoprefixer",
         "postcss",
         "postcss-load-config",
@@ -210,7 +225,7 @@
         "@vercel/analytics",
         "@vercel/edge",
         "@vercel/nft",
-        "astro",
+        "astro@5.1.1_vite@6.0.5_zod@3.24.1",
         "esbuild@0.24.2",
         "fast-glob"
       ]
@@ -1345,7 +1360,7 @@
         "@babel/plugin-transform-react-jsx-source",
         "@types/babel__core",
         "react-refresh",
-        "vite"
+        "vite@6.0.5"
       ]
     },
     "@volar/kit@2.4.11_typescript@5.7.2": {
@@ -1515,6 +1530,71 @@
         "@astrojs/check"
       ]
     },
+    "astro@5.1.1_@types+node@22.5.4_vite@6.0.5__@types+node@22.5.4_zod@3.24.1": {
+      "integrity": "sha512-prpWC2PRs4P3FKQg6gZaU+VNMqbZi5pDvORGB2nrjfRjkrvF6/l4BqhvkJ6YQ0Ohm5rIMVz8ljgaRI77mLHbwg==",
+      "dependencies": [
+        "@astrojs/compiler",
+        "@astrojs/internal-helpers",
+        "@astrojs/markdown-remark",
+        "@astrojs/telemetry",
+        "@oslojs/encoding",
+        "@rollup/pluginutils",
+        "@types/cookie",
+        "acorn",
+        "aria-query",
+        "axobject-query",
+        "boxen",
+        "ci-info",
+        "clsx",
+        "common-ancestor-path",
+        "cookie",
+        "cssesc",
+        "debug",
+        "deterministic-object-hash",
+        "devalue",
+        "diff",
+        "dlv",
+        "dset",
+        "es-module-lexer",
+        "esbuild@0.21.5",
+        "estree-walker@3.0.3",
+        "fast-glob",
+        "flattie",
+        "github-slugger",
+        "html-escaper",
+        "http-cache-semantics",
+        "js-yaml@4.1.0",
+        "kleur@4.1.5",
+        "magic-string",
+        "magicast",
+        "micromatch",
+        "mrmime",
+        "neotraverse",
+        "p-limit@6.2.0",
+        "p-queue",
+        "preferred-pm",
+        "prompts",
+        "rehype",
+        "semver@7.6.3",
+        "sharp",
+        "shiki",
+        "tinyexec",
+        "tsconfck",
+        "ultrahtml",
+        "unist-util-visit",
+        "unstorage",
+        "vfile",
+        "vite@6.0.5_@types+node@22.5.4",
+        "vitefu@1.0.4_vite@6.0.5__@types+node@22.5.4_@types+node@22.5.4",
+        "which-pm",
+        "xxhash-wasm",
+        "yargs-parser",
+        "yocto-spinner",
+        "zod",
+        "zod-to-json-schema",
+        "zod-to-ts"
+      ]
+    },
     "astro@5.1.1_vite@6.0.5_zod@3.24.1": {
       "integrity": "sha512-prpWC2PRs4P3FKQg6gZaU+VNMqbZi5pDvORGB2nrjfRjkrvF6/l4BqhvkJ6YQ0Ohm5rIMVz8ljgaRI77mLHbwg==",
       "dependencies": [
@@ -1569,8 +1649,8 @@
         "unist-util-visit",
         "unstorage",
         "vfile",
-        "vite",
-        "vitefu",
+        "vite@6.0.5",
+        "vitefu@1.0.4_vite@6.0.5",
         "which-pm",
         "xxhash-wasm",
         "yargs-parser",
@@ -4692,10 +4772,26 @@
         "rollup"
       ]
     },
+    "vite@6.0.5_@types+node@22.5.4": {
+      "integrity": "sha512-akD5IAH/ID5imgue2DYhzsEwCi0/4VKY31uhMLEYJwPP4TiUp8pL5PIK+Wo7H8qT8JY9i+pVfPydcFPYD1EL7g==",
+      "dependencies": [
+        "@types/node@22.5.4",
+        "esbuild@0.24.0",
+        "fsevents",
+        "postcss",
+        "rollup"
+      ]
+    },
     "vitefu@1.0.4_vite@6.0.5": {
       "integrity": "sha512-y6zEE3PQf6uu/Mt6DTJ9ih+kyJLr4XcSgHR2zUkM8SWDhuixEJxfJ6CZGMHh1Ec3vPLoEA0IHU5oWzVqw8ulow==",
       "dependencies": [
-        "vite"
+        "vite@6.0.5"
+      ]
+    },
+    "vitefu@1.0.4_vite@6.0.5__@types+node@22.5.4_@types+node@22.5.4": {
+      "integrity": "sha512-y6zEE3PQf6uu/Mt6DTJ9ih+kyJLr4XcSgHR2zUkM8SWDhuixEJxfJ6CZGMHh1Ec3vPLoEA0IHU5oWzVqw8ulow==",
+      "dependencies": [
+        "vite@6.0.5_@types+node@22.5.4"
       ]
     },
     "volar-service-css@0.0.62_@volar+language-service@2.4.11": {
@@ -4997,6 +5093,47 @@
     },
     "zwitch@2.0.4": {
       "integrity": "sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A=="
+    }
+  },
+  "workspace": {
+    "dependencies": [
+      "npm:astro@*"
+    ],
+    "packageJson": {
+      "dependencies": [
+        "npm:@astro-community/astro-embed-youtube@~0.5.6",
+        "npm:@astrojs/mdx@^4.0.2",
+        "npm:@astrojs/react@^4.1.1",
+        "npm:@astrojs/rss@^4.0.10",
+        "npm:@astrojs/sitemap@^3.2.1",
+        "npm:@astrojs/tailwind@^5.1.3",
+        "npm:@astrojs/vercel@^8.0.1",
+        "npm:@fontsource/fira-code@^5.1.0",
+        "npm:@fontsource/fira-sans@^5.1.0",
+        "npm:@headlessui/react@^2.2.0",
+        "npm:@iconify-json/heroicons@^1.2.2",
+        "npm:@iconify-json/simple-icons@^1.2.16",
+        "npm:@jsr/std__encoding@^1.0.6",
+        "npm:@jsr/std__path@^1.0.8",
+        "npm:@tailwindcss/typography@~0.5.15",
+        "npm:@types/react-dom@^19.0.2",
+        "npm:@types/react@^19.0.2",
+        "npm:@vercel/analytics@^1.4.1",
+        "npm:@vercel/og@~0.6.4",
+        "npm:@vercel/speed-insights@^1.1.0",
+        "npm:astro-icon@^1.1.4",
+        "npm:astro-robots-txt@1",
+        "npm:astro-seo@~0.8.4",
+        "npm:astro@^5.1.1",
+        "npm:globals@^15.13.0",
+        "npm:react-compiler-runtime@^19.0.0-beta-201e55d-20241215",
+        "npm:react-dom@19",
+        "npm:react@19",
+        "npm:rehype-external-links@3",
+        "npm:sharp-ico@~0.1.5",
+        "npm:sharp@~0.33.5",
+        "npm:tailwindcss@^3.4.16"
+      ]
     }
   }
 }
