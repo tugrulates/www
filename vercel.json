@@ -1,6 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "installCommand": "npm install -g deno && deno install",
+  "installCommand": "npm install -g deno && npm install",
   "cleanUrls": true,
   "outputDirectory": ".vercel/output/static",
   "headers": [
