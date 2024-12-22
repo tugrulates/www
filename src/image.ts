@@ -1,6 +1,6 @@
 import { encodeBase64 } from "@jsr/std__encoding";
-import { fromFileUrl, join } from "@jsr/std__path";
-import type { ImageResponse } from "@vercel/og";
+import { join } from "@jsr/std__path";
+import { ImageResponse } from "@vercel/og";
 import type { GetImageResult, ImageMetadata } from "astro";
 import sharp from "sharp";
 import type { CoverMeta, CoverType } from "~/components/Cover.astro";
@@ -28,6 +28,23 @@ export async function getCoverData(cover: CoverType): Promise<CoverMeta> {
   throw new Error(`Invalid cover: ${cover}`);
 }
 
+export async function getFavicon(size?: number): Promise<GetImageResult> {
+  return await getImage({
+    src: AVATAR,
+    width: size,
+    height: size,
+    format: "png",
+  });
+}
+
+export interface OpenGraphImageData {
+  title: string;
+  subtitle?: string;
+  description: string;
+  image: ImageMetadata;
+  cta: string;
+}
+
 export async function getOpenGraphImage({
   title,
   subtitle,
@@ -48,24 +65,7 @@ export async function getOpenGraphImage({
   }
 }
 
-export async function getFavicon(size?: number): Promise<GetImageResult> {
-  return await getImage({
-    src: AVATAR,
-    width: size,
-    height: size,
-    format: "png",
-  });
-}
-
-export interface OpenGraphImageData {
-  title: string;
-  subtitle?: string;
-  description: string;
-  image: ImageMetadata;
-  cta: string;
-}
-
-export async function getSimpleOpenGraphImage(
+async function getSimpleOpenGraphImage(
   image: ImageMetadata,
 ): Promise<ImageResponse> {
   const buffer = await Deno.readFile(join("dist", image.src));
@@ -74,13 +74,13 @@ export async function getSimpleOpenGraphImage(
   });
 }
 
-export async function getRichOpenGraphImage(
+async function getRichOpenGraphImage(
   data: OpenGraphImageData,
 ): Promise<ImageResponse> {
   const [avatarBuffer, imageBuffer, regularFontBuffer, boldFontBuffer] =
     await Promise.all([
       Deno.readFile("src/images/me-small.png"),
-      Deno.readFile(fromFileUrl(data.image.src)),
+      Deno.readFile(join("dist", data.image.src)),
       Deno.readFile(
         "node_modules/@fontsource/fira-sans/files/fira-sans-latin-500-normal.woff",
       ),
