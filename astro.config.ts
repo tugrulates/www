@@ -14,7 +14,6 @@ import { SITE } from "./src/config.ts";
 export default defineConfig({
   site: SITE.url,
   output: "static",
-  outDir: ".vercel/static",
   env: {
     schema: {
       DRAFTS: envField.boolean({
@@ -29,7 +28,7 @@ export default defineConfig({
       }),
     },
   },
-  adapter: vercel({ webAnalytics: { enabled: true } }),
+  adapter: vercel(),
   markdown: { rehypePlugins: [[rehypeExternalLinks, { rel: ["nofollow"] }]] },
   prefetch: true,
   trailingSlash: "never",
