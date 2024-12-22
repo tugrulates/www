@@ -1,1 +1,1 @@
-export { collections } from "~/content.astro";
+export { collections } from "~/site.astro";

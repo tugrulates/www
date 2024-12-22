@@ -1,9 +1,8 @@
----
 import type { ImageResponse } from "@vercel/og";
 import type { GetStaticPaths } from "astro";
 import type { CoverType } from "~/components/Cover.astro";
-import { getPages, getPosts } from "~/content.astro";
-import { getCoverData, getOpenGraphImage } from "~/image.astro";
+import { getPages, getPosts } from "~/content.ts";
+import { getCoverData, getOpenGraphImage } from "~/image.ts";
 
 export const getStaticPaths = (async () => {
   const [pages, posts] = await Promise.all([getPages(), getPosts()]);
@@ -27,7 +26,6 @@ interface Props {
     cta: string;
   };
 }
-
 export const GET = async ({
   props: { title, cover, cta, description },
 }: Props): Promise<ImageResponse> => {
@@ -35,4 +33,3 @@ export const GET = async ({
   const image = coverData.data.wide;
   return await getOpenGraphImage({ title, description, image, cta });
 };
----

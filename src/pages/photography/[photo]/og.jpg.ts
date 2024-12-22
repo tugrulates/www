@@ -1,10 +1,8 @@
----
 import type { ImageResponse } from "@vercel/og";
 import type { GetStaticPaths } from "astro";
-import { getPhotos } from "~/content.astro";
+import { getPhotos } from "~/content.ts";
 import { formatDate } from "~/date.ts";
-import { getOpenGraphImage } from "~/image.astro";
-import { type OpenGraphImageData } from "~/og.ts";
+import { getOpenGraphImage, type OpenGraphImageData } from "~/image.ts";
 
 export const getStaticPaths = (async () => {
   const photos = await getPhotos();
@@ -27,4 +25,3 @@ interface Props {
 export const GET = async (props: Props): Promise<ImageResponse> => {
   return await getOpenGraphImage(props.props);
 };
----

@@ -1,9 +1,13 @@
 ---
-import { type CollectionEntry, getCollection } from "astro:content";
-import { DRAFTS } from "astro:env/client";
-
 import { glob } from "astro/loaders";
 import { defineCollection, reference, z } from "astro:content";
+import DEFAULT_COVER from "content/pages/images/rijksmuseum-wide.jpg";
+import AVATAR from "~/images/me.png";
+
+export { getConfiguredImageService, getImage, imageConfig } from "astro:assets";
+export { getCollection, getEntry, type CollectionEntry } from "astro:content";
+export { DRAFTS, RICH_OPENGRAPH_IMAGES } from "astro:env/client";
+export { AVATAR, DEFAULT_COVER };
 
 export const collections = {
   pages: defineCollection({
@@ -69,20 +73,4 @@ export const collections = {
       }),
   }),
 };
-
-export async function getPages(): Promise<CollectionEntry<"pages">[]> {
-  return await getCollection("pages");
-}
-
-export async function getPosts(): Promise<CollectionEntry<"posts">[]> {
-  return (
-    await getCollection("posts", ({ data }) => !data.draft || DRAFTS)
-  ).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
-}
-
-export async function getPhotos(): Promise<CollectionEntry<"photos">[]> {
-  return (await getCollection("photos")).sort(
-    (a, b) => b.data.date.getTime() - a.data.date.getTime()
-  );
-}
 ---

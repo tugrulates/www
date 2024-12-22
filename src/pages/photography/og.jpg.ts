@@ -1,7 +1,6 @@
----
 import type { ImageResponse } from "@vercel/og";
-import { getPhotos } from "~/content.astro";
-import { getOpenGraphImage } from "~/image.astro";
+import { getPhotos } from "~/content.ts";
+import { getOpenGraphImage } from "~/image.ts";
 
 export const GET = async (): Promise<ImageResponse> => {
   const photos = await getPhotos();
@@ -14,4 +13,3 @@ export const GET = async (): Promise<ImageResponse> => {
     cta: "View photos",
   });
 };
----

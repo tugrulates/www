@@ -100,7 +100,7 @@ const {
               download={actionDownload}
               href={actionHref}
             >
-              <CoverButton icon={actionIcon} />
+              {actionIcon && <CoverButton icon={actionIcon} />}
             </a>
           )
         }

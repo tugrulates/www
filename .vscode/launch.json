@@ -2,7 +2,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "command": "deno task astro preview",
+      "command": "deno task dev",
       "name": "Development server",
       "request": "launch",
       "type": "node-terminal"

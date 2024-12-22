@@ -1,8 +1,8 @@
 ---
 import type { CoverType } from "~/components/Cover.astro";
 import Post from "~/components/Post.astro";
-import { getPosts } from "~/content.astro";
-import { getCoverData } from "~/image.astro";
+import { getPosts } from "~/content.ts";
+import { getCoverData } from "~/image.ts";
 import FeedLayout from "~/layouts/FeedLayout.astro";
 
 const posts = await getPosts();

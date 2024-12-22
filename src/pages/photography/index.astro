@@ -1,6 +1,6 @@
 ---
 import Photo from "~/components/Photo.astro";
-import { getPhotos } from "~/content.astro";
+import { getPhotos } from "~/content.ts";
 import FeedLayout from "~/layouts/FeedLayout.astro";
 
 const photos = await getPhotos();

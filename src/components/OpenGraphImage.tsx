@@ -18,7 +18,7 @@ export function OpenGraphImage({
   cta,
   description,
 }: Props): JSX.Element {
-  const cardSize = DIMENSIONS.opengraph_source_height - 200;
+  const cardSize = DIMENSIONS.opengraph.source.height - 200;
   return (
     <div
       tw="relative flex flex-row w-full h-full bg-black justify-center items-center"
@@ -28,8 +28,8 @@ export function OpenGraphImage({
         <img
           alt="Discarded JSX element"
           src={background}
-          width={DIMENSIONS.opengraph_source_width}
-          height={DIMENSIONS.opengraph_source_height}
+          width={DIMENSIONS.opengraph.source.width}
+          height={DIMENSIONS.opengraph.source.height}
           style={{ objectFit: "cover", objectPosition: "center" }}
         />
       </div>

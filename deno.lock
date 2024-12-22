@@ -1,7 +1,6 @@
 {
   "version": "4",
   "specifiers": {
-    "jsr:@std/encoding@*": "1.0.6",
     "jsr:@std/fs@*": "1.0.6",
     "jsr:@std/path@*": "1.0.8",
     "jsr:@std/path@^1.0.8": "1.0.8",
@@ -19,6 +18,7 @@
     "npm:@iconify-json/heroicons@^1.2.2": "1.2.2",
     "npm:@iconify-json/simple-icons@^1.2.16": "1.2.16",
     "npm:@jsr/std__encoding@^1.0.6": "1.0.6",
+    "npm:@jsr/std__path@^1.0.8": "1.0.8",
     "npm:@tailwindcss/typography@~0.5.15": "0.5.15_tailwindcss@3.4.17__postcss@8.4.49",
     "npm:@types/node@*": "22.5.4",
     "npm:@types/react-dom@^19.0.2": "19.0.2_@types+react@19.0.2",
@@ -34,7 +34,7 @@
     "npm:astro@^5.1.1": "5.1.1_@types+node@22.5.4_vite@6.0.5__@types+node@22.5.4_zod@3.24.1",
     "npm:exiftool-vendored@*": "29.0.0",
     "npm:globals@^15.13.0": "15.14.0",
-    "npm:jsr@*": "0.13.2",
+    "npm:mime@^4.0.6": "4.0.6",
     "npm:react-compiler-runtime@^19.0.0-beta-201e55d-20241215": "19.0.0-beta-201e55d-20241215_react@19.0.0",
     "npm:react-dom@19": "19.0.0_react@19.0.0",
     "npm:react@19": "19.0.0",
@@ -44,9 +44,6 @@
     "npm:tailwindcss@^3.4.16": "3.4.17_postcss@8.4.49"
   },
   "jsr": {
-    "@std/encoding@1.0.6": {
-      "integrity": "ca87122c196e8831737d9547acf001766618e78cd8c33920776c7f5885546069"
-    },
     "@std/fs@1.0.6": {
       "integrity": "42b56e1e41b75583a21d5a37f6a6a27de9f510bcd36c0c85791d685ca0b85fa2",
       "dependencies": [
@@ -861,6 +858,9 @@
     },
     "@jsr/std__encoding@1.0.6": {
       "integrity": "sha512-P5q1wD6O7RtZ89PaIDsQb+3NeCK2xlDEVhZT+k3gn9RNEep4StH7r50cRPK4bp2E7MU8kKc24sSsaCpj5v4i3Q=="
+    },
+    "@jsr/std__path@1.0.8": {
+      "integrity": "sha512-eNBGlh/8ZVkMxtFH4bwIzlAeKoHYk5in4wrBZhi20zMdOiuX4QozP4+19mIXBT2lzHDjhuVLyECbhFeR304iDg=="
     },
     "@mapbox/node-pre-gyp@2.0.0-rc.0": {
       "integrity": "sha512-nhSMNprz3WmeRvd8iUs5JqkKr0Ncx46JtPxM3AhXes84XpSJfmIwKeWXRpsr53S7kqPkQfPhzrMFUxSNb23qSA==",
@@ -2896,14 +2896,6 @@
     "jsonc-parser@3.3.1": {
       "integrity": "sha512-HUgH65KyejrUFPvHFPbqOY0rsFip3Bo5wb4ngvdi1EpCYWUQDC5V+Y7mZws+DLkr4M//zQJoanu1SP+87Dv1oQ=="
     },
-    "jsr@0.13.2": {
-      "integrity": "sha512-c4ir0ql2Xgpg9mSOSPKBANS9oTvlV8fSzpesCsHP04VAOJ3pBm7YygY2LVkHC0jz9G36JBGh1oiEZTWO4UyctA==",
-      "dependencies": [
-        "kolorist",
-        "node-stream-zip",
-        "semiver"
-      ]
-    },
     "kleur@3.0.3": {
       "integrity": "sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w=="
     },
@@ -3565,6 +3557,9 @@
     "mime@3.0.0": {
       "integrity": "sha512-jSCU7/VB1loIWBZe14aEYHU/+1UMEHoaO7qxCOVJOw9GgH72VAWppxNcjU+x9a2k3GSIBXNKxXQFqRvvZ7vr3A=="
     },
+    "mime@4.0.6": {
+      "integrity": "sha512-4rGt7rvQHBbaSOF9POGkk1ocRP16Md1x36Xma8sz8h8/vfCUI2OtEIeCqe4Ofes853x4xDoPiFLIT47J5fI/7A=="
+    },
     "mimic-fn@4.0.0": {
       "integrity": "sha512-vqiC06CuhBTUdZH+RYl8sFrL096vA45Ok5ISO6sE/Mr1jRbGH4Csnhi8f3wKVl7x8mO4Au7Ir9D3Oyv1VYMFJw=="
     },
@@ -3676,9 +3671,6 @@
     },
     "node-releases@2.0.19": {
       "integrity": "sha512-xxOWJsBKtzAq7DY0J+DTzuz58K8e7sJbdgwkbMWQe8UYB6ekmsQ45q0M/tJDsGaZmbC+l7n57UV8Hl5tHxO9uw=="
-    },
-    "node-stream-zip@1.15.0": {
-      "integrity": "sha512-LN4fydt9TqhZhThkZIVQnF9cwjU3qmUH9h78Mx/K7d3VvfRqqwthLwJEUOEL0QPZ0XQmNN7be5Ggit5+4dq3Bw=="
     },
     "nopt@8.0.0": {
       "integrity": "sha512-1L/fTJ4UmV/lUxT2Uf006pfZKTvAgCF+chz+0OgBHO8u2Z67pE7AaAUUj7CJy0lXqHmymUvGFt6NE9R3HER0yw==",
@@ -4299,9 +4291,6 @@
     "scheduler@0.25.0": {
       "integrity": "sha512-xFVuu11jh+xcO7JOAGJNOXld8/TcEHK/4CituBUeUb5hqxJLj9YuemAEuvm9gQ/+pgXYfbQuqAkiYu+u7YEsNA=="
     },
-    "semiver@1.1.0": {
-      "integrity": "sha512-QNI2ChmuioGC1/xjyYwyZYADILWyW6AmS1UH6gDj/SFUUUS4MBAWs/7mxnkRPc/F4iHezDP+O8t0dO8WHiEOdg=="
-    },
     "semver@6.3.1": {
       "integrity": "sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA=="
     },
@@ -4631,7 +4620,7 @@
       "dependencies": [
         "consola",
         "defu",
-        "mime",
+        "mime@3.0.0",
         "node-fetch-native",
         "pathe"
       ]
@@ -5137,6 +5126,7 @@
         "npm:@iconify-json/heroicons@^1.2.2",
         "npm:@iconify-json/simple-icons@^1.2.16",
         "npm:@jsr/std__encoding@^1.0.6",
+        "npm:@jsr/std__path@^1.0.8",
         "npm:@tailwindcss/typography@~0.5.15",
         "npm:@types/react-dom@^19.0.2",
         "npm:@types/react@^19.0.2",
@@ -5148,6 +5138,7 @@
         "npm:astro-seo@~0.8.4",
         "npm:astro@^5.1.1",
         "npm:globals@^15.13.0",
+        "npm:mime@^4.0.6",
         "npm:react-compiler-runtime@^19.0.0-beta-201e55d-20241215",
         "npm:react-dom@19",
         "npm:react@19",
