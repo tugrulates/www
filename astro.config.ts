@@ -13,7 +13,8 @@ import { SITE } from "./src/config.ts";
 // https://astro.build/config
 export default defineConfig({
   site: SITE.url,
-  output: "server",
+  output: "static",
+  outDir: ".vercel/static",
   env: {
     schema: {
       DRAFTS: envField.boolean({
