@@ -54,13 +54,7 @@ export const DIMENSIONS = {
     },
   },
   opengraph: {
-    source: {
-      width: 2400,
-      height: 1350,
-    },
-    target: {
-      width: 1200,
-      height: 675,
-    },
+    width: 1200,
+    height: 675,
   },
 };

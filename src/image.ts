@@ -1,15 +1,17 @@
 import { encodeBase64 } from "@jsr/std__encoding";
 import { join } from "@jsr/std__path";
 import { ImageResponse } from "@vercel/og";
-import type { GetImageResult, ImageMetadata } from "astro";
+import type { GetImageResult, ImageMetadata, LocalImageService } from "astro";
 import sharp from "sharp";
 import type { CoverMeta, CoverType } from "~/components/Cover.astro";
 import { OpenGraphImage } from "~/components/OpenGraphImage.tsx";
 import { DIMENSIONS } from "~/config.ts";
 import {
   AVATAR,
+  getConfiguredImageService,
   getEntry,
   getImage,
+  imageConfig,
   RICH_OPENGRAPH_IMAGES,
 } from "~/site.astro";
 
@@ -89,16 +91,19 @@ async function getRichOpenGraphImage(
       ),
     ]);
   const avatar = `data:image/png;base64,${encodeBase64(avatarBuffer)}`;
+  const imageService = await getConfiguredImageService() as LocalImageService;
+  const resized = await imageService.transform(
+    imageBuffer,
+    { src: data.image.src, ...DIMENSIONS.opengraph, format: "jpeg" },
+    imageConfig,
+  );
   const background = `data:image/${
-    data.image.format.replace(
-      "jpg",
-      "jpeg",
-    )
-  };base64,${encodeBase64(imageBuffer)}`;
+    data.image.format.replace("jpg", "jpeg")
+  };base64,${encodeBase64(resized.data)}`;
   const og = new ImageResponse(
     OpenGraphImage({ avatar, background, ...data }),
     {
-      ...DIMENSIONS.opengraph.source,
+      ...DIMENSIONS.opengraph,
       fonts: [
         { name: "Regular", data: regularFontBuffer, style: "normal" },
         { name: "Bold", data: boldFontBuffer, style: "normal" },
@@ -107,10 +112,7 @@ async function getRichOpenGraphImage(
   );
   const png = await og.arrayBuffer();
   const jpeg = await sharp(png)
-    .resize(
-      DIMENSIONS.opengraph.target.width,
-      DIMENSIONS.opengraph.target.height,
-    )
+    .resize(DIMENSIONS.opengraph.width, DIMENSIONS.opengraph.height)
     .jpeg({ quality: 95 })
     .toBuffer();
   return new Response(jpeg, {
