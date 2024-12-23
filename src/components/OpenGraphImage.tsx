@@ -18,7 +18,7 @@ export function OpenGraphImage({
   cta,
   description,
 }: Props): JSX.Element {
-  const cardSize = DIMENSIONS.opengraph.source.height - 200;
+  const cardSize = DIMENSIONS.opengraph.height - 80;
   return (
     <div
       tw="relative flex flex-row w-full h-full bg-black justify-center items-center"
@@ -28,41 +28,39 @@ export function OpenGraphImage({
         <img
           alt="Discarded JSX element"
           src={background}
-          width={DIMENSIONS.opengraph.source.width}
-          height={DIMENSIONS.opengraph.source.height}
+          width={DIMENSIONS.opengraph.width}
+          height={DIMENSIONS.opengraph.height}
           style={{ objectFit: "cover", objectPosition: "center" }}
         />
       </div>
       <div
-        tw="relative flex flex-1 flex-col p-16 items-center justify-between text-5xl text-white"
+        tw="relative flex flex-1 flex-col p-8 items-center justify-between text-2xl text-white"
         style={{ height: cardSize, maxWidth: cardSize }}
       >
         <div
-          tw="absolute inset-0 shadow-lg shadow-stone-900/80 bg-stone-800/90"
+          tw="absolute inset-0 shadow-md shadow-stone-900/80 bg-stone-800/90"
           style={{ borderRadius: "5%" }}
         />
-        <div tw="p-2 rounded-full text-black bg-stone-200 shadow-lg shadow-stone-900/80 flex items-center">
+        <div tw="p-1 rounded-full text-black bg-stone-200 shadow-md shadow-stone-900/80 flex items-center">
           <img
             alt="Discarded JSX element"
             src={avatar}
-            tw={"w-24 h-24 rounded-full border border-black"}
+            tw={"w-12 h-12 rounded-full border border-black"}
           />
-          <span tw="px-8">{SITE.domain}</span>
+          <span tw="px-4">{SITE.domain}</span>
         </div>
         <div tw="flex flex-col items-center">
-          <h1 tw="m-8" style={{ fontFamily: "Bold" }}>
+          <h1 tw="m-4" style={{ fontFamily: "Bold" }}>
             {title}
           </h1>
-          {subtitle !== undefined
-            ? (
-              <h2 tw="m-8">
-                <em>{subtitle}</em>
-              </h2>
-            )
-            : undefined}
+          {subtitle && (
+            <h2 tw="m-4">
+              <em>{subtitle}</em>
+            </h2>
+          )}
         </div>
         <div tw="text-stone-300 text-center">{description}</div>
-        <div tw="px-16 py-8 rounded-2xl bg-indigo-500 shadow-lg shadow-indigo-900/80 flex justify-center">
+        <div tw="px-8 py-4 rounded-2xl bg-indigo-500 shadow-md shadow-indigo-900/80 flex justify-center">
           {cta}
         </div>
       </div>
