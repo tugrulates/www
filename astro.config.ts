@@ -2,7 +2,7 @@ import mdx from "@astrojs/mdx";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
-import vercel from "@astrojs/vercel";
+import deno from "@deno/astro-adapter";
 import icon from "astro-icon";
 import robotsTxt from "astro-robots-txt";
 import { defineConfig, envField } from "astro/config";
@@ -27,7 +27,7 @@ export default defineConfig({
       }),
     },
   },
-  adapter: vercel(),
+  adapter: deno(),
   markdown: { rehypePlugins: [[rehypeExternalLinks, { rel: ["nofollow"] }]] },
   prefetch: true,
   trailingSlash: "never",

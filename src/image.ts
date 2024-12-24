@@ -54,6 +54,7 @@ export async function getOpenGraphImage({
   image,
   cta,
 }: OpenGraphImageData): Promise<ImageResponse> {
+  return new Response("Not found", { status: 404 });
   if (RICH_OPENGRAPH_IMAGES) {
     return await getRichOpenGraphImage({
       title,
@@ -70,7 +71,11 @@ export async function getOpenGraphImage({
 async function getSimpleOpenGraphImage(
   image: ImageMetadata,
 ): Promise<ImageResponse> {
-  const buffer = await Deno.readFile(join("dist", image.src));
+  const buffer = await Deno.readFile(
+    image.src.startsWith("/@fs")
+      ? image.src.replace(/^\/@fs/, "").replace(/\?[^?]+$/, "")
+      : join("dist/client", image.src),
+  );
   return new Response(buffer, {
     headers: { "Content-Type": "image/jpeg" },
   });
