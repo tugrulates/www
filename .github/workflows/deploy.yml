@@ -34,7 +34,13 @@ jobs:
         uses: denoland/deployctl@v1
         with:
           project: "trl"
-          entrypoint: "server/entry.mjs"
           root: "dist"
+          entrypoint: "server/entry.mjs"
 
+      - name: Deploy redirect
+        uses: denoland/deployctl@v1
+        with:
+          project: "trl-redirect"
+          root: "src"
+          entrypoint: "scripts/serve-redirect.ts"
 
