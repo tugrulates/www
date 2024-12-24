@@ -19,13 +19,6 @@ jobs:
       - name: Clone repository
         uses: actions/checkout@v4
 
-      - name: Deploy redirect
-        uses: denoland/deployctl@v1
-        with:
-          project: "trl-redirect"
-          root: "src"
-          entrypoint: "scripts/serve-redirect.ts"
-
       - name: Install Deno
         uses: denoland/setup-deno@v2
         with:
@@ -43,4 +36,11 @@ jobs:
           project: "trl"
           root: "dist"
           entrypoint: "server/entry.mjs"
+
+      - name: Deploy redirect
+        uses: denoland/deployctl@v1
+        with:
+          project: "trl-redirect"
+          root: "src"
+          entrypoint: "scripts/serve-redirect.ts"
 
