@@ -17,7 +17,8 @@
       "dependencies": ["build:files", "build:photos"],
       "command": "astro build"
     },
-    "dev": "astro dev"
+    "dev": "astro dev",
+    "deploy": "~/.deno/bin/deployctl deploy --project=tugrulates-www jsr:@std/http/file-server"
   },
   "imports": {
     "~/": "./src/",
