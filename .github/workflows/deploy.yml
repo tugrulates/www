@@ -41,7 +41,7 @@ jobs:
         uses: denoland/deployctl@v1
         with:
           project: "trl-redirect"
-          entrypoint: "redirect.ts"
-          root: "scripts"
+          entrypoint: "scripts/redirect.ts"
+          root: "src"
 
 
