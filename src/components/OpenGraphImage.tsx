@@ -1,8 +1,9 @@
 import type { JSX } from "react";
-import { DIMENSIONS, SITE } from "~/config.ts";
+import { DIMENSIONS } from "~/config.ts";
 
 interface Props {
   avatar: string;
+  url: URL;
   background: string;
   title: string;
   subtitle?: string;
@@ -12,6 +13,7 @@ interface Props {
 
 export function OpenGraphImage({
   avatar,
+  url,
   background,
   title,
   subtitle,
@@ -47,7 +49,7 @@ export function OpenGraphImage({
             src={avatar}
             tw={"w-12 h-12 rounded-full border border-black"}
           />
-          <span tw="px-4">{SITE.domain}</span>
+          <span tw="px-4">{url.host}</span>
         </div>
         <div tw="flex flex-col items-center">
           <h1 tw="m-4" style={{ fontFamily: "Bold" }}>

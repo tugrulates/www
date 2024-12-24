@@ -1,9 +1,8 @@
-import { ImageResponse } from "@vercel/og";
+import type { GetImageResult } from "astro";
 import type { CoverMeta, CoverType } from "~/components/Cover.astro";
 import { AVATAR, getEntry, getImage } from "~/site.astro";
-import type { GetImageResult } from "astro";
 
-export async function getCoverData(cover: CoverType): Promise<CoverMeta> {
+export async function getCover(cover: CoverType): Promise<CoverMeta> {
   if ("collection" in cover && cover.collection === "photos") {
     const entry = await getEntry("photos", cover.id);
     if (!entry) throw new Error(`Photo not found: ${cover.id}`);
@@ -18,6 +17,11 @@ export async function getCoverData(cover: CoverType): Promise<CoverMeta> {
   throw new Error(`Invalid cover: ${cover}`);
 }
 
+export async function getDefaultCover(): Promise<CoverMeta> {
+  const about = await getEntry("pages", "about");
+  return await getCover(about?.data.cover);
+}
+
 export async function getFavicon(size?: number): Promise<GetImageResult> {
   return await getImage({
     src: AVATAR,
@@ -25,19 +29,4 @@ export async function getFavicon(size?: number): Promise<GetImageResult> {
     height: size,
     format: "png",
   });
-}
-
-export interface OpenGraphImageData {
-  title: string;
-  subtitle?: string;
-  description: string;
-  image: ImageData;
-  cta: string;
-}
-
-/**
- * @todo Fix with SSR.
- */
-export function getOpenGraphImage(_: OpenGraphImageData): ImageResponse {
-  return new Response("Not found", { status: 404 });
 }

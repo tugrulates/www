@@ -8,7 +8,7 @@ import Header from "~/components/Header.astro";
 import { AUTHOR, DIMENSIONS, SITE } from "~/config.ts";
 import { formatDateIso } from "~/date.ts";
 import { getFavicon } from "~/image.ts";
-import { getCanonicalChildPath } from "~/url.ts";
+import { getUrl } from "~/url";
 
 interface Props {
   tab: string;
@@ -30,7 +30,8 @@ const {
   class: className,
 } = Astro.props;
 
-const ogImage = getCanonicalChildPath(Astro.url, "og.jpg");
+const ogImage = getUrl(Astro.url, "og.jpg");
+ogImage.searchParams.set("path", Astro.url.pathname.replace(/^\//, ""));
 const appleTouchIcon = await getFavicon(180);
 const favicon = await getFavicon(180);
 ---
@@ -56,7 +57,7 @@ const favicon = await getFavicon(180);
               optional: {
                 description,
                 locale: "en",
-                siteName: SITE.domain,
+                siteName: Astro.url.host,
               },
               article: {
                 publishedTime: formatDateIso(date) ?? "",
