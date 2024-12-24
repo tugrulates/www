@@ -1,19 +1,7 @@
-import { encodeBase64 } from "@jsr/std__encoding";
-import { join } from "@jsr/std__path";
 import { ImageResponse } from "@vercel/og";
-import type { GetImageResult, ImageMetadata, LocalImageService } from "astro";
-import sharp from "sharp";
 import type { CoverMeta, CoverType } from "~/components/Cover.astro";
-import { OpenGraphImage } from "~/components/OpenGraphImage.tsx";
-import { DIMENSIONS } from "~/config.ts";
-import {
-  AVATAR,
-  getConfiguredImageService,
-  getEntry,
-  getImage,
-  imageConfig,
-  RICH_OPENGRAPH_IMAGES,
-} from "~/site.astro";
+import { AVATAR, getEntry, getImage } from "~/site.astro";
+import type { GetImageResult } from "astro";
 
 export async function getCoverData(cover: CoverType): Promise<CoverMeta> {
   if ("collection" in cover && cover.collection === "photos") {
@@ -43,84 +31,13 @@ export interface OpenGraphImageData {
   title: string;
   subtitle?: string;
   description: string;
-  image: ImageMetadata;
+  image: ImageData;
   cta: string;
 }
 
-export async function getOpenGraphImage({
-  title,
-  subtitle,
-  description,
-  image,
-  cta,
-}: OpenGraphImageData): Promise<ImageResponse> {
+/**
+ * @todo Fix with SSR.
+ */
+export function getOpenGraphImage(_: OpenGraphImageData): ImageResponse {
   return new Response("Not found", { status: 404 });
-  if (RICH_OPENGRAPH_IMAGES) {
-    return await getRichOpenGraphImage({
-      title,
-      subtitle,
-      description,
-      image,
-      cta,
-    });
-  } else {
-    return await getSimpleOpenGraphImage(image);
-  }
-}
-
-async function getSimpleOpenGraphImage(
-  image: ImageMetadata,
-): Promise<ImageResponse> {
-  const buffer = await Deno.readFile(
-    image.src.startsWith("/@fs")
-      ? image.src.replace(/^\/@fs/, "").replace(/\?[^?]+$/, "")
-      : join("dist/client", image.src),
-  );
-  return new Response(buffer, {
-    headers: { "Content-Type": "image/jpeg" },
-  });
-}
-
-async function getRichOpenGraphImage(
-  data: OpenGraphImageData,
-): Promise<ImageResponse> {
-  const [avatarBuffer, imageBuffer, regularFontBuffer, boldFontBuffer] =
-    await Promise.all([
-      Deno.readFile("src/images/me-small.png"),
-      Deno.readFile(join("dist", data.image.src)),
-      Deno.readFile(
-        "node_modules/@fontsource/fira-sans/files/fira-sans-latin-500-normal.woff",
-      ),
-      Deno.readFile(
-        "node_modules/@fontsource/fira-sans/files/fira-sans-latin-900-normal.woff",
-      ),
-    ]);
-  const avatar = `data:image/png;base64,${encodeBase64(avatarBuffer)}`;
-  const imageService = await getConfiguredImageService() as LocalImageService;
-  const resized = await imageService.transform(
-    imageBuffer,
-    { src: data.image.src, ...DIMENSIONS.opengraph, format: "jpeg" },
-    imageConfig,
-  );
-  const background = `data:image/${
-    data.image.format.replace("jpg", "jpeg")
-  };base64,${encodeBase64(resized.data)}`;
-  const og = new ImageResponse(
-    OpenGraphImage({ avatar, background, ...data }),
-    {
-      ...DIMENSIONS.opengraph,
-      fonts: [
-        { name: "Regular", data: regularFontBuffer, style: "normal" },
-        { name: "Bold", data: boldFontBuffer, style: "normal" },
-      ],
-    },
-  );
-  const png = await og.arrayBuffer();
-  const jpeg = await sharp(png)
-    .resize(DIMENSIONS.opengraph.width, DIMENSIONS.opengraph.height)
-    .jpeg({ quality: 95 })
-    .toBuffer();
-  return new Response(jpeg, {
-    headers: { "Content-Type": "image/jpeg" },
-  });
 }
