@@ -24,7 +24,7 @@ jobs:
         with:
           project: "trl-redirect"
           entrypoint: "scripts/redirect.ts"
-          root: "src"
+          root: "../src"
 
       - name: Install Deno
         uses: denoland/setup-deno@v2
