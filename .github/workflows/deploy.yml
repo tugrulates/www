@@ -1,9 +1,10 @@
 name: Deploy
 on:
+  workflow_dispatch:
   push:
     branches: main
   pull_request:
-    branches: deps/deno-deploy
+    branches: main
 
 jobs:
   deploy:
