@@ -1,8 +1,5 @@
 name: Deploy
-on:
-  push:
-    branches:
-      - deps/deno-deploy
+on: [push]
 
 jobs:
   deploy:
