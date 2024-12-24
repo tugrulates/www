@@ -18,7 +18,7 @@
       "command": "astro build"
     },
     "dev": "astro dev",
-    "deploy": "~/.deno/bin/deployctl deploy --project=tugrulates-www jsr:@std/http/file-server"
+    "deploy": "~/.deno/bin/deployctl deploy --project=tugrul jsr:@std/http/file-server"
   },
   "imports": {
     "~/": "./src/",
