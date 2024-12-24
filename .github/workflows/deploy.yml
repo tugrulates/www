@@ -23,8 +23,9 @@ jobs:
         uses: denoland/deployctl@v1
         with:
           project: "trl-redirect"
-          entrypoint: "scripts/redirect.ts"
-          root: "../src"
+          root: "src"
+          entrypoint: "scripts/serve-redirect.ts"
+          import-map: "../deno.json"
 
       - name: Install Deno
         uses: denoland/setup-deno@v2
@@ -41,6 +42,6 @@ jobs:
         uses: denoland/deployctl@v1
         with:
           project: "trl"
-          entrypoint: "server/entry.mjs"
           root: "dist"
+          entrypoint: "server/entry.mjs"
 
