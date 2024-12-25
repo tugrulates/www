@@ -1,6 +1,6 @@
 import { AUTHOR } from "~/config.ts";
 import { getPhotos } from "~/content.ts";
-import { getOpenGraphImage } from "~/node.ts";
+import { getOpenGraphImage } from "~/image.ts";
 
 export const prerender = false;
 

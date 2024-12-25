@@ -1,6 +1,5 @@
 import { SITE } from "~/config.ts";
-import { getCover } from "~/image.ts";
-import { getOpenGraphImage } from "~/node.ts";
+import { getCover, getOpenGraphImage } from "~/image.ts";
 import { getEntry } from "~/site.astro";
 
 export const prerender = false;
