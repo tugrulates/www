@@ -7,12 +7,19 @@ import icon from "astro-icon";
 import robotsTxt from "astro-robots-txt";
 import { defineConfig, envField } from "astro/config";
 import rehypeExternalLinks from "rehype-external-links";
-import { SITE, SSR_FILES } from "./src/config.ts";
+import { SITE } from "./src/config.ts";
+
+const ENVIRONMENT = Deno.env.get("VERCEL_ENVIRONMENT");
+const HOST = Deno.env.get(
+  ENVIRONMENT === "production"
+    ? "VERCEL_PROJECT_PRODUCTION_URL"
+    : "VERCEL_BRANCH_URL",
+);
 
 // https://astro.build/config
 export default defineConfig({
   output: "static",
-  site: SITE.url.href,
+  site: HOST ? `https://${HOST}` : SITE.url.href,
   env: {
     schema: {
       DRAFTS: envField.boolean({
@@ -22,10 +29,7 @@ export default defineConfig({
       }),
     },
   },
-  adapter: vercel({
-    isr: true,
-    includeFiles: SSR_FILES,
-  }),
+  adapter: vercel({ isr: true }),
   markdown: { rehypePlugins: [[rehypeExternalLinks, { rel: ["nofollow"] }]] },
   prefetch: true,
   trailingSlash: "never",

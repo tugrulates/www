@@ -1,13 +1,15 @@
+import { APIContext } from "astro";
 import { AUTHOR } from "~/config.ts";
 import { getPhotos } from "~/content.ts";
 import { getOpenGraphImage } from "~/image.ts";
 
 export const prerender = false;
 
-export async function GET(): Promise<Response> {
+export async function GET({ url }: APIContext): Promise<Response> {
   const photos = await getPhotos();
   return await getOpenGraphImage(
     {
+      site: new URL(url.origin),
       image: photos[0].data.wide,
       title: "Photography",
       subtitle: `by ${AUTHOR.name}`,

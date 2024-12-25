@@ -1,12 +1,9 @@
-import { join } from "@jsr/std__path";
 import type { ImageMetadata } from "astro";
-import { readFile } from "node:fs/promises";
-import process from "node:process";
 import satori from "satori";
 import sharp from "sharp";
 import type { CoverMeta, CoverType } from "~/components/Cover.astro";
 import { OpenGraphImage } from "~/components/OpenGraphImage.tsx";
-import { DIMENSIONS, SITE } from "~/config.ts";
+import { DIMENSIONS } from "~/config.ts";
 import { AVATAR, getEntry } from "~/site.astro";
 import { getChildUrl } from "~/url.ts";
 
@@ -31,22 +28,24 @@ export async function getCover(cover: CoverType): Promise<CoverMeta> {
  * This function runs on Node.js.
  */
 export async function getOpenGraphImage(data: {
+  site: URL;
   title: string;
   subtitle?: string;
   description: string;
   image: ImageMetadata;
   cta: string;
 }): Promise<Response> {
-  const background = getChildUrl(SITE.url, data.image.src);
-  const avatar = getChildUrl(SITE.url, AVATAR.src);
+  const background = getChildUrl(data.site, data.image.src);
+  const avatar = getChildUrl(data.site, AVATAR.src);
 
-  const [regular, bold] = await Promise.all([
-    readFile(join(process.cwd(), "src/fonts/FiraSans-Regular.ttf")),
-    readFile(join(process.cwd(), "src/fonts/FiraSans-Bold.ttf")),
-  ]);
+  const [regular, bold] = await Promise.all(
+    ["/fonts/FiraSans-Regular.ttf", "/fonts/FiraSans-Bold.ttf"].map(
+      async (f) => await (await fetch(getChildUrl(data.site, f))).arrayBuffer(),
+    ),
+  );
 
   const svg = await satori(
-    OpenGraphImage({ url: SITE.url, avatar, background, ...data }),
+    OpenGraphImage({ avatar, background, ...data }),
     {
       ...DIMENSIONS.opengraph,
       fonts: [
@@ -55,6 +54,7 @@ export async function getOpenGraphImage(data: {
       ],
     },
   );
+
   const jpeg = await sharp(new TextEncoder().encode(svg))
     .resize(DIMENSIONS.opengraph.width, DIMENSIONS.opengraph.height)
     .jpeg({ quality: 95 })

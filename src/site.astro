@@ -1,19 +1,15 @@
 ---
-import { join } from "@jsr/std__path";
 import { glob } from "astro/loaders";
 import { defineCollection, reference, z } from "astro:content";
 import DEFAULT_COVER from "content/pages/images/rijksmuseum-wide.jpg";
 import AVATAR from "~/images/me.png";
-import type { CoverMeta as CoverMetadata } from "./components/Cover.astro";
-import { SITE } from "./config";
-import { getChildUrl } from "./url";
 
 export { getConfiguredImageService, getImage, imageConfig } from "astro:assets";
 export { getCollection, getEntry, type CollectionEntry } from "astro:content";
 export { DRAFTS } from "astro:env/client";
 export { AVATAR, DEFAULT_COVER };
 
-export const NOT_FOUND = new Response("Not found", { status: 404 });
+export const NOT_FOUND = new Response(null, { status: 404 });
 
 export const collections = {
   pages: defineCollection({
@@ -79,23 +75,4 @@ export const collections = {
       }),
   }),
 };
-
-export interface Metadata {
-  data: {
-    title: string;
-    subtitle?: string;
-    description?: string;
-    date?: Date;
-    keywords?: string[];
-  };
-  collection?: string;
-  cover?: CoverMetadata;
-}
-
-export async function getMetadata(path: string): Promise<Metadata | null> {
-  const url = getChildUrl(SITE.url, join(path, "metadata.json"));
-  const response = await fetch(url);
-  if (!response.ok) return null;
-  return (await response.json()) as Metadata;
-}
 ---

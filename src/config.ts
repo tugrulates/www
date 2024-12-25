@@ -1,9 +1,7 @@
-const VERCEL_URL = Deno.env.get("VERCEL_PROJECT_PRODUCTION_URL");
-
 export const SITE = {
   title: "Tugrul Ates",
   description: "Personal website.",
-  url: new URL(`https://${VERCEL_URL ?? "www.tugrulates.com"}`),
+  url: new URL("https://www.tugrulates.com"),
 } as const;
 
 export const AUTHOR = {
@@ -58,8 +56,3 @@ export const DIMENSIONS = {
     height: 675,
   },
 } as const;
-
-export const SSR_FILES = [
-  "src/fonts/FiraSans-Regular.ttf",
-  "src/fonts/FiraSans-Bold.ttf",
-];

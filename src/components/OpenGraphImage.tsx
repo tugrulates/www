@@ -2,7 +2,7 @@ import { DIMENSIONS } from "~/config.ts";
 
 interface Props {
   avatar: URL;
-  url: URL;
+  site: URL;
   background: URL;
   title: string;
   cta: string;
@@ -12,7 +12,7 @@ interface Props {
 
 export function OpenGraphImage({
   avatar,
-  url,
+  site,
   background,
   title,
   cta,
@@ -50,7 +50,7 @@ export function OpenGraphImage({
             height={48}
             tw={"rounded-full border border-black"}
           />
-          <span tw="px-4">{url.host}</span>
+          <span tw="px-4">{site.host}</span>
         </div>
         <div tw="flex flex-col items-center">
           <h1 tw="m-4" style={{ fontFamily: "Bold" }}>
