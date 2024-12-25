@@ -2,7 +2,7 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "astro",
   "installCommand": "npm install -g deno && deno install",
-  "buildCommand": "deno task build && deno run -A src/scripts/vercel-hack.ts && cat vercel.json",
+  "buildCommand": "deno task build",
   "functions": { "src/pages/og.jpg.ts": { "runtime": "vercel-deno@3.1.0" } },
   "cleanUrls": true,
   "headers": [
