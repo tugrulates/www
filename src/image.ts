@@ -1,4 +1,5 @@
 import type { ImageMetadata } from "astro";
+import process from "node:process";
 import satori from "satori";
 import sharp from "sharp";
 import type { CoverMeta, CoverType } from "~/components/Cover.astro";
@@ -44,7 +45,14 @@ export async function getOpenGraphImage(data: {
   );
   const [regular, bold] = await Promise.all(
     ["fonts/FiraSans-Regular.ttf", "fonts/FiraSans-Bold.ttf"].map(
-      async (f) => await (await fetch(getChildUrl(data.site, f))).arrayBuffer(),
+      async (f) =>
+        await (await fetch(getChildUrl(data.site, f), {
+          Headers: {
+            "x-vercel-protection-bypass":
+              process.env.VERCEL_AUTOMATION_BYPASS_SECRET,
+            "x-vercel-set-bypass-cookie": true,
+          },
+        })).arrayBuffer(),
     ),
   );
 
