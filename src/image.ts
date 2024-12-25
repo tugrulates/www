@@ -1,6 +1,5 @@
-import { encodeBase64 } from "@jsr/std__encoding";
 import { join } from "@jsr/std__path";
-import type { ImageMetadata, LocalImageService } from "astro";
+import type { ImageMetadata } from "astro";
 import { readFile } from "node:fs/promises";
 import process from "node:process";
 import satori from "satori";
@@ -8,12 +7,7 @@ import sharp from "sharp";
 import type { CoverMeta, CoverType } from "~/components/Cover.astro";
 import { OpenGraphImage } from "~/components/OpenGraphImage.tsx";
 import { DIMENSIONS, SITE } from "~/config.ts";
-import {
-  getConfiguredImageService,
-  getEntry,
-  imageConfig,
-  NOT_FOUND,
-} from "~/site.astro";
+import { AVATAR, getEntry } from "~/site.astro";
 import { getChildUrl } from "~/url.ts";
 
 export async function getCover(cover: CoverType): Promise<CoverMeta> {
@@ -54,24 +48,14 @@ export async function getOpenGraphImage(data: {
   image: ImageMetadata;
   cta: string;
 }): Promise<Response> {
-  const [imageBuffer, avatarBuffer, regularFontBuffer, boldFontBuffer] =
-    await Promise.all([
-      getImageBuffer(data.image.src),
-      readFile(join(process.cwd(), "src/images/me-small.png")),
-      readFile(join(process.cwd(), "src/fonts/FiraSans-Regular.ttf")),
-      readFile(join(process.cwd(), "src/fonts/FiraSans-Bold.ttf")),
-    ]);
-  if (!imageBuffer) return NOT_FOUND;
+  const background = getChildUrl(SITE.url, data.image.src);
+  const avatar = getChildUrl(SITE.url, AVATAR.src);
 
-  const imageService = await getConfiguredImageService() as LocalImageService;
-  const resized = await imageService.transform(
-    imageBuffer,
-    { src: data.image.src, ...DIMENSIONS.opengraph, format: "jpeg" },
-    imageConfig,
-  );
+  const [regularFontBuffer, boldFontBuffer] = await Promise.all([
+    readFile(join(process.cwd(), "src/fonts/FiraSans-Regular.ttf")),
+    readFile(join(process.cwd(), "src/fonts/FiraSans-Bold.ttf")),
+  ]);
 
-  const avatar = `data:image/png;base64,${encodeBase64(avatarBuffer)}`;
-  const background = `data:image/jpeg;base64,${encodeBase64(resized.data)}`;
   const svg = await satori(
     OpenGraphImage({ url: SITE.url, avatar, background, ...data }),
     {
