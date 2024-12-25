@@ -1,27 +1,27 @@
-import type { ImageResponse } from "@vercel/og";
-import type { GetStaticPaths } from "astro";
+import type { InferGetStaticPropsType } from "astro";
+import { SITE } from "~/config.ts";
 import { getPhotos } from "~/content.ts";
 import { formatDate } from "~/date.ts";
-import { getOpenGraphImage, type OpenGraphImageData } from "~/image.ts";
+import { getOpenGraphImage } from "~/image.ts";
 
-export const getStaticPaths = (async () => {
+export async function getStaticPaths() {
   const photos = await getPhotos();
   return photos.map((photo) => ({
     params: { photo: photo.id },
     props: {
+      url: SITE.url,
       title: photo.data.title,
       description: `${formatDate(photo.data.date)} — ${photo.data.location}`,
       image: photo.data.wide,
       cta: "View photo",
     },
   }));
-}) satisfies GetStaticPaths;
-
-interface Props {
-  params: { photo: string };
-  props: OpenGraphImageData;
 }
 
-export const GET = async (props: Props): Promise<ImageResponse> => {
-  return await getOpenGraphImage(props.props);
-};
+interface Input {
+  props: InferGetStaticPropsType<typeof getStaticPaths>;
+}
+
+export async function GET({ props }: Input): Promise<Response> {
+  return await getOpenGraphImage(props);
+}

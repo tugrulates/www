@@ -1,13 +1,13 @@
 ---
-import { type GetStaticPaths, type InferGetStaticPropsType } from "astro";
+import { type InferGetStaticPropsType } from "astro";
 import { render } from "astro:content";
 import Cover, { type CoverType } from "~/components/Cover.astro";
 import License from "~/components/License.astro";
 import { getPages, getPosts } from "~/content.ts";
-import { getCoverData } from "~/image.ts";
+import { getCover } from "~/image.ts";
 import ArticleLayout from "~/layouts/ArticleLayout.astro";
 
-export const getStaticPaths = (async () => {
+export async function getStaticPaths() {
   const pages = await getPages();
   const posts = await getPosts();
   return [
@@ -20,7 +20,7 @@ export const getStaticPaths = (async () => {
       props: { post, license: true },
     })),
   ];
-}) satisfies GetStaticPaths;
+}
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
@@ -28,7 +28,7 @@ const { post, license }: Props = Astro.props;
 const posts = await getPosts();
 const index = posts.findIndex((other) => other.id === post.id);
 const { Content } = await render(post);
-const cover = await getCoverData(post.data.cover as CoverType);
+const cover = await getCover(post.data.cover as CoverType);
 ---
 
 <ArticleLayout

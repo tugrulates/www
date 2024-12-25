@@ -1,10 +1,9 @@
-import type { APIRoute } from "astro";
 import { SITE } from "~/config.ts";
-import { getFavicon } from "~/image.ts";
+import { getFavicon } from "~/pages/favicon.ico.ts";
 
 const faviconPngSizes = [192, 512];
 
-export const GET: APIRoute = async () => {
+export async function GET(): Promise<Response> {
   const icons = await Promise.all(
     faviconPngSizes.map(async (size) => {
       const image = await getFavicon(size);
@@ -26,4 +25,4 @@ export const GET: APIRoute = async () => {
   };
 
   return new Response(JSON.stringify(manifest));
-};
+}

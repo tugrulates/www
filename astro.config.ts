@@ -11,16 +11,11 @@ import { SITE } from "./src/config.ts";
 
 // https://astro.build/config
 export default defineConfig({
-  site: SITE.url,
   output: "static",
+  site: `https://${Deno.env.get("VERCEL_URL") ?? SITE.url.host}`,
   env: {
     schema: {
       DRAFTS: envField.boolean({
-        context: "client",
-        access: "public",
-        default: false,
-      }),
-      RICH_OPENGRAPH_IMAGES: envField.boolean({
         context: "client",
         access: "public",
         default: false,

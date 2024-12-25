@@ -1,5 +1,5 @@
 ---
-import { type GetStaticPaths, type InferGetStaticPropsType } from "astro";
+import { type InferGetStaticPropsType } from "astro";
 import Cover from "~/components/Cover.astro";
 import License from "~/components/License.astro";
 import { AUTHOR, SITE } from "~/config.ts";
@@ -7,13 +7,13 @@ import { getPhotos } from "~/content.ts";
 import { formatDate } from "~/date.ts";
 import ArticleLayout from "~/layouts/ArticleLayout.astro";
 
-export const getStaticPaths = (async () => {
+export async function getStaticPaths() {
   const photos = await getPhotos();
   return photos.map((photo) => ({
     params: { photo: photo.id },
     props: { photo },
   }));
-}) satisfies GetStaticPaths;
+}
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const { photo } = Astro.props;
@@ -116,7 +116,7 @@ const index = photos.findIndex((other) => other.id === photo.id);
     and make commercial use of it, provided that you attribute the work to {
       AUTHOR.name
     } and this website
-    <a href={SITE.url}>{SITE.domain}</a>. For any reuse or distribution, you
+    <a href={SITE.url}>{SITE.url.host}</a>. For any reuse or distribution, you
     must make clear to others the license terms of this work.
   </License>
 </ArticleLayout>
