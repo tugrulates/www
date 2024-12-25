@@ -1,10 +1,9 @@
 import { encodeBase64 } from "@jsr/std__encoding";
 import { join } from "@jsr/std__path";
+import { ImageResponse } from "@vercel/og";
 import type { ImageMetadata, LocalImageService } from "astro";
 import { readFile } from "node:fs/promises";
 import process from "node:process";
-import satori from "satori";
-import sharp from "sharp";
 import type { CoverMeta, CoverType } from "~/components/Cover.astro";
 import { OpenGraphImage } from "~/components/OpenGraphImage.tsx";
 import { DIMENSIONS, SITE } from "~/config.ts";
@@ -67,7 +66,8 @@ export async function getOpenGraphImage(data: {
 
   const avatar = `data:image/png;base64,${encodeBase64(avatarBuffer)}`;
   const background = `data:image/jpeg;base64,${encodeBase64(resized.data)}`;
-  const svg = await satori(
+
+  return new ImageResponse(
     OpenGraphImage({ url: SITE.url, avatar, background, ...data }),
     {
       ...DIMENSIONS.opengraph,
@@ -77,10 +77,4 @@ export async function getOpenGraphImage(data: {
       ],
     },
   );
-  const jpeg = await sharp(new TextEncoder().encode(svg))
-    .resize(DIMENSIONS.opengraph.width, DIMENSIONS.opengraph.height)
-    .jpeg({ quality: 95 })
-    .toBuffer();
-
-  return new Response(jpeg, { headers: { "Content-Type": "image/jpeg" } });
 }
