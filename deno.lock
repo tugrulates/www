@@ -28,6 +28,7 @@
     "npm:@types/react@*": "19.0.2",
     "npm:@types/react@^19.0.2": "19.0.2",
     "npm:@vercel/analytics@^1.4.1": "1.4.1_react@19.0.0",
+    "npm:@vercel/functions@^1.5.2": "1.5.2",
     "npm:@vercel/og@~0.6.4": "0.6.4",
     "npm:@vercel/speed-insights@^1.1.0": "1.1.0_react@19.0.0",
     "npm:astro-icon@^1.1.4": "1.1.4",
@@ -1271,6 +1272,9 @@
     },
     "@vercel/edge@1.1.4": {
       "integrity": "sha512-mCe+KKmYphgWaO6NSxzkxskv4eZOuuRDqBQX/LhOizj5o1+4u/fwjN+WZDpAyVH8WU8+7EueijoT6wbTKlauOA=="
+    },
+    "@vercel/functions@1.5.2": {
+      "integrity": "sha512-9XuynFoM/J1X+LSahgjhuAZCbZ96vm9mpXapCkSS1MX890U7zLh7n2RW/2KLNuxsXt8u8h2dOCw+Njtg+7pXgQ=="
     },
     "@vercel/nft@0.27.10_acorn@8.14.0": {
       "integrity": "sha512-zbaF9Wp/NsZtKLE4uVmL3FyfFwlpDyuymQM1kPbeT0mVOHKDQQNjnnfslB3REg3oZprmNFJuh3pkHBk2qAaizg==",
