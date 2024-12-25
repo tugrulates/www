@@ -1,14 +1,14 @@
-import { exists } from "@jsr/std__fs";
 import { join } from "@jsr/std__path";
 import { readFile } from "node:fs/promises";
 
 export const prerender = false;
 
 async function getMetadata(path: string): Promise<string | null> {
-  if (await exists(path)) {
+  try {
     return JSON.parse(await readFile(join(path, "metadata.json"), "utf-8"));
+  } catch {
+    return null;
   }
-  return null;
 }
 
 interface Input {

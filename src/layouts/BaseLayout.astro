@@ -32,7 +32,9 @@ const {
   class: className,
 } = Astro.props;
 
-const ogImage = getChildUrl(Astro.url, "og.jpg");
+const ogImage = getChildUrl(SITE.url, "og.jpg");
+if (Astro.url.pathname)
+  ogImage.searchParams.set("path", Astro.url.pathname.replace(/^\//, ""));
 
 const appleTouchIcon = await getFavicon(180);
 const favicon = await getFavicon(180);
