@@ -10,7 +10,7 @@ import Header from "~/components/Header.astro";
 import { AUTHOR, DIMENSIONS, SITE } from "~/config.ts";
 import { formatDateIso } from "~/date.ts";
 import { getFavicon } from "~/pages/favicon.ico.ts";
-import { getChildUrl } from "~/url";
+import { getCanonicalUrl, getChildUrl, getRelativePathname } from "~/url.ts";
 
 interface Props {
   tab: string;
@@ -33,8 +33,8 @@ const {
 } = Astro.props;
 
 const ogImage = getChildUrl(SITE.url, "og.jpg");
-if (Astro.url.pathname)
-  ogImage.searchParams.set("path", Astro.url.pathname.replace(/^\//, ""));
+const ogPath = getRelativePathname(Astro.url);
+if (ogPath) ogImage.searchParams.set("path", ogPath);
 
 const appleTouchIcon = await getFavicon(180);
 const favicon = await getFavicon(180);
@@ -56,7 +56,7 @@ const favicon = await getFavicon(180);
                 title: `${title} — ${AUTHOR.name}`,
                 type: date !== undefined ? "article" : "website",
                 image: ogImage.href,
-                url: getChildUrl(SITE.url, Astro.url.pathname),
+                url: getCanonicalUrl(Astro.url),
               },
               optional: {
                 description,
