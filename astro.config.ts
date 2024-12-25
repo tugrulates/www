@@ -11,7 +11,9 @@ import { SITE } from "./src/config.ts";
 
 const ENVIRONMENT = Deno.env.get("VERCEL_ENVIRONMENT");
 const HOST = Deno.env.get(
-  ENVIRONMENT === "production" ? "VERCEL_PROJECT_PRODUCTION_URL" : "VERCEL_URL",
+  ENVIRONMENT === "production"
+    ? "VERCEL_PROJECT_PRODUCTION_URL"
+    : "VERCEL_BRANCH_URL",
 );
 
 // https://astro.build/config
