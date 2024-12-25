@@ -47,6 +47,10 @@ export async function getOpenGraphImage(data: {
   image: ImageMetadata;
   cta: string;
 }): Promise<Response> {
+  const [regular, bold] = await Promise.all([
+    readFile(join(process.cwd(), "/public/fonts/FiraSans-Regular.ttf")),
+    readFile(join(process.cwd(), "/public/fonts/FiraSans-Bold.ttf")),
+  ]);
   const svg = await satori(
     OpenGraphImage({
       avatar: getChildUrl(data.site, AVATAR.src),
@@ -55,7 +59,7 @@ export async function getOpenGraphImage(data: {
     }),
     {
       ...DIMENSIONS.opengraph,
-      fonts: await Promise.all([getFont("Regular"), getFont("Bold")]),
+      fonts: [{ name: "Regular", data: regular }, { name: "Bold", data: bold }],
     },
   );
 
