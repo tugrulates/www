@@ -55,7 +55,7 @@ export async function getOpenGraphImage(data: {
   const svg = await satori(
     OpenGraphImage({
       avatar: `data:image/png;base64,${avatar.toString("base64")}`,
-      background: getChildUrl(data.site, data.image.src),
+      background: getChildUrl(getChildUrl(data.site, data.image.src)),
       ...data,
     }),
     {
