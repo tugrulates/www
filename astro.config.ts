@@ -31,8 +31,8 @@ export default defineConfig({
     isr: true,
     includeFiles: [
       "/src/images/me-small.png",
-      "/public/fonts/FiraSans-Regular.ttf",
-      "/public/fonts/FiraSans-Bold.ttf",
+      "/src/fonts/FiraSans-Regular.ttf",
+      "/src/fonts/FiraSans-Bold.ttf",
     ],
   }),
   markdown: { rehypePlugins: [[rehypeExternalLinks, { rel: ["nofollow"] }]] },
