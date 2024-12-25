@@ -26,22 +26,21 @@ export async function getCover(cover: CoverType): Promise<CoverMeta> {
 async function fetchFont(
   site: URL,
   name: string,
-): Promise<{ name: string; data: ArrayBuffer }[]> {
+): Promise<{ name: string; data: ArrayBuffer }> {
   const response = await fetch(
     getChildUrl(site, `fonts/FiraSans-${name}.ttf`),
     {
       Headers: {
         "x-vercel-protection-bypass":
           process.env.VERCEL_AUTOMATION_BYPASS_SECRET,
-        "x-vercel-set-bypass-cookie": "true",
+        "x-vercel-set-bypass-cookie": true,
       },
     },
   );
   if (!response.ok) {
-    console.error(`Failed to fetch font: ${response.statusText}`);
-    return [];
+    throw new Error(`Failed to fetch font: ${response.statusText}`);
   }
-  return [{ name, data: await response.arrayBuffer() }];
+  return { name, data: await response.arrayBuffer() };
 }
 
 /**
@@ -59,10 +58,10 @@ export async function getOpenGraphImage(data: {
 }): Promise<Response> {
   const background = getChildUrl(data.site, data.image.src);
   const avatar = getChildUrl(data.site, AVATAR.src);
-  const fonts = (await Promise.all([
+  const fonts = await Promise.all([
     fetchFont(data.site, "Regular") ?? [],
     fetchFont(data.site, "Bold") ?? [],
-  ])).flat();
+  ]);
   const svg = await satori(
     OpenGraphImage({ avatar, background, ...data }),
     { ...DIMENSIONS.opengraph, fonts },
