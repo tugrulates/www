@@ -5042,6 +5042,7 @@
         "npm:@types/react-dom@^19.0.2",
         "npm:@types/react@^19.0.2",
         "npm:@vercel/analytics@^1.4.1",
+        "npm:@vercel/functions@^1.5.2",
         "npm:@vercel/speed-insights@^1.1.0",
         "npm:astro-icon@^1.1.4",
         "npm:astro-robots-txt@1",

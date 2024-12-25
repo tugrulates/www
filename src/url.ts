@@ -48,12 +48,18 @@ export function getChildUrl(url: URL, ...path: string[]): URL {
  * import { assertEquals } from "jsr:@std/assert";
  * assertEquals(getCanonicalUrl(new URL("http://host/about")).href, "https://www.tugrulates.com/about");
  * assertEquals(getCanonicalUrl(new URL("http://host")).href, "https://www.tugrulates.com/");
+ * assertEquals(getCanonicalUrl(new URL("http://host"), "about").href, "https://www.tugrulates.com/about");
  * ```
  *
  * @param url Any URL.
+ * @param path The additional path segments.
  * @returns The canonical URL.
  * @see SITE
  */
-export function getCanonicalUrl(url: URL): URL {
-  return getChildUrl(new URL(SITE.url.origin), getRelativePathname(url));
+export function getCanonicalUrl(url: URL, ...path: string[]): URL {
+  return getChildUrl(
+    new URL(SITE.url.origin),
+    getRelativePathname(url),
+    ...path,
+  );
 }

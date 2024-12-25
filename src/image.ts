@@ -8,7 +8,7 @@ import type { CoverMeta, CoverType } from "~/components/Cover.astro";
 import { OpenGraphImage } from "~/components/OpenGraphImage.tsx";
 import { DIMENSIONS } from "~/config.ts";
 import { getEntry } from "~/site.astro";
-import { getChildUrl } from "~/url.ts";
+import { getCanonicalUrl } from "~/url.ts";
 
 export async function getCover(cover: CoverType): Promise<CoverMeta> {
   if ("collection" in cover && cover.collection === "photos") {
@@ -55,7 +55,7 @@ export async function getOpenGraphImage(data: {
   const svg = await satori(
     OpenGraphImage({
       avatar: `data:image/png;base64,${avatar.toString("base64")}`,
-      background: getChildUrl(getChildUrl(data.site, data.image.src)),
+      background: getCanonicalUrl(data.site, data.image.src),
       ...data,
     }),
     {
