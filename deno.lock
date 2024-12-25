@@ -19,7 +19,6 @@
     "npm:@iconify-json/heroicons@^1.2.2": "1.2.2",
     "npm:@iconify-json/simple-icons@^1.2.17": "1.2.17",
     "npm:@imagemagick/magick-wasm@0.0.31": "0.0.31",
-    "npm:@imagemagick/magick-wasm@^0.0.32": "0.0.32",
     "npm:@jsr/std__encoding@^1.0.6": "1.0.6",
     "npm:@jsr/std__fs@^1.0.8": "1.0.8",
     "npm:@jsr/std__path@^1.0.8": "1.0.8",
@@ -663,9 +662,6 @@
     },
     "@imagemagick/magick-wasm@0.0.31": {
       "integrity": "sha512-QNivAUxSaItuiY8ziI/vRy6TtoecD7TOsD1LGZCG3wv8lfbdGbIj2QiJk0FlGkGwAVR966NlD3mkxPNvQrvq0w=="
-    },
-    "@imagemagick/magick-wasm@0.0.32": {
-      "integrity": "sha512-+niNRuJk4ZPE9PDzBg19Kjyl+CEdAgaJBXQSFXmO1CTDoYOxrZ3DBdstfs1+8r77hjoiph+4Wu4qpldfcrKm7A=="
     },
     "@img/sharp-darwin-arm64@0.33.5": {
       "integrity": "sha512-UT4p+iz/2H4twwAoLCqfA9UH5pI6DggwKEGuaPy7nCVQ8ZsiY5PIcrRvD1DzuY3qYL07NtIQcWnBSY/heikIFQ==",
@@ -5016,7 +5012,6 @@
         "npm:@headlessui/react@^2.2.0",
         "npm:@iconify-json/heroicons@^1.2.2",
         "npm:@iconify-json/simple-icons@^1.2.17",
-        "npm:@imagemagick/magick-wasm@^0.0.32",
         "npm:@jsr/std__encoding@^1.0.6",
         "npm:@jsr/std__fs@^1.0.8",
         "npm:@jsr/std__path@^1.0.8",

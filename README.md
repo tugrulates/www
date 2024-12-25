@@ -28,7 +28,8 @@
 - Icons: **[Iconify](https://iconify.design)** with
   **[Heroicons](https://heroicons.com)** and
   **[Simple Icons](https://simpleicons.org)**
-- Hosting: **[Deno Deploy](https://deno.com/deploy)**
+- Build runtime: **[Deno](https://deno.land)**
+- Hosting: **[Vercel](https://vercel.com)**
 
 ## 📜 License
 
