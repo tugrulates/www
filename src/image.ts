@@ -1,9 +1,10 @@
 import { encodeBase64 } from "@jsr/std__encoding";
 import { join } from "@jsr/std__path";
-import { ImageResponse } from "@vercel/og";
 import type { ImageMetadata, LocalImageService } from "astro";
 import { readFile } from "node:fs/promises";
 import process from "node:process";
+import satori from "satori";
+import sharp from "sharp";
 import type { CoverMeta, CoverType } from "~/components/Cover.astro";
 import { OpenGraphImage } from "~/components/OpenGraphImage.tsx";
 import { DIMENSIONS, SITE } from "~/config.ts";
@@ -52,8 +53,8 @@ export async function getOpenGraphImage(data: {
     await Promise.all([
       getImageBuffer(data.image.src),
       readFile(join(process.cwd(), "src/images/me-small.png")),
-      readFile(join(process.cwd(), "public/fonts/fira-sans-500.woff")),
-      readFile(join(process.cwd(), "public/fonts/fira-sans-900.woff")),
+      readFile(join(process.cwd(), "public/fonts/FiraSans-Regular.ttf")),
+      readFile(join(process.cwd(), "public/fonts/FiraSans-Bold.ttf")),
     ]);
   if (!imageBuffer) return new Response("Not found", { status: 404 });
 
@@ -65,9 +66,8 @@ export async function getOpenGraphImage(data: {
   );
 
   const avatar = `data:image/png;base64,${encodeBase64(avatarBuffer)}`;
-  const background = `data:image/jpeg;base64,${encodeBase64(imageBuffer)}`;
-
-  return new ImageResponse(
+  const background = `data:image/jpeg;base64,${encodeBase64(resized.data)}`;
+  const svg = await satori(
     OpenGraphImage({ url: SITE.url, avatar, background, ...data }),
     {
       ...DIMENSIONS.opengraph,
@@ -77,4 +77,10 @@ export async function getOpenGraphImage(data: {
       ],
     },
   );
+  const jpeg = await sharp(new TextEncoder().encode(svg))
+    .resize(DIMENSIONS.opengraph.width, DIMENSIONS.opengraph.height)
+    .jpeg({ quality: 95 })
+    .toBuffer();
+
+  return new Response(jpeg, { headers: { "Content-Type": "image/jpeg" } });
 }

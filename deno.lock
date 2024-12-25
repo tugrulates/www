@@ -27,7 +27,6 @@
     "npm:@types/react-dom@^19.0.2": "19.0.2_@types+react@19.0.2",
     "npm:@types/react@^19.0.2": "19.0.2",
     "npm:@vercel/analytics@^1.4.1": "1.4.1_react@19.0.0",
-    "npm:@vercel/og@~0.6.4": "0.6.4",
     "npm:@vercel/speed-insights@^1.1.0": "1.1.0_react@19.0.0",
     "npm:astro-icon@^1.1.4": "1.1.4",
     "npm:astro-robots-txt@1": "1.0.0",
@@ -989,9 +988,6 @@
         "react"
       ]
     },
-    "@resvg/resvg-wasm@2.4.0": {
-      "integrity": "sha512-C7c51Nn4yTxXFKvgh2txJFNweaVcfUPQxwEUFw4aWsCmfiBDJsTSwviIF8EcwjQ6k8bPyMWCl1vw4BdxE569Cg=="
-    },
     "@rollup/pluginutils@5.1.4": {
       "integrity": "sha512-USm05zrsFxYLPdWWq+K3STlWiT/3ELn3RcV5hJMghpeAIhxfsUIg6mt12CBJBInWMV4VneoV7SfGv8xIwo2qNQ==",
       "dependencies": [
@@ -1283,14 +1279,6 @@
         "node-gyp-build",
         "picomatch@4.0.2",
         "resolve-from"
-      ]
-    },
-    "@vercel/og@0.6.4": {
-      "integrity": "sha512-+IB8fYbVHEAtLfhCXSRS61Q/OfBJTaPCXhvGvXTBIUfs9lqZMDesZ2UnvKYbnEYHSMgCzBaj5BOq66iePl8mjw==",
-      "dependencies": [
-        "@resvg/resvg-wasm",
-        "satori",
-        "yoga-wasm-web"
       ]
     },
     "@vercel/speed-insights@1.1.0_react@19.0.0": {
@@ -5031,7 +5019,6 @@
         "npm:@types/react-dom@^19.0.2",
         "npm:@types/react@^19.0.2",
         "npm:@vercel/analytics@^1.4.1",
-        "npm:@vercel/og@~0.6.4",
         "npm:@vercel/speed-insights@^1.1.0",
         "npm:astro-icon@^1.1.4",
         "npm:astro-robots-txt@1",
@@ -5041,6 +5028,7 @@
         "npm:react-dom@19",
         "npm:react@19",
         "npm:rehype-external-links@3",
+        "npm:satori@0.12",
         "npm:sharp-ico@~0.1.5",
         "npm:sharp@~0.33.5",
         "npm:tailwindcss@^3.4.16"
