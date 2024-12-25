@@ -1,4 +1,6 @@
+import { join } from "@jsr/std__path";
 import type { ImageMetadata } from "astro";
+import { readFile } from "node:fs/promises";
 import process from "node:process";
 import satori from "satori";
 import sharp from "sharp";
@@ -23,24 +25,13 @@ export async function getCover(cover: CoverType): Promise<CoverMeta> {
   throw new Error(`Invalid cover: ${cover}`);
 }
 
-async function fetchFont(
-  site: URL,
+async function getFont(
   name: string,
 ): Promise<{ name: string; data: ArrayBuffer }> {
-  const response = await fetch(
-    getChildUrl(site, `fonts/FiraSans-${name}.ttf`),
-    {
-      Headers: {
-        "x-vercel-protection-bypass":
-          process.env.VERCEL_AUTOMATION_BYPASS_SECRET,
-        "x-vercel-set-bypass-cookie": "samesitenone",
-      },
-    },
+  const data = await readFile(
+    join(process.cwd(), `/public/fonts/FiraSans-${name}.ttf`),
   );
-  if (!response.ok) {
-    throw new Error(`Failed to fetch font: ${response.statusText}`);
-  }
-  return { name, data: await response.arrayBuffer() };
+  return { name, data };
 }
 
 /**
@@ -56,15 +47,16 @@ export async function getOpenGraphImage(data: {
   image: ImageMetadata;
   cta: string;
 }): Promise<Response> {
-  const background = getChildUrl(data.site, data.image.src);
-  const avatar = getChildUrl(data.site, AVATAR.src);
-  const fonts = await Promise.all([
-    fetchFont(data.site, "Regular") ?? [],
-    fetchFont(data.site, "Bold") ?? [],
-  ]);
   const svg = await satori(
-    OpenGraphImage({ avatar, background, ...data }),
-    { ...DIMENSIONS.opengraph, fonts },
+    OpenGraphImage({
+      avatar: getChildUrl(data.site, AVATAR.src),
+      background: getChildUrl(data.site, data.image.src),
+      ...data,
+    }),
+    {
+      ...DIMENSIONS.opengraph,
+      fonts: await Promise.all([getFont("Regular"), getFont("Bold")]),
+    },
   );
 
   const jpeg = await sharp(new TextEncoder().encode(svg))
