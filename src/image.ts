@@ -51,7 +51,7 @@ export async function getOpenGraphImage(data: {
   const background = getChildUrl(SITE.url, data.image.src);
   const avatar = getChildUrl(SITE.url, AVATAR.src);
 
-  const [regularFontBuffer, boldFontBuffer] = await Promise.all([
+  const [regular, bold] = await Promise.all([
     readFile(join(process.cwd(), "src/fonts/FiraSans-Regular.ttf")),
     readFile(join(process.cwd(), "src/fonts/FiraSans-Bold.ttf")),
   ]);
@@ -61,8 +61,8 @@ export async function getOpenGraphImage(data: {
     {
       ...DIMENSIONS.opengraph,
       fonts: [
-        { name: "Regular", data: regularFontBuffer, style: "normal" },
-        { name: "Bold", data: boldFontBuffer, style: "normal" },
+        { name: "Regular", data: regular, style: "normal" },
+        { name: "Bold", data: bold, style: "normal" },
       ],
     },
   );

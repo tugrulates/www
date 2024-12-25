@@ -58,7 +58,6 @@ export const DIMENSIONS = {
 } as const;
 
 export const SSR_FILES = [
-  "src/images/me-small.png",
   "src/fonts/FiraSans-Regular.ttf",
   "src/fonts/FiraSans-Bold.ttf",
 ];
