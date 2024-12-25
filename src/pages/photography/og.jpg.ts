@@ -1,11 +1,10 @@
-import { APIRoute } from "astro";
 import { AUTHOR } from "~/config.ts";
 import { getPhotos } from "~/content.ts";
 import { getOpenGraphImage } from "~/node.ts";
 
 export const prerender = false;
 
-export const GET: APIRoute = async () => {
+export async function GET(): Promise<Response> {
   const photos = await getPhotos();
   return await getOpenGraphImage(
     {
@@ -18,4 +17,4 @@ export const GET: APIRoute = async () => {
       cta: "Visit",
     },
   );
-};
+}

@@ -1,11 +1,11 @@
-import type { APIRoute } from "astro";
+import type { APIContext } from "astro";
 import { getCover } from "~/image.ts";
 import { getOpenGraphImage } from "~/node.ts";
 import { getEntry } from "~/site.astro";
 
 export const prerender = false;
 
-export const GET: APIRoute = async ({ params }) => {
+export async function GET({ params }: APIContext) {
   const post = await getEntry("posts", params.post ?? "");
   if (!post) return new Response("Not found", { status: 404 });
   const cover = await getCover(post.data.cover);
@@ -15,4 +15,4 @@ export const GET: APIRoute = async ({ params }) => {
     cta: "Read more",
     description: post.data.description,
   });
-};
+}

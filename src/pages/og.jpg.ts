@@ -1,4 +1,3 @@
-import { APIRoute } from "astro";
 import { SITE } from "~/config.ts";
 import { getCover } from "~/image.ts";
 import { getOpenGraphImage } from "~/node.ts";
@@ -6,7 +5,7 @@ import { getEntry } from "~/site.astro";
 
 export const prerender = false;
 
-export const GET: APIRoute = async () => {
+export async function GET(): Promise<Response> {
   const about = await getEntry("pages", "about");
   const cover = await getCover(about?.data.cover);
   return await getOpenGraphImage(
@@ -18,4 +17,4 @@ export const GET: APIRoute = async () => {
       cta: "Visit",
     },
   );
-};
+}

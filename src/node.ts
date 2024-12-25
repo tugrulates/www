@@ -42,8 +42,8 @@ export async function getOpenGraphImage(data: {
     await Promise.all([
       getImageBuffer(data.image.src),
       readFile(join(process.cwd(), "src/images/me-small.png")),
-      readFile(join(process.cwd(), FONT, "fira-sans-latin-500-normal.woff")),
-      readFile(join(process.cwd(), FONT, "fira-sans-latin-900-normal.woff")),
+      readFile(join(process.cwd(), "public/fonts/fira-sans-500.woff")),
+      readFile(join(process.cwd(), "public/fonts/fira-sans-900.woff")),
     ]);
   if (!imageBuffer) return new Response("Not found", { status: 404 });
   const avatar = `data:image/png;base64,${encodeBase64(avatarBuffer)}`;

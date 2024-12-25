@@ -1,11 +1,11 @@
-import { APIRoute } from "astro";
+import { APIContext } from "astro";
 import { formatDate } from "~/date.ts";
 import { getOpenGraphImage } from "~/node.ts";
 import { getEntry } from "~/site.astro";
 
 export const prerender = false;
 
-export const GET: APIRoute = async ({ params }) => {
+export async function GET({ params }: APIContext) {
   const photo = await getEntry("photos", params.photo ?? "");
   if (!photo) return new Response("Not found", { status: 404 });
   return await getOpenGraphImage(
@@ -16,4 +16,4 @@ export const GET: APIRoute = async ({ params }) => {
       cta: "View photo",
     },
   );
-};
+}
