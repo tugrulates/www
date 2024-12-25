@@ -1,10 +1,12 @@
 import type { ImageMetadata } from "astro";
+import process from "node:process";
 import satori from "satori";
 import sharp from "sharp";
 import type { CoverMeta, CoverType } from "~/components/Cover.astro";
 import { OpenGraphImage } from "~/components/OpenGraphImage.tsx";
 import { DIMENSIONS } from "~/config.ts";
 import { AVATAR, getEntry } from "~/site.astro";
+import { getChildUrl } from "~/url.ts";
 
 export async function getCover(cover: CoverType): Promise<CoverMeta> {
   if ("collection" in cover && cover.collection === "photos") {
@@ -25,7 +27,16 @@ async function fetchFont(
   site: URL,
   name: string,
 ): Promise<{ name: string; data: ArrayBuffer }> {
-  const response = await fetch(`/fonts/FiraSans-${name}.ttf`);
+  const response = await fetch(
+    getChildUrl(site, `/fonts/FiraSans-${name}.ttf`),
+    {
+      Headers: {
+        "x-vercel-protection-bypass":
+          process.env.VERCEL_AUTOMATION_BYPASS_SECRET,
+        "x-vercel-set-bypass-cookie": "samesitenone",
+      },
+    },
+  );
   if (!response.ok) {
     throw new Error(`Failed to fetch font: ${response.statusText}`);
   }
