@@ -61,12 +61,7 @@ export async function getOpenGraphImage(data: {
   const imageService = await getConfiguredImageService() as LocalImageService;
   const resized = await imageService.transform(
     imageBuffer,
-    {
-      src: data.image.src,
-      width: DIMENSIONS.opengraph.width / 2,
-      height: DIMENSIONS.opengraph.height / 2,
-      format: "jpeg",
-    },
+    { src: data.image.src, ...DIMENSIONS.opengraph, format: "jpeg" },
     imageConfig,
   );
 
