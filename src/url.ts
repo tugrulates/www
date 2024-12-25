@@ -34,6 +34,7 @@ export function getChildUrl(url: URL, ...path: string[]): URL {
  * assertEquals(getCanonicalUrl(new URL("http://host/about")).href, "https://www.tugrulates.com/about");
  * assertEquals(getCanonicalUrl(new URL("http://host")).href, "https://www.tugrulates.com/");
  * assertEquals(getCanonicalUrl(new URL("http://host"), "about").href, "https://www.tugrulates.com/about");
+ * assertEquals(getCanonicalUrl(new URL("http://host"), "/@fs/file").href, "http://host/@fs/file");
  * ```
  *
  * @param url Any URL.
@@ -42,5 +43,8 @@ export function getChildUrl(url: URL, ...path: string[]): URL {
  * @see SITE
  */
 export function getCanonicalUrl(url: URL, ...path: string[]): URL {
+  if (path.length && path[0].startsWith("/@fs")) {
+    return getChildUrl(url, ...path);
+  }
   return getChildUrl(new URL(SITE.url.origin), url.pathname, ...path);
 }
