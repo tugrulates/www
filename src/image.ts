@@ -1,12 +1,17 @@
 import { encodeBase64 } from "@jsr/std__encoding";
 import { join } from "@jsr/std__path";
-import type { ImageMetadata, LocalImageService } from "astro";
+import type { LocalImageService } from "astro";
 import satori from "satori";
 import sharp from "sharp";
 import type { CoverMeta, CoverType } from "~/components/Cover.astro";
 import { OpenGraphImage } from "~/components/OpenGraphImage.tsx";
 import { DIMENSIONS, SITE } from "~/config.ts";
-import { getConfiguredImageService, getEntry, imageConfig } from "~/site.astro";
+import {
+  getConfiguredImageService,
+  getEntry,
+  imageConfig,
+  Metadata,
+} from "~/site.astro";
 
 export async function getCover(cover: CoverType): Promise<CoverMeta> {
   if ("collection" in cover && cover.collection === "photos") {
@@ -28,22 +33,23 @@ export async function getDefaultCover(): Promise<CoverMeta> {
   return await getCover(about?.data.cover);
 }
 
-export async function getOpenGraphImage(
-  data: {
-    title: string;
-    subtitle?: string;
-    description?: string;
-    image: ImageMetadata;
-    cta: string;
-  },
-): Promise<Response> {
+export function getCta(metadata: Metadata): string {
+  if (metadata.collection === "posts") return "Read more";
+  if (metadata.collection === "photos") return "View photo";
+  return "Visit";
+}
+
+export async function getOpenGraphImage(metadata: Metadata): Promise<Response> {
+  const image = (metadata.cover ?? await getDefaultCover()).data.wide;
+  const cta = getCta(metadata);
+
   const [avatarBuffer, imageBuffer, regularFontBuffer, boldFontBuffer] =
     await Promise.all([
       Deno.readFile("src/images/me-small.png"),
       Deno.readFile(
-        data.image.src.startsWith("/@fs")
-          ? data.image.src.replace(/\/@fs/, "").replace(/\?[^?]*$/, "")
-          : join("dist/server", data.image.src),
+        image.src.startsWith("/@fs")
+          ? image.src.replace(/\/@fs/, "").replace(/\?[^?]*$/, "")
+          : join("dist/server", image.src),
       ),
       Deno.readFile(
         "node_modules/@fontsource/fira-sans/files/fira-sans-latin-500-normal.woff",
@@ -56,7 +62,7 @@ export async function getOpenGraphImage(
   const imageService = await getConfiguredImageService() as LocalImageService;
   const resized = await imageService.transform(
     imageBuffer,
-    { src: data.image.src, ...DIMENSIONS.opengraph, format: "jpeg" },
+    { src: image.src, ...DIMENSIONS.opengraph, format: "jpeg" },
     imageConfig,
   );
   const background = `data:image/${resized.format};base64,${
@@ -64,7 +70,13 @@ export async function getOpenGraphImage(
   }`;
 
   const svg = await satori(
-    OpenGraphImage({ url: SITE.url, avatar, background, ...data }),
+    OpenGraphImage({
+      url: SITE.url,
+      avatar,
+      background,
+      cta,
+      ...metadata.data,
+    }),
     {
       ...DIMENSIONS.opengraph,
       fonts: [
