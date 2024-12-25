@@ -58,8 +58,8 @@ export async function getOpenGraphImage(data: {
     await Promise.all([
       getImageBuffer(data.image.src),
       readFile(join(process.cwd(), "src/images/me-small.png")),
-      readFile(join(process.cwd(), "public/fonts/FiraSans-Regular.ttf")),
-      readFile(join(process.cwd(), "public/fonts/FiraSans-Bold.ttf")),
+      readFile(join(process.cwd(), "src/fonts/FiraSans-Regular.ttf")),
+      readFile(join(process.cwd(), "src/fonts/FiraSans-Bold.ttf")),
     ]);
   if (!imageBuffer) return NOT_FOUND;
 
