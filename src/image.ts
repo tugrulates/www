@@ -25,17 +25,6 @@ export async function getCover(cover: CoverType): Promise<CoverMeta> {
   throw new Error(`Invalid cover: ${cover}`);
 }
 
-async function getImageBuffer(image: string): Promise<Uint8Array | null> {
-  if (image.startsWith("/@fs")) {
-    return new Uint8Array(
-      await Deno.readFile(image.replace(/^\/@fs/, "").replace(/\?[^?]*$/, "")),
-    );
-  }
-  const response = await fetch(getChildUrl(SITE.url, image));
-  if (!response.ok) return null;
-  return new Uint8Array(await response.arrayBuffer());
-}
-
 /**
  * Return a JPEG response with an OpenGraph image.
  *
