@@ -1,5 +1,5 @@
 import { SITE } from "~/config.ts";
-import { getFavicon } from "~/image.ts";
+import { getFavicon } from "~/pages/favicon.ico.ts";
 
 const faviconPngSizes = [192, 512];
 

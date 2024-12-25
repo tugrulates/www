@@ -1,6 +1,5 @@
-import type { GetImageResult } from "astro";
 import type { CoverMeta, CoverType } from "~/components/Cover.astro";
-import { AVATAR, getEntry, getImage } from "~/site.astro";
+import { getEntry } from "~/site.astro";
 
 export async function getCover(cover: CoverType): Promise<CoverMeta> {
   if ("collection" in cover && cover.collection === "photos") {
@@ -20,13 +19,4 @@ export async function getCover(cover: CoverType): Promise<CoverMeta> {
 export async function getDefaultCover(): Promise<CoverMeta> {
   const about = await getEntry("pages", "about");
   return await getCover(about?.data.cover);
-}
-
-export async function getFavicon(size?: number): Promise<GetImageResult> {
-  return await getImage({
-    src: AVATAR,
-    width: size,
-    height: size,
-    format: "png",
-  });
 }

@@ -6,7 +6,6 @@ import satori from "satori";
 import sharp from "sharp";
 import { OpenGraphImage } from "~/components/OpenGraphImage.tsx";
 import { DIMENSIONS } from "~/config.ts";
-import { getDefaultCover } from "~/image.ts";
 import {
   getConfiguredImageService,
   imageConfig,
@@ -79,11 +78,12 @@ export async function GET({ request }: Input): Promise<Response> {
   const file = join("dist/client", path, "metadata.json");
   if (!await exists(file)) return new Response("Not found", { status: 404 });
   const metadata = JSON.parse(await Deno.readTextFile(file)) as Metadata;
+  return new Response(JSON.stringify(metadata));
 
-  return await getOpenGraphImage({
-    url,
-    ...metadata.data,
-    image: (metadata.cover ?? await getDefaultCover())?.data.wide,
-    cta: getCTA(metadata),
-  });
+  // return await getOpenGraphImage({
+  //   url,
+  //   ...metadata.data,
+  //   image: (metadata.cover ?? await getDefaultCover())?.data.wide,
+  //   cta: getCTA(metadata),
+  // });
 }

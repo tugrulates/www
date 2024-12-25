@@ -1,5 +1,5 @@
 ---
-import { type GetStaticPaths, type InferGetStaticPropsType } from "astro";
+import { type InferGetStaticPropsType } from "astro";
 import { render } from "astro:content";
 import Cover, { type CoverType } from "~/components/Cover.astro";
 import License from "~/components/License.astro";
@@ -7,7 +7,7 @@ import { getPages, getPosts } from "~/content.ts";
 import { getCover } from "~/image.ts";
 import ArticleLayout from "~/layouts/ArticleLayout.astro";
 
-export const getStaticPaths = (async () => {
+export async function getStaticPaths() {
   const pages = await getPages();
   const posts = await getPosts();
   return [
@@ -20,7 +20,7 @@ export const getStaticPaths = (async () => {
       props: { post, license: true },
     })),
   ];
-}) satisfies GetStaticPaths;
+}
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
