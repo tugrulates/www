@@ -1,5 +1,6 @@
 import { encodeBase64 } from "@jsr/std__encoding";
 import type { ImageMetadata, LocalImageService } from "astro";
+import { readFile } from "node:fs/promises";
 import satori from "satori";
 import sharp from "sharp";
 import type { CoverMeta, CoverType } from "~/components/Cover.astro";
@@ -34,6 +35,11 @@ async function getImageBuffer(image: string): Promise<Uint8Array | null> {
   return new Uint8Array(await response.arrayBuffer());
 }
 
+/**
+ * Return a JPEG response with an OpenGraph image.
+ *
+ * This function runs on Node.js.
+ */
 export async function getOpenGraphImage(data: {
   title: string;
   description: string;
@@ -42,12 +48,12 @@ export async function getOpenGraphImage(data: {
 }): Promise<Response> {
   const [avatarBuffer, imageBuffer, regularFontBuffer, boldFontBuffer] =
     await Promise.all([
-      Deno.readFile("src/images/me-small.png"),
+      readFile("src/images/me-small.png"),
       await getImageBuffer(data.image.src),
-      Deno.readFile(
+      readFile(
         "node_modules/@fontsource/fira-sans/files/fira-sans-latin-500-normal.woff",
       ),
-      Deno.readFile(
+      readFile(
         "node_modules/@fontsource/fira-sans/files/fira-sans-latin-900-normal.woff",
       ),
     ]);
