@@ -23,6 +23,27 @@ export async function getCover(cover: CoverType): Promise<CoverMeta> {
   throw new Error(`Invalid cover: ${cover}`);
 }
 
+async function fetchFont(
+  site: URL,
+  name: string,
+): Promise<{ name: string; data: ArrayBuffer }[]> {
+  const response = await fetch(
+    getChildUrl(site, `fonts/FiraSans-${name}.ttf`),
+    {
+      Headers: {
+        "x-vercel-protection-bypass":
+          process.env.VERCEL_AUTOMATION_BYPASS_SECRET,
+        "x-vercel-set-bypass-cookie": "true",
+      },
+    },
+  );
+  if (!response.ok) {
+    console.error(`Failed to fetch font: ${response.statusText}`);
+    return [];
+  }
+  return [{ name, data: await response.arrayBuffer() }];
+}
+
 /**
  * Return a JPEG response with an OpenGraph image.
  *
@@ -38,37 +59,13 @@ export async function getOpenGraphImage(data: {
 }): Promise<Response> {
   const background = getChildUrl(data.site, data.image.src);
   const avatar = getChildUrl(data.site, AVATAR.src);
-
-  console.log(
-    "Fetching fonts...",
-    getChildUrl(data.site, "fonts/FiraSans-Regular.ttf"),
-  );
-  const [regular, bold] = await Promise.all(
-    ["fonts/FiraSans-Regular.ttf", "fonts/FiraSans-Bold.ttf"].map(
-      async (font) => {
-        const response = await fetch(getChildUrl(data.site, font), {
-          Headers: {
-            "x-vercel-protection-bypass":
-              process.env.VERCEL_AUTOMATION_BYPASS_SECRET,
-            "x-vercel-set-bypass-cookie": true,
-          },
-        });
-        if (response.ok) return await response.arrayBuffer();
-        console.error(`Failed to fetch font: ${response.statusText}`);
-        return null;
-      },
-    ),
-  );
-
+  const fonts = (await Promise.all([
+    fetchFont(data.site, "Regular") ?? [],
+    fetchFont(data.site, "Bold") ?? [],
+  ])).flat();
   const svg = await satori(
     OpenGraphImage({ avatar, background, ...data }),
-    {
-      ...DIMENSIONS.opengraph,
-      fonts: [
-        ...(regular ? [{ name: "Regular", data: regular }] : []),
-        ...(bold ? [{ name: "Bold", data: bold }] : []),
-      ],
-    },
+    { ...DIMENSIONS.opengraph, fonts },
   );
 
   const jpeg = await sharp(new TextEncoder().encode(svg))
