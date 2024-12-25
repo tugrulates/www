@@ -28,7 +28,7 @@ async function fetchFont(
   name: string,
 ): Promise<{ name: string; data: ArrayBuffer }> {
   const response = await fetch(
-    getChildUrl(site, `/fonts/FiraSans-${name}.ttf`),
+    getChildUrl(site, `fonts/FiraSans-${name}.ttf`),
     {
       Headers: {
         "x-vercel-protection-bypass":
@@ -56,8 +56,8 @@ export async function getOpenGraphImage(data: {
   image: ImageMetadata;
   cta: string;
 }): Promise<Response> {
-  const background = data.image.src;
-  const avatar = AVATAR.src;
+  const background = getChildUrl(data.site, data.image.src);
+  const avatar = getChildUrl(data.site, AVATAR.src);
   const fonts = await Promise.all([
     fetchFont(data.site, "Regular") ?? [],
     fetchFont(data.site, "Bold") ?? [],
