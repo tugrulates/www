@@ -33,6 +33,7 @@ async function getImageBuffer(image: string): Promise<Uint8Array | null> {
  */
 export async function getOpenGraphImage(data: {
   title: string;
+  subtitle?: string;
   description: string;
   image: ImageMetadata;
   cta: string;
