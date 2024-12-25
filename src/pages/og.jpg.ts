@@ -1,6 +1,4 @@
-import { join } from "@jsr/std__path";
-import { SITE } from "~/config.ts";
-import { getChildUrl } from "~/url.ts";
+import { getMetadata } from "~/site.astro";
 
 export const prerender = false;
 
@@ -10,10 +8,7 @@ interface Input {
 
 export async function GET({ request }: Input): Promise<Response> {
   const path = new URL(request.url).searchParams.get("path") ?? "";
-  const url = getChildUrl(SITE.url, join(path, "metadata.json"));
-  const response = await fetch(url);
-  if (!response.ok) return new Response("Not found", { status: 404 });
-  const metadata = await response.json();
+  const metadata = await getMetadata(path);
   // return await getOpenGraphImage({
   //   title: "Tugrul Ates",
   //   subtitle: "Personal Website",
