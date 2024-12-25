@@ -10,9 +10,9 @@ export const GET: APIRoute = async ({ params }) => {
   if (!post) return new Response("Not found", { status: 404 });
   const cover = await getCover(post.data.cover);
   return await getOpenGraphImage({
+    image: cover.data.wide,
     title: post.data.title,
     cta: "Read more",
     description: post.data.description,
-    image: cover.data.wide,
   });
 };

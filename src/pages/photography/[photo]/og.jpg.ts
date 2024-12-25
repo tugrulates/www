@@ -10,9 +10,9 @@ export const GET: APIRoute = async ({ params }) => {
   if (!photo) return new Response("Not found", { status: 404 });
   return await getOpenGraphImage(
     {
+      image: photo.data.wide,
       title: photo.data.title,
       description: `${formatDate(photo.data.date)} — ${photo.data.location}`,
-      image: photo.data.wide,
       cta: "View photo",
     },
   );
