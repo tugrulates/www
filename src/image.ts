@@ -48,9 +48,9 @@ export async function getOpenGraphImage(data: {
   cta: string;
 }): Promise<Response> {
   const [avatar, regular, bold] = await Promise.all([
-    readFile(join(process.cwd(), "/src/images/me-small.png")),
-    readFile(join(process.cwd(), "/src/fonts/FiraSans-Regular.ttf")),
-    readFile(join(process.cwd(), "/src/fonts/FiraSans-Bold.ttf")),
+    readFile(join(process.cwd(), "src/images/me-small.png")),
+    readFile(join(process.cwd(), "src/fonts/FiraSans-Regular.ttf")),
+    readFile(join(process.cwd(), "src/fonts/FiraSans-Bold.ttf")),
   ]);
   const svg = await satori(
     OpenGraphImage({
