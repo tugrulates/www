@@ -7,7 +7,7 @@ import sharp from "sharp";
 import type { CoverMeta, CoverType } from "~/components/Cover.astro";
 import { OpenGraphImage } from "~/components/OpenGraphImage.tsx";
 import { DIMENSIONS } from "~/config.ts";
-import { AVATAR, getEntry } from "~/site.astro";
+import { getEntry } from "~/site.astro";
 import { getChildUrl } from "~/url.ts";
 
 export async function getCover(cover: CoverType): Promise<CoverMeta> {
@@ -47,13 +47,14 @@ export async function getOpenGraphImage(data: {
   image: ImageMetadata;
   cta: string;
 }): Promise<Response> {
-  const [regular, bold] = await Promise.all([
+  const [avatar, regular, bold] = await Promise.all([
+    readFile(join(process.cwd(), "/src/images/me-small.png")),
     readFile(join(process.cwd(), "/public/fonts/FiraSans-Regular.ttf")),
     readFile(join(process.cwd(), "/public/fonts/FiraSans-Bold.ttf")),
   ]);
   const svg = await satori(
     OpenGraphImage({
-      avatar: getChildUrl(data.site, AVATAR.src),
+      avatar: `data:image/png;base64,${avatar.toString("base64")}`,
       background: getChildUrl(data.site, data.image.src),
       ...data,
     }),
