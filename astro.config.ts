@@ -29,7 +29,14 @@ export default defineConfig({
       }),
     },
   },
-  adapter: vercel({ isr: true }),
+  adapter: vercel({
+    isr: true,
+    includeFiles: [
+      "src/images/me-small.png",
+      "src/fonts/FiraSans-Regular.ttf",
+      "src/fonts/FiraSans-Bold.ttf",
+    ],
+  }),
   markdown: { rehypePlugins: [[rehypeExternalLinks, { rel: ["nofollow"] }]] },
   prefetch: true,
   trailingSlash: "never",

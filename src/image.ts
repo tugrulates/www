@@ -1,10 +1,13 @@
+import { join } from "@jsr/std__path";
 import type { ImageMetadata } from "astro";
+import { readFile } from "node:fs/promises";
+import process from "node:process";
 import satori from "satori";
 import sharp from "sharp";
 import type { CoverMeta, CoverType } from "~/components/Cover.astro";
 import { OpenGraphImage } from "~/components/OpenGraphImage.tsx";
 import { DIMENSIONS } from "~/config.ts";
-import { AVATAR, getEntry } from "~/site.astro";
+import { getEntry } from "~/site.astro";
 import { getCanonicalUrl } from "~/url.ts";
 
 export async function getCover(cover: CoverType): Promise<CoverMeta> {
@@ -50,16 +53,23 @@ export async function getOpenGraphImage(data: {
   image: ImageMetadata;
   cta: string;
 }): Promise<Response> {
-  const [regular, bold] = await Promise.all([
-    fetchFont(data.site, "Regular"),
-    fetchFont(data.site, "Bold"),
+  const [avatar, regular, bold] = await Promise.all([
+    readFile(join(process.cwd(), "src/images/me-small.png")),
+    readFile(join(process.cwd(), "src/fonts/FiraSans-Regular.ttf")),
+    readFile(join(process.cwd(), "src/fonts/FiraSans-Bold.ttf")),
   ]);
-  const avatar = getCanonicalUrl(data.site, AVATAR.src).href;
   const background = getCanonicalUrl(data.site, data.image.src).href;
 
   const svg = await satori(
-    OpenGraphImage({ avatar, background, ...data }),
-    { ...DIMENSIONS.opengraph, fonts: [regular, bold] },
+    OpenGraphImage({
+      avatar: `data:image/png;base64,${avatar.toString("base64")}`,
+      background,
+      ...data,
+    }),
+    {
+      ...DIMENSIONS.opengraph,
+      fonts: [{ name: "Regular", data: regular }, { name: "Bold", data: bold }],
+    },
   );
 
   const jpeg = await sharp(new TextEncoder().encode(svg))
