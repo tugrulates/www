@@ -45,14 +45,18 @@ export async function getOpenGraphImage(data: {
   );
   const [regular, bold] = await Promise.all(
     ["fonts/FiraSans-Regular.ttf", "fonts/FiraSans-Bold.ttf"].map(
-      async (f) =>
-        await (await fetch(getChildUrl(data.site, f), {
+      async (font) => {
+        const response = await fetch(getChildUrl(data.site, font), {
           Headers: {
             "x-vercel-protection-bypass":
               process.env.VERCEL_AUTOMATION_BYPASS_SECRET,
             "x-vercel-set-bypass-cookie": true,
           },
-        })).arrayBuffer(),
+        });
+        if (response.ok) return await response.arrayBuffer();
+        console.error(`Failed to fetch font: ${response.statusText}`);
+        return null;
+      },
     ),
   );
 
@@ -61,8 +65,8 @@ export async function getOpenGraphImage(data: {
     {
       ...DIMENSIONS.opengraph,
       fonts: [
-        { name: "Regular", data: regular, style: "normal" },
-        { name: "Bold", data: bold, style: "normal" },
+        ...(regular ? [{ name: "Regular", data: regular }] : []),
+        ...(bold ? [{ name: "Bold", data: bold }] : []),
       ],
     },
   );
