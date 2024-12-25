@@ -2,7 +2,7 @@
   "nodeModulesDir": "auto",
   "tasks": {
     "astro": "ASTRO_TELEMETRY_DISABLED=1 deno -A npm:astro",
-    "clean": "rm -rf dist .astro .vercel content/photos/*/*.json public/files 2> /dev/null",
+    "clean": "rm -rf dist .astro content/photos/*/*.json public/files 2> /dev/null",
     "fetch:blog": "git submodule update --init --remote content/blog",
     "fetch:photos": "git submodule update --init --remote content/photos",
     "build:files": {

@@ -1,10 +1,8 @@
 export const SITE = {
   title: "Tugrul Ates",
   description: "Personal website.",
-  domain: "www.tugrulates.com",
-  url: "https://www.tugrulates.com",
-  trailingSlashes: false,
-};
+  url: new URL("https://www.tugrulates.com"),
+} as const;
 
 export const AUTHOR = {
   name: "Tugrul Ates",
@@ -40,7 +38,7 @@ export const AUTHOR = {
       url: "https://www.instagram.com/turulier/",
     },
   ],
-};
+} as const;
 
 export const DIMENSIONS = {
   cover: {
@@ -57,4 +55,4 @@ export const DIMENSIONS = {
     width: 1200,
     height: 675,
   },
-};
+} as const;

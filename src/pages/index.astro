@@ -2,14 +2,14 @@
 import type { CoverType } from "~/components/Cover.astro";
 import Post from "~/components/Post.astro";
 import { getPosts } from "~/content.ts";
-import { getCoverData } from "~/image.ts";
+import { getCover } from "~/image.ts";
 import FeedLayout from "~/layouts/FeedLayout.astro";
 
 const posts = await getPosts();
 const covers = Object.fromEntries(
   await Promise.all(
     posts.map(async (post) => {
-      const cover = await getCoverData(post.data.cover as CoverType);
+      const cover = await getCover(post.data.cover as CoverType);
       return [post.id, cover];
     })
   )

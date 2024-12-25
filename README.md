@@ -19,8 +19,6 @@
 ## ⚙️ Uses
 
 - Language: **[TypeScript](https://www.typescriptlang.org)**
-- Build & Dependencies: **[Deno](https://deno.com)** with `node_modules` (no
-  npm)
 - Framework: **[Astro](https://astro.build)** with
   **[React](https://reactjs.org)**
 - UI: **[Tailwind CSS](https://tailwindcss.com)** and
@@ -30,7 +28,7 @@
 - Icons: **[Iconify](https://iconify.design)** with
   **[Heroicons](https://heroicons.com)** and
   **[Simple Icons](https://simpleicons.org)**
-- Hosting: **[Vercel](https://vercel.com)**
+- Hosting: **[Deno Deploy](https://deno.com/deploy)**
 
 ## 📜 License
 

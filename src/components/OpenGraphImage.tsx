@@ -1,21 +1,23 @@
 import type { JSX } from "react";
-import { DIMENSIONS, SITE } from "~/config.ts";
+import { DIMENSIONS } from "~/config.ts";
 
 interface Props {
   avatar: string;
+  url: URL;
   background: string;
   title: string;
-  subtitle?: string;
   cta: string;
+  subtitle?: string;
   description?: string;
 }
 
 export function OpenGraphImage({
   avatar,
+  url,
   background,
   title,
-  subtitle,
   cta,
+  subtitle,
   description,
 }: Props): JSX.Element {
   const cardSize = DIMENSIONS.opengraph.height - 80;
@@ -47,7 +49,7 @@ export function OpenGraphImage({
             src={avatar}
             tw={"w-12 h-12 rounded-full border border-black"}
           />
-          <span tw="px-4">{SITE.domain}</span>
+          <span tw="px-4">{url.host}</span>
         </div>
         <div tw="flex flex-col items-center">
           <h1 tw="m-4" style={{ fontFamily: "Bold" }}>

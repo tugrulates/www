@@ -1,52 +1,26 @@
-import { SITE } from "~/config.ts";
-
 /**
- * Get the path of a child URL.
+ * Get the path of a full URL.
  *
  * Example:
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
- * const path = getChildPath(new URL("http://localhost/about"), "feed");
- * assertEquals(path.href, "http://localhost/about/feed");
+ * const path = getUrl(new URL("http://localhost/about"), "photography", "feed");
+ * assertEquals(path.href, "http://localhost/photography/feed");
  * ```
  *
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
- * const path = getChildPath(new URL("http://localhost"), "og.jpg");
- * assertEquals(path.href, "http://localhost/og.jpg");
+ * const path = getUrl(new URL("http://localhost/"), "about", "metadata.json");
+ * assertEquals(path.href, "http://localhost/about/metadata.json");
  * ```
  *
- * @param url The parent URL.
- * @param path The child path.
- * @returns The canonical path of the child URL with the site domain.
+ * @param url Any URL containing the protocol and host. Pathname is ignored
+ * @param path The path segments.
+ * @returns The path of the URL with the site domain.
  */
-export function getChildPath(url: URL, path: string): URL {
+export function getUrl(url: URL, ...path: string[]): URL {
   return new URL(
-    `${url.pathname.replace(/\/+/, "")}/${path}`,
+    path.join("/").replace(/^\//, ""),
     `${url.protocol}${url.host}`,
   );
-}
-
-/**
- * Get the canonical path of a child URL.
- *
- * Example:
- * ```ts
- * import { assertEquals } from "jsr:@std/assert";
- * const path = getCanonicalChildPath(new URL("http://localhost/about"), "feed");
- * assertEquals(path.href, "https://www.tugrulates.com/about/feed");
- * ```
- *
- * ```ts
- * import { assertEquals } from "jsr:@std/assert";
- * const path = getCanonicalChildPath(new URL("http://localhost"), "og.jpg");
- * assertEquals(path.href, "https://www.tugrulates.com/og.jpg");
- * ```
- *
- * @param url The parent URL.
- * @param path The child path.
- * @returns The canonical path of the child URL with the site domain.
- */
-export function getCanonicalChildPath(url: URL, path: string): URL {
-  return new URL(getChildPath(url, path).pathname, SITE.url);
 }
