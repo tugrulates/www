@@ -65,7 +65,7 @@ export async function getOpenGraphImage(data: {
   );
 
   const avatar = `data:image/png;base64,${encodeBase64(avatarBuffer)}`;
-  const background = `data:image/jpeg;base64,${encodeBase64(resized.data)}`;
+  const background = `data:image/jpeg;base64,${encodeBase64(imageBuffer)}`;
 
   return new ImageResponse(
     OpenGraphImage({ url: SITE.url, avatar, background, ...data }),
