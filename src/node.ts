@@ -6,13 +6,14 @@ import { encodeBase64 } from "@jsr/std__encoding";
 import { join } from "@jsr/std__path";
 import { ImageMetadata } from "astro";
 import { readFile } from "node:fs/promises";
+import process from "node:process";
 import satori from "satori";
 import sharp from "sharp";
 import { OpenGraphImage } from "~/components/OpenGraphImage.tsx";
 import { DIMENSIONS, SITE } from "~/config.ts";
 import { getChildUrl } from "~/url.ts";
 
-const FONT_FILES = "node_modules/@fontsource/fira-sans/files";
+const FONT = "node_modules/@fontsource/fira-sans/files";
 
 async function getImageBuffer(image: string): Promise<Uint8Array | null> {
   if (image.startsWith("/@fs")) {
@@ -38,10 +39,10 @@ export async function getOpenGraphImage(data: {
 }): Promise<Response> {
   const [avatarBuffer, imageBuffer, regularFontBuffer, boldFontBuffer] =
     await Promise.all([
-      readFile("src/images/me-small.png"),
+      readFile(join(process.cwd(), "src/images/me-small.png")),
       await getImageBuffer(data.image.src),
-      readFile(join(FONT_FILES, "fira-sans-latin-500-normal.woff")),
-      readFile(join(FONT_FILES, "fira-sans-latin-900-normal.woff")),
+      readFile(join(process.cwd(), FONT, "fira-sans-latin-500-normal.woff")),
+      readFile(join(process.cwd(), FONT, "fira-sans-latin-900-normal.woff")),
     ]);
   if (!imageBuffer) return new Response("Not found", { status: 404 });
   const avatar = `data:image/png;base64,${encodeBase64(avatarBuffer)}`;
