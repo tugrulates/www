@@ -17,7 +17,7 @@ const HOST = Deno.env.get(
 // https://astro.build/config
 export default defineConfig({
   output: "static",
-  site: HOST ? `https://${VERCEL_URL}` : SITE.url.href,
+  site: HOST ? `https://${HOST}` : SITE.url.href,
   env: {
     schema: {
       DRAFTS: envField.boolean({

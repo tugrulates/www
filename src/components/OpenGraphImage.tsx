@@ -1,9 +1,9 @@
 import { DIMENSIONS } from "~/config.ts";
 
 interface Props {
-  avatar: URL;
   site: URL;
-  background: URL;
+  avatar: string;
+  background: string;
   title: string;
   cta: string;
   subtitle?: string;
@@ -28,7 +28,7 @@ export function OpenGraphImage({
       <div tw="absolute inset-0 flex">
         <img
           alt="Discarded JSX element"
-          src={background.href}
+          src={background}
           width={DIMENSIONS.opengraph.width}
           height={DIMENSIONS.opengraph.height}
           style={{ objectFit: "cover", objectPosition: "center" }}
@@ -45,7 +45,7 @@ export function OpenGraphImage({
         <div tw="p-1 rounded-full text-black bg-stone-200 shadow-md shadow-stone-900/80 flex items-center">
           <img
             alt="Discarded JSX element"
-            src={avatar.href}
+            src={avatar}
             width={48}
             height={48}
             tw={"rounded-full border border-black"}
