@@ -1,4 +1,3 @@
-import type { JSX } from "react";
 import { DIMENSIONS } from "~/config.ts";
 
 interface Props {
@@ -19,7 +18,7 @@ export function OpenGraphImage({
   cta,
   subtitle,
   description,
-}: Props): JSX.Element {
+}: Props): React.JSX.Element {
   const cardSize = DIMENSIONS.opengraph.height - 80;
   return (
     <div

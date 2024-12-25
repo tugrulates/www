@@ -25,7 +25,6 @@ export default defineConfig({
   adapter: vercel({
     isr: true,
     includeFiles: SSR_FILES,
-    edgeMiddleware: true,
   }),
   markdown: { rehypePlugins: [[rehypeExternalLinks, { rel: ["nofollow"] }]] },
   prefetch: true,

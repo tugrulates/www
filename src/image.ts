@@ -8,7 +8,12 @@ import sharp from "sharp";
 import type { CoverMeta, CoverType } from "~/components/Cover.astro";
 import { OpenGraphImage } from "~/components/OpenGraphImage.tsx";
 import { DIMENSIONS, SITE } from "~/config.ts";
-import { getConfiguredImageService, getEntry, imageConfig } from "~/site.astro";
+import {
+  getConfiguredImageService,
+  getEntry,
+  imageConfig,
+  NOT_FOUND,
+} from "~/site.astro";
 import { getChildUrl } from "~/url.ts";
 
 export async function getCover(cover: CoverType): Promise<CoverMeta> {
@@ -56,7 +61,7 @@ export async function getOpenGraphImage(data: {
       readFile(join(process.cwd(), "public/fonts/FiraSans-Regular.ttf")),
       readFile(join(process.cwd(), "public/fonts/FiraSans-Bold.ttf")),
     ]);
-  if (!imageBuffer) return new Response("Not found", { status: 404 });
+  if (!imageBuffer) return NOT_FOUND;
 
   const imageService = await getConfiguredImageService() as LocalImageService;
   const resized = await imageService.transform(
