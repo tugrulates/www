@@ -1,4 +1,4 @@
-import { APIContext } from "astro";
+import type { APIContext } from "astro";
 import { AUTHOR } from "~/config.ts";
 import { getPhotos } from "~/content.ts";
 import { getOpenGraphImage } from "~/image.ts";

@@ -1,4 +1,4 @@
-import { APIContext } from "astro";
+import type { APIContext } from "astro";
 import { SITE } from "~/config.ts";
 import { getCover, getOpenGraphImage } from "~/image.ts";
 import { getEntry, NOT_FOUND } from "~/site.astro";

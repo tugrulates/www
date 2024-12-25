@@ -1,5 +1,5 @@
 import rss from "@astrojs/rss";
-import { APIContext } from "astro";
+import type { APIContext } from "astro";
 import { AUTHOR } from "~/config.ts";
 import { getPosts } from "~/content.ts";
 
