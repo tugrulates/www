@@ -1,8 +1,8 @@
 import { encodeBase64 } from "@jsr/std__encoding";
 import { exists } from "@jsr/std__fs";
 import { join } from "@jsr/std__path";
-import { ImageResponse } from "@vercel/og";
 import type { ImageMetadata, LocalImageService } from "astro";
+import satori from "satori";
 import sharp from "sharp";
 import { OpenGraphImage } from "~/components/OpenGraphImage.tsx";
 import { DIMENSIONS } from "~/config.ts";
@@ -15,7 +15,7 @@ import {
 
 export const prerender = false;
 
-export async function getOpenGraphImage(
+async function getOpenGraphImage(
   data: {
     url: URL;
     title: string;
@@ -24,15 +24,11 @@ export async function getOpenGraphImage(
     image: ImageMetadata;
     cta: string;
   },
-): Promise<ImageResponse> {
+): Promise<Response> {
   const [avatarBuffer, imageBuffer, regularFontBuffer, boldFontBuffer] =
     await Promise.all([
       Deno.readFile("src/images/me-small.png"),
-      Deno.readFile(
-        data.image.src.startsWith("/@fs")
-          ? data.image.src.replace(/\/@fs/, "").replace(/\?[^?]+/, "")
-          : join("dist/client", data.image.src),
-      ),
+      Deno.readFile(join("dist/client", data.image.src)),
       Deno.readFile(
         "node_modules/@fontsource/fira-sans/files/fira-sans-latin-500-normal.woff",
       ),
@@ -50,24 +46,20 @@ export async function getOpenGraphImage(
   const background = `data:image/${
     data.image.format.replace("jpg", "jpeg")
   };base64,${encodeBase64(resized.data)}`;
-  const og = new ImageResponse(
-    OpenGraphImage({ avatar, background, ...data }),
-    {
-      ...DIMENSIONS.opengraph,
-      fonts: [
-        { name: "Regular", data: regularFontBuffer, style: "normal" },
-        { name: "Bold", data: boldFontBuffer, style: "normal" },
-      ],
-    },
-  );
-  const png = await og.arrayBuffer();
-  const jpeg = await sharp(png)
+
+  const svg = await satori(OpenGraphImage({ avatar, background, ...data }), {
+    ...DIMENSIONS.opengraph,
+    fonts: [
+      { name: "Regular", data: regularFontBuffer, style: "normal" },
+      { name: "Bold", data: boldFontBuffer, style: "normal" },
+    ],
+  });
+
+  const jpeg = await sharp(new TextEncoder().encode(svg))
     .resize(DIMENSIONS.opengraph.width, DIMENSIONS.opengraph.height)
     .jpeg({ quality: 95 })
     .toBuffer();
-  return new Response(jpeg, {
-    headers: { "Content-Type": "image/jpeg" },
-  });
+  return new Response(jpeg, { headers: { "Content-Type": "image/jpeg" } });
 }
 
 function getCTA(metadata: Metadata): string {
@@ -76,19 +68,18 @@ function getCTA(metadata: Metadata): string {
   return "Visit";
 }
 
-interface Props {
+interface Input {
   request: Request;
 }
 
-export async function GET({ request }: Props): Promise<Response> {
+export async function GET({ request }: Input): Promise<Response> {
   const url = new URL(request.url);
   const path = url.searchParams.get("path") ?? "";
 
-  let file = join(path, "metadata.json");
-  if (!await exists(file)) file = join("dist/client", file);
+  const file = join("dist/client", path, "metadata.json");
   if (!await exists(file)) return new Response("Not found", { status: 404 });
-
   const metadata = JSON.parse(await Deno.readTextFile(file)) as Metadata;
+
   return await getOpenGraphImage({
     url,
     ...metadata.data,

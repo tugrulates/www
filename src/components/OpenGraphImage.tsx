@@ -6,8 +6,8 @@ interface Props {
   url: URL;
   background: string;
   title: string;
-  subtitle?: string;
   cta: string;
+  subtitle?: string;
   description?: string;
 }
 
@@ -16,8 +16,8 @@ export function OpenGraphImage({
   url,
   background,
   title,
-  subtitle,
   cta,
+  subtitle,
   description,
 }: Props): JSX.Element {
   const cardSize = DIMENSIONS.opengraph.height - 80;
