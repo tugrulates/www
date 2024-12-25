@@ -1,7 +1,10 @@
 export const SITE = {
   title: "Tugrul Ates",
   description: "Personal website.",
-  url: new URL("https://www.tugrulates.com"),
+  url: new URL(
+    Deno.env.get("VERCEL_PROJECT_PRODUCTION_URL") ??
+      "https://www.tugrulates.com",
+  ),
 } as const;
 
 export const AUTHOR = {

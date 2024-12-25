@@ -12,7 +12,7 @@ import { SITE, SSR_FILES } from "./src/config.ts";
 // https://astro.build/config
 export default defineConfig({
   output: "static",
-  site: `https://${Deno.env.get("VERCEL_URL") ?? SITE.url.host}`,
+  site: SITE.url.href,
   env: {
     schema: {
       DRAFTS: envField.boolean({
