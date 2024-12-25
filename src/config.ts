@@ -56,3 +56,9 @@ export const DIMENSIONS = {
     height: 675,
   },
 } as const;
+
+export const SSR_FILES = [
+  "src/images/me-small.png",
+  "node_modules/@fontsource/fira-sans/files/fira-sans-latin-500-normal.woff",
+  "node_modules/@fontsource/fira-sans/files/fira-sans-latin-900-normal.woff",
+];

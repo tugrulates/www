@@ -7,7 +7,7 @@ import icon from "astro-icon";
 import robotsTxt from "astro-robots-txt";
 import { defineConfig, envField } from "astro/config";
 import rehypeExternalLinks from "rehype-external-links";
-import { SITE } from "./src/config.ts";
+import { SITE, SSR_FILES } from "./src/config.ts";
 
 // https://astro.build/config
 export default defineConfig({
@@ -22,7 +22,10 @@ export default defineConfig({
       }),
     },
   },
-  adapter: vercel(),
+  adapter: vercel({
+    isr: true,
+    includeFiles: SSR_FILES,
+  }),
   markdown: { rehypePlugins: [[rehypeExternalLinks, { rel: ["nofollow"] }]] },
   prefetch: true,
   trailingSlash: "never",
