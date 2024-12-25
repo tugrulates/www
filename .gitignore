@@ -4,6 +4,7 @@ public/files/
 # build output
 dist/
 .astro/
+.vercel/
 
 # dependencies
 node_modules/
