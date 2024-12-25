@@ -1,13 +1,14 @@
 import rss from "@astrojs/rss";
-import { AUTHOR, SITE } from "~/config.ts";
+import type { APIContext } from "astro";
+import { AUTHOR } from "~/config.ts";
 import { getPosts } from "~/content.ts";
 
-export async function GET(): Promise<Response> {
+export async function GET({ url }: APIContext): Promise<Response> {
   const posts = await getPosts();
   return await rss({
     title: "Tugrul Ates — Posts",
     description: "Posts by Tugrul Ates",
-    site: SITE.url,
+    site: url.origin,
     trailingSlash: false,
     items: posts.map((post) => ({
       link: post.id,

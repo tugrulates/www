@@ -1,25 +1,19 @@
-import type { InferGetStaticPropsType } from "astro";
-import { getPages, getPosts } from "~/content.ts";
+import type { APIContext } from "astro";
 import { getCover, getOpenGraphImage } from "~/image.ts";
+import { getEntry, NOT_FOUND } from "~/site.astro";
 
-export async function getStaticPaths() {
-  const [pages, posts] = await Promise.all([getPages(), getPosts()]);
-  return [...pages, ...posts].map((post) => ({
-    params: { post: post.id.replace(/^posts\//, "") },
-    props: {
-      title: post.data.title,
-      cover: post.data.cover,
-      cta: "Read more",
-      description: post.data.description,
-    },
-  }));
-}
+export const prerender = false;
 
-interface Input {
-  props: InferGetStaticPropsType<typeof getStaticPaths>;
-}
-
-export async function GET({ props }: Input): Promise<Response> {
-  const cover = await getCover(props.cover);
-  return await getOpenGraphImage({ ...props, image: cover.data.wide });
+export async function GET({ url, params }: APIContext) {
+  const post = await getEntry("posts", params.post ?? "") ??
+    await getEntry("pages", params.post ?? "");
+  if (!post) return NOT_FOUND;
+  const cover = await getCover(post.data.cover);
+  return await getOpenGraphImage({
+    site: new URL(url.origin),
+    image: cover.data.wide,
+    title: post.data.title,
+    cta: "Read more",
+    description: post.data.description,
+  });
 }

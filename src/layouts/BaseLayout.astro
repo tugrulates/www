@@ -7,10 +7,10 @@ import { SEO } from "astro-seo";
 import { ClientRouter } from "astro:transitions";
 import Footer from "~/components/Footer.astro";
 import Header from "~/components/Header.astro";
-import { AUTHOR, DIMENSIONS, SITE } from "~/config.ts";
+import { AUTHOR, DIMENSIONS } from "~/config.ts";
 import { formatDateIso } from "~/date.ts";
 import { getFavicon } from "~/pages/favicon.ico.ts";
-import { getChildUrl } from "~/url";
+import { getCanonicalUrl, getChildUrl } from "~/url.ts";
 
 interface Props {
   tab: string;
@@ -54,7 +54,7 @@ const favicon = await getFavicon(180);
                 title: `${title} — ${AUTHOR.name}`,
                 type: date !== undefined ? "article" : "website",
                 image: ogImage.href,
-                url: getChildUrl(SITE.url, Astro.url.pathname),
+                url: getCanonicalUrl(Astro.url),
               },
               optional: {
                 description,

@@ -1,10 +1,9 @@
 import { Field, Label, Switch } from "@headlessui/react";
-import type { JSX } from "react";
 import { type Dispatch, type SetStateAction, useEffect, useState } from "react";
 
 interface Props {
-  lightIcon?: JSX.Element;
-  darkIcon?: JSX.Element;
+  lightIcon?: React.JSX.Element;
+  darkIcon?: React.JSX.Element;
 }
 
 interface State {
@@ -20,10 +19,9 @@ function toggleTheme(
   localStorage.setItem("theme", JSON.stringify(newTheme));
 }
 
-export default function ThemeToggle({
-  lightIcon,
-  darkIcon,
-}: Props): JSX.Element {
+export default function ThemeToggle(
+  { lightIcon, darkIcon }: Props,
+): React.JSX.Element {
   const [theme, setTheme] = useState({ dark: true });
   const [isMounted, setIsMounted] = useState(false);
 

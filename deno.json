@@ -22,6 +22,9 @@
   "imports": {
     "~/": "./src/",
     "astro": "npm:astro",
+    "react": "npm:react",
+    "react-dom": "npm:react-dom",
+    "@types/react": "npm:@types/react",
     "events": "node:events",
     "fs": "node:fs",
     "os": "node:os",

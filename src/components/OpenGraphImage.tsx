@@ -1,9 +1,7 @@
-import type { JSX } from "react";
-import { DIMENSIONS } from "~/config.ts";
+import { DIMENSIONS, SITE } from "~/config.ts";
 
 interface Props {
   avatar: string;
-  url: URL;
   background: string;
   title: string;
   cta: string;
@@ -13,13 +11,12 @@ interface Props {
 
 export function OpenGraphImage({
   avatar,
-  url,
   background,
   title,
   cta,
   subtitle,
   description,
-}: Props): JSX.Element {
+}: Props): React.JSX.Element {
   const cardSize = DIMENSIONS.opengraph.height - 80;
   return (
     <div
@@ -47,9 +44,11 @@ export function OpenGraphImage({
           <img
             alt="Discarded JSX element"
             src={avatar}
-            tw={"w-12 h-12 rounded-full border border-black"}
+            width={48}
+            height={48}
+            tw={"rounded-full border border-black"}
           />
-          <span tw="px-4">{url.host}</span>
+          <span tw="px-4">{SITE.url.host}</span>
         </div>
         <div tw="flex flex-col items-center">
           <h1 tw="m-4" style={{ fontFamily: "Bold" }}>

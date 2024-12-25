@@ -1,14 +1,13 @@
 import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
-import type { JSX } from "react";
 import { createRef, useState } from "react";
 
 interface Props {
-  image?: JSX.Element;
-  openButton?: JSX.Element;
-  closeButton?: JSX.Element;
+  image?: React.JSX.Element;
+  openButton?: React.JSX.Element;
+  closeButton?: React.JSX.Element;
 }
 
-export default function PhotoViewer(props: Props): JSX.Element {
+export default function PhotoViewer(props: Props): React.JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
   const openButtonRef = createRef<HTMLButtonElement>();
   return (

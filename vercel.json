@@ -2,7 +2,7 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "astro",
   "installCommand": "npm install -g deno && deno install",
-  "buildCommand": "deno task build && mv .vercel/output/static/dist/* .vercel/output/static",
+  "buildCommand": "deno task build && mv .vercel/output/static/client/* .vercel/output/static",
   "cleanUrls": true,
   "headers": [
     {

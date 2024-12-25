@@ -1,12 +1,14 @@
-import { encodeBase64 } from "@jsr/std__encoding";
 import { join } from "@jsr/std__path";
-import type { ImageMetadata, LocalImageService } from "astro";
+import type { ImageMetadata } from "astro";
+import { readFile } from "node:fs/promises";
+import process from "node:process";
 import satori from "satori";
 import sharp from "sharp";
 import type { CoverMeta, CoverType } from "~/components/Cover.astro";
 import { OpenGraphImage } from "~/components/OpenGraphImage.tsx";
-import { DIMENSIONS, SITE } from "~/config.ts";
-import { getConfiguredImageService, getEntry, imageConfig } from "~/site.astro";
+import { DIMENSIONS } from "~/config.ts";
+import { getEntry } from "~/site.astro";
+import { getCanonicalUrl } from "~/url.ts";
 
 export async function getCover(cover: CoverType): Promise<CoverMeta> {
   if ("collection" in cover && cover.collection === "photos") {
@@ -23,54 +25,50 @@ export async function getCover(cover: CoverType): Promise<CoverMeta> {
   throw new Error(`Invalid cover: ${cover}`);
 }
 
-export async function getDefaultCover(): Promise<CoverMeta> {
-  const about = await getEntry("pages", "about");
-  return await getCover(about?.data.cover);
+async function fetchFont(
+  site: URL,
+  name: string,
+): Promise<{ name: string; data: ArrayBuffer }> {
+  const response = await fetch(
+    getCanonicalUrl(
+      site,
+      `fonts/FiraSans-${name}.ttf`,
+    ).href,
+  );
+  if (!response.ok) throw new Error(`Font not found: ${name}`);
+  const data = await response.arrayBuffer();
+  return { name, data };
 }
 
-export async function getOpenGraphImage(
-  data: {
-    title: string;
-    subtitle?: string;
-    description?: string;
-    image: ImageMetadata;
-    cta: string;
-  },
-): Promise<Response> {
-  const [avatarBuffer, imageBuffer, regularFontBuffer, boldFontBuffer] =
-    await Promise.all([
-      Deno.readFile("src/images/me-small.png"),
-      Deno.readFile(
-        data.image.src.startsWith("/@fs")
-          ? data.image.src.replace(/\/@fs/, "").replace(/\?[^?]*$/, "")
-          : join("dist", data.image.src),
-      ),
-      Deno.readFile(
-        "node_modules/@fontsource/fira-sans/files/fira-sans-latin-500-normal.woff",
-      ),
-      Deno.readFile(
-        "node_modules/@fontsource/fira-sans/files/fira-sans-latin-900-normal.woff",
-      ),
-    ]);
-  const avatar = `data:image/png;base64,${encodeBase64(avatarBuffer)}`;
-  const imageService = await getConfiguredImageService() as LocalImageService;
-  const resized = await imageService.transform(
-    imageBuffer,
-    { src: data.image.src, ...DIMENSIONS.opengraph, format: "jpeg" },
-    imageConfig,
-  );
-  const background = `data:image/${resized.format};base64,${
-    encodeBase64(resized.data)
-  }`;
+/**
+ * Return a JPEG response with an OpenGraph image.
+ *
+ * This function runs on Node.js.
+ */
+export async function getOpenGraphImage(data: {
+  site: URL;
+  title: string;
+  subtitle?: string;
+  description: string;
+  image: ImageMetadata;
+  cta: string;
+}): Promise<Response> {
+  const [avatar, regular, bold] = await Promise.all([
+    readFile(join(process.cwd(), "src/images/me-small.png")),
+    readFile(join(process.cwd(), "src/fonts/FiraSans-Regular.ttf")),
+    readFile(join(process.cwd(), "src/fonts/FiraSans-Bold.ttf")),
+  ]);
+  const background = getCanonicalUrl(data.site, data.image.src).href;
 
   const svg = await satori(
-    OpenGraphImage({ url: SITE.url, avatar, background, ...data }),
+    OpenGraphImage({
+      avatar: `data:image/png;base64,${avatar.toString("base64")}`,
+      background,
+      ...data,
+    }),
     {
       ...DIMENSIONS.opengraph,
-      fonts: [
-        { name: "Regular", data: regularFontBuffer, style: "normal" },
-        { name: "Bold", data: boldFontBuffer, style: "normal" },
-      ],
+      fonts: [{ name: "Regular", data: regular }, { name: "Bold", data: bold }],
     },
   );
 
@@ -78,5 +76,6 @@ export async function getOpenGraphImage(
     .resize(DIMENSIONS.opengraph.width, DIMENSIONS.opengraph.height)
     .jpeg({ quality: 95 })
     .toBuffer();
+
   return new Response(jpeg, { headers: { "Content-Type": "image/jpeg" } });
 }

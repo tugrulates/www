@@ -9,10 +9,17 @@ import { defineConfig, envField } from "astro/config";
 import rehypeExternalLinks from "rehype-external-links";
 import { SITE } from "./src/config.ts";
 
+const ENVIRONMENT = Deno.env.get("VERCEL_ENVIRONMENT");
+const HOST = Deno.env.get(
+  ENVIRONMENT === "production"
+    ? "VERCEL_PROJECT_PRODUCTION_URL"
+    : "VERCEL_BRANCH_URL",
+);
+
 // https://astro.build/config
 export default defineConfig({
   output: "static",
-  site: `https://${Deno.env.get("VERCEL_URL") ?? SITE.url.host}`,
+  site: HOST ? `https://${HOST}` : SITE.url.href,
   env: {
     schema: {
       DRAFTS: envField.boolean({
@@ -22,7 +29,14 @@ export default defineConfig({
       }),
     },
   },
-  adapter: vercel(),
+  adapter: vercel({
+    isr: true,
+    includeFiles: [
+      "src/images/me-small.png",
+      "src/fonts/FiraSans-Regular.ttf",
+      "src/fonts/FiraSans-Bold.ttf",
+    ],
+  }),
   markdown: { rehypePlugins: [[rehypeExternalLinks, { rel: ["nofollow"] }]] },
   prefetch: true,
   trailingSlash: "never",

@@ -1,15 +1,22 @@
-import { getOpenGraphImage } from "~/image.ts";
-import { DEFAULT_COVER as image } from "~/site.astro";
+import type { APIContext } from "astro";
+import { SITE } from "~/config.ts";
+import { getCover, getOpenGraphImage } from "~/image.ts";
+import { getEntry, NOT_FOUND } from "~/site.astro";
 
-export async function GET(): Promise<Response> {
-  return await getOpenGraphImage({
-    title: "Tugrul Ates",
-    subtitle: "Personal Website",
-    description: `
-      Hello! I am Tugrul Ates and I love technology, art, and everything in between.
-      This website is my digital canvas, where I share my thoughts, creations, and
-      experiences with the world.`,
-    image,
-    cta: "Visit",
-  });
+export const prerender = false;
+
+export async function GET({ url }: APIContext): Promise<Response> {
+  const about = await getEntry("pages", "about");
+  if (!about) return NOT_FOUND;
+  const cover = await getCover(about.data.cover);
+  return await getOpenGraphImage(
+    {
+      site: new URL(url.origin),
+      image: cover.data.wide,
+      title: SITE.title,
+      subtitle: SITE.description,
+      description: about?.data.description,
+      cta: "Visit",
+    },
+  );
 }
