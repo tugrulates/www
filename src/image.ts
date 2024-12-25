@@ -43,7 +43,7 @@ export async function getOpenGraphImage(
       Deno.readFile(
         data.image.src.startsWith("/@fs")
           ? data.image.src.replace(/\/@fs/, "").replace(/\?[^?]*$/, "")
-          : join("dist", data.image.src),
+          : join("dist/server", data.image.src),
       ),
       Deno.readFile(
         "node_modules/@fontsource/fira-sans/files/fira-sans-latin-500-normal.woff",
