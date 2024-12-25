@@ -55,6 +55,7 @@ export async function getOpenGraphImage(data: {
   const avatar = `data:image/png;base64,${me.toString("base64")}`;
   const background = data.image.src.startsWith("/@fs")
     ? getChildUrl(data.site, data.image.src).href
+    // Vercel deploy protection disallows fetching from preview deployments.
     : getCanonicalUrl(data.site, data.image.src).href;
 
   const svg = await satori(
