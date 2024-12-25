@@ -1,24 +1,6 @@
 import { SITE } from "~/config.ts";
 
 /**
- * Get the pathname of a URL without the leading slash.
- *
- * Example:
- * ```ts
- * import { assertEquals } from "jsr:@std/assert";
- * assertEquals(getRelativePathname(new URL("http://host/about")), "about");
- * assertEquals(getRelativePathname(new URL("http://host/")), "");
- * assertEquals(getRelativePathname(new URL("http://host")), "");
- * ```
- *
- * @param url Any URL.
- * @returns The pathname without the leading slash.
- */
-export function getRelativePathname(url: URL): string {
-  return url.pathname.replace(/^\//, "");
-}
-
-/**
  * Get the path of a full URL.
  *
  * Example:
@@ -35,7 +17,10 @@ export function getRelativePathname(url: URL): string {
  */
 export function getChildUrl(url: URL, ...path: string[]): URL {
   return new URL(
-    [getRelativePathname(url), ...path].join("/").replace(/^\//, ""),
+    [url.pathname, ...path]
+      .map((p) => p.replace(/^\//, ""))
+      .filter((p) => p)
+      .join("/"),
     url.origin,
   );
 }
@@ -57,9 +42,5 @@ export function getChildUrl(url: URL, ...path: string[]): URL {
  * @see SITE
  */
 export function getCanonicalUrl(url: URL, ...path: string[]): URL {
-  return getChildUrl(
-    new URL(SITE.url.origin),
-    getRelativePathname(url),
-    ...path,
-  );
+  return getChildUrl(new URL(SITE.url.origin), url.pathname, ...path);
 }

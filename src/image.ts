@@ -8,7 +8,7 @@ import type { CoverMeta, CoverType } from "~/components/Cover.astro";
 import { OpenGraphImage } from "~/components/OpenGraphImage.tsx";
 import { DIMENSIONS } from "~/config.ts";
 import { getEntry } from "~/site.astro";
-import { getCanonicalUrl } from "~/url.ts";
+import { getCanonicalUrl, getChildUrl } from "~/url.ts";
 
 export async function getCover(cover: CoverType): Promise<CoverMeta> {
   if ("collection" in cover && cover.collection === "photos") {
@@ -47,17 +47,17 @@ export async function getOpenGraphImage(data: {
   image: ImageMetadata;
   cta: string;
 }): Promise<Response> {
-  const [avatar, regular, bold] = await Promise.all([
+  const [me, regular, bold] = await Promise.all([
     readFile(join(process.cwd(), "src/images/me-small.png")),
     readFile(join(process.cwd(), "src/fonts/FiraSans-Regular.ttf")),
     readFile(join(process.cwd(), "src/fonts/FiraSans-Bold.ttf")),
   ]);
+  const avatar = `data:image/png;base64,${me.toString("base64")}`;
+  const background = data.image.src.startsWith("/@fs")
+    ? getChildUrl(data.site, data.image.src).href
+    : getCanonicalUrl(data.site, data.image.src).href;
   const svg = await satori(
-    OpenGraphImage({
-      avatar: `data:image/png;base64,${avatar.toString("base64")}`,
-      background: getCanonicalUrl(data.site, data.image.src),
-      ...data,
-    }),
+    OpenGraphImage({ avatar, background, ...data }),
     {
       ...DIMENSIONS.opengraph,
       fonts: [{ name: "Regular", data: regular }, { name: "Bold", data: bold }],
