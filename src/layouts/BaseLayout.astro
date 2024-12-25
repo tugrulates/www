@@ -7,10 +7,10 @@ import { SEO } from "astro-seo";
 import { ClientRouter } from "astro:transitions";
 import Footer from "~/components/Footer.astro";
 import Header from "~/components/Header.astro";
-import { AUTHOR, DIMENSIONS, SITE } from "~/config.ts";
+import { AUTHOR, DIMENSIONS } from "~/config.ts";
 import { formatDateIso } from "~/date.ts";
 import { getFavicon } from "~/pages/favicon.ico.ts";
-import { getCanonicalUrl, getChildUrl, getRelativePathname } from "~/url.ts";
+import { getCanonicalUrl, getChildUrl } from "~/url.ts";
 
 interface Props {
   tab: string;
@@ -32,9 +32,7 @@ const {
   class: className,
 } = Astro.props;
 
-const ogImage = getChildUrl(SITE.url, "og.jpg");
-const ogPath = getRelativePathname(Astro.url);
-if (ogPath) ogImage.searchParams.set("path", ogPath);
+const ogImage = getChildUrl(Astro.url, "og.jpg");
 
 const appleTouchIcon = await getFavicon(180);
 const favicon = await getFavicon(180);
