@@ -1,13 +1,13 @@
+import {
+  ImageMagick,
+  type IMagickImage,
+  initializeImageMagick,
+  MagickFormat,
+} from "@imagemagick/magick-wasm";
 import { encodeBase64 } from "@jsr/std__encoding";
 import { exists } from "@jsr/std__fs";
 import { join } from "@jsr/std__path";
 import type { ImageMetadata, LocalImageService } from "astro";
-import {
-  ImageMagick,
-  type IMagickImage,
-  initialize as initializeImageMagick,
-  MagickFormat,
-} from "https://deno.land/x/imagemagick_deno@0.0.31/mod.ts";
 import satori from "satori";
 import { OpenGraphImage } from "~/components/OpenGraphImage.tsx";
 import { DIMENSIONS } from "~/config.ts";
@@ -19,6 +19,9 @@ import {
 } from "~/site.astro";
 
 export const prerender = false;
+
+export const IMAGEMAGICK_WASM =
+  "https://cdn.jsdelivr.net/npm/@imagemagick/magick-wasm@0.0.32/dist/magick.wasm";
 
 async function getOpenGraphImage(
   data: {
@@ -60,11 +63,7 @@ async function getOpenGraphImage(
     ],
   });
 
-  await initializeImageMagick();
-  // const jpeg = await sharp(new TextEncoder().encode(svg))
-  //   .resize(DIMENSIONS.opengraph.width, DIMENSIONS.opengraph.height)
-  //   .jpeg({ quality: 95 })
-  //   .toBuffer();
+  await initializeImageMagick(IMAGEMAGICK_WASM);
   const jpeg = await ImageMagick.read(
     new TextEncoder().encode(svg),
     async (img: IMagickImage) => {
