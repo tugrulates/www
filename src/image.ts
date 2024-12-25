@@ -38,8 +38,12 @@ export async function getOpenGraphImage(data: {
   const background = getChildUrl(data.site, data.image.src);
   const avatar = getChildUrl(data.site, AVATAR.src);
 
+  console.log(
+    "Fetching fonts...",
+    getChildUrl(data.site, "fonts/FiraSans-Regular.ttf"),
+  );
   const [regular, bold] = await Promise.all(
-    ["/fonts/FiraSans-Regular.ttf", "/fonts/FiraSans-Bold.ttf"].map(
+    ["fonts/FiraSans-Regular.ttf", "fonts/FiraSans-Bold.ttf"].map(
       async (f) => await (await fetch(getChildUrl(data.site, f))).arrayBuffer(),
     ),
   );
