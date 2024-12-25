@@ -25,15 +25,6 @@ export async function getCover(cover: CoverType): Promise<CoverMeta> {
   throw new Error(`Invalid cover: ${cover}`);
 }
 
-async function getFont(
-  name: string,
-): Promise<{ name: string; data: ArrayBuffer }> {
-  const data = await readFile(
-    join(process.cwd(), `/public/fonts/FiraSans-${name}.ttf`),
-  );
-  return { name, data };
-}
-
 /**
  * Return a JPEG response with an OpenGraph image.
  *
