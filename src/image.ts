@@ -1,6 +1,8 @@
 import { encodeBase64 } from "@jsr/std__encoding";
+import { join } from "@jsr/std__path";
 import type { ImageMetadata, LocalImageService } from "astro";
 import { readFile } from "node:fs/promises";
+import process from "node:process";
 import satori from "satori";
 import sharp from "sharp";
 import type { CoverMeta, CoverType } from "~/components/Cover.astro";
@@ -48,13 +50,19 @@ export async function getOpenGraphImage(data: {
 }): Promise<Response> {
   const [avatarBuffer, imageBuffer, regularFontBuffer, boldFontBuffer] =
     await Promise.all([
-      readFile("src/images/me-small.png"),
+      readFile(join(process.cwd(), "src/images/me-small.png")),
       await getImageBuffer(data.image.src),
       readFile(
-        "node_modules/@fontsource/fira-sans/files/fira-sans-latin-500-normal.woff",
+        join(
+          process.cwd(),
+          "node_modules/@fontsource/fira-sans/files/fira-sans-latin-500-normal.woff",
+        ),
       ),
       readFile(
-        "node_modules/@fontsource/fira-sans/files/fira-sans-latin-900-normal.woff",
+        join(
+          process.cwd(),
+          "node_modules/@fontsource/fira-sans/files/fira-sans-latin-900-normal.woff",
+        ),
       ),
     ]);
 
