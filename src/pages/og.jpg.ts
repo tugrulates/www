@@ -1,18 +1,8 @@
 import { join } from "@jsr/std__path";
-import { readFile } from "node:fs/promises";
+import { SITE } from "~/config.ts";
+import { getChildUrl } from "~/url.ts";
 
 export const prerender = false;
-
-async function getMetadata(path: string): Promise<string | null> {
-  try {
-    const metadata = await readFile(join(path, "metadata.json"), "utf-8");
-    console.log("Found at", path);
-    return JSON.parse(metadata);
-  } catch {
-    console.log("Not found at", path);
-    return null;
-  }
-}
 
 interface Input {
   request: Request;
@@ -20,17 +10,10 @@ interface Input {
 
 export async function GET({ request }: Input): Promise<Response> {
   const path = new URL(request.url).searchParams.get("path") ?? "";
-  const metadata = (await getMetadata(path)) ??
-    (await getMetadata(join("dist/client", path))) ??
-    (await getMetadata(join("client", path))) ??
-    (await getMetadata(join("../client", path))) ??
-    (await getMetadata(join("server", path))) ??
-    (await getMetadata(join("../server", path))) ??
-    (await getMetadata(join("static/server", path))) ??
-    (await getMetadata(join("static/client", path))) ??
-    (await getMetadata(join("../static/server", path))) ??
-    (await getMetadata(join("../static/client", path)));
-  if (!metadata) return new Response("Not found", { status: 404 });
+  const url = getChildUrl(SITE.url, join(path, "metadata.json"));
+  const response = await fetch(url);
+  if (!response.ok) return new Response("Not found", { status: 404 });
+  const metadata = await response.json();
   // return await getOpenGraphImage({
   //   title: "Tugrul Ates",
   //   subtitle: "Personal Website",
