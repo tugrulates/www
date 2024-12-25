@@ -35,7 +35,7 @@ export function getRelativePathname(url: URL): string {
  */
 export function getChildUrl(url: URL, ...path: string[]): URL {
   return new URL(
-    [getRelativePathname(url), ...path].join("/"),
+    [getRelativePathname(url), ...path].join("/").replace(/^\//, ""),
     url.origin,
   );
 }

@@ -1,6 +1,5 @@
 import { encodeBase64 } from "@jsr/std__encoding";
 import type { APIRoute, LocalImageService } from "astro";
-import { join } from "path";
 import satori from "satori";
 import sharp from "sharp";
 import type { CoverMeta } from "~/components/Cover.astro";
@@ -14,6 +13,7 @@ import {
   imageConfig,
   type Metadata,
 } from "~/site.astro";
+import { getChildUrl } from "~/url.ts";
 
 export const prerender = false;
 
@@ -28,18 +28,19 @@ async function getDefaultCover(): Promise<CoverMeta> {
   return await getCover(about?.data.cover);
 }
 
+async function getImageBuffer(image: string): Promise<Uint8Array | null> {
+  const response = await fetch(getChildUrl(SITE.url, image));
+  if (!response.ok) return null;
+  return new Uint8Array(await response.arrayBuffer());
+}
+
 async function getOpenGraphImage(metadata: Metadata): Promise<Response> {
   const image = (metadata.cover ?? await getDefaultCover()).data.wide;
-  const cta = getCta(metadata);
 
   const [avatarBuffer, imageBuffer, regularFontBuffer, boldFontBuffer] =
     await Promise.all([
       Deno.readFile("src/images/me-small.png"),
-      Deno.readFile(
-        image.src.startsWith("/@fs")
-          ? image.src.replace(/\/@fs/, "").replace(/\?[^?]*$/, "")
-          : join("dist/client", image.src),
-      ),
+      await getImageBuffer(image.src),
       Deno.readFile(
         "node_modules/@fontsource/fira-sans/files/fira-sans-latin-500-normal.woff",
       ),
@@ -47,6 +48,9 @@ async function getOpenGraphImage(metadata: Metadata): Promise<Response> {
         "node_modules/@fontsource/fira-sans/files/fira-sans-latin-900-normal.woff",
       ),
     ]);
+
+  if (!imageBuffer) return new Response("Not found", { status: 404 });
+
   const avatar = `data:image/png;base64,${encodeBase64(avatarBuffer)}`;
   const imageService = await getConfiguredImageService() as LocalImageService;
   const resized = await imageService.transform(
@@ -60,11 +64,11 @@ async function getOpenGraphImage(metadata: Metadata): Promise<Response> {
 
   const svg = await satori(
     OpenGraphImage({
+      ...metadata.data,
       url: SITE.url,
       avatar,
       background,
-      cta,
-      ...metadata.data,
+      cta: getCta(metadata),
     }),
     {
       ...DIMENSIONS.opengraph,
