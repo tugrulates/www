@@ -25,21 +25,6 @@ export async function getCover(cover: CoverType): Promise<CoverMeta> {
   throw new Error(`Invalid cover: ${cover}`);
 }
 
-async function fetchFont(
-  site: URL,
-  name: string,
-): Promise<{ name: string; data: ArrayBuffer }> {
-  const response = await fetch(
-    getCanonicalUrl(
-      site,
-      `fonts/FiraSans-${name}.ttf`,
-    ).href,
-  );
-  if (!response.ok) throw new Error(`Font not found: ${name}`);
-  const data = await response.arrayBuffer();
-  return { name, data };
-}
-
 /**
  * Return a JPEG response with an OpenGraph image.
  *
