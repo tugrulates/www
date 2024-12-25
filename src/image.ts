@@ -1,6 +1,6 @@
 import { encodeBase64 } from "@jsr/std__encoding";
 import { join } from "@jsr/std__path";
-import { ImageMetadata } from "astro";
+import type { ImageMetadata, LocalImageService } from "astro";
 import { readFile } from "node:fs/promises";
 import process from "node:process";
 import satori from "satori";
@@ -8,7 +8,7 @@ import sharp from "sharp";
 import type { CoverMeta, CoverType } from "~/components/Cover.astro";
 import { OpenGraphImage } from "~/components/OpenGraphImage.tsx";
 import { DIMENSIONS, SITE } from "~/config.ts";
-import { getEntry } from "~/site.astro";
+import { getConfiguredImageService, getEntry, imageConfig } from "~/site.astro";
 import { getChildUrl } from "~/url.ts";
 
 export async function getCover(cover: CoverType): Promise<CoverMeta> {
@@ -57,8 +57,16 @@ export async function getOpenGraphImage(data: {
       readFile(join(process.cwd(), "public/fonts/fira-sans-900.woff")),
     ]);
   if (!imageBuffer) return new Response("Not found", { status: 404 });
+
+  const imageService = await getConfiguredImageService() as LocalImageService;
+  const resized = await imageService.transform(
+    imageBuffer,
+    { src: data.image.src, ...DIMENSIONS.opengraph, format: "jpeg" },
+    imageConfig,
+  );
+
   const avatar = `data:image/png;base64,${encodeBase64(avatarBuffer)}`;
-  const background = `data:image/jpeg;base64,${encodeBase64(imageBuffer)}`;
+  const background = `data:image/jpeg;base64,${encodeBase64(resized.data)}`;
   const svg = await satori(
     OpenGraphImage({ url: SITE.url, avatar, background, ...data }),
     {
@@ -73,5 +81,6 @@ export async function getOpenGraphImage(data: {
     .resize(DIMENSIONS.opengraph.width, DIMENSIONS.opengraph.height)
     .jpeg({ quality: 95 })
     .toBuffer();
+
   return new Response(jpeg, { headers: { "Content-Type": "image/jpeg" } });
 }

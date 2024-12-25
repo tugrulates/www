@@ -1,4 +1,4 @@
-import { APIContext } from "astro";
+import type { APIContext } from "astro";
 import { formatDate } from "~/date.ts";
 import { getOpenGraphImage } from "~/image.ts";
 import { getEntry } from "~/site.astro";
