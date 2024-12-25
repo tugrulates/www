@@ -38,10 +38,10 @@ export async function getOpenGraphImage(data: {
   image: ImageMetadata;
   cta: string;
 }): Promise<Response> {
-  const [avatarBuffer, imageBuffer, regularFontBuffer, boldFontBuffer] =
+  const [imageBuffer, avatarBuffer, regularFontBuffer, boldFontBuffer] =
     await Promise.all([
+      getImageBuffer(data.image.src),
       readFile(join(process.cwd(), "src/images/me-small.png")),
-      await getImageBuffer(data.image.src),
       readFile(join(process.cwd(), FONT, "fira-sans-latin-500-normal.woff")),
       readFile(join(process.cwd(), FONT, "fira-sans-latin-900-normal.woff")),
     ]);
