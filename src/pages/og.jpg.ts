@@ -2,10 +2,16 @@ import { encodeBase64 } from "@jsr/std__encoding";
 import { exists } from "@jsr/std__fs";
 import { join } from "@jsr/std__path";
 import type { ImageMetadata, LocalImageService } from "astro";
+import {
+  ImageMagick,
+  type IMagickImage,
+  initialize as initializeImageMagick,
+  MagickFormat,
+} from "https://deno.land/x/imagemagick_deno@0.0.31/mod.ts";
 import satori from "satori";
-import sharp from "sharp";
 import { OpenGraphImage } from "~/components/OpenGraphImage.tsx";
 import { DIMENSIONS } from "~/config.ts";
+import { getDefaultCover } from "~/image.ts";
 import {
   getConfiguredImageService,
   imageConfig,
@@ -42,9 +48,9 @@ async function getOpenGraphImage(
     { src: data.image.src, ...DIMENSIONS.opengraph, format: "jpeg" },
     imageConfig,
   );
-  const background = `data:image/${
-    data.image.format.replace("jpg", "jpeg")
-  };base64,${encodeBase64(resized.data)}`;
+  const background = `data:image/${resized.format};base64,${
+    encodeBase64(resized.data)
+  }`;
 
   const svg = await satori(OpenGraphImage({ avatar, background, ...data }), {
     ...DIMENSIONS.opengraph,
@@ -54,10 +60,24 @@ async function getOpenGraphImage(
     ],
   });
 
-  const jpeg = await sharp(new TextEncoder().encode(svg))
-    .resize(DIMENSIONS.opengraph.width, DIMENSIONS.opengraph.height)
-    .jpeg({ quality: 95 })
-    .toBuffer();
+  await initializeImageMagick();
+  // const jpeg = await sharp(new TextEncoder().encode(svg))
+  //   .resize(DIMENSIONS.opengraph.width, DIMENSIONS.opengraph.height)
+  //   .jpeg({ quality: 95 })
+  //   .toBuffer();
+  const jpeg = await ImageMagick.read(
+    new TextEncoder().encode(svg),
+    async (img: IMagickImage) => {
+      img.resize(DIMENSIONS.opengraph.width, DIMENSIONS.opengraph.height);
+      return await img.write(
+        MagickFormat.Jpeg,
+        async (data: Uint8Array) => {
+          await Promise.resolve();
+          return data;
+        },
+      );
+    },
+  );
   return new Response(jpeg, { headers: { "Content-Type": "image/jpeg" } });
 }
 
@@ -78,12 +98,11 @@ export async function GET({ request }: Input): Promise<Response> {
   const file = join("dist/client", path, "metadata.json");
   if (!await exists(file)) return new Response("Not found", { status: 404 });
   const metadata = JSON.parse(await Deno.readTextFile(file)) as Metadata;
-  return new Response(JSON.stringify(metadata));
 
-  // return await getOpenGraphImage({
-  //   url,
-  //   ...metadata.data,
-  //   image: (metadata.cover ?? await getDefaultCover())?.data.wide,
-  //   cta: getCTA(metadata),
-  // });
+  return await getOpenGraphImage({
+    url,
+    ...metadata.data,
+    image: (metadata.cover ?? await getDefaultCover())?.data.wide,
+    cta: getCTA(metadata),
+  });
 }
