@@ -4,23 +4,19 @@
  * Example:
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
- * const path = getUrl(new URL("http://localhost/about"), "photography", "feed");
- * assertEquals(path.href, "http://localhost/photography/feed");
+ * assertEquals(getChildUrl(new URL("http://host"), "/about").href, "http://host/about");
+ * assertEquals(getChildUrl(new URL("http://host"), "feed").href, "http://host/feed");
+ * assertEquals(getChildUrl(new URL("http://host/about"), "feed").href, "http://host/about/feed");
+ * assertEquals(getChildUrl(new URL("http://host/"), "about", "feed").href, "http://host/about/feed");
  * ```
  *
- * ```ts
- * import { assertEquals } from "jsr:@std/assert";
- * const path = getUrl(new URL("http://localhost/"), "about", "metadata.json");
- * assertEquals(path.href, "http://localhost/about/metadata.json");
- * ```
- *
- * @param url Any URL containing the protocol and host. Pathname is ignored
- * @param path The path segments.
- * @returns The path of the URL with the site domain.
+ * @param url Any URL containing the protocol and host, and optional pathname.
+ * @param path The additional path segments.
+ * @returns The new URL with child paths.
  */
-export function getUrl(url: URL, ...path: string[]): URL {
+export function getChildUrl(url: URL, ...path: string[]): URL {
   return new URL(
-    path.join("/").replace(/^\//, ""),
+    [url.pathname, ...path].join("/").replace(/^\//, "").replace(/^\//, ""),
     `${url.protocol}${url.host}`,
   );
 }
