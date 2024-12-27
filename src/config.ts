@@ -56,3 +56,27 @@ export const DIMENSIONS = {
     height: 675,
   },
 } as const;
+
+export const HEADERS = [
+  // CSP headers
+  {
+    source: /\/(.*)/,
+    headers: {
+      "Content-Security-Policy":
+        "default-src 'none'; connect-src 'self' https://vercel.live https://*.pusher.com wss://*.pusher.com; font-src 'self' https://vercel.live https://*.vercel.com https://fonts.gstatic.com; frame-src 'self' https://vercel.live https://www.youtube-nocookie.com; img-src 'self' data: https://vercel.com https://i.ytimg.com; manifest-src 'self'; script-src 'self' 'unsafe-inline' https://vercel.live; style-src 'self' 'unsafe-inline' https://vercel.live; base-uri 'none'; form-action 'none'; frame-ancestors 'none';",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security":
+        "max-age=31536001; includeSubDomains; preload",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "DENY",
+      "X-XSS-Protection": "1; mode=block",
+    },
+  },
+  // Cache headers
+  {
+    source: /\/_astro\/(.*)/,
+    headers: {
+      "Cache-Control": "public, max-age=31536000, immutable",
+    },
+  },
+];
