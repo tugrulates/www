@@ -1,6 +1,8 @@
 import { SITE } from "~/config.ts";
 import { getFavicon } from "~/pages/favicon.ico.ts";
 
+export const prerender = true;
+
 const faviconPngSizes = [192, 512];
 
 export async function GET(): Promise<Response> {

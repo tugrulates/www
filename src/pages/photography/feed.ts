@@ -3,6 +3,8 @@ import type { APIContext } from "astro";
 import { AUTHOR } from "~/config.ts";
 import { getPhotos } from "~/content.ts";
 
+export const prerender = true;
+
 export async function GET({ url }: APIContext): Promise<Response> {
   const photos = await getPhotos();
   return await rss({

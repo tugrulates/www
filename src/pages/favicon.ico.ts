@@ -4,6 +4,8 @@ import sharp from "sharp";
 import ico from "sharp-ico";
 import { AVATAR, getImage } from "~/site.astro";
 
+export const prerender = true;
+
 async function getFaviconIco(): Promise<Buffer> {
   const buffer = await sharp("src/images/me.png")
     .resize(32)

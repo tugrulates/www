@@ -3,6 +3,8 @@ import Photo from "~/components/Photo.astro";
 import { getPhotos } from "~/content.ts";
 import FeedLayout from "~/layouts/FeedLayout.astro";
 
+export const prerender = true;
+
 const photos = await getPhotos();
 ---
 
