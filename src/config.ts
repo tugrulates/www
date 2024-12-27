@@ -72,11 +72,4 @@ export const HEADERS = [
       "X-XSS-Protection": "1; mode=block",
     },
   },
-  // Cache headers
-  {
-    source: /\/_astro\/(.*)/,
-    headers: {
-      "Cache-Control": "public, max-age=31536000, immutable",
-    },
-  },
 ];
