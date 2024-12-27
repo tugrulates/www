@@ -1,8 +1,7 @@
-import { APIContext, MiddlewareNext } from "astro";
 import { HEADERS } from "~/config.ts";
-import { sequence } from "~/site.astro";
+import { defineMiddleware, sequence } from "~/middleware.astro";
 
-async function addHeaders(context: APIContext, next: MiddlewareNext) {
+const addHeaders = defineMiddleware(async (context, next) => {
   const response = await next();
   const path = new URL(context.url).pathname;
   for (const headers of HEADERS.filter((h) => h.source.test(path))) {
@@ -11,6 +10,6 @@ async function addHeaders(context: APIContext, next: MiddlewareNext) {
     }
   }
   return response;
-}
+});
 
 export const onRequest = sequence(addHeaders);
