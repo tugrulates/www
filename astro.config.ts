@@ -11,7 +11,7 @@ import { SITE } from "./src/config.ts";
 
 // https://astro.build/config
 export default defineConfig({
-  output: "server",
+  output: "static",
   site: SITE.url.href,
   env: {
     schema: {
