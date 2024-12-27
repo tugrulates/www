@@ -7,8 +7,6 @@ import { getPhotos } from "~/content.ts";
 import { formatDate } from "~/date.ts";
 import ArticleLayout from "~/layouts/ArticleLayout.astro";
 
-export const prerender = true;
-
 export async function getStaticPaths() {
   const photos = await getPhotos();
   return photos.map((photo) => ({
