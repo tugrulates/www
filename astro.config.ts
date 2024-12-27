@@ -24,6 +24,7 @@ export default defineConfig({
   },
   adapter: vercel({
     isr: true,
+    edgeMiddleware: true,
     includeFiles: [
       "src/images/me-small.png",
       "src/fonts/FiraSans-Regular.ttf",

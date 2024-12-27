@@ -6,7 +6,6 @@ async function addHeaders(context: APIContext, next: MiddlewareNext) {
   const response = await next();
   const path = new URL(context.url).pathname;
   for (const headers of HEADERS.filter((h) => h.source.test(path))) {
-    console.log(headers.source);
     for (const [key, value] of Object.entries(headers.headers)) {
       response.headers.set(key, value);
     }
