@@ -2,6 +2,7 @@ import { APIContext, MiddlewareNext } from "astro";
 import { sequence } from "~/site.astro";
 
 const HEADERS = [
+  // CSP headers
   {
     source: /\/(.*)/,
     headers: {
@@ -13,6 +14,7 @@ const HEADERS = [
       "X-XSS-Protection": "1; mode=block",
     },
   },
+  // Cache headers
   {
     source: /\/_astro\/(.*)/,
     headers: {
