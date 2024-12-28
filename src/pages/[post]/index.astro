@@ -1,7 +1,7 @@
 ---
 import { type InferGetStaticPropsType } from "astro";
 import { render } from "astro:content";
-import Cover, { type CoverType } from "~/components/Cover.astro";
+import Cover from "~/components/Cover.astro";
 import License from "~/components/License.astro";
 import { getPages, getPosts } from "~/content.ts";
 import { getCover } from "~/image.ts";
@@ -28,7 +28,7 @@ const { post, license }: Props = Astro.props;
 const posts = await getPosts();
 const index = posts.findIndex((other) => other.id === post.id);
 const { Content } = await render(post);
-const cover = await getCover(post.data.cover as CoverType);
+const cover = await getCover(post.data.cover);
 ---
 
 <ArticleLayout

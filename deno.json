@@ -36,5 +36,6 @@
     "lib": ["deno.ns", "dom"],
     "jsx": "react-jsx",
     "jsxImportSource": "react"
-  }
+  },
+  "unstable": ["sloppy-imports"]
 }
