@@ -1,34 +1,39 @@
 ---
-import { type InferGetStaticPropsType } from "astro";
 import { render } from "astro:content";
-import Cover, { type CoverType } from "~/components/Cover.astro";
+import Cover from "~/components/Cover.astro";
 import License from "~/components/License.astro";
-import { getPages, getPosts } from "~/content.ts";
+import { getPosts } from "~/content.ts";
 import { getCover } from "~/image.ts";
 import ArticleLayout from "~/layouts/ArticleLayout.astro";
+import { NOT_FOUND } from "~/site.astro";
 
-export async function getStaticPaths() {
-  const pages = await getPages();
-  const posts = await getPosts();
-  return [
-    ...pages.map((page) => ({
-      params: { post: page.id },
-      props: { post: page, license: false },
-    })),
-    ...posts.map((post) => ({
-      params: { post: post.id.replace(/^posts\//, "") },
-      props: { post, license: true },
-    })),
-  ];
-}
+export const prerender = false;
 
-type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+// export async function getStaticPaths() {
+//   const pages = await getPages();
+//   const posts = await getPosts();
+//   return [
+//     ...pages.map((page) => ({
+//       params: { post: page.id },
+//       props: { post: page, license: false },
+//     })),
+//     ...posts.map((post) => ({
+//       params: { post: post.id.replace(/^posts\//, "") },
+//       props: { post, license: true },
+//     })),
+//   ];
+// }
 
-const { post, license }: Props = Astro.props;
+// type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+// const { post, license }: Props = Astro.props;
 const posts = await getPosts();
-const index = posts.findIndex((other) => other.id === post.id);
+const index = posts.findIndex((other) => other.id === Astro.params.post);
+if (index === -1) return NOT_FOUND;
+const post = posts[index];
+const license = post.collection === "posts";
 const { Content } = await render(post);
-const cover = await getCover(post.data.cover as CoverType);
+const cover = await getCover(post.data.cover);
 ---
 
 <ArticleLayout

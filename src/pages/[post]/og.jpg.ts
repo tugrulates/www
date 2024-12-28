@@ -5,8 +5,9 @@ import { getEntry, NOT_FOUND } from "~/site.astro";
 export const prerender = false;
 
 export async function GET({ url, params }: APIContext) {
-  const post = await getEntry("posts", params.post ?? "") ??
-    await getEntry("pages", params.post ?? "");
+  if (!params.post) return NOT_FOUND;
+  const post = await getEntry("posts", params.post) ??
+    await getEntry("pages", params.post);
   if (!post) return NOT_FOUND;
   const cover = await getCover(post.data.cover);
   return await getOpenGraphImage({

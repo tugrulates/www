@@ -1,5 +1,4 @@
 ---
-import { type InferGetStaticPropsType } from "astro";
 import Cover from "~/components/Cover.astro";
 import License from "~/components/License.astro";
 import { AUTHOR, SITE } from "~/config.ts";
@@ -7,19 +6,23 @@ import { getPhotos } from "~/content.ts";
 import { formatDate } from "~/date.ts";
 import ArticleLayout from "~/layouts/ArticleLayout.astro";
 
-export async function getStaticPaths() {
-  const photos = await getPhotos();
-  return photos.map((photo) => ({
-    params: { photo: photo.id },
-    props: { photo },
-  }));
-}
+export const prerender = false;
 
-type Props = InferGetStaticPropsType<typeof getStaticPaths>;
-const { photo } = Astro.props;
-const date: Date = photo.data.date;
+// export async function getStaticPaths() {
+//   const photos = await getPhotos();
+//   return photos.map((photo) => ({
+//     params: { photo: photo.id },
+//     props: { photo },
+//   }));
+// }
+
+// type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+// const { photo } = Astro.props;
 const photos = await getPhotos();
-const index = photos.findIndex((other) => other.id === photo.id);
+const index = photos.findIndex((p) => p.id === Astro.params.photo);
+if (index === -1) return NOT_FOUND;
+const photo = photos[index];
+const date: Date = photo.data.date;
 ---
 
 <ArticleLayout

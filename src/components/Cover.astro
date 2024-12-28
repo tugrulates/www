@@ -1,7 +1,6 @@
 ---
 import { type ImageMetadata } from "astro";
 import { Image } from "astro:assets";
-import type { CollectionEntry } from "astro:content";
 import { fade } from "astro:transitions";
 import CoverButton from "~/components/CoverButton.astro";
 import CoverImage from "~/components/CoverImage.astro";
@@ -18,7 +17,7 @@ export interface CoverMeta {
   data: CoverData;
 }
 
-export type CoverType = CollectionEntry<"photos"> | CoverData;
+export type CoverType = CoverData | { id: string; collection: "photos" };
 
 interface Props {
   image: CoverMeta;
