@@ -4918,6 +4918,7 @@
         "npm:astro-robots-txt@1",
         "npm:astro-seo@~0.8.4",
         "npm:astro@^5.1.1",
+        "npm:dist-exiftool@^10.53.0",
         "npm:globals@^15.13.0",
         "npm:react-dom@19",
         "npm:react@19",
