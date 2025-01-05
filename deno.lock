@@ -31,6 +31,7 @@
     "npm:astro@*": "5.1.2_@types+node@22.5.4_vite@6.0.7__@types+node@22.5.4_zod@3.24.1",
     "npm:astro@5.1.2": "5.1.2_@types+node@22.5.4_vite@6.0.7__@types+node@22.5.4_zod@3.24.1",
     "npm:astro@^5.1.1": "5.1.2_@types+node@22.5.4_vite@6.0.7__@types+node@22.5.4_zod@3.24.1",
+    "npm:dist-exiftool@^10.53.0": "10.53.0",
     "npm:globals@^15.13.0": "15.14.0",
     "npm:react-dom@*": "19.0.0_react@19.0.0",
     "npm:react-dom@19": "19.0.0_react@19.0.0",
@@ -2016,6 +2017,14 @@
     "diff@5.2.0": {
       "integrity": "sha512-uIFDxqpRZGZ6ThOk84hEfqWoHx2devRFvpTZcTHur85vImfaxUbTW9Ryh4CpCuDnToOP1CEtXKIgytHBPVff5A=="
     },
+    "dist-exiftool@10.53.0": {
+      "integrity": "sha512-rWjalcN4eU76iA1wwQjXpdPgiNq8k3cbV+YvXdoJVsnYTVTTtRogY9bbHDhMtU76mFv46JkFuQzZkIsSkf6xfA==",
+      "dependencies": [
+        "exiftool.exe",
+        "exiftool.pl",
+        "platform-dependent-modules"
+      ]
+    },
     "dlv@1.1.3": {
       "integrity": "sha512-+HlytyjlPKnIG8XuRG8WvmBP8xs8P71y+SKKS6ZXWoEgLuePxtDoUEiH7WkdePWrQ5JBpE6aoVqfZfJUQkjXwA=="
     },
@@ -2230,6 +2239,12 @@
     },
     "eventemitter3@5.0.1": {
       "integrity": "sha512-GWkBvjiSZK87ELrYOSESUYeVIc9mvLLf/nXalMOS5dYrgZq9o5OVkbZAVM06CVxYsCwH9BDZFPlQTlPA1j4ahA=="
+    },
+    "exiftool.exe@10.53.0": {
+      "integrity": "sha512-+79RKU+qass902BldGmxTmIfIiEnzYc57JiYawVDu2/Alu20AgsZpyBspdWFENX+xcmFKLLvc8ZcuIxbEiqnSw=="
+    },
+    "exiftool.pl@10.53.0": {
+      "integrity": "sha512-IgCT0YmeZAzQK9OVZAXBUIZQ1HU2Ml12mwqyzKKyATqVxUwUghnqS7+gSUzmbfsJsQ1k6uV1OboDPGn7Y4bi5A=="
     },
     "extend@3.0.2": {
       "integrity": "sha512-fjquC59cD7CyW6urNXK0FBufkZcoiGG80wTuPujX590cB5Ttln20E2UB4S/WARVqhXffZl2LNgS+gQdPIIim/g=="
@@ -3674,6 +3689,9 @@
         "mlly",
         "pathe"
       ]
+    },
+    "platform-dependent-modules@0.0.14": {
+      "integrity": "sha512-6nOD+RSVmI5Xu1bD8DWetQ3rlgyPq4n5j5esDXn5H+J2XBTvK6t51DP/NZH5CvIlGw3VmOu+7R+WhbYoBDcNEA=="
     },
     "postcss-import@15.1.0_postcss@8.4.49": {
       "integrity": "sha512-hpr+J05B2FVYUAXHeK1YyI267J/dDDhMU6B6civm8hSY1jYJnBXxzKDKDswzJmtLHryrjhnDjqqp/49t8FALew==",
