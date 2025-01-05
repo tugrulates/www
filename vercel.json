@@ -1,8 +1,8 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "astro",
-  "installCommand": "npm install -g deno && deno install",
-  "buildCommand": "deno task build && apt install exiftool && mv .vercel/output/static/client/* .vercel/output/static",
+  "installCommand": "apt install exiftool && npm install -g deno && deno install",
+  "buildCommand": "deno task build && mv .vercel/output/static/client/* .vercel/output/static",
   "cleanUrls": true,
   "headers": [
     {
