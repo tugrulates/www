@@ -1,8 +1,12 @@
 ---
+import { expandGlob } from "@jsr/std__fs";
+import { basename } from "@jsr/std__path";
+import { getPhoto } from "@jsr/tugrulates__photos";
 import { glob } from "astro/loaders";
 import { defineCollection, reference, z } from "astro:content";
 import DEFAULT_COVER from "content/pages/images/rijksmuseum-wide.jpg";
 import AVATAR from "~/images/me.png";
+
 export { getConfiguredImageService, getImage, imageConfig } from "astro:assets";
 export { getCollection, getEntry, type CollectionEntry } from "astro:content";
 
@@ -55,7 +59,23 @@ export const collections = {
       }),
   }),
   photos: defineCollection({
-    loader: glob({ pattern: "**/index.json", base: "./content/photos" }),
+    loader: async () => {
+      const data = [];
+      for await (const file of expandGlob("content/photos/*/wide.jpg")) {
+        data.push(await getPhoto(file.path));
+      }
+      return data.map((data) => {
+        const square = data.variants.find(
+          (v) => basename(v.src) === "square.jpg"
+        );
+        if (!square) throw new Error(`Missing square size for ${data.id}`);
+        return {
+          wide: data.src,
+          square: square.src,
+          ...data,
+        };
+      });
+    },
     schema: ({ image }) =>
       z.object({
         wide: image(),
@@ -64,14 +84,14 @@ export const collections = {
         description: z.string(),
         keywords: z.array(z.string()),
         date: z.string().transform((value) => new Date(value)),
-        location: z.string(),
-        city: z.string(),
-        state: z.string(),
-        country: z.string(),
-        camera: z.string(),
-        lens: z.string(),
-        editing: z.string(),
-        license: z.string().url(),
+        location: z.string().optional(),
+        city: z.string().optional(),
+        state: z.string().optional(),
+        country: z.string().optional(),
+        camera: z.string().optional(),
+        lens: z.string().optional(),
+        software: z.string().optional(),
+        license: z.string().url().optional(),
       }),
   }),
 };

@@ -9,12 +9,8 @@
       "dependencies": ["fetch:blog"],
       "command": "cp -R content/blog/files/* public/files"
     },
-    "build:photos": {
-      "dependencies": ["fetch:photos"],
-      "command": "deno run -A src/scripts/build-photos.ts"
-    },
     "build": {
-      "dependencies": ["build:files", "build:photos"],
+      "dependencies": ["build:files"],
       "command": "astro build"
     },
     "dev": "astro dev"
