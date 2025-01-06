@@ -15,7 +15,7 @@
     "@jsr/std__encoding": "^1.0.6",
     "@jsr/std__fs": "^1.0.8",
     "@jsr/std__path": "^1.0.8",
-    "@jsr/tugrulates__photos": "^0.1.2",
+    "@jsr/tugrulates__photos": "^0.1.3",
     "@tailwindcss/typography": "^0.5.15",
     "@types/react-dom": "^19.0.2",
     "@types/react": "^19.0.2",

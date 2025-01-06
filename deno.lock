@@ -16,7 +16,7 @@
     "npm:@jsr/std__encoding@^1.0.6": "1.0.6",
     "npm:@jsr/std__fs@^1.0.8": "1.0.8",
     "npm:@jsr/std__path@^1.0.8": "1.0.8",
-    "npm:@jsr/tugrulates__photos@~0.1.2": "0.1.2",
+    "npm:@jsr/tugrulates__photos@~0.1.3": "0.1.3",
     "npm:@tailwindcss/typography@~0.5.15": "0.5.15_tailwindcss@3.4.17__postcss@8.4.49",
     "npm:@types/node@*": "22.5.4",
     "npm:@types/react-dom@^19.0.2": "19.0.2_@types+react@19.0.2",
@@ -833,8 +833,8 @@
     "@jsr/std__text@1.0.9": {
       "integrity": "sha512-gaI+QdL6VAy9gY+I/nZr8CXqleva48G4quvFkJ83saxZBuZb7HayUaxR29ixUBoidUGVVyB+KIvPrwKaySmw3A=="
     },
-    "@jsr/tugrulates__photos@0.1.2": {
-      "integrity": "sha512-eoXn0lIrX0177JusLf4ZTAIPW7UTyKp3NoKABoNe9OZmIYK2/YHWMSeq3pby4pUOzM35c28Y1ZH7fuHVLW8b3g==",
+    "@jsr/tugrulates__photos@0.1.3": {
+      "integrity": "sha512-lnQFrxj/W00/l7sIuzbjqX3rhFcJtFQNgiJkgkDIx22PABnLmchcGRits8GRKrhYGrDkjddXrH8xyK8GSfxX2g==",
       "dependencies": [
         "@jsr/cliffy__ansi",
         "@jsr/cliffy__command",
@@ -4873,7 +4873,7 @@
         "npm:@jsr/std__encoding@^1.0.6",
         "npm:@jsr/std__fs@^1.0.8",
         "npm:@jsr/std__path@^1.0.8",
-        "npm:@jsr/tugrulates__photos@~0.1.2",
+        "npm:@jsr/tugrulates__photos@~0.1.3",
         "npm:@tailwindcss/typography@~0.5.15",
         "npm:@types/react-dom@^19.0.2",
         "npm:@types/react@^19.0.2",
