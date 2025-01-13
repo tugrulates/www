@@ -13,8 +13,6 @@ export { getCollection, getEntry, type CollectionEntry } from "astro:content";
 export { DRAFTS } from "astro:env/client";
 export { AVATAR, DEFAULT_COVER };
 
-export const NOT_FOUND = new Response(null, { status: 404 });
-
 export const collections = {
   pages: defineCollection({
     loader: glob({ pattern: "**/*.{md,mdx}", base: "./content/pages" }),
