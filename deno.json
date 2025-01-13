@@ -17,10 +17,10 @@
   },
   "imports": {
     "~/": "./src/",
-    "astro": "npm:astro",
+    "astro": "npm:astro@^5.1.5",
     "react": "npm:react",
     "react-dom": "npm:react-dom",
-    "@types/react": "npm:@types/react",
+    "@types/react": "npm:@types/react@^19.0.6",
     "events": "node:events",
     "fs": "node:fs",
     "os": "node:os",
