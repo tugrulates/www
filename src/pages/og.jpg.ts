@@ -3,8 +3,6 @@ import { SITE } from "~/config.ts";
 import { getCover, getOpenGraphImage } from "~/image.ts";
 import { getEntry, NOT_FOUND } from "~/site.astro";
 
-export const prerender = false;
-
 export async function GET({ url }: APIContext): Promise<Response> {
   const about = await getEntry("pages", "about");
   if (!about) return NOT_FOUND;

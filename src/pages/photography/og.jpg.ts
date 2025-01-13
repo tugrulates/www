@@ -3,8 +3,6 @@ import { AUTHOR } from "~/config.ts";
 import { getPhotos } from "~/content.ts";
 import { getOpenGraphImage } from "~/image.ts";
 
-export const prerender = false;
-
 export async function GET({ url }: APIContext): Promise<Response> {
   const photos = await getPhotos();
   return await getOpenGraphImage(

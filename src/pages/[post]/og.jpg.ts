@@ -2,8 +2,6 @@ import type { APIContext } from "astro";
 import { getCover, getOpenGraphImage } from "~/image.ts";
 import { getEntry, NOT_FOUND } from "~/site.astro";
 
-export const prerender = false;
-
 export async function GET({ url, params }: APIContext) {
   const post = await getEntry("posts", params.post ?? "") ??
     await getEntry("pages", params.post ?? "");
