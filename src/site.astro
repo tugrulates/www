@@ -1,7 +1,7 @@
 ---
 import { expandGlob } from "@jsr/std__fs";
 import { basename } from "@jsr/std__path";
-import { getPhoto } from "@jsr/tugrulates__photos";
+import { photo } from "@jsr/tugrulates__photo";
 import { glob } from "astro/loaders";
 import { defineCollection, reference, z } from "astro:content";
 import DEFAULT_COVER from "content/pages/images/rijksmuseum-wide.jpg";
@@ -60,16 +60,16 @@ export const collections = {
     loader: async () => {
       const data = [];
       for await (const file of expandGlob("content/photos/*/wide.jpg")) {
-        data.push(await getPhoto(file.path));
+        data.push(await photo(file.path));
       }
       return data.map((data) => {
         const square = data.variants.find(
-          (v) => basename(v.src) === "square.jpg"
+          (v) => basename(v.path) === "square.jpg"
         );
         if (!square) throw new Error(`Missing square size for ${data.id}`);
         return {
-          wide: data.src,
-          square: square.src,
+          wide: data.path,
+          square: square.path,
           ...data,
         };
       });
