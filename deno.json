@@ -23,9 +23,11 @@
     "@types/react": "npm:@types/react@^19.0.11",
     "events": "node:events",
     "fs": "node:fs",
+    "module": "node:module",
     "os": "node:os",
     "path": "node:path",
     "stream": "node:stream",
+    "url": "node:url",
     "util": "node:util"
   },
   "compilerOptions": {
