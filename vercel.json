@@ -1,7 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "astro",
-  "installCommand": "npm install -g deno && deno upgrade 2.4.4 && deno install",
+  "installCommand": "rm deno.lock && npm install -g deno@2.4.3 && deno install",
   "buildCommand": "deno task build",
   "cleanUrls": true,
   "headers": [
