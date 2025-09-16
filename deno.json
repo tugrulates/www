@@ -31,6 +31,7 @@
     "util": "node:util"
   },
   "compilerOptions": {
+    "lib": ["deno.ns", "dom"],
     "jsx": "react-jsx",
     "jsxImportSource": "react"
   },
