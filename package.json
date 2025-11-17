@@ -6,7 +6,7 @@
     "@astrojs/rss": "^4.0.10",
     "@astrojs/sitemap": "^3.2.1",
     "@astrojs/tailwind": "^6.0.0",
-    "@astrojs/vercel": "^8.1.2",
+    "@astrojs/vercel": "^9.0.1",
     "@fontsource/fira-code": "^5.2.5",
     "@fontsource/fira-sans": "^5.2.5",
     "@headlessui/react": "^2.2.0",
