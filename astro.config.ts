@@ -30,7 +30,6 @@ export default defineConfig({
     icon({
       include: {
         simple_icons: [
-          "bluesky",
           "github",
           "google",
           "linkedin",

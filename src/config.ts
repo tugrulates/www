@@ -22,16 +22,6 @@ export const AUTHOR = {
       icon: "simple-icons:stackoverflow",
       url: "https://stackoverflow.com/users/634336/tugrul-ates",
     },
-    {
-      name: "Bluesky",
-      icon: "simple-icons:bluesky",
-      url: "https://bsky.app/profile/turul.bsky.social",
-    },
-    {
-      name: "500px",
-      icon: "logo-500px",
-      url: "https://500px.com/p/tugrulates",
-    },
   ],
 } as const;
 
