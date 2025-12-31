@@ -34,7 +34,6 @@ export default defineConfig({
           "github",
           "google",
           "linkedin",
-          "instagram",
           "meta",
           "stack-overflow",
           "wikipedia",

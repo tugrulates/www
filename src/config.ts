@@ -32,11 +32,6 @@ export const AUTHOR = {
       icon: "logo-500px",
       url: "https://500px.com/p/tugrulates",
     },
-    {
-      name: "Instagram",
-      icon: "simple-icons:instagram",
-      url: "https://www.instagram.com/turulier/",
-    },
   ],
 } as const;
 
