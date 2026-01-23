@@ -17,11 +17,6 @@ export const AUTHOR = {
       icon: "simple-icons:github",
       url: "https://github.com/tugrulates",
     },
-    {
-      name: "Stack Overflow",
-      icon: "simple-icons:stackoverflow",
-      url: "https://stackoverflow.com/users/634336/tugrul-ates",
-    },
   ],
 } as const;
 
