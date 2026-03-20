@@ -5,7 +5,7 @@ import tailwind from "@astrojs/tailwind";
 import vercel from "@astrojs/vercel";
 import icon from "astro-icon";
 import robotsTxt from "astro-robots-txt";
-import { defineConfig, envField } from "astro/config";
+import { defineConfig, envField, fontProviders } from "astro/config";
 import rehypeExternalLinks from "rehype-external-links";
 import { SITE } from "./src/config.ts";
 
@@ -24,6 +24,26 @@ export default defineConfig({
   },
   adapter: vercel(),
   markdown: { rehypePlugins: [[rehypeExternalLinks, { rel: ["nofollow"] }]] },
+  fonts: [{
+    provider: fontProviders.fontsource(),
+    name: "Fira Sans",
+    cssVariable: "--font-fira-sans",
+  }, {
+    provider: fontProviders.fontsource(),
+    name: "Fira Code",
+    cssVariable: "--font-fira-code",
+  }, {
+    provider: fontProviders.local(),
+    name: "CCSymbols",
+    cssVariable: "--font-cc-symbols",
+    options: {
+      variants: [{
+        src: ["./public/fonts/CCSymbols.woff"],
+        weight: "normal",
+        style: "normal",
+      }],
+    },
+  }],
   prefetch: true,
   trailingSlash: "never",
   integrations: [

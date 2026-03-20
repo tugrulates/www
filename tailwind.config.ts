@@ -10,8 +10,16 @@ export default {
   },
   theme: {
     fontFamily: {
-      sans: ["Fira Sans", ...defaultTheme.fontFamily.sans, "CCSymbols"],
-      mono: ["Fira Code", ...defaultTheme.fontFamily.mono, "CCSymbols"],
+      sans: [
+        "var(--font-fira-sans)",
+        ...defaultTheme.fontFamily.sans,
+        "var(--font-cc-symbols)",
+      ],
+      mono: [
+        "var(--font-fira-code)",
+        ...defaultTheme.fontFamily.mono,
+        "var(--font-cc-symbols)",
+      ],
     },
   },
   plugins: [typography],
