@@ -1,9 +1,8 @@
 ---
-import "@fontsource/fira-code";
-import "@fontsource/fira-sans";
 import Analytics from "@vercel/analytics/astro";
 import SpeedInsights from "@vercel/speed-insights/astro";
 import { SEO } from "astro-seo";
+import { Font } from "astro:assets";
 import { ClientRouter } from "astro:transitions";
 import Footer from "~/components/Footer.astro";
 import Header from "~/components/Header.astro";
@@ -89,6 +88,9 @@ const favicon = await getFavicon(180);
     />
     <link href={appleTouchIcon.src} rel="apple-touch-icon" />
     <link href="/manifest.json" rel="manifest" />
+    <Font cssVariable="--font-fira-sans" />
+    <Font cssVariable="--font-fira-code" />
+    <Font cssVariable="--font-cc-symbols" />
     <ClientRouter />
     <Analytics />
     <SpeedInsights />
@@ -102,15 +104,6 @@ const favicon = await getFavicon(180);
     ]}
     data-tab={tab}
   >
-    <style>
-      @font-face {
-        font-family: "CCSymbols";
-        src: url("/fonts/CCSymbols.woff") format("woff");
-        font-weight: normal;
-        font-style: normal;
-        font-display: swap;
-      }
-    </style>
     <div class="flex-1"></div>
     <div class="flex min-h-screen w-full max-w-screen-md flex-col items-center">
       <Header class="print:hidden" />
