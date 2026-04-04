@@ -1,15 +1,15 @@
 import type { GetImageResult } from "astro";
-import type { Buffer } from "node:buffer";
+import { getImage } from "astro:assets";
 import sharp from "sharp";
 import ico from "sharp-ico";
-import { AVATAR, getImage } from "~/site.astro";
+import { AVATAR } from "~/site.astro";
 
-async function getFaviconIco(): Promise<Buffer> {
+async function getFaviconIco() {
   const buffer = await sharp("src/images/me.png")
     .resize(32)
     .toFormat("png")
     .toBuffer();
-  return ico.encode([buffer]);
+  return new Uint8Array(ico.encode([buffer]));
 }
 
 export async function getFavicon(size?: number): Promise<GetImageResult> {
