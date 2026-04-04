@@ -1,13 +1,5 @@
-# generated content
-public/files/
-
-# build output
-dist/
 .astro/
 .vercel/
-
-# dependencies
+dist/
 node_modules/
-
-# macOS-specific files
-.DS_Store
+public/files/

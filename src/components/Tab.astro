@@ -1,4 +1,6 @@
 ---
+import "~/styles/global.css";
+
 interface Props {
   tab: string;
   href: string;
@@ -26,14 +28,15 @@ const { tab, text, href } = Astro.props;
 </a>
 
 <style>
+  @reference "tailwindcss";
   :global([data-tab="posts"]) #tab-posts,
   :global([data-tab="photos"]) #tab-photos,
   :global([data-tab="about"]) #tab-about {
     @apply bg-stone-200;
   }
-  :global(.dark) :global([data-tab="posts"]) #tab-posts,
-  :global(.dark) :global([data-tab="photos"]) #tab-photos,
-  :global(.dark) :global([data-tab="about"]) #tab-about {
+  :global([data-theme=dark]) :global([data-tab="posts"]) #tab-posts,
+  :global([data-theme=dark]) :global([data-tab="photos"]) #tab-photos,
+  :global([data-theme=dark]) :global([data-tab="about"]) #tab-about {
     @apply bg-stone-800;
   }
 </style>

@@ -12,28 +12,24 @@ const { class: className } = Astro.props;
 ---
 
 <script is:inline>
-  function getDark() {
+  function getTheme() {
     if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
       try {
-        const theme = JSON.parse(localStorage.getItem("theme") ?? "");
-        const { dark } = theme;
-        return dark;
+        const data = JSON.parse(localStorage.getItem("theme") ?? {});
+        const { theme } = data;
+        if(theme) return theme;
       } catch (e) {
         console.error("Error reading theme", e);
       }
     }
     if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      return true;
+      return "dark";
     }
-    return false;
+    return "light";
   }
 
   function setTheme(document) {
-    if (getDark()) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
+    document.documentElement.setAttribute("data-theme", getTheme());
   }
 
   setTheme(document);
@@ -73,7 +69,7 @@ const { class: className } = Astro.props;
         />
       </div>
     </Tab>
-    <ThemeToggle client:only="react" transition:persist>
+    <ThemeToggle client:only="react">
       <Icon aria-hidden name="heroicons:sun-solid" size={32} slot="lightIcon" />
       <Icon aria-hidden name="heroicons:moon-solid" size={32} slot="darkIcon" />
     </ThemeToggle>
