@@ -3,12 +3,22 @@ import { SITE } from "~/config.ts";
 /**
  * Get the path of a full URL.
  *
- * Example:
+ * @example Url manipulation
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
- * assertEquals(getChildUrl(new URL("http://host"), "feed").href, "http://host/feed");
- * assertEquals(getChildUrl(new URL("http://host/about"), "feed").href, "http://host/about/feed");
- * assertEquals(getChildUrl(new URL("http://host/"), "about", "feed").href, "http://host/about/feed");
+ *
+ * assertEquals(
+ *   getChildUrl(new URL("http://host"), "feed").href,
+ *   "http://host/feed",
+ * );
+ * assertEquals(
+ *   getChildUrl(new URL("http://host/about"), "feed").href,
+ *   "http://host/about/feed",
+ * );
+ * assertEquals(
+ *   getChildUrl(new URL("http://host/"), "about", "feed").href,
+ *   "http://host/about/feed",
+ * );
  * ```
  *
  * @param url Base URL.
@@ -28,13 +38,26 @@ export function getChildUrl(url: URL, ...path: string[]): URL {
 /**
  * Get the canonical site address for a URL.
  *
- * Example:
+ * @example Canonical URL
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
- * assertEquals(getCanonicalUrl(new URL("http://host/about")).href, "https://www.tugrulates.com/about");
- * assertEquals(getCanonicalUrl(new URL("http://host")).href, "https://www.tugrulates.com/");
- * assertEquals(getCanonicalUrl(new URL("http://host"), "about").href, "https://www.tugrulates.com/about");
- * assertEquals(getCanonicalUrl(new URL("http://host"), "/@fs/file").href, "http://host/@fs/file");
+ *
+ * assertEquals(
+ *   getCanonicalUrl(new URL("http://host/about")).href,
+ *   "https://www.tugrulates.com/about",
+ * );
+ * assertEquals(
+ *   getCanonicalUrl(new URL("http://host")).href,
+ *   "https://www.tugrulates.com/",
+ * );
+ * assertEquals(
+ *   getCanonicalUrl(new URL("http://host"), "about").href,
+ *   "https://www.tugrulates.com/about",
+ * );
+ * assertEquals(
+ *   getCanonicalUrl(new URL("http://host"), "/@fs/file").href,
+ *   "http://host/@fs/file",
+ * );
  * ```
  *
  * @param url Any URL.
