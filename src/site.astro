@@ -3,12 +3,10 @@ import { expandGlob } from "@jsr/std__fs";
 import { basename } from "@jsr/std__path";
 import { photo } from "@jsr/tugrulates__photo";
 import { glob } from "astro/loaders";
-import { defineCollection, reference, z } from "astro:content";
+import { z } from "astro/zod";
+import { defineCollection, reference } from "astro:content";
 import DEFAULT_COVER from "content/pages/images/rijksmuseum-wide.jpg";
 import AVATAR from "~/images/me.png";
-
-export { getConfiguredImageService, getImage, imageConfig } from "astro:assets";
-export { getCollection, getEntry, type CollectionEntry } from "astro:content";
 
 export { DRAFTS } from "astro:env/client";
 export { AVATAR, DEFAULT_COVER };

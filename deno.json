@@ -1,7 +1,7 @@
 {
   "nodeModulesDir": "auto",
   "tasks": {
-    "astro": "ASTRO_TELEMETRY_DISABLED=1 deno -A npm:astro",
+    "astro": "ASTRO_TELEMETRY_DISABLED=1 dx astro",
     "clean": "rm -rf dist .astro content/photos/*/*.json public/files 2> /dev/null",
     "fetch:blog": "git submodule update --init --remote content/blog",
     "fetch:photos": "git submodule update --init --remote content/photos",
@@ -20,20 +20,12 @@
     "astro": "npm:astro@^6.1.3",
     "react": "npm:react@19.2.4",
     "react-dom": "npm:react-dom@19.2.4",
-    "@types/react": "npm:@types/react@^19.2.14",
-    "events": "node:events",
-    "fs": "node:fs",
-    "module": "node:module",
-    "os": "node:os",
-    "path": "node:path",
-    "stream": "node:stream",
-    "url": "node:url",
-    "util": "node:util"
+    "@types/react": "npm:@types/react@^19.2.14"
   },
   "compilerOptions": {
     "lib": ["deno.ns", "dom"],
     "jsx": "react-jsx",
     "jsxImportSource": "react"
   },
-  "unstable": ["sloppy-imports"]
+  "unstable": ["bare-node-builtins"]
 }

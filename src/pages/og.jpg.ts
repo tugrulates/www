@@ -1,6 +1,6 @@
+import { getEntry } from "astro:content";
 import { SITE } from "~/config.ts";
 import { getCover, getOpenGraphImage } from "~/image.ts";
-import { getEntry } from "~/site.astro";
 
 export async function GET() {
   const about = await getEntry("pages", "about");

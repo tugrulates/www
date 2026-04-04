@@ -1,11 +1,11 @@
 import { encodeBase64 } from "@jsr/std__encoding";
 import type { ImageMetadata } from "astro";
+import { getEntry } from "astro:content";
 import satori from "satori";
 import sharp from "sharp";
 import type { CoverMeta, CoverType } from "~/components/Cover.astro";
 import { OpenGraphImage } from "~/components/OpenGraphImage.tsx";
 import { DIMENSIONS } from "~/config.ts";
-import { getEntry } from "~/site.astro";
 import { getCanonicalUrl } from "~/url.ts";
 
 export async function getCover(cover: CoverType): Promise<CoverMeta> {
@@ -49,7 +49,10 @@ export async function getOpenGraphImage(data: {
     }),
     {
       ...DIMENSIONS.opengraph,
-      fonts: [{ name: "Regular", data: regular }, { name: "Bold", data: bold }],
+      fonts: [{ name: "Regular", data: regular.buffer }, {
+        name: "Bold",
+        data: bold.buffer,
+      }],
     },
   );
 
@@ -58,5 +61,7 @@ export async function getOpenGraphImage(data: {
     .jpeg({ quality: 95 })
     .toBuffer();
 
-  return new Response(jpeg, { headers: { "Content-Type": "image/jpeg" } });
+  return new Response(new Uint8Array(jpeg), {
+    headers: { "Content-Type": "image/jpeg" },
+  });
 }
