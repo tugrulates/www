@@ -1,7 +1,7 @@
 import { SITE } from "~/config.ts";
 
 /**
- * Get the path of a full URL.
+ * Returns the path of a full URL.
  *
  * @example Url manipulation
  * ```ts
@@ -21,9 +21,9 @@ import { SITE } from "~/config.ts";
  * );
  * ```
  *
- * @param url Base URL.
- * @param path The additional path segments.
- * @returns The new URL with child paths.
+ * @param url Base URL
+ * @param path The additional path segments
+ * @returns The new URL with child paths
  */
 export function getChildUrl(url: URL, ...path: string[]): URL {
   return new URL(
@@ -36,7 +36,7 @@ export function getChildUrl(url: URL, ...path: string[]): URL {
 }
 
 /**
- * Get the canonical site address for a URL.
+ * Returns the canonical site address for a URL.
  *
  * @example Canonical URL
  * ```ts
@@ -60,9 +60,9 @@ export function getChildUrl(url: URL, ...path: string[]): URL {
  * );
  * ```
  *
- * @param url Any URL.
- * @param path The additional path segments.
- * @returns The canonical URL.
+ * @param url Any URL
+ * @param path The additional path segments
+ * @returns The canonical URL
  * @see SITE
  */
 export function getCanonicalUrl(url: URL, ...path: string[]): URL {

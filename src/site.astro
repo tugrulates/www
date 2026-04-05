@@ -5,8 +5,8 @@ import { photo } from "@jsr/tugrulates__photo";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
 import { defineCollection, reference } from "astro:content";
-import DEFAULT_COVER from "content/pages/images/rijksmuseum-wide.jpg";
-import AVATAR from "~/images/me.png";
+import DEFAULT_COVER from "content/pages/images/rijksmuseum-wide.jpg" with { type: "bytes" };
+import AVATAR from "~/images/me.png" with { type: "bytes" };
 
 export { DRAFTS } from "astro:env/client";
 export { AVATAR, DEFAULT_COVER };
