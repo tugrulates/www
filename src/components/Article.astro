@@ -12,15 +12,15 @@ const { title, date, class: className } = Astro.props;
 <article
   class:list={[
     "prose prose-stone w-full max-w-none px-2 dark:prose-invert md:prose-lg max-sm:pb-4",
-    "prose-a:underline prose-a:decoration-stone-500/50 hover:prose-a:decoration-current",
-    "prose-img:m-0 sm:prose-img:rounded-xl sm:[&_p:has(img)]:!p-2",
-    "prose-ol:!pl-12 prose-ul:!pl-12",
-    "prose-pre:!bg-stone-900 prose-pre:px-4 prose-pre:py-2 prose-pre:shadow prose-pre:shadow-black",
+    "prose-a:underline prose-a:decoration-stone-500/50 prose-a:hover:decoration-current",
+    "prose-img:m-0 sm:prose-img:rounded-xl sm:[&_p:has(img)]:p-2!",
+    "prose-ol:pl-12! prose-ul:pl-12!",
+    "prose-pre:bg-stone-900! prose-pre:px-4 prose-pre:py-2 prose-pre:shadow prose-pre:shadow-black",
     "prose-table:overflow-clip sm:prose-table:rounded-xl",
-    "prose-tr:border-transparent hover:prose-tr:bg-stone-500/20 sm:prose-tr:rounded-xl",
+    "prose-tr:border-transparent prose-tr:hover:bg-stone-500/20 sm:prose-tr:rounded-xl",
     "prose-th:p-4 prose-th:align-top prose-td:p-4 prose-td:align-top",
     "prose-hr:border-stone-500",
-    "print:!text-black print:prose-headings:!text-black print:prose-a:!text-black print:prose-strong:!text-black print:prose-code:!text-black",
+    "print:text-black! print:prose-headings:text-black! print:prose-a:text-black! print:prose-strong:text-black! print:prose-code:text-black!",
     className,
   ]}
 >
@@ -49,7 +49,7 @@ const { title, date, class: className } = Astro.props;
       @apply -mx-2 px-2 outline-none outline-offset-0 transition-all max-sm:rounded-none sm:rounded-xl;
       @apply hover:bg-stone-500/20 hover:outline-8 hover:outline-stone-500/20;
       @apply print:hover:bg-transparent print:hover:outline-transparent;
-      @apply print:!text-black;
+      @apply print:text-black!;
     }
     article > :global(lite-youtube) {
       @apply aspect-video;
@@ -58,7 +58,7 @@ const { title, date, class: className } = Astro.props;
       @apply bg-none;
     }
     article > :global(lite-youtube.lyt-activated) {
-      @apply !bg-none;
+      @apply bg-none!;
     }
     article :global(a::after) {
       @apply inline-block h-3 w-0 bg-current pl-0.5 pr-3 align-text-top opacity-75 hover:opacity-100 print:hidden;

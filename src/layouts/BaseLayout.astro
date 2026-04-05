@@ -9,8 +9,8 @@ import Header from "~/components/Header.astro";
 import { AUTHOR, DIMENSIONS } from "~/config.ts";
 import { formatDateIso } from "~/date.ts";
 import { getFavicon } from "~/pages/favicon.ico.ts";
-import { getCanonicalUrl, getChildUrl } from "~/url.ts";
 import "~/styles/global.css";
+import { getCanonicalUrl, getChildUrl } from "~/url.ts";
 
 interface Props {
   tab: string;
@@ -99,21 +99,21 @@ const favicon = await getFavicon(180);
   <body
     class:list={[
       "relative flex flex-row gap-0",
-      "from-stone-400 to-stone-300 dark:from-stone-600 dark:to-stone-700 sm:bg-gradient-to-b",
+      "from-stone-400 to-stone-300 dark:from-stone-600 dark:to-stone-700 sm:bg-linear-to-b",
       "bg-stone-400 dark:bg-stone-600",
-      "text-black dark:text-white print:!text-black",
+      "text-black dark:text-white print:text-black!",
     ]}
     data-tab={tab}
   >
     <div class="flex-1"></div>
-    <div class="flex min-h-screen w-full max-w-screen-md flex-col items-center">
+    <div class="flex min-h-screen w-full max-w-3xl flex-col items-center">
       <Header class="print:hidden" />
       <main
         class:list={[
           "z-10 w-full flex-1 text-left sm:p-4",
           "sm:rounded-b-3xl sm:rounded-t-xl print:rounded-none",
           "shadow-lg shadow-stone-900/20 print:shadow-none",
-          "bg-stone-200 dark:bg-stone-800 print:!bg-white",
+          "bg-stone-200 dark:bg-stone-800 print:bg-white!",
           className,
         ]}
       >

@@ -39,14 +39,14 @@ const { link, image, imageDescription, title, description, date } = Astro.props;
         width={160}
       />
     </div>
-    <div class="flex-0 group flex flex-1 flex-col px-2 py-2 sm:py-1">
+    <div class="flex-1 group flex flex-col px-2 py-2 sm:py-1">
       <time
-        class="text-stone-700 dark:text-stone-300 print:!text-black"
+        class="text-stone-700 dark:text-stone-300 print:text-black!"
         datetime={date.toISOString()}>{formatDate(date)}</time
       >
       <h1 class="mb-2 grow text-xl font-bold">{title}</h1>
       <p
-        class="line-clamp-4 font-thin text-stone-600 dark:text-stone-400 print:!text-black"
+        class="line-clamp-4 font-thin text-stone-600 dark:text-stone-400 print:text-black!"
       >
         {description}
       </p>
