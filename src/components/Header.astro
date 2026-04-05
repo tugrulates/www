@@ -15,7 +15,7 @@ const { class: className } = Astro.props;
   function getTheme() {
     if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
       try {
-        const data = JSON.parse(localStorage.getItem("theme") ?? {});
+        const data = JSON.parse(localStorage.getItem("theme") ?? "{}");
         const { theme } = data;
         if(theme) return theme;
       } catch (e) {
