@@ -39,6 +39,7 @@ const { title, date, class: className } = Astro.props;
   </header>
   <slot />
   <style>
+    @reference "tailwindcss";
     article > :global(p),
     article > :global(ul),
     article > :global(ol),

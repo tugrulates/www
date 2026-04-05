@@ -1,13 +1,14 @@
 import mdx from "@astrojs/mdx";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
-import tailwind from "@astrojs/tailwind";
 import vercel from "@astrojs/vercel";
 import icon from "astro-icon";
 import robotsTxt from "astro-robots-txt";
 import { defineConfig, envField, fontProviders } from "astro/config";
 import rehypeExternalLinks from "rehype-external-links";
 import { SITE } from "./src/config.ts";
+
+import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
 export default defineConfig({
@@ -66,6 +67,8 @@ export default defineConfig({
     react(),
     robotsTxt({ policy: [{ userAgent: "*", allow: "/", disallow: "/test/" }] }),
     sitemap({ filter: (page) => page !== `${SITE.url}/test/` }),
-    tailwind(),
   ],
+  vite: {
+    plugins: [tailwindcss()],
+  },
 });
