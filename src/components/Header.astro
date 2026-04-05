@@ -1,9 +1,9 @@
 ---
 import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
-import avatar from "~/images/me.png";
 import ThemeToggle from "~/components/ThemeToggle.tsx";
 import Tab from "~/components/Tab.astro";
+import { AVATAR } from "~/site.astro";
 
 interface Props {
   class?: string;
@@ -64,7 +64,7 @@ const { class: className } = Astro.props;
           class="rounded-full border border-black dark:border-white"
           densities={[1, 2, 3, 4]}
           height="32"
-          src={avatar}
+          src={AVATAR}
           width="32"
         />
       </div>

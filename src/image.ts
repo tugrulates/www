@@ -23,9 +23,7 @@ export async function getCover(cover: CoverType): Promise<CoverMeta> {
   throw new Error(`Invalid cover: ${cover}`);
 }
 
-/**
- * Return a JPEG response with an OpenGraph image.
- */
+/** Returns a JPEG response with an OpenGraph image. */
 export async function getOpenGraphImage(data: {
   site: URL;
   title: string;

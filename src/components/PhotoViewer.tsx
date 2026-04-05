@@ -14,6 +14,7 @@ export default function PhotoViewer(props: Props): React.JSX.Element {
     <div>
       <button
         ref={openButtonRef}
+        type="button"
         aria-label="Expand image"
         onClick={() => {
           setIsOpen(true);
@@ -41,6 +42,7 @@ export default function PhotoViewer(props: Props): React.JSX.Element {
             {props.image}
             <button
               aria-label="Close image"
+              type="button"
               onClick={() => {
                 setIsOpen(true);
               }}

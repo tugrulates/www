@@ -1,5 +1,11 @@
 import { DIMENSIONS, SITE } from "~/config.ts";
 
+declare module "react" {
+  interface HTMLAttributes<T> {
+    tw?: string;
+  }
+}
+
 interface Props {
   avatar: string;
   background: string;
@@ -46,7 +52,7 @@ export function OpenGraphImage({
             src={avatar}
             width={48}
             height={48}
-            tw={"rounded-full border border-black"}
+            tw="rounded-full border border-black"
           />
           <span tw="px-4">{SITE.url.host}</span>
         </div>

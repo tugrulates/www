@@ -1,4 +1,4 @@
-import { InferGetStaticPropsType } from "astro";
+import type { InferGetStaticPropsType } from "astro";
 import { SITE } from "~/config.ts";
 import { getPhotos } from "~/content.ts";
 import { formatDate } from "~/date.ts";
