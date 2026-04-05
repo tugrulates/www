@@ -43,8 +43,8 @@ const cover = await getCover(post.data.cover);
     actionHref={cover.id && `/photography/${cover.id}`}
     actionIcon="heroicons:photo-solid"
     image={cover}
-    next={posts[index + 1]?.id}
-    previous={posts[index - 1]?.id}
+    next={index >= 0 ? posts[index + 1]?.id : undefined}
+    previous={index >= 0 ? posts[index - 1]?.id : undefined}
     slot="cover"
   />
   <Content slot="content" />
