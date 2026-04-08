@@ -79,7 +79,7 @@ export const collections = {
         title: z.string(),
         description: z.string(),
         keywords: z.array(z.string()),
-        date: z.string().transform((value) => new Date(value)),
+        date: z.coerce.date(),
         location: z.string().optional(),
         city: z.string().optional(),
         state: z.string().optional(),
@@ -87,7 +87,7 @@ export const collections = {
         camera: z.string().optional(),
         lens: z.string().optional(),
         software: z.string().optional(),
-        license: z.string().url().optional(),
+        license: z.url().optional(),
       }),
   }),
 };
