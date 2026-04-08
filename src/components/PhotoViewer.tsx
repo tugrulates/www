@@ -29,7 +29,7 @@ export default function PhotoViewer(props: Props): React.JSX.Element {
           setIsOpen(false);
         }}
       >
-        <div className="fixed inset-0 z-50 bg-gradient-to-b from-stone-400 to-stone-300 align-middle dark:from-stone-600 dark:to-stone-700" />
+        <div className="fixed inset-0 z-50 bg-linear-to-b from-stone-400 to-stone-300 align-middle dark:from-stone-600 dark:to-stone-700" />
         <div className="group/cover fixed inset-0 z-50 flex w-screen items-center justify-center">
           <DialogPanel
             onClick={() => {
