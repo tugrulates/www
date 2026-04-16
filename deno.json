@@ -7,7 +7,7 @@
     "fetch:photos": "git submodule update --init --remote content/photos",
     "build:files": {
       "dependencies": ["fetch:blog"],
-      "command": "cp -R content/blog/files/* public/files"
+      "command": "mkdir -p public/files && cp -R content/blog/files/* public/files/"
     },
     "build": {
       "dependencies": ["build:files"],
