@@ -2,10 +2,10 @@
   "dependencies": {
     "@astro-community/astro-embed-youtube": "^0.5.10",
     "@astrojs/mdx": "6.0.3",
-    "@astrojs/react": "6.0.0",
-    "@astrojs/rss": "4.0.18",
+    "@astrojs/react": "6.0.1",
+    "@astrojs/rss": "4.0.19",
     "@astrojs/sitemap": "3.7.3",
-    "@astrojs/vercel": "11.0.0",
+    "@astrojs/vercel": "11.0.3",
     "@headlessui/react": "^2.2.9",
     "@iconify-json/heroicons": "^1.2.3",
     "@iconify-json/simple-icons": "^1.2.76",
@@ -28,7 +28,7 @@
     "react-dom": "^19.2.4",
     "react": "^19.2.4",
     "rehype-external-links": "^3.0.0",
-    "satori": "^0.26.0",
+    "satori": "^0.28.0",
     "sharp": "^0.35.1",
     "sharp-ico": "^0.1.5",
     "tailwindcss": "^4.2.2"
